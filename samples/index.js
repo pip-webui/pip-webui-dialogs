@@ -24,12 +24,12 @@
             $scope.pages = [
                 { title: 'Information dialog', state: 'information', url: '/information',
                     controller: 'InformationController', 
-                    templateUrl: '../samples/information_dialog/information_dialog.html' },
+                    templateUrl: '../samples/information/information.html' },
                 { title: 'Confirmation dialog', state: 'confirmation', url: '/confirmation',
                     controller: 'ConfirmationController', 
-                    templateUrl: '../samples/confirmation_dialog/confirmation_dialog.html' },
+                    templateUrl: '../samples/confirmation/confirmation.html' },
                 { title: 'Options dialogs', state: 'options', url: '/options',
-                    controller: 'OptionsController', templateUrl: '../samples/options_dialog/options_dialog.html' }
+                    controller: 'OptionsController', templateUrl: '../samples/options/options.html' }
             ];
             
             $scope.selected = {};

@@ -4,7 +4,7 @@
 (function (angular) {
     'use strict';
 
-    var thisModule = angular.module('appBasicControls.Options', []);
+    var thisModule = angular.module('appDialogs.Options', []);
 
     thisModule.config(function (pipTranslateProvider) {
         pipTranslateProvider.translations('en', {

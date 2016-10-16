@@ -28,7 +28,7 @@
                 ],
                 links = [
                     { title: 'Composite controls', href: '/pip-webui-composite/index.html'},
-                    { title: 'Core', href: '/pip-webui-core/index.html'},
+                    { title: 'Core', href: '/pip-webui-services/index.html'},
                     { title: 'CSS components', href: '/pip-webui-css/index.html'},
                     { title: 'Document controls', href: '/pip-webui-documents/index.html'},
                     { title: 'Entry pages', href: '/pip-webui-entry/index.html'},

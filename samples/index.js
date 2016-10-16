@@ -9,7 +9,7 @@
             // 3rd Party Modules
             'ui.router', 'ui.utils', 'ngResource', 'ngAria', 'ngCookies', 'ngSanitize', 'ngMessages',
             'ngMaterial', 'LocalStorageModule', 'ngAnimate',
-            'pipCore', 'pipDialogs', 'pipTheme.Default', 'pipTheme.Bootbarn', 'pipTheme',
+            'pipServices', 'pipDialogs', 'pipTheme.Default', 'pipTheme.Bootbarn', 'pipTheme',
 
             'appDialogs.Information', 'appDialogs.Confirmation', 'appDialogs.Options'
         ]

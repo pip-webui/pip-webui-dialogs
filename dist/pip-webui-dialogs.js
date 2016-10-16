@@ -315,18 +315,7 @@ module.run(['$templateCache', function($templateCache) {
     'use strict';
 
     var thisModule = angular.module('pipConfirmationDialog',
-        ['ngMaterial', 'pipUtils', 'pipTranslate', 'pipDialogs.Templates']);
-
-    /* eslint-disable quote-props */
-    thisModule.config(['pipTranslateProvider', function (pipTranslateProvider) {
-        pipTranslateProvider.translations('en', {
-            'CONFIRM_TITLE': 'Confirm'
-        });
-        pipTranslateProvider.translations('ru', {
-            'CONFIRM_TITLE': 'Подтвердите'
-        });
-    }]);
-    /* eslint-enable quote-props */
+        ['ngMaterial', 'pipDialogs.Translate', 'pipDialogs.Templates']);
 
     thisModule.factory('pipConfirmationDialog',
         ['$mdDialog', function ($mdDialog) {
@@ -354,12 +343,27 @@ module.run(['$templateCache', function($templateCache) {
     );
 
     thisModule.controller('pipConfirmationDialogController',
-        ['$scope', '$rootScope', '$mdDialog', 'pipTranslate', 'params', function ($scope, $rootScope, $mdDialog, pipTranslate, params) {
-            $scope.theme = $rootScope.$theme;
-            $scope.title = params.title || 'CONFIRM_TITLE';
+        ['$scope', '$rootScope', '$mdDialog', '$injector', 'params', function ($scope, $rootScope, $mdDialog, $injector, params) {
+            var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
 
-            $scope.ok = params.ok || 'OK';
-            $scope.cancel = params.cancel || 'CANCEL';
+            if (pipTranslate) {
+                pipTranslate.translations('en', {
+                    'CONFIRM_TITLE': 'Confirm'
+                });
+                pipTranslate.translations('ru', {
+                    'CONFIRM_TITLE': 'Подтвердите'
+                });
+
+                $scope.title = params.title || 'CONFIRM_TITLE';
+                $scope.ok = params.ok || 'OK';
+                $scope.cancel = params.cancel || 'CANCEL';
+            } else {
+                $scope.title = params.title || 'Confirm';
+                $scope.ok = params.ok || 'OK';
+                $scope.cancel = params.cancel || 'Cancel';
+            }
+
+            $scope.theme = $rootScope.$theme;
 
             $scope.onCancel = function () {
                 $mdDialog.cancel();
@@ -374,6 +378,29 @@ module.run(['$templateCache', function($templateCache) {
 })(window.angular);
 
 /**
+ * @file Optional filter to translate string resources
+ * @copyright Digital Living Software Corp. 2014-2016
+ */
+ 
+/* global angular */
+
+(function () {
+    'use strict';
+
+    var thisModule = angular.module('pipDialogs.Translate', []);
+
+    thisModule.filter('translate', ['$injector', function ($injector) {
+        var pipTranslate = $injector.has('pipTranslate') 
+            ? $injector.get('pipTranslate') : null;
+
+        return function (key) {
+            return pipTranslate  ? pipTranslate.translate(key) || key : key;
+        }
+    }]);
+
+})();
+
+/**
  * @file Error details dialog
  * @copyright Digital Living Software Corp. 2014-2016
  * @todo
@@ -384,29 +411,7 @@ module.run(['$templateCache', function($templateCache) {
     'use strict';
 
     var thisModule = angular.module('pipErrorDetailsDialog',
-        ['ngMaterial', 'pipUtils', 'pipTranslate', 'pipDialogs.Templates']);
-
-    /* eslint-disable quote-props */
-    thisModule.config(['pipTranslateProvider', function (pipTranslateProvider) {
-        pipTranslateProvider.translations('en', {
-            'ERROR_DETAILS': 'Error details',
-            'CODE': 'Code',
-            'PATH': 'Path',
-            'ERROR': 'Error code',
-            'METHOD': 'Method',
-            'MESSAGE': 'Message'
-
-        });
-        pipTranslateProvider.translations('ru', {
-            'ERROR_DETAILS': 'Детали ошибки',
-            'CODE': 'Код',
-            'PATH': 'Путь',
-            'ERROR': 'Код ошибки',
-            'METHOD': 'Метод',
-            'MESSAGE': 'Сообщение'
-        });
-    }]);
-    /* eslint-enable quote-props */
+        ['ngMaterial', 'pipDialogs.Translate', 'pipDialogs.Templates']);
 
     thisModule.factory('pipErrorDetailsDialog',
         ['$mdDialog', function ($mdDialog) {
@@ -434,11 +439,35 @@ module.run(['$templateCache', function($templateCache) {
     );
 
     thisModule.controller('pipErrorDetailsDialogController',
-        ['$scope', '$rootScope', '$mdDialog', 'pipTranslate', 'params', function ($scope, $rootScope, $mdDialog, pipTranslate, params) {
+        ['$scope', '$rootScope', '$mdDialog', '$injector', 'params', function ($scope, $rootScope, $mdDialog, $injector, params) {
+            var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
+            if (pipTranslate) {
+                pipTranslate.translations('en', {
+                    'ERROR_DETAILS': 'Error details',
+                    'CODE': 'Code',
+                    'PATH': 'Path',
+                    'ERROR': 'Error code',
+                    'METHOD': 'Method',
+                    'MESSAGE': 'Message'
+
+                });
+                pipTranslate.translations('ru', {
+                    'ERROR_DETAILS': 'Детали ошибки',
+                    'CODE': 'Код',
+                    'PATH': 'Путь',
+                    'ERROR': 'Код ошибки',
+                    'METHOD': 'Метод',
+                    'MESSAGE': 'Сообщение'
+                });
+                $scope.ok = params.ok || 'OK';
+                $scope.cancel = params.cancel || 'CANCEL';
+            } else {
+                $scope.ok = params.ok || 'OK';
+                $scope.cancel = params.cancel || 'Cancel';
+            }
+
             $scope.theme = $rootScope.$theme
             $scope.error = params.error;
-            $scope.ok = params.ok || 'OK';
-            $scope.cancel = params.cancel || 'CANCEL';
 
             $scope.onCancel = function () {
                 $mdDialog.cancel();
@@ -463,18 +492,7 @@ module.run(['$templateCache', function($templateCache) {
     'use strict';
 
     var thisModule = angular.module('pipInformationDialog',
-        ['ngMaterial', 'pipUtils', 'pipTranslate', 'pipDialogs.Templates']);
-
-    /* eslint-disable quote-props */
-    thisModule.config(['pipTranslateProvider', function (pipTranslateProvider) {
-        pipTranslateProvider.translations('en', {
-            'INFORMATION_TITLE': 'Information'
-        });
-        pipTranslateProvider.translations('ru', {
-            'INFORMATION_TITLE': 'Информация'
-        });
-    }]);
-    /* eslint-enable quote-props */
+        ['ngMaterial', 'pipDialogs.Translate', 'pipDialogs.Templates']);
 
     thisModule.factory('pipInformationDialog',
         ['$mdDialog', function ($mdDialog) {
@@ -498,18 +516,34 @@ module.run(['$templateCache', function($templateCache) {
     );
 
     thisModule.controller('pipInformationDialogController',
-        ['$scope', '$rootScope', '$mdDialog', 'pipTranslate', 'params', 'pipUtils', function ($scope, $rootScope, $mdDialog, pipTranslate, params, pipUtils) {
-            var content, item;
+        ['$scope', '$rootScope', '$mdDialog', '$injector', 'params', function ($scope, $rootScope, $mdDialog, $injector, params) {
+            var content = params.message, item;
+
+            var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
+            if (pipTranslate) {
+                pipTranslate.translations('en', {
+                    'INFORMATION_TITLE': 'Information'
+                });
+                pipTranslate.translations('ru', {
+                    'INFORMATION_TITLE': 'Информация'
+                });
+
+                $scope.title = params.title || 'INFORMATION_TITLE';
+                $scope.ok = params.ok || 'OK';
+                content = pipTranslate.translate(content);
+            } else {
+                $scope.title = params.title || 'Information';
+                $scope.ok = params.ok || 'OK';
+            }
+
+            var pipFormat = $injector.has('pipFormat') ? $injector.get('pipFormat') : null;
 
             $scope.theme = $rootScope.$theme;
-            $scope.title = params.title || 'INFORMATION_TITLE';
-            content = pipTranslate.translate(params.message);
-            if (params.item) {
+            if (params.item && pipFormat) {
                 item = _.truncate(params.item, 25);
-                content = pipUtils.sprintf(content, item);
+                content = pipFormat(content, item);
             }
             $scope.content = content;
-            $scope.ok = params.ok || 'OK';
 
             $scope.onOk = function () {
                 $mdDialog.hide();
@@ -531,18 +565,7 @@ module.run(['$templateCache', function($templateCache) {
     'use strict';
 
     var thisModule = angular.module('pipOptionsDialog',
-        ['ngMaterial', 'pipUtils', 'pipTranslate', 'pipDialogs.Templates']);
-
-    /* eslint-disable quote-props */
-    thisModule.config(['pipTranslateProvider', function (pipTranslateProvider) {
-        pipTranslateProvider.translations('en', {
-            'OPTIONS_TITLE': 'Choose Option'
-        });
-        pipTranslateProvider.translations('ru', {
-            'OPTIONS_TITLE': 'Выберите опцию'
-        });
-    }]);
-    /* eslint-enable quote-props */
+        ['ngMaterial', 'pipDialogs.Translate', 'pipDialogs.Templates']);
 
     thisModule.factory('pipOptionsDialog',
         ['$mdDialog', function ($mdDialog) {
@@ -566,36 +589,51 @@ module.run(['$templateCache', function($templateCache) {
                         locals: {params: params},
                         clickOutsideToClose: true
                     })
-                        .then(function (option) {
-                            focusToggleControl();
+                    .then(function (option) {
+                        focusToggleControl();
 
-                            if (successCallback) {
-                                successCallback(option);
-                            }
-                        }, function () {
-                            focusToggleControl();
-                            if (cancelCallback) {
-                                cancelCallback();
-                            }
-                        });
+                        if (successCallback) {
+                            successCallback(option);
+                        }
+                    }, function () {
+                        focusToggleControl();
+                        if (cancelCallback) {
+                            cancelCallback();
+                        }
+                    });
                 }
             };
         }]
     );
     thisModule.controller('pipOptionsDialogController',
-        ['$scope', '$rootScope', '$mdDialog', 'params', function ($scope, $rootScope, $mdDialog, params) {
+        ['$scope', '$rootScope', '$mdDialog', '$injector', 'params', function ($scope, $rootScope, $mdDialog, $injector, params) {
+            var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
+            if (pipTranslate) {
+                pipTranslate.translations('en', {
+                    'OPTIONS_TITLE': 'Choose Option'
+                });
+                pipTranslate.translations('ru', {
+                    'OPTIONS_TITLE': 'Выберите опцию'
+                });
+
+                $scope.title = params.title || 'OPTIONS_TITLE';
+                $scope.applyButtonTitle = params.appleButtonTitle || 'SELECT';
+            } else {
+                $scope.title = params.title || 'Choose Option';
+                $scope.applyButtonTitle = params.appleButtonTitle || 'Select';
+            }
+
             $scope.theme = $rootScope.$theme;
-            $scope.title = params.title || 'OPTIONS_TITLE';
             $scope.options = params.options;
             $scope.selectedOption = _.find(params.options, {active: true}) || {};
             $scope.selectedOptionName = $scope.selectedOption.name;
-            $scope.applyButtonTitle = params.appleButtonTitle || 'SELECT';
             $scope.deleted = params.deleted;
             $scope.deletedTitle = params.deletedTitle;
             $scope.onOptionSelect = function (event, option) {
                 event.stopPropagation();
                 $scope.selectedOptionName = option.name;
             };
+            
             $scope.onKeyPress = function (event) {
                 if (event.keyCode === 32 || event.keyCode === 13) {
                     event.stopPropagation();
@@ -603,15 +641,18 @@ module.run(['$templateCache', function($templateCache) {
                     $scope.onSelect();
                 }
             };
+
             $scope.onCancel = function () {
                 $mdDialog.cancel();
             };
+
             $scope.onSelect = function () {
                 var option;
 
                 option = _.find(params.options, {name: $scope.selectedOptionName});
                 $mdDialog.hide({option: option, deleted: $scope.deleted});
             };
+
             // Setting focus to input control
             function focusInput() {
                 var list;
@@ -638,18 +679,7 @@ module.run(['$templateCache', function($templateCache) {
     'use strict';
 
     var thisModule = angular.module('pipOptionsBigDialog',
-        ['ngMaterial', 'pipUtils', 'pipTranslate', 'pipDialogs.Templates']);
-
-    /* eslint-disable quote-props */
-    thisModule.config(['pipTranslateProvider', function (pipTranslateProvider) {
-        pipTranslateProvider.translations('en', {
-            'OPTIONS_TITLE': 'Choose Option'
-        });
-        pipTranslateProvider.translations('ru', {
-            'OPTIONS_TITLE': 'Выберите опцию'
-        });
-    }]);
-    /* eslint-enable quote-props */
+        ['ngMaterial', 'pipDialogs.Translate', 'pipDialogs.Templates']);
 
     thisModule.factory('pipOptionsBigDialog',
         ['$mdDialog', function ($mdDialog) {
@@ -673,27 +703,42 @@ module.run(['$templateCache', function($templateCache) {
                         locals: {params: params},
                         clickOutsideToClose: true
                     })
-                        .then(function (option) {
-                            focusToggleControl();
+                    .then(function (option) {
+                        focusToggleControl();
 
-                            if (successCallback) {
-                                successCallback(option);
-                            }
-                        }, function () {
-                            focusToggleControl();
-                            if (cancelCallback) {
-                                cancelCallback();
-                            }
-                        });
+                        if (successCallback) {
+                            successCallback(option);
+                        }
+                    }, function () {
+                        focusToggleControl();
+                        if (cancelCallback) {
+                            cancelCallback();
+                        }
+                    });
                 }
             };
         }]
     );
 
     thisModule.controller('pipOptionsDialogBigController',
-        ['$scope', '$rootScope', '$mdDialog', 'params', function ($scope, $rootScope, $mdDialog, params) {
+        ['$scope', '$rootScope', '$mdDialog', '$injector', 'params', function ($scope, $rootScope, $mdDialog, $injector, params) {
+            var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
+            if (pipTranslate) {
+                pipTranslate.translations('en', {
+                    'OPTIONS_TITLE': 'Choose Option'
+                });
+                pipTranslate.translations('ru', {
+                    'OPTIONS_TITLE': 'Выберите опцию'
+                });
+
+                $scope.title = params.title || 'OPTIONS_TITLE';
+                $scope.applyButtonTitle = params.applyButtonTitle || 'SELECT';
+            } else {
+                $scope.title = params.title || 'Choose Option';
+                $scope.applyButtonTitle = params.applyButtonTitle || 'Select';
+            }
+
             $scope.theme = $rootScope.$theme;
-            $scope.title = params.title || 'OPTIONS_TITLE';
             $scope.options = params.options;
             $scope.noActions = params.noActions || false;
             $scope.noTitle = params.noTitle || false;
@@ -701,7 +746,6 @@ module.run(['$templateCache', function($templateCache) {
             $scope.selectedOption = _.find(params.options, {active: true}) || {};
             $scope.selectedOptionName = $scope.selectedOption.name;
             $scope.optionIndex = _.findIndex(params.options, $scope.selectedOption);
-            $scope.applyButtonTitle = params.applyButtonTitle || 'SELECT';
 
             $scope.deleted = params.deleted;
             $scope.deletedTitle = params.deletedTitle;

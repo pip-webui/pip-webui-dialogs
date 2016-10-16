@@ -9,18 +9,7 @@
     'use strict';
 
     var thisModule = angular.module('pipInformationDialog',
-        ['ngMaterial', 'pipUtils', 'pipTranslate', 'pipDialogs.Templates']);
-
-    /* eslint-disable quote-props */
-    thisModule.config(function (pipTranslateProvider) {
-        pipTranslateProvider.translations('en', {
-            'INFORMATION_TITLE': 'Information'
-        });
-        pipTranslateProvider.translations('ru', {
-            'INFORMATION_TITLE': 'Информация'
-        });
-    });
-    /* eslint-enable quote-props */
+        ['ngMaterial', 'pipDialogs.Translate', 'pipDialogs.Templates']);
 
     thisModule.factory('pipInformationDialog',
         function ($mdDialog) {
@@ -44,18 +33,34 @@
     );
 
     thisModule.controller('pipInformationDialogController',
-        function ($scope, $rootScope, $mdDialog, pipTranslate, params, pipUtils) {
-            var content, item;
+        function ($scope, $rootScope, $mdDialog, $injector, params) {
+            var content = params.message, item;
+
+            var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
+            if (pipTranslate) {
+                pipTranslate.translations('en', {
+                    'INFORMATION_TITLE': 'Information'
+                });
+                pipTranslate.translations('ru', {
+                    'INFORMATION_TITLE': 'Информация'
+                });
+
+                $scope.title = params.title || 'INFORMATION_TITLE';
+                $scope.ok = params.ok || 'OK';
+                content = pipTranslate.translate(content);
+            } else {
+                $scope.title = params.title || 'Information';
+                $scope.ok = params.ok || 'OK';
+            }
+
+            var pipFormat = $injector.has('pipFormat') ? $injector.get('pipFormat') : null;
 
             $scope.theme = $rootScope.$theme;
-            $scope.title = params.title || 'INFORMATION_TITLE';
-            content = pipTranslate.translate(params.message);
-            if (params.item) {
+            if (params.item && pipFormat) {
                 item = _.truncate(params.item, 25);
-                content = pipUtils.sprintf(content, item);
+                content = pipFormat(content, item);
             }
             $scope.content = content;
-            $scope.ok = params.ok || 'OK';
 
             $scope.onOk = function () {
                 $mdDialog.hide();

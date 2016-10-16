@@ -9,29 +9,7 @@
     'use strict';
 
     var thisModule = angular.module('pipErrorDetailsDialog',
-        ['ngMaterial', 'pipUtils', 'pipTranslate', 'pipDialogs.Templates']);
-
-    /* eslint-disable quote-props */
-    thisModule.config(function (pipTranslateProvider) {
-        pipTranslateProvider.translations('en', {
-            'ERROR_DETAILS': 'Error details',
-            'CODE': 'Code',
-            'PATH': 'Path',
-            'ERROR': 'Error code',
-            'METHOD': 'Method',
-            'MESSAGE': 'Message'
-
-        });
-        pipTranslateProvider.translations('ru', {
-            'ERROR_DETAILS': 'Детали ошибки',
-            'CODE': 'Код',
-            'PATH': 'Путь',
-            'ERROR': 'Код ошибки',
-            'METHOD': 'Метод',
-            'MESSAGE': 'Сообщение'
-        });
-    });
-    /* eslint-enable quote-props */
+        ['ngMaterial', 'pipDialogs.Translate', 'pipDialogs.Templates']);
 
     thisModule.factory('pipErrorDetailsDialog',
         function ($mdDialog) {
@@ -59,11 +37,35 @@
     );
 
     thisModule.controller('pipErrorDetailsDialogController',
-        function ($scope, $rootScope, $mdDialog, pipTranslate, params) {
+        function ($scope, $rootScope, $mdDialog, $injector, params) {
+            var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
+            if (pipTranslate) {
+                pipTranslate.translations('en', {
+                    'ERROR_DETAILS': 'Error details',
+                    'CODE': 'Code',
+                    'PATH': 'Path',
+                    'ERROR': 'Error code',
+                    'METHOD': 'Method',
+                    'MESSAGE': 'Message'
+
+                });
+                pipTranslate.translations('ru', {
+                    'ERROR_DETAILS': 'Детали ошибки',
+                    'CODE': 'Код',
+                    'PATH': 'Путь',
+                    'ERROR': 'Код ошибки',
+                    'METHOD': 'Метод',
+                    'MESSAGE': 'Сообщение'
+                });
+                $scope.ok = params.ok || 'OK';
+                $scope.cancel = params.cancel || 'CANCEL';
+            } else {
+                $scope.ok = params.ok || 'OK';
+                $scope.cancel = params.cancel || 'Cancel';
+            }
+
             $scope.theme = $rootScope.$theme
             $scope.error = params.error;
-            $scope.ok = params.ok || 'OK';
-            $scope.cancel = params.cancel || 'CANCEL';
 
             $scope.onCancel = function () {
                 $mdDialog.cancel();

@@ -10,18 +10,7 @@
     'use strict';
 
     var thisModule = angular.module('pipOptionsDialog',
-        ['ngMaterial', 'pipUtils', 'pipTranslate', 'pipDialogs.Templates']);
-
-    /* eslint-disable quote-props */
-    thisModule.config(function (pipTranslateProvider) {
-        pipTranslateProvider.translations('en', {
-            'OPTIONS_TITLE': 'Choose Option'
-        });
-        pipTranslateProvider.translations('ru', {
-            'OPTIONS_TITLE': 'Выберите опцию'
-        });
-    });
-    /* eslint-enable quote-props */
+        ['ngMaterial', 'pipDialogs.Translate', 'pipDialogs.Templates']);
 
     thisModule.factory('pipOptionsDialog',
         function ($mdDialog) {
@@ -45,36 +34,51 @@
                         locals: {params: params},
                         clickOutsideToClose: true
                     })
-                        .then(function (option) {
-                            focusToggleControl();
+                    .then(function (option) {
+                        focusToggleControl();
 
-                            if (successCallback) {
-                                successCallback(option);
-                            }
-                        }, function () {
-                            focusToggleControl();
-                            if (cancelCallback) {
-                                cancelCallback();
-                            }
-                        });
+                        if (successCallback) {
+                            successCallback(option);
+                        }
+                    }, function () {
+                        focusToggleControl();
+                        if (cancelCallback) {
+                            cancelCallback();
+                        }
+                    });
                 }
             };
         }
     );
     thisModule.controller('pipOptionsDialogController',
-        function ($scope, $rootScope, $mdDialog, params) {
+        function ($scope, $rootScope, $mdDialog, $injector, params) {
+            var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
+            if (pipTranslate) {
+                pipTranslate.translations('en', {
+                    'OPTIONS_TITLE': 'Choose Option'
+                });
+                pipTranslate.translations('ru', {
+                    'OPTIONS_TITLE': 'Выберите опцию'
+                });
+
+                $scope.title = params.title || 'OPTIONS_TITLE';
+                $scope.applyButtonTitle = params.appleButtonTitle || 'SELECT';
+            } else {
+                $scope.title = params.title || 'Choose Option';
+                $scope.applyButtonTitle = params.appleButtonTitle || 'Select';
+            }
+
             $scope.theme = $rootScope.$theme;
-            $scope.title = params.title || 'OPTIONS_TITLE';
             $scope.options = params.options;
             $scope.selectedOption = _.find(params.options, {active: true}) || {};
             $scope.selectedOptionName = $scope.selectedOption.name;
-            $scope.applyButtonTitle = params.appleButtonTitle || 'SELECT';
             $scope.deleted = params.deleted;
             $scope.deletedTitle = params.deletedTitle;
             $scope.onOptionSelect = function (event, option) {
                 event.stopPropagation();
                 $scope.selectedOptionName = option.name;
             };
+            
             $scope.onKeyPress = function (event) {
                 if (event.keyCode === 32 || event.keyCode === 13) {
                     event.stopPropagation();
@@ -82,15 +86,18 @@
                     $scope.onSelect();
                 }
             };
+
             $scope.onCancel = function () {
                 $mdDialog.cancel();
             };
+
             $scope.onSelect = function () {
                 var option;
 
                 option = _.find(params.options, {name: $scope.selectedOptionName});
                 $mdDialog.hide({option: option, deleted: $scope.deleted});
             };
+
             // Setting focus to input control
             function focusInput() {
                 var list;

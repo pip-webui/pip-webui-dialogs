@@ -7,18 +7,7 @@
     'use strict';
 
     var thisModule = angular.module('pipConfirmationDialog',
-        ['ngMaterial', 'pipUtils', 'pipTranslate', 'pipDialogs.Templates']);
-
-    /* eslint-disable quote-props */
-    thisModule.config(function (pipTranslateProvider) {
-        pipTranslateProvider.translations('en', {
-            'CONFIRM_TITLE': 'Confirm'
-        });
-        pipTranslateProvider.translations('ru', {
-            'CONFIRM_TITLE': 'Подтвердите'
-        });
-    });
-    /* eslint-enable quote-props */
+        ['ngMaterial', 'pipDialogs.Translate', 'pipDialogs.Templates']);
 
     thisModule.factory('pipConfirmationDialog',
         function ($mdDialog) {
@@ -46,12 +35,27 @@
     );
 
     thisModule.controller('pipConfirmationDialogController',
-        function ($scope, $rootScope, $mdDialog, pipTranslate, params) {
-            $scope.theme = $rootScope.$theme;
-            $scope.title = params.title || 'CONFIRM_TITLE';
+        function ($scope, $rootScope, $mdDialog, $injector, params) {
+            var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
 
-            $scope.ok = params.ok || 'OK';
-            $scope.cancel = params.cancel || 'CANCEL';
+            if (pipTranslate) {
+                pipTranslate.translations('en', {
+                    'CONFIRM_TITLE': 'Confirm'
+                });
+                pipTranslate.translations('ru', {
+                    'CONFIRM_TITLE': 'Подтвердите'
+                });
+
+                $scope.title = params.title || 'CONFIRM_TITLE';
+                $scope.ok = params.ok || 'OK';
+                $scope.cancel = params.cancel || 'CANCEL';
+            } else {
+                $scope.title = params.title || 'Confirm';
+                $scope.ok = params.ok || 'OK';
+                $scope.cancel = params.cancel || 'Cancel';
+            }
+
+            $scope.theme = $rootScope.$theme;
 
             $scope.onCancel = function () {
                 $mdDialog.cancel();

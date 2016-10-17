@@ -7,36 +7,41 @@
 
             'pipDropdown', 'pipLayout',
             // 3rd Party Modules
+            // 'ui.router', 'ui.utils', 'ngResource', 'ngAria', 'ngCookies', 'ngSanitize', 'ngMessages',
+            // 'ngMaterial', 'LocalStorageModule', 'ngAnimate',
+            // 'pipServices', 'pipDialogs', 'pipTheme',
             'ui.router', 'ui.utils', 'ngResource', 'ngAria', 'ngCookies', 'ngSanitize', 'ngMessages',
-            'ngMaterial', 'LocalStorageModule', 'ngAnimate',
-            'pipServices', 'pipDialogs', 'pipTheme.Default', 'pipTheme.Bootbarn', 'pipTheme',
+            'ngMaterial', 'LocalStorageModule', 'angularFileUpload', 'ngAnimate',
+            'pipServices', 'pipNav', 'pipTheme', 'pipDialogs',
+
 
             'appDialogs.Information', 'appDialogs.Confirmation', 'appDialogs.Options'
         ]
     );
 
     thisModule.controller('pipSampleController',
-        function ($scope, $rootScope, $state, $mdSidenav, $timeout, pipTranslate, $mdTheming, pipTheme,
-                  $mdMedia) {
+        function ($scope, $rootScope, $state, $mdSidenav, pipTranslate, $timeout, $mdMedia, pipAppBar) {
 
-            pipTheme.setCurrentTheme('bootbarn-warm');
-            
             $scope.pages = [
                 { title: 'Information dialog', state: 'information', url: '/information',
                     controller: 'InformationController', 
-                    templateUrl: '../samples/information/information.html' },
+                    templateUrl: 'information_sample/information.html' },
                 { title: 'Confirmation dialog', state: 'confirmation', url: '/confirmation',
                     controller: 'ConfirmationController', 
-                    templateUrl: '../samples/confirmation/confirmation.html' },
+                    templateUrl: 'confirmation_sample/confirmation.html' },
                 { title: 'Options dialogs', state: 'options', url: '/options',
-                    controller: 'OptionsController', templateUrl: '../samples/options/options.html' }
+                    controller: 'OptionsController', templateUrl: 'options_sample/options.html' }
             ];
-            
-            $scope.selected = {};
 
+            $scope.selected = {};
             $timeout(function () {
                 $scope.selected.pageIndex = _.findIndex($scope.pages, {state: $state.current.name});
-            });
+                $scope.selected.navId = $state.current.name;
+            }, 100);
+
+            pipAppBar.showMenuNavIcon();
+            pipAppBar.showLanguage();
+            pipAppBar.showTitleText('DIALOGS');
 
             $scope.onNavigationSelect = function (stateName) {
                 if ($state.current.name !== stateName) {
@@ -50,16 +55,6 @@
                 }
             };
 
-            $scope.isEntryPage = function () {
-                return $state.current.name === 'signin' || $state.current.name === 'signup' ||
-                    $state.current.name === 'recover_password' || $state.current.name === 'post_signup';
-            };
-
-            $scope.isPadding = function () {
-                return $rootScope.$state
-                    ? !($rootScope.$state.name === 'tabs' ||
-                    $rootScope.$state.name === 'dropdown' && $mdMedia('xs')) : true;
-            };
         }
     );
 

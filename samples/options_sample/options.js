@@ -35,7 +35,7 @@
             pipAppBar.hideShadow();
             pipAppBar.showMenuNavIcon();
             pipAppBar.showLanguage();
-            pipAppBar.showTitleText('CONTROLS');
+            pipAppBar.showTitleText('DIALOGS');
             
             $scope.onOptionsDialogOpen = function (event) {
                 pipOptionsDialog.show(

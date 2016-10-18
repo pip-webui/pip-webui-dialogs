@@ -9,8 +9,8 @@ Pip.WebUI.Dialogs modules contains general purpose dialogs.
 - Error message dialog
 - Option selection dialog
 
-<a href="https://github.com/pip-webui/pip-webui-controls/raw/master/doc/images/img-info-dialog.png" style="border: 3px ridge #c8d2df; display: inline-block">
-    <img src="https://github.com/pip-webui/pip-webui-controls/raw/master/doc/images/img-info-dialog.png"/>
+<a href="https://github.com/pip-webui/pip-webui-dialogs/raw/master/doc/images/img-info-dialog.png" style="border: 3px ridge #c8d2df; display: inline-block">
+    <img src="https://github.com/pip-webui/pip-webui-dialogs/raw/master/doc/images/img-info-dialog.png"/>
 </a>
 
 Standard dialogs require only few lines of code from developers:

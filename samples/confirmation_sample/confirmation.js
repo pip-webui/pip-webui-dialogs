@@ -16,7 +16,7 @@
                     CODE: 'Code'
                 });
                 pipTranslate.translations('ru', {
-                    OPEN_CONFIRM: 'Открыть диалог родтверждения',
+                    OPEN_CONFIRM: 'Открыть диалог подтверждения',
                     CONFIRM_DIALOG: 'Диалог подтверждения',
                     SAMPLE: 'Пример',
                     CODE: 'Пример кода'                    

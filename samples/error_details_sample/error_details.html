@@ -1,0 +1,31 @@
+<h2 class="text-title header-margin">{{::title}}</h2>
+
+<md-button class="lm0 md-raised md-accent flat" ng-click="onErrorDialogOpen($event)">{{::openErrorDetails}}</md-button>
+<pre class="text-body1 color-window-bg p16">
+<h3 class="text-subhead2 without-margin">{{::code}}</h3>
+<code class="language-js">
+    
+           var error = {
+                code: 'Error Code 155',
+                path: 'Error parh',
+                error: 'Show Error',
+                message: 'This is error message: Show Error'
+            }
+            
+            $scope.onErrorDialogOpen = function (event) {
+                pipErrorDetailsDialog.show(
+                    {
+                        error: error,
+                        ok: 'Ok'
+                    },
+                    function () {
+                        console.log('Error show callback');  // eslint-disable-line
+                    },
+                    function () {
+                        console.log('Error show cancel callback');   // eslint-disable-line
+                    }
+                );        
+            };
+
+</code>
+</pre>

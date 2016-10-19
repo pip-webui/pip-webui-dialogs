@@ -12,7 +12,7 @@
 
             'pipDialogs',
 
-            'appDialogs.Information', 'appDialogs.Confirmation', 'appDialogs.Options'
+            'appDialogs.Information', 'appDialogs.Confirmation', 'appDialogs.Options', 'appDialogs.ErrorDetails'
         ]
     );
 
@@ -28,6 +28,10 @@
             { 
                 title: 'Options dialogs', state: 'options', url: '/options',
                 controller: 'OptionsController', templateUrl: 'options_sample/options.html' 
+            },
+            { 
+                title: 'Error Details dialogs', state: 'error_details', url: '/error_details',
+                controller: 'ErrorDetailsController', templateUrl: 'error_details_sample/error_details.html' 
             }
         ];
 

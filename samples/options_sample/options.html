@@ -1,10 +1,10 @@
-<h2 class="text-title tm0 bm24">{{:: 'OPTIONS_DIALOG' | translate }}</h2>
+<h2 class="text-title header-margin">{{::titleOptions}}</h2>
 <md-button class="lm0 md-raised md-accent flat"
-           ng-click="onOptionsDialogOpen($event)">{{:: 'OPEN_OPTIONS' | translate }}
+           ng-click="onOptionsDialogOpen($event)">{{::openOptions}}
 </md-button>
 
 <pre class="text-body1 color-window-bg p16">
-<h3 class="text-subhead2 m0">{{:: 'CODE' | translate}}</h3>
+<h3 class="text-subhead2 without-margin">{{::code}}</h3>
 <code class="language-js">pipOptionsDialog.show(
        {
            event: event,
@@ -27,11 +27,11 @@
 
 <md-divider class="tm8 pip-list-divider"></md-divider>
 <md-button class="lm0 md-raised md-accent flat"
-           ng-click="onOptionsBigDialogOpen($event)">{{:: 'OPEN_OPTIONS_BIG' | translate }}
+           ng-click="onOptionsBigDialogOpen($event)">{{::openOptionsBig}}
 </md-button>
 
 <pre class="text-body1 color-window-bg p16">
-<h3 class="text-subhead2 m0">{{:: 'CODE' | translate}}</h3>
+<h3 class="text-subhead2 without-margin">{{::code}}</h3>
 <code class="language-js">pipOptionsBigDialog.show(
 {
     event: event,
@@ -70,11 +70,11 @@ function (option) {
 <md-divider class="tm8 pip-list-divider"></md-divider>
 <md-button class="lm0 md-raised md-accent flat"
            ng-click="onOptionsBigDialogOpenForContribs($event)">
-    {{:: 'OPEN_OPTIONS_BIG_CONTRIBS' | translate }}
+    {{::openOptionsBigButton}}
 </md-button>
 
 <pre class="text-body1 color-window-bg p16">
-<h3 class="text-subhead2 m0">{{:: 'CODE' | translate}}</h3>
+<h3 class="text-subhead2 without-margin">{{::code}}</h3>
 <code class="language-js">pipOptionsBigDialog.show(
        {
            event: event,
@@ -103,11 +103,11 @@ function (option) {
 </pre>
 <md-divider class="tm8 pip-list-divider"></md-divider>
 <md-button class="lm0 md-raised md-accent flat"
-           ng-click="onRoleDialog($event)">{{:: 'OPEN_ROLE_DIALOG' | translate }}
+           ng-click="onRoleDialog($event)">{{::openOptionsBigHint}}
 </md-button>
 
 <pre class="text-body1 color-window-bg p16">
-<h3 class="text-subhead2 m0">{{:: 'CODE' | translate}}</h3>
+<h3 class="text-subhead2 without-margin">{{::code}}</h3>
 <code class="language-js"><strong>pipOptionsBigDialog.show</strong>(
 {
     event: event,

@@ -58,7 +58,7 @@
             $scope.theme = $rootScope.$theme;
             if (params.item && pipFormat) {
                 item = _.truncate(params.item, 25);
-                content = pipFormat(content, item);
+                content = pipFormat.sprintf(content, item);
             }
             $scope.content = content;
 

@@ -24,18 +24,46 @@
     });
 
     thisModule.controller('OptionsController',
-        function ($scope, pipOptionsDialog, pipOptionsBigDialog, pipAppBar, $timeout) {
+        function ($scope, pipOptionsDialog, pipOptionsBigDialog, $injector, $timeout) {
+           
+            var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
 
-            $timeout(function() {
-                $('pre code').each(function(i, block) {
-                    Prism.highlightElement(block);
+            if (pipTranslate) {
+                pipTranslate.translations('en', {
+                    OPEN_OPTIONS: 'Open options dialog',
+                    OPEN_OPTIONS_BIG: 'Open big options dialog',
+                    OPTIONS_DIALOG: 'Options dialog',
+                    OPEN_OPTIONS_BIG_CONTRIBS: 'Open big options dialog with buttons',
+                    OPEN_ROLE_DIALOG: 'Open big dialog with hint',
+                    SAMPLE: 'Sample',
+                    CODE: 'Code'
                 });
-            });
-            
-            pipAppBar.hideShadow();
-            pipAppBar.showMenuNavIcon();
-            pipAppBar.showLanguage();
-            pipAppBar.showTitleText('DIALOGS');
+                pipTranslate.translations('ru', {
+                    OPEN_OPTIONS: 'Открыть диалог выбора',
+                    OPEN_OPTIONS_BIG: 'Открыть большой диалог выбора',
+                    OPTIONS_DIALOG: 'Диалог выбора',
+                    OPEN_OPTIONS_BIG_CONTRIBS: 'Открыть большой диалог с кнопками',
+                    OPEN_ROLE_DIALOG: 'Открыть диалог с подсказкой',
+                    SAMPLE: 'Пример',
+                    CODE: 'Пример кода'                    
+                });
+                $scope.titleOptions = pipTranslate.translate('OPTIONS_DIALOG');                
+                $scope.openOptions = pipTranslate.translate('OPEN_OPTIONS');
+                $scope.openOptionsBig = pipTranslate.translate('OPEN_OPTIONS_BIG');
+                $scope.openOptionsBigButton = pipTranslate.translate('OPEN_OPTIONS_BIG_CONTRIBS');
+                $scope.openOptionsBigHint = pipTranslate.translate('OPEN_ROLE_DIALOG');
+                $scope.sample = pipTranslate.translate('SAMPLE');
+                $scope.code = pipTranslate.translate('CODE');
+            } else {
+                $scope.titleOptions = 'Options dialog';
+                $scope.openOptions = 'Open options dialog';
+                $scope.openOptionsBig = 'Open big options dialog';
+                $scope.openOptionsBigButton = 'Open big options dialog with buttons';
+                $scope.openOptionsBigHint = 'Open big dialog with hint';
+              
+                $scope.sample = 'Sample';
+                $scope.code = 'Code';
+            }
             
             $scope.onOptionsDialogOpen = function (event) {
                 pipOptionsDialog.show(

@@ -3,29 +3,42 @@
 
     var thisModule = angular.module('appDialogs.Confirmation', []);
 
-    thisModule.config(function (pipTranslateProvider) {
-        pipTranslateProvider.translations('en', {
-            OPEN_CONFIRM: 'Open confirmation dialog',
-            CONFIRM_DIALOG: 'Confirmation dialog'
-        });
-        pipTranslateProvider.translations('ru', {
-            OPEN_CONFIRM: 'Открыть диалог родтверждения',
-            CONFIRM_DIALOG: 'Диалог подтверждения'
-        });
-    });
-
     thisModule.controller('ConfirmationController',
-        function ($scope, pipConfirmationDialog, pipAppBar, $timeout) {
+        function ($scope, pipConfirmationDialog, $injector, $timeout) {
+
+            var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
+
+            if (pipTranslate) {
+                pipTranslate.translations('en', {
+                    OPEN_CONFIRM: 'Open confirmation dialog',
+                    CONFIRM_DIALOG: 'Confirmation dialog',
+                    SAMPLE: 'Sample',
+                    CODE: 'Code'
+                });
+                pipTranslate.translations('ru', {
+                    OPEN_CONFIRM: 'Открыть диалог родтверждения',
+                    CONFIRM_DIALOG: 'Диалог подтверждения',
+                    SAMPLE: 'Пример',
+                    CODE: 'Пример кода'                    
+                });
+                $scope.openConfirm = pipTranslate.translate('OPEN_CONFIRM');
+                $scope.title = pipTranslate.translate('CONFIRM_DIALOG');
+                $scope.sample = pipTranslate.translate('SAMPLE');
+                $scope.code = pipTranslate.translate('CODE');
+            } else {
+                $scope.openConfirm = 'Open confirmation dialog';
+                $scope.title = 'Confirmation dialog';                
+                $scope.sample = 'Sample';
+                $scope.code = 'Code';
+            }
 
             $timeout(function() {
                 $('pre code').each(function(i, block) {
-                    Prism.highlightElement(block);
+                    if (Prism) {
+                        Prism.highlightElement(block);
+                    }
                 });
             });
-
-            pipAppBar.showMenuNavIcon();
-            pipAppBar.showLanguage();
-            pipAppBar.showTitleText('DIALOGS');
             
             $scope.onConfirmDialogOpen = function (event) {
                 pipConfirmationDialog.show(

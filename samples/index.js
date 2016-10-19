@@ -8,7 +8,6 @@
             'ngMaterial', 'wu.masonry', 'LocalStorageModule', 'angularFileUpload', 'ngAnimate',
 
             'pipServices', 
-            // 'pipLists',
             'pipTheme.Default', 'pipTheme.Bootbarn', 'pipTheme', 
 
             'pipDialogs',

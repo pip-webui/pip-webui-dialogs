@@ -42,7 +42,7 @@
                         </div>
                         <div class="pip-subtitle spacer-right"
                              style="height: inherit" ng-if="option.text"
-                             pip-translate-html="{{::option.text | translate}}">
+                             ng-bind-html="option.text | translate">
                         </div>
                     </div>
 

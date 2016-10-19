@@ -255,7 +255,8 @@ module.run(['$templateCache', function($templateCache) {
     '                        </div>\n' +
     '                        <div class="pip-subtitle spacer-right"\n' +
     '                             style="height: inherit" ng-if="option.text"\n' +
-    '                             pip-translate-html="{{::option.text | translate}}">\n' +
+    '                             ng-bind-html="option.text | translate"\n' +
+    '                             xxxpip-translate-html="{{::option.text | translate}}">\n' +
     '                        </div>\n' +
     '                    </div>\n' +
     '\n' +

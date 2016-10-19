@@ -6,23 +6,6 @@
 
     var thisModule = angular.module('appDialogs.Options', []);
 
-    thisModule.config(function (pipTranslateProvider) {
-        pipTranslateProvider.translations('en', {
-            OPEN_OPTIONS: 'Open options dialog',
-            OPEN_OPTIONS_BIG: 'Open big options dialog',
-            OPTIONS_DIALOG: 'Options dialog',
-            OPEN_OPTIONS_BIG_CONTRIBS: 'Open big options dialog with buttons',
-            OPEN_ROLE_DIALOG: 'Open big dialog with hint'
-        });
-        pipTranslateProvider.translations('ru', {
-            OPEN_OPTIONS: 'Открыть диалог выбора',
-            OPEN_OPTIONS_BIG: 'Открыть большой диалог выбора',
-            OPTIONS_DIALOG: 'Диалог выбора',
-            OPEN_OPTIONS_BIG_CONTRIBS: 'Открыть большой диалог с кнопками',
-            OPEN_ROLE_DIALOG: 'Открыть диалог с подсказкой'
-        });
-    });
-
     thisModule.controller('OptionsController',
         function ($scope, pipOptionsDialog, pipOptionsBigDialog, $injector, $timeout) {
            
@@ -66,7 +49,7 @@
             }
             
             function setActive(options, optionName) {
-                
+
             }
             
             $scope.onOptionsDialogOpen = function (event) {
@@ -140,7 +123,7 @@
                         event: event,
                         options: [
                             { name: 'option_1', text: '<b>Спланируй</b> задачи и действуй чтобы их осуществить.', active: true },
-                            { name: 'option_2', text: 'Assertively engineer stand-alone information vis-a-vis ethical partnerships. Dynamically extend accurate data after strategic infrastructures. Globally matrix intuitive potentialities without', active: true }
+                            { name: 'option_2', text: 'OPEN_OPTIONS_BIG_CONTRIBS', active: true }
 
                         ]
                     },

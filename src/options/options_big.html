@@ -7,7 +7,7 @@
            min-width="400" md-theme="{{theme}}">
     <md-dialog-content class="pip-body p0 pip-scroll" ng-class="{'bp24': !noActions}">
         <div class="pip-header" ng-class="{'header-hint': noTitle && hint}">
-            <h3 class="m0 text-title" ng-if="!noTitle">
+            <h3 class="m0" ng-if="!noTitle">
                 {{::title | translate}}
             </h3>
             <div ng-show="noTitle && hint" class="dialog-hint layout-row layout-align-start-center">

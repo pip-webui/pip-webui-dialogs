@@ -33,7 +33,7 @@ module.run(['$templateCache', function($templateCache) {
     '-->\n' +
     '\n' +
     '<md-dialog class="pip-dialog pip-confirmation-dialog layout-column" width="400" md-theme="{{::theme}}">\n' +
-    '    <div class="pip-header text-subhead1">\n' +
+    '    <div class="pip-header">\n' +
     '        <h3>{{:: title}}</h3>\n' +
     '    </div>\n' +
     '    <div class="pip-footer">\n' +
@@ -60,54 +60,55 @@ module.run(['$templateCache', function($templateCache) {
     '@copyright Digital Living Software Corp. 2014-2016\n' +
     '-->\n' +
     '\n' +
-    '<md-dialog class="pip-dialog pip-details-dialog layout-column" width="400" md-theme="{{theme}}">\n' +
+    '<md-dialog class="pip-dialog pip-error-details-dialog layout-column" width="400" md-theme="{{theme}}">\n' +
     '    <div class="pip-body">\n' +
-    '\n' +
-    '        <div class="pip-header text-subhead1">{{::\'ERROR_DETAILS\' | translate}}</div>\n' +
+    '        <div class="pip-header">\n' +
+    '            <h3>{{::errorDetails | translate}}</h3>\n' +
+    '        </div>\n' +
     '        <div class="layout-row layout-align-start-center error-section text-body2 color-secondary-text"\n' +
     '             ng-if="error.code || (error.data && error.data.code)">\n' +
-    '            {{::\'CODE\' | translate}}\n' +
+    '            {{::errorCode | translate}}\n' +
     '        </div>\n' +
-    '        <div class="layout-row layout-align-start-center" ng-if="error.code || (error.data && error.data.code)">\n' +
+    '        <div class="layout-row layout-align-start-center text-subhead1" ng-if="error.code || (error.data && error.data.code)">\n' +
     '            {{error.code || error.data.code}}\n' +
     '        </div>\n' +
     '\n' +
     '        <div class="layout-row layout-align-start-center error-section text-body2 color-secondary-text"\n' +
     '             ng-if="error.path || (error.data && error.data.path)">\n' +
-    '            {{::\'PATH\' | translate}}\n' +
+    '            {{::errorPath | translate}}\n' +
     '        </div>\n' +
-    '        <div class="layout-row layout-align-start-center" ng-if="error.path || (error.data && error.data.path)">\n' +
+    '        <div class="layout-row layout-align-start-center text-subhead1" ng-if="error.path || (error.data && error.data.path)">\n' +
     '            {{error.path || error.data.path}}\n' +
     '        </div>\n' +
     '\n' +
     '        <div class="error-section text-body2 color-secondary-text layout-row layout-align-start-center"\n' +
     '             ng-if="error.error || (error.data && error.data.error)">\n' +
-    '            {{::\'ERROR\' | translate}}\n' +
+    '            {{::errorText | translate}}\n' +
     '        </div>\n' +
-    '        <div class="layout-row layout-align-start-center" ng-if="error.error || (error.data && error.data.error)">\n' +
+    '        <div class="layout-row layout-align-start-center text-subhead1" ng-if="error.error || (error.data && error.data.error)">\n' +
     '            {{error.error || error.data.error}}\n' +
     '        </div>\n' +
     '\n' +
     '        <div class="error-section text-body2 color-secondary-text layout-row layout-align-start-center"\n' +
     '             ng-if="error.method || (error.data && error.data.method)">\n' +
-    '            {{::\'METHOD\' | translate}}\n' +
+    '            {{::errorMethod | translate}}\n' +
     '        </div>\n' +
-    '        <div class="layout-row layout-align-start-center" ng-if="error.method || (error.data && error.data.method)">\n' +
+    '        <div class="layout-row layout-align-start-center text-subhead1" ng-if="error.method || (error.data && error.data.method)">\n' +
     '            {{error.method || error.data.method}}\n' +
     '        </div>\n' +
     '\n' +
     '        <div class="error-section text-body2 color-secondary-text layout-row layout-align-start-center"\n' +
     '             ng-if="error.message || (error.data && error.data.message)">\n' +
-    '            {{::\'MESSAGE\' | translate}}\n' +
+    '            {{::errorMessage | translate}}\n' +
     '        </div>\n' +
-    '        <div class="layout-row layout-align-start-center"\n' +
+    '        <div class="layout-row layout-align-start-center text-subhead1"\n' +
     '             ng-if="error.message || (error.data && error.data.message)">\n' +
     '            {{error.message || error.data.message}}\n' +
     '        </div>\n' +
     '    </div>\n' +
-    '    <div class="pip-footer rp16">\n' +
+    '    <div class="pip-footer">\n' +
     '        <div>\n' +
-    '            <md-button class="md-accent m0" ng-click="onOk()">{{::\'DISMISS\' | translate }}</md-button>\n' +
+    '            <md-button class="md-accent m0" ng-click="onOk()">{{::dismissButton | translate}}</md-button>\n' +
     '        </div>\n' +
     '    </div>\n' +
     '</md-dialog>\n' +
@@ -165,7 +166,7 @@ module.run(['$templateCache', function($templateCache) {
     '           min-width="400" md-theme="{{theme}}">\n' +
     '    <md-dialog-content class="pip-body lp0 tp0 rp0 bp24 pip-scroll">\n' +
     '        <div class="pip-header" >\n' +
-    '            <h3 class="text-title">{{::title | translate}}</h3>\n' +
+    '            <h3>{{::title | translate}}</h3>\n' +
     '            <div ng-show="deletedTitle" class="header-option text-subhead1 divider-bottom">\n' +
     '                <md-checkbox ng-model="deleted" aria-label="CHECKBOX">{{::deletedTitle | translate}}</md-checkbox>\n' +
     '            </div>\n' +
@@ -219,7 +220,7 @@ module.run(['$templateCache', function($templateCache) {
     '           min-width="400" md-theme="{{theme}}">\n' +
     '    <md-dialog-content class="pip-body p0 pip-scroll" ng-class="{\'bp24\': !noActions}">\n' +
     '        <div class="pip-header" ng-class="{\'header-hint\': noTitle && hint}">\n' +
-    '            <h3 class="m0 text-title" ng-if="!noTitle">\n' +
+    '            <h3 class="m0" ng-if="!noTitle">\n' +
     '                {{::title | translate}}\n' +
     '            </h3>\n' +
     '            <div ng-show="noTitle && hint" class="dialog-hint layout-row layout-align-start-center">\n' +
@@ -401,79 +402,6 @@ module.run(['$templateCache', function($templateCache) {
 })();
 
 /**
- * @file Information dialog
- * @copyright Digital Living Software Corp. 2014-2016
- * @todo
- * - Improve sample in sampler app
- */
-
-(function (angular, _) {
-    'use strict';
-
-    var thisModule = angular.module('pipInformationDialog',
-        ['ngMaterial', 'pipDialogs.Translate', 'pipDialogs.Templates']);
-
-    thisModule.factory('pipInformationDialog',
-        ['$mdDialog', function ($mdDialog) {
-            return {
-                show: function (params, callback) {
-                    $mdDialog.show({
-                        targetEvent: params.event,
-                        templateUrl: 'information/information.html',
-                        controller: 'pipInformationDialogController',
-                        locals: {params: params},
-                        clickOutsideToClose: true
-                    })
-                        .then(function () {
-                            if (callback) {
-                                callback();
-                            }
-                        });
-                }
-            };
-        }]
-    );
-
-    thisModule.controller('pipInformationDialogController',
-        ['$scope', '$rootScope', '$mdDialog', '$injector', 'params', function ($scope, $rootScope, $mdDialog, $injector, params) {
-            var content = params.message, item;
-console.log('content', content);
-            var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
-            if (pipTranslate) {
-                pipTranslate.translations('en', {
-                    'INFORMATION_TITLE': 'Information'
-                });
-                pipTranslate.translations('ru', {
-                    'INFORMATION_TITLE': 'Информация'
-                });
-
-                $scope.title = params.title || 'INFORMATION_TITLE';
-                $scope.ok = params.ok || 'OK';
-                content = pipTranslate.translate(content);
-            } else {
-                $scope.title = params.title || 'Information';
-                $scope.ok = params.ok || 'OK';
-            }
-console.log('content1', content);
-            var pipFormat = $injector.has('pipFormat') ? $injector.get('pipFormat') : null;
-
-            $scope.theme = $rootScope.$theme;
-            if (params.item && pipFormat) {
-                item = _.truncate(params.item, 25);
-                content = pipFormat.sprintf(content, item);
-                console.log('content2', content);
-            }
-            $scope.content = content;
-console.log('content1', $scope.content);
-            $scope.onOk = function () {
-                $mdDialog.hide();
-            };
-        }]
-    );
-
-})(window.angular, window._);
-
-/**
  * @file Error details dialog
  * @copyright Digital Living Software Corp. 2014-2016
  * @todo
@@ -513,30 +441,46 @@ console.log('content1', $scope.content);
 
     thisModule.controller('pipErrorDetailsDialogController',
         ['$scope', '$rootScope', '$mdDialog', '$injector', 'params', function ($scope, $rootScope, $mdDialog, $injector, params) {
+            
             var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
+            
             if (pipTranslate) {
                 pipTranslate.translations('en', {
                     'ERROR_DETAILS': 'Error details',
-                    'CODE': 'Code',
+                    'CODE': 'Error code',
                     'PATH': 'Path',
-                    'ERROR': 'Error code',
+                    'ERROR': 'Error',
                     'METHOD': 'Method',
-                    'MESSAGE': 'Message'
-
+                    'MESSAGE': 'Message',
+                    'DISMISS': 'Dismiss'
                 });
                 pipTranslate.translations('ru', {
                     'ERROR_DETAILS': 'Детали ошибки',
-                    'CODE': 'Код',
+                    'CODE': 'Код ошибки',
                     'PATH': 'Путь',
-                    'ERROR': 'Код ошибки',
+                    'ERROR': 'Ошибка',
                     'METHOD': 'Метод',
                     'MESSAGE': 'Сообщение'
                 });
                 $scope.ok = params.ok || 'OK';
                 $scope.cancel = params.cancel || 'CANCEL';
+                $scope.errorDetails = 'ERROR_DETAILS';
+                $scope.dismissButton = 'DISMISS';
+                $scope.errorMessage = 'MESSAGE';
+                $scope.errorCode = 'CODE';
+                $scope.errorMethod = 'METHOD';
+                $scope.errorPath = 'PATH';
+                $scope.errorText = 'ERROR';                
             } else {
                 $scope.ok = params.ok || 'OK';
                 $scope.cancel = params.cancel || 'Cancel';
+                $scope.errorDetails = 'Error details';
+                $scope.dismissButton = 'Dismiss';
+                $scope.errorMessage = 'Message';
+                $scope.errorCode = 'Code';
+                $scope.errorMethod = 'Method';
+                $scope.errorPath = 'Path';
+                $scope.error = 'Error';
             }
 
             $scope.theme = $rootScope.$theme
@@ -553,6 +497,79 @@ console.log('content1', $scope.content);
     );
 
 })(window.angular);
+
+/**
+ * @file Information dialog
+ * @copyright Digital Living Software Corp. 2014-2016
+ * @todo
+ * - Improve sample in sampler app
+ */
+
+(function (angular, _) {
+    'use strict';
+
+    var thisModule = angular.module('pipInformationDialog',
+        ['ngMaterial', 'pipDialogs.Translate', 'pipDialogs.Templates']);
+
+    thisModule.factory('pipInformationDialog',
+        ['$mdDialog', function ($mdDialog) {
+            return {
+                show: function (params, callback) {
+                    $mdDialog.show({
+                        targetEvent: params.event,
+                        templateUrl: 'information/information.html',
+                        controller: 'pipInformationDialogController',
+                        locals: {params: params},
+                        clickOutsideToClose: true
+                    })
+                        .then(function () {
+                            if (callback) {
+                                callback();
+                            }
+                        });
+                }
+            };
+        }]
+    );
+
+    thisModule.controller('pipInformationDialogController',
+        ['$scope', '$rootScope', '$mdDialog', '$injector', 'params', function ($scope, $rootScope, $mdDialog, $injector, params) {
+            var content = params.message, item;
+
+            var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
+            if (pipTranslate) {
+                pipTranslate.translations('en', {
+                    'INFORMATION_TITLE': 'Information'
+                });
+                pipTranslate.translations('ru', {
+                    'INFORMATION_TITLE': 'Информация'
+                });
+
+                $scope.title = params.title || 'INFORMATION_TITLE';
+                $scope.ok = params.ok || 'OK';
+                content = pipTranslate.translate(content);
+            } else {
+                $scope.title = params.title || 'Information';
+                $scope.ok = params.ok || 'OK';
+            }
+
+            var pipFormat = $injector.has('pipFormat') ? $injector.get('pipFormat') : null;
+
+            $scope.theme = $rootScope.$theme;
+            if (params.item && pipFormat) {
+                item = _.truncate(params.item, 25);
+                content = pipFormat.sprintf(content, item);
+                console.log('content2', content);
+            }
+            $scope.content = content;
+
+            $scope.onOk = function () {
+                $mdDialog.hide();
+            };
+        }]
+    );
+
+})(window.angular, window._);
 
 /**
  * @file Options dialog

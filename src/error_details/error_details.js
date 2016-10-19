@@ -38,30 +38,46 @@
 
     thisModule.controller('pipErrorDetailsDialogController',
         function ($scope, $rootScope, $mdDialog, $injector, params) {
+            
             var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
+            
             if (pipTranslate) {
                 pipTranslate.translations('en', {
                     'ERROR_DETAILS': 'Error details',
-                    'CODE': 'Code',
+                    'CODE': 'Error code',
                     'PATH': 'Path',
-                    'ERROR': 'Error code',
+                    'ERROR': 'Error',
                     'METHOD': 'Method',
-                    'MESSAGE': 'Message'
-
+                    'MESSAGE': 'Message',
+                    'DISMISS': 'Dismiss'
                 });
                 pipTranslate.translations('ru', {
                     'ERROR_DETAILS': 'Детали ошибки',
-                    'CODE': 'Код',
+                    'CODE': 'Код ошибки',
                     'PATH': 'Путь',
-                    'ERROR': 'Код ошибки',
+                    'ERROR': 'Ошибка',
                     'METHOD': 'Метод',
                     'MESSAGE': 'Сообщение'
                 });
                 $scope.ok = params.ok || 'OK';
                 $scope.cancel = params.cancel || 'CANCEL';
+                $scope.errorDetails = 'ERROR_DETAILS';
+                $scope.dismissButton = 'DISMISS';
+                $scope.errorMessage = 'MESSAGE';
+                $scope.errorCode = 'CODE';
+                $scope.errorMethod = 'METHOD';
+                $scope.errorPath = 'PATH';
+                $scope.errorText = 'ERROR';                
             } else {
                 $scope.ok = params.ok || 'OK';
                 $scope.cancel = params.cancel || 'Cancel';
+                $scope.errorDetails = 'Error details';
+                $scope.dismissButton = 'Dismiss';
+                $scope.errorMessage = 'Message';
+                $scope.errorCode = 'Code';
+                $scope.errorMethod = 'Method';
+                $scope.errorPath = 'Path';
+                $scope.error = 'Error';
             }
 
             $scope.theme = $rootScope.$theme

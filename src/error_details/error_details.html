@@ -6,8 +6,8 @@
 <md-dialog class="pip-dialog pip-details-dialog layout-column" width="400" md-theme="{{theme}}">
     <div class="pip-body">
 
-        <div class="pip-header p0 bp8  text-subhead1">{{::'ERROR_DETAILS' | translate}}</div>
-        <div class="layout-row layout-align-start-center h48 text-body2 color-secondary-text"
+        <div class="pip-header text-subhead1">{{::'ERROR_DETAILS' | translate}}</div>
+        <div class="layout-row layout-align-start-center error-section text-body2 color-secondary-text"
              ng-if="error.code || (error.data && error.data.code)">
             {{::'CODE' | translate}}
         </div>
@@ -15,7 +15,7 @@
             {{error.code || error.data.code}}
         </div>
 
-        <div class="layout-row layout-align-start-center h48 text-body2 color-secondary-text"
+        <div class="layout-row layout-align-start-center error-section text-body2 color-secondary-text"
              ng-if="error.path || (error.data && error.data.path)">
             {{::'PATH' | translate}}
         </div>
@@ -23,7 +23,7 @@
             {{error.path || error.data.path}}
         </div>
 
-        <div class="h48 text-body2 color-secondary-text layout-row layout-align-start-center"
+        <div class="error-section text-body2 color-secondary-text layout-row layout-align-start-center"
              ng-if="error.error || (error.data && error.data.error)">
             {{::'ERROR' | translate}}
         </div>
@@ -31,7 +31,7 @@
             {{error.error || error.data.error}}
         </div>
 
-        <div class="h48 text-body2 color-secondary-text layout-row layout-align-start-center"
+        <div class="error-section text-body2 color-secondary-text layout-row layout-align-start-center"
              ng-if="error.method || (error.data && error.data.method)">
             {{::'METHOD' | translate}}
         </div>
@@ -39,7 +39,7 @@
             {{error.method || error.data.method}}
         </div>
 
-        <div class="h48 text-body2 color-secondary-text layout-row layout-align-start-center"
+        <div class="error-section text-body2 color-secondary-text layout-row layout-align-start-center"
              ng-if="error.message || (error.data && error.data.message)">
             {{::'MESSAGE' | translate}}
         </div>

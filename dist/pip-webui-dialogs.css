@@ -100,15 +100,26 @@
 }
 .pip-dialog.pip-options-dialog .pip-header md-checkbox {
   font-size: 16px;
+  margin: 0px!important;
+}
+.pip-dialog.pip-options-dialog .pip-header .header-option {
+  padding-top: 0px!important;
+  padding-bottom: 24px!important;
 }
 .pip-dialog.pip-options-dialog .pip-body {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
+  padding-left: 0px!important;
+  padding-right: 0px!important;
+  padding-top: 0px!important;
+  padding-bottom: 24px!important;
+}
+.pip-dialog.pip-options-dialog .pip-list-item.item-padding {
+  padding: 0px 16px!important;
 }
 .pip-dialog.pip-options-dialog .pip-list-item {
   cursor: pointer;
   width: 100%;
   height: 48px;
+  padding: 0px!important;
   display: -webkit-box;
   display: -moz-box;
   display: -webkit-flex;
@@ -144,6 +155,7 @@
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
+  margin-right: 12px;
 }
 .pip-dialog.pip-options-dialog .pip-list-item md-radio-button {
   width: 20px;
@@ -152,6 +164,7 @@
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
+  margin: 0px!important;
 }
 .pip-dialog.pip-options-dialog .pip-list-item.selected,
 .pip-dialog.pip-options-dialog .pip-list-item:hover {
@@ -259,6 +272,9 @@
 }
 .pip-dialog.pip-confirmation-dialog .pip-header {
   line-height: 24px;
+}
+.pip-dialog.pip-confirmation-dialog .pip-header h3 {
+  margin: 0px;
 }
 .pip-dialog.pip-confirmation-dialog .pip-footer {
   border-top: 0 !important;

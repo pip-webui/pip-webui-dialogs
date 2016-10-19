@@ -34,7 +34,7 @@ module.run(['$templateCache', function($templateCache) {
     '\n' +
     '<md-dialog class="pip-dialog pip-confirmation-dialog layout-column" width="400" md-theme="{{::theme}}">\n' +
     '    <div class="pip-header text-subhead1">\n' +
-    '        <h3 class="m0">{{:: title}}</h3>\n' +
+    '        <h3>{{:: title}}</h3>\n' +
     '    </div>\n' +
     '    <div class="pip-footer">\n' +
     '        <div>\n' +
@@ -63,8 +63,8 @@ module.run(['$templateCache', function($templateCache) {
     '<md-dialog class="pip-dialog pip-details-dialog layout-column" width="400" md-theme="{{theme}}">\n' +
     '    <div class="pip-body">\n' +
     '\n' +
-    '        <div class="pip-header p0 bp8  text-subhead1">{{::\'ERROR_DETAILS\' | translate}}</div>\n' +
-    '        <div class="layout-row layout-align-start-center h48 text-body2 color-secondary-text"\n' +
+    '        <div class="pip-header text-subhead1">{{::\'ERROR_DETAILS\' | translate}}</div>\n' +
+    '        <div class="layout-row layout-align-start-center error-section text-body2 color-secondary-text"\n' +
     '             ng-if="error.code || (error.data && error.data.code)">\n' +
     '            {{::\'CODE\' | translate}}\n' +
     '        </div>\n' +
@@ -72,7 +72,7 @@ module.run(['$templateCache', function($templateCache) {
     '            {{error.code || error.data.code}}\n' +
     '        </div>\n' +
     '\n' +
-    '        <div class="layout-row layout-align-start-center h48 text-body2 color-secondary-text"\n' +
+    '        <div class="layout-row layout-align-start-center error-section text-body2 color-secondary-text"\n' +
     '             ng-if="error.path || (error.data && error.data.path)">\n' +
     '            {{::\'PATH\' | translate}}\n' +
     '        </div>\n' +
@@ -80,7 +80,7 @@ module.run(['$templateCache', function($templateCache) {
     '            {{error.path || error.data.path}}\n' +
     '        </div>\n' +
     '\n' +
-    '        <div class="h48 text-body2 color-secondary-text layout-row layout-align-start-center"\n' +
+    '        <div class="error-section text-body2 color-secondary-text layout-row layout-align-start-center"\n' +
     '             ng-if="error.error || (error.data && error.data.error)">\n' +
     '            {{::\'ERROR\' | translate}}\n' +
     '        </div>\n' +
@@ -88,7 +88,7 @@ module.run(['$templateCache', function($templateCache) {
     '            {{error.error || error.data.error}}\n' +
     '        </div>\n' +
     '\n' +
-    '        <div class="h48 text-body2 color-secondary-text layout-row layout-align-start-center"\n' +
+    '        <div class="error-section text-body2 color-secondary-text layout-row layout-align-start-center"\n' +
     '             ng-if="error.method || (error.data && error.data.method)">\n' +
     '            {{::\'METHOD\' | translate}}\n' +
     '        </div>\n' +
@@ -96,7 +96,7 @@ module.run(['$templateCache', function($templateCache) {
     '            {{error.method || error.data.method}}\n' +
     '        </div>\n' +
     '\n' +
-    '        <div class="h48 text-body2 color-secondary-text layout-row layout-align-start-center"\n' +
+    '        <div class="error-section text-body2 color-secondary-text layout-row layout-align-start-center"\n' +
     '             ng-if="error.message || (error.data && error.data.message)">\n' +
     '            {{::\'MESSAGE\' | translate}}\n' +
     '        </div>\n' +
@@ -131,7 +131,7 @@ module.run(['$templateCache', function($templateCache) {
     '<md-dialog class="pip-dialog pip-information-dialog layout-column"\n' +
     '           width="400" md-theme="{{theme}}">\n' +
     '    <div class="pip-header">\n' +
-    '        <h3 class="m0">{{ title | translate }}</h3>\n' +
+    '        <h3 >{{ title | translate }}</h3>\n' +
     '    </div>\n' +
     '    <div class="pip-body">\n' +
     '        <div class="pip-content">\n' +
@@ -165,19 +165,19 @@ module.run(['$templateCache', function($templateCache) {
     '           min-width="400" md-theme="{{theme}}">\n' +
     '    <md-dialog-content class="pip-body lp0 tp0 rp0 bp24 pip-scroll">\n' +
     '        <div class="pip-header" >\n' +
-    '            <h3 class="m0 bm16 text-title">{{::title | translate}}</h3>\n' +
-    '            <div ng-show="deletedTitle" class="bp16 tp8 text-subhead1 divider-bottom">\n' +
-    '                <md-checkbox ng-model="deleted" aria-label="CHECKBOX" class="m0">{{::deletedTitle | translate}}</md-checkbox>\n' +
+    '            <h3 class="text-title">{{::title | translate}}</h3>\n' +
+    '            <div ng-show="deletedTitle" class="header-option text-subhead1 divider-bottom">\n' +
+    '                <md-checkbox ng-model="deleted" aria-label="CHECKBOX">{{::deletedTitle | translate}}</md-checkbox>\n' +
     '            </div>\n' +
     '        </div>\n' +
     '        <div class="pip-content">\n' +
     '            <md-radio-group ng-model="selectedOptionName" class="pip-list md-primary" md-no-ink="true"\n' +
     '                            ng-keypress="onKeyPress($event)" tabindex="0">\n' +
-    '                <div ng-repeat="option in options" class="pip-list-item p0" md-ink-ripple\n' +
+    '                <div ng-repeat="option in options" class="pip-list-item" md-ink-ripple\n' +
     '                     ui-event="{ click: \'onOptionSelect($event, option)\' }"\n' +
     '                     ng-class="{ selected: option.name == selectedOptionName }">\n' +
-    '                    <div class="pip-list-item">\n' +
-    '                        <md-icon class="pip-option-icon rm12" md-svg-icon="icons:{{option.icon}}" ng-if="option.icon">\n' +
+    '                    <div class="pip-list-item item-padding">\n' +
+    '                        <md-icon class="pip-option-icon" md-svg-icon="icons:{{option.icon}}" ng-if="option.icon">\n' +
     '                        </md-icon>\n' +
     '                        <div class="pip-option-title">\n' +
     '                            {{::option.title | translate}}\n' +

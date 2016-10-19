@@ -238,7 +238,7 @@ module.run(['$templateCache', function($templateCache) {
     '                     pip-select="onSelected($event)">\n' +
     '\n' +
     '                <md-list-item class="pip-ref-list-item pip-selectable layout-row layout-align-start-center"\n' +
-    '                              ng-class="{\'selected\' : option.name == selectedOptionName,\n' +
+    '                              ng-class="{\'selected md-focused\' : option.name == selectedOptionName,\n' +
     '                              \'divider-bottom\': $index != options.length - 1}"\n' +
     '                              md-ink-ripple\n' +
     '                              ng-keyup="onKeyUp($event, $index)"\n' +
@@ -351,6 +351,102 @@ module.run(['$templateCache', function($templateCache) {
 })(window.angular);
 
 /**
+ * @file Optional filter to translate string resources
+ * @copyright Digital Living Software Corp. 2014-2016
+ */
+ 
+/* global angular */
+
+(function () {
+    'use strict';
+
+    var thisModule = angular.module('pipDialogs.Translate', []);
+
+    thisModule.filter('translate', ['$injector', function ($injector) {
+        var pipTranslate = $injector.has('pipTranslate') 
+            ? $injector.get('pipTranslate') : null;
+
+        return function (key) {
+            return pipTranslate  ? pipTranslate.translate(key) || key : key;
+        }
+    }]);
+
+})();
+
+/**
+ * @file Information dialog
+ * @copyright Digital Living Software Corp. 2014-2016
+ * @todo
+ * - Improve sample in sampler app
+ */
+
+(function (angular, _) {
+    'use strict';
+
+    var thisModule = angular.module('pipInformationDialog',
+        ['ngMaterial', 'pipDialogs.Translate', 'pipDialogs.Templates']);
+
+    thisModule.factory('pipInformationDialog',
+        ['$mdDialog', function ($mdDialog) {
+            return {
+                show: function (params, callback) {
+                    $mdDialog.show({
+                        targetEvent: params.event,
+                        templateUrl: 'information/information.html',
+                        controller: 'pipInformationDialogController',
+                        locals: {params: params},
+                        clickOutsideToClose: true
+                    })
+                        .then(function () {
+                            if (callback) {
+                                callback();
+                            }
+                        });
+                }
+            };
+        }]
+    );
+
+    thisModule.controller('pipInformationDialogController',
+        ['$scope', '$rootScope', '$mdDialog', '$injector', 'params', function ($scope, $rootScope, $mdDialog, $injector, params) {
+            var content = params.message, item;
+
+            var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
+            if (pipTranslate) {
+                pipTranslate.translations('en', {
+                    'INFORMATION_TITLE': 'Information'
+                });
+                pipTranslate.translations('ru', {
+                    'INFORMATION_TITLE': 'Информация'
+                });
+
+                $scope.title = params.title || 'INFORMATION_TITLE';
+                $scope.ok = params.ok || 'OK';
+                content = pipTranslate.translate(content);
+            } else {
+                $scope.title = params.title || 'Information';
+                $scope.ok = params.ok || 'OK';
+            }
+
+            var pipFormat = $injector.has('pipFormat') ? $injector.get('pipFormat') : null;
+
+            $scope.theme = $rootScope.$theme;
+            if (params.item && pipFormat) {
+                item = _.truncate(params.item, 25);
+                content = pipFormat.sprintf(content, item);
+                console.log('content2', content);
+            }
+            $scope.content = content;
+
+            $scope.onOk = function () {
+                $mdDialog.hide();
+            };
+        }]
+    );
+
+})(window.angular, window._);
+
+/**
  * @file Error details dialog
  * @copyright Digital Living Software Corp. 2014-2016
  * @todo
@@ -446,102 +542,6 @@ module.run(['$templateCache', function($templateCache) {
     );
 
 })(window.angular);
-
-/**
- * @file Optional filter to translate string resources
- * @copyright Digital Living Software Corp. 2014-2016
- */
- 
-/* global angular */
-
-(function () {
-    'use strict';
-
-    var thisModule = angular.module('pipDialogs.Translate', []);
-
-    thisModule.filter('translate', ['$injector', function ($injector) {
-        var pipTranslate = $injector.has('pipTranslate') 
-            ? $injector.get('pipTranslate') : null;
-
-        return function (key) {
-            return pipTranslate  ? pipTranslate.translate(key) || key : key;
-        }
-    }]);
-
-})();
-
-/**
- * @file Information dialog
- * @copyright Digital Living Software Corp. 2014-2016
- * @todo
- * - Improve sample in sampler app
- */
-
-(function (angular, _) {
-    'use strict';
-
-    var thisModule = angular.module('pipInformationDialog',
-        ['ngMaterial', 'pipDialogs.Translate', 'pipDialogs.Templates']);
-
-    thisModule.factory('pipInformationDialog',
-        ['$mdDialog', function ($mdDialog) {
-            return {
-                show: function (params, callback) {
-                    $mdDialog.show({
-                        targetEvent: params.event,
-                        templateUrl: 'information/information.html',
-                        controller: 'pipInformationDialogController',
-                        locals: {params: params},
-                        clickOutsideToClose: true
-                    })
-                        .then(function () {
-                            if (callback) {
-                                callback();
-                            }
-                        });
-                }
-            };
-        }]
-    );
-
-    thisModule.controller('pipInformationDialogController',
-        ['$scope', '$rootScope', '$mdDialog', '$injector', 'params', function ($scope, $rootScope, $mdDialog, $injector, params) {
-            var content = params.message, item;
-
-            var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
-            if (pipTranslate) {
-                pipTranslate.translations('en', {
-                    'INFORMATION_TITLE': 'Information'
-                });
-                pipTranslate.translations('ru', {
-                    'INFORMATION_TITLE': 'Информация'
-                });
-
-                $scope.title = params.title || 'INFORMATION_TITLE';
-                $scope.ok = params.ok || 'OK';
-                content = pipTranslate.translate(content);
-            } else {
-                $scope.title = params.title || 'Information';
-                $scope.ok = params.ok || 'OK';
-            }
-
-            var pipFormat = $injector.has('pipFormat') ? $injector.get('pipFormat') : null;
-
-            $scope.theme = $rootScope.$theme;
-            if (params.item && pipFormat) {
-                item = _.truncate(params.item, 25);
-                content = pipFormat.sprintf(content, item);
-                console.log('content2', content);
-            }
-            $scope.content = content;
-
-            $scope.onOk = function () {
-                $mdDialog.hide();
-            };
-        }]
-    );
-
-})(window.angular, window._);
 
 /**
  * @file Options dialog

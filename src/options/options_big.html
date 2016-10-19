@@ -25,7 +25,7 @@
                      pip-select="onSelected($event)">
 
                 <md-list-item class="pip-ref-list-item pip-selectable layout-row layout-align-start-center"
-                              ng-class="{'selected' : option.name == selectedOptionName,
+                              ng-class="{'selected md-focused' : option.name == selectedOptionName,
                               'divider-bottom': $index != options.length - 1}"
                               md-ink-ripple
                               ng-keyup="onKeyUp($event, $index)"

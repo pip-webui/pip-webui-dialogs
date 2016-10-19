@@ -7,7 +7,8 @@
             'ui.router', 'ui.utils', 'ngResource', 'ngAria', 'ngCookies', 'ngSanitize', 'ngMessages',
             'ngMaterial', 'wu.masonry', 'LocalStorageModule', 'angularFileUpload', 'ngAnimate',
 
-            'pipServices', 'pipLists',
+            'pipServices', 
+            // 'pipLists',
             'pipTheme.Default', 'pipTheme.Bootbarn', 'pipTheme', 
 
             'pipDialogs',

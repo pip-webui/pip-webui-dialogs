@@ -218,33 +218,33 @@ module.run(['$templateCache', function($templateCache) {
     '\n' +
     '<md-dialog class="pip-dialog pip-options-dialog-big layout-column"\n' +
     '           min-width="400" md-theme="{{theme}}">\n' +
-    '    <md-dialog-content class="pip-body p0 pip-scroll" ng-class="{\'bp24\': !noActions}">\n' +
+    '    <md-dialog-content class="pip-body pip-scroll" ng-class="{\'bp24\': !noActions}">\n' +
     '        <div class="pip-header" ng-class="{\'header-hint\': noTitle && hint}">\n' +
     '            <h3 class="m0" ng-if="!noTitle">\n' +
     '                {{::title | translate}}\n' +
     '            </h3>\n' +
     '            <div ng-show="noTitle && hint" class="dialog-hint layout-row layout-align-start-center">\n' +
-    '                <div class="w40" flex-fixed>\n' +
+    '                <div class="hint-icon-container flex-fixed" >\n' +
     '                    <md-icon md-svg-icon="icons:info-circle-outline"></md-icon>\n' +
     '                </div>\n' +
     '                <div>{{::hint | translate}}</div>\n' +
     '            </div>\n' +
     '        </div>\n' +
-    '        <div class="pip-divider" ng-if="!noTitle"></div>\n' +
+    '        <div class="content-divider" ng-if="!noTitle"></div>\n' +
     '        <div class="pip-content">\n' +
-    '            <div class="h8" ng-if="noTitle && hint"></div>\n' +
-    '            <md-list class="pip-menu  pip-ref-list w-stretch"\n' +
+    '            <div class="spacer8" ng-if="noTitle && hint"></div>\n' +
+    '            <md-list class="pip-menu  pip-ref-list"\n' +
     '                     pip-selected="optionIndex" index="{{optionIndex }}"\n' +
     '                     pip-select="onSelected($event)">\n' +
     '\n' +
     '                <md-list-item class="pip-ref-list-item pip-selectable layout-row layout-align-start-center"\n' +
     '                              ng-class="{\'selected\' : option.name == selectedOptionName,\n' +
     '                              \'divider-bottom\': $index != options.length - 1}"\n' +
-    '                              md-ink-ripple xxxxng-keypress="onKeyPress($event)"\n' +
+    '                              md-ink-ripple\n' +
     '                              ng-keyup="onKeyUp($event, $index)"\n' +
     '                              ng-repeat="option in options" >\n' +
     '\n' +
-    '                    <div class="pip-content  line-height-string  max-w100-stretch" ng-click="onOptionSelect($event, option)">\n' +
+    '                    <div class="pip-content  content-stretch" ng-click="onOptionSelect($event, option)">\n' +
     '                        <p class="pip-title  rp24-flex" ng-if="option.title" style="margin-bottom: 4px !important;">\n' +
     '                            {{::option.title | translate}}\n' +
     '                        </p>\n' +
@@ -262,36 +262,8 @@ module.run(['$templateCache', function($templateCache) {
     '                </md-list-item>\n' +
     '\n' +
     '            </md-list>\n' +
-    '            <!--\n' +
-    '            <md-radio-group ng-model="selectedOptionName" class="pip-list md-primary" md-no-ink="true"\n' +
-    '                            ng-keypress="onKeyPress($event)" tabindex="0">\n' +
-    '                <div ng-repeat="option in options" class="pip-list-item p0" md-ink-ripple\n' +
-    '                     ui-event="{ click: \'onOptionSelect($event, option)\' }"\n' +
-    '                     ng-class="{ selected: option.name == selectedOptionName }">\n' +
-    '                    <div class="pip-list-item">\n' +
-    '\n' +
-    '                        <div class="pip-content lp24-flex rp24-flex" flex>\n' +
-    '                            <div class="pip-title" ng-if="option.title">\n' +
-    '                                {{::option.title | translate}}\n' +
-    '                            </div>\n' +
-    '                            <div class="pip-subtitle" ng-if="option.subtitle">\n' +
-    '                                {{::option.subtitle | translate}}\n' +
-    '                            </div>\n' +
-    '                            <div class="pip-text" ng-if="option.text">\n' +
-    '\n' +
-    '                                <span pip-translate-html="{{::option.text | translate}}"/>\n' +
-    '                            </div>\n' +
-    '                        </div>\n' +
-    '\n' +
-    '                        <md-radio-button ng-value="option.name" tabindex="-1" class="rm24-flex"\n' +
-    '                                         aria-label="{{::option.title | translate}}">\n' +
-    '                        </md-radio-button>\n' +
-    '                    </div>\n' +
-    '\n' +
-    '                </div>\n' +
-    '            </md-radio-group> -->\n' +
     '        </div>\n' +
-    '        <div class="h8" ng-if="noActions"></div>\n' +
+    '        <div class="spacer8" ng-if="noActions"></div>\n' +
     '    </md-dialog-content>\n' +
     '\n' +
     '    <div class="pip-footer" ng-if="!noActions">\n' +
@@ -377,29 +349,6 @@ module.run(['$templateCache', function($templateCache) {
     );
 
 })(window.angular);
-
-/**
- * @file Optional filter to translate string resources
- * @copyright Digital Living Software Corp. 2014-2016
- */
- 
-/* global angular */
-
-(function () {
-    'use strict';
-
-    var thisModule = angular.module('pipDialogs.Translate', []);
-
-    thisModule.filter('translate', ['$injector', function ($injector) {
-        var pipTranslate = $injector.has('pipTranslate') 
-            ? $injector.get('pipTranslate') : null;
-
-        return function (key) {
-            return pipTranslate  ? pipTranslate.translate(key) || key : key;
-        }
-    }]);
-
-})();
 
 /**
  * @file Error details dialog
@@ -497,6 +446,29 @@ module.run(['$templateCache', function($templateCache) {
     );
 
 })(window.angular);
+
+/**
+ * @file Optional filter to translate string resources
+ * @copyright Digital Living Software Corp. 2014-2016
+ */
+ 
+/* global angular */
+
+(function () {
+    'use strict';
+
+    var thisModule = angular.module('pipDialogs.Translate', []);
+
+    thisModule.filter('translate', ['$injector', function ($injector) {
+        var pipTranslate = $injector.has('pipTranslate') 
+            ? $injector.get('pipTranslate') : null;
+
+        return function (key) {
+            return pipTranslate  ? pipTranslate.translate(key) || key : key;
+        }
+    }]);
+
+})();
 
 /**
  * @file Information dialog

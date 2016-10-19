@@ -191,8 +191,10 @@
   font-size: 16px;
 }
 .pip-dialog.pip-options-dialog-big .pip-body {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
+  padding: 0px!important;
+}
+.pip-dialog.pip-options-dialog-big .pip-menu {
+  width: 100%!important;
 }
 .pip-dialog.pip-options-dialog-big .pip-list-item {
   cursor: pointer;
@@ -266,6 +268,20 @@
   height: 24px !important;
   margin: 0 16px 0 0 !important;
 }
+.pip-dialog.pip-options-dialog-big .hint-icon-container {
+  width: 40px;
+}
+.pip-dialog.pip-options-dialog-big .content-divider {
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  margin-bottom: 8px;
+  margin-top: 8px;
+}
+.pip-dialog.pip-options-dialog-big .spacer8 {
+  height: 8px;
+}
+.pip-dialog.pip-options-dialog-big .content-stretch {
+  max-width: 100%!important;
+}
 .pip-dialog.pip-confirmation-dialog .pip-header {
   line-height: 24px;
 }
@@ -296,4 +312,12 @@
 }
 .pip-dialog h3 {
   font: normal 500 20px Roboto, 'Helvetica Neue', sans-serif;
+}
+.pip-dialog .rp24-flex {
+  padding-right: 24px !important;
+}
+@media (max-width: 1200px) {
+  .pip-dialog .p24-flex {
+    padding: 16px !important;
+  }
 }

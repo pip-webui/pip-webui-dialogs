@@ -32,15 +32,15 @@
                               ng-repeat="option in options" >
 
                     <div class="pip-content  content-stretch" ng-click="onOptionSelect($event, option)">
-                        <p class="pip-title  rp24-flex" ng-if="option.title" style="margin-bottom: 4px !important;">
+                        <p class="pip-title spacer-right" ng-if="option.title" style="margin-bottom: 4px !important;">
                             {{::option.title | translate}}
                         </p>
-                        <div class="pip-subtitle  rp24-flex"
+                        <div class="pip-subtitle spacer-right"
                              style="height: inherit"
                              ng-if="option.subtitle">
                             {{::option.subtitle | translate}}
                         </div>
-                        <div class="pip-subtitle  rp24-flex"
+                        <div class="pip-subtitle spacer-right"
                              style="height: inherit" ng-if="option.text"
                              pip-translate-html="{{::option.text | translate}}">
                         </div>

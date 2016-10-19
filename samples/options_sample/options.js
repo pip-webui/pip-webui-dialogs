@@ -65,6 +65,10 @@
                 $scope.code = 'Code';
             }
             
+            function setActive(options, optionName) {
+                
+            }
+            
             $scope.onOptionsDialogOpen = function (event) {
                 pipOptionsDialog.show(
                     {

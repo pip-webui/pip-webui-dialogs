@@ -245,15 +245,15 @@ module.run(['$templateCache', function($templateCache) {
     '                              ng-repeat="option in options" >\n' +
     '\n' +
     '                    <div class="pip-content  content-stretch" ng-click="onOptionSelect($event, option)">\n' +
-    '                        <p class="pip-title  rp24-flex" ng-if="option.title" style="margin-bottom: 4px !important;">\n' +
+    '                        <p class="pip-title spacer-right" ng-if="option.title" style="margin-bottom: 4px !important;">\n' +
     '                            {{::option.title | translate}}\n' +
     '                        </p>\n' +
-    '                        <div class="pip-subtitle  rp24-flex"\n' +
+    '                        <div class="pip-subtitle spacer-right"\n' +
     '                             style="height: inherit"\n' +
     '                             ng-if="option.subtitle">\n' +
     '                            {{::option.subtitle | translate}}\n' +
     '                        </div>\n' +
-    '                        <div class="pip-subtitle  rp24-flex"\n' +
+    '                        <div class="pip-subtitle spacer-right"\n' +
     '                             style="height: inherit" ng-if="option.text"\n' +
     '                             pip-translate-html="{{::option.text | translate}}">\n' +
     '                        </div>\n' +

@@ -6,7 +6,7 @@
  * - Remove deleted hack in the controller
  */
 
-(function (angular, $, _) {
+(function () {
     'use strict';
 
     var thisModule = angular.module('pipOptionsBigDialog',
@@ -129,4 +129,4 @@
         }
     );
 
-})(window.angular, window.jQuery, window._);
+})();

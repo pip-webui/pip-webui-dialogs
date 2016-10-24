@@ -5,7 +5,7 @@
  * - Improve sample in sampler app
  */
 
-(function (angular, _) {
+(function () {
     'use strict';
 
     var thisModule = angular.module('pipInformationDialog',
@@ -69,4 +69,4 @@
         }
     );
 
-})(window.angular, window._);
+})();

@@ -1,24 +1,3 @@
-/**
- * @file Registration of dialogs
- * @copyright Digital Living Software Corp. 2014-2016
- */
-
-/* global angular */
-
-(function (angular) {
-    'use strict';
-
-    angular.module('pipDialogs', [
-        'pipInformationDialog',
-        'pipConfirmationDialog',
-        'pipOptionsDialog',
-        'pipOptionsBigDialog',
-        'pipErrorDetailsDialog'
-    ]);
-
-})(window.angular);
-
-
 (function(module) {
 try {
   module = angular.module('pipDialogs.Templates');
@@ -279,515 +258,399 @@ module.run(['$templateCache', function($templateCache) {
 }]);
 })();
 
-/**
- * @file Confirmation dialog
- * @copyright Digital Living Software Corp. 2014-2016
- */
-
-(function (angular) {
+(function () {
     'use strict';
-
-    var thisModule = angular.module('pipConfirmationDialog',
-        ['ngMaterial', 'pipDialogs.Translate', 'pipDialogs.Templates']);
-
-    thisModule.factory('pipConfirmationDialog',
-        ['$mdDialog', function ($mdDialog) {
-            return {
-                show: function (params, successCallback, cancelCallback) {
-                    $mdDialog.show({
-                        targetEvent: params.event,
-                        templateUrl: 'confirmation/confirmation.html',
-                        controller: 'pipConfirmationDialogController',
-                        locals: { params: params },
-                        clickOutsideToClose: true
-                    })
-                    .then(function () {
-                        if (successCallback) {
-                            successCallback();
-                        }
-                    }, function () {
-                        if (cancelCallback) {
-                            cancelCallback();
-                        }
-                    });
-                }
-            };
-        }]
-    );
-
-    thisModule.controller('pipConfirmationDialogController',
-        ['$scope', '$rootScope', '$mdDialog', '$injector', 'params', function ($scope, $rootScope, $mdDialog, $injector, params) {
-            var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
-
-            if (pipTranslate) {
-                pipTranslate.translations('en', {
-                    'CONFIRM_TITLE': 'Confirm'
-                });
-                pipTranslate.translations('ru', {
-                    'CONFIRM_TITLE': 'Подтвердите'
-                });
-
-                $scope.title = params.title || 'CONFIRM_TITLE';
-                $scope.ok = params.ok || 'OK';
-                $scope.cancel = params.cancel || 'CANCEL';
-            } else {
-                $scope.title = params.title || 'Confirm';
-                $scope.ok = params.ok || 'OK';
-                $scope.cancel = params.cancel || 'Cancel';
-            }
-
-            $scope.theme = $rootScope.$theme;
-
-            $scope.onCancel = function () {
-                $mdDialog.cancel();
-            };
-
-            $scope.onOk = function () {
-                $mdDialog.hide();
-            };
-        }]
-    );
-
-})(window.angular);
-
-/**
- * @file Optional filter to translate string resources
- * @copyright Digital Living Software Corp. 2014-2016
- */
- 
-/* global angular */
+    angular.module('pipDialogs', [
+        'pipInformationDialog',
+        'pipConfirmationDialog',
+        'pipOptionsDialog',
+        'pipOptionsBigDialog',
+        'pipErrorDetailsDialog'
+    ]);
+})();
 
 (function () {
     'use strict';
-
-    var thisModule = angular.module('pipDialogs.Translate', []);
-
-    thisModule.filter('translate', ['$injector', function ($injector) {
-        var pipTranslate = $injector.has('pipTranslate') 
-            ? $injector.get('pipTranslate') : null;
-
-        return function (key) {
-            return pipTranslate  ? pipTranslate.translate(key) || key : key;
-        }
+    var thisModule = angular.module('pipConfirmationDialog', ['ngMaterial', 'pipDialogs.Translate', 'pipDialogs.Templates']);
+    thisModule.factory('pipConfirmationDialog', ['$mdDialog', function ($mdDialog) {
+        return {
+            show: function (params, successCallback, cancelCallback) {
+                $mdDialog.show({
+                    targetEvent: params.event,
+                    templateUrl: 'confirmation/confirmation.html',
+                    controller: 'pipConfirmationDialogController',
+                    locals: { params: params },
+                    clickOutsideToClose: true
+                })
+                    .then(function () {
+                    if (successCallback) {
+                        successCallback();
+                    }
+                }, function () {
+                    if (cancelCallback) {
+                        cancelCallback();
+                    }
+                });
+            }
+        };
     }]);
-
+    thisModule.controller('pipConfirmationDialogController', ['$scope', '$rootScope', '$mdDialog', '$injector', 'params', function ($scope, $rootScope, $mdDialog, $injector, params) {
+        var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
+        if (pipTranslate) {
+            pipTranslate.translations('en', {
+                'CONFIRM_TITLE': 'Confirm'
+            });
+            pipTranslate.translations('ru', {
+                'CONFIRM_TITLE': 'Подтвердите'
+            });
+            $scope.title = params.title || 'CONFIRM_TITLE';
+            $scope.ok = params.ok || 'OK';
+            $scope.cancel = params.cancel || 'CANCEL';
+        }
+        else {
+            $scope.title = params.title || 'Confirm';
+            $scope.ok = params.ok || 'OK';
+            $scope.cancel = params.cancel || 'Cancel';
+        }
+        $scope.theme = $rootScope.$theme;
+        $scope.onCancel = function () {
+            $mdDialog.cancel();
+        };
+        $scope.onOk = function () {
+            $mdDialog.hide();
+        };
+    }]);
 })();
 
-/**
- * @file Error details dialog
- * @copyright Digital Living Software Corp. 2014-2016
- * @todo
- * - Improve sample in sampler app
- */
-
-(function (angular) {
+(function () {
     'use strict';
+    var thisModule = angular.module('pipDialogs.Translate', []);
+    thisModule.filter('translate', ['$injector', function ($injector) {
+        var pipTranslate = $injector.has('pipTranslate')
+            ? $injector.get('pipTranslate') : null;
+        return function (key) {
+            return pipTranslate ? pipTranslate.translate(key) || key : key;
+        };
+    }]);
+})();
 
-    var thisModule = angular.module('pipErrorDetailsDialog',
-        ['ngMaterial', 'pipDialogs.Translate', 'pipDialogs.Templates']);
-
-    thisModule.factory('pipErrorDetailsDialog',
-        ['$mdDialog', function ($mdDialog) {
-            return {
-                show: function (params, successCallback, cancelCallback) {
-                    $mdDialog.show({
-                        targetEvent: params.event,
-                        templateUrl: 'error_details/error_details.html',
-                        controller: 'pipErrorDetailsDialogController',
-                        locals: {params: params},
-                        clickOutsideToClose: true
-                    })
-                        .then(function () {
-                            if (successCallback) {
-                                successCallback();
-                            }
-                        }, function () {
-                            if (cancelCallback) {
-                                cancelCallback();
-                            }
-                        });
-                }
-            };
-        }]
-    );
-
-    thisModule.controller('pipErrorDetailsDialogController',
-        ['$scope', '$rootScope', '$mdDialog', '$injector', 'params', function ($scope, $rootScope, $mdDialog, $injector, params) {
-            
-            var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
-            
-            if (pipTranslate) {
-                pipTranslate.translations('en', {
-                    'ERROR_DETAILS': 'Error details',
-                    'CODE': 'Error code',
-                    'PATH': 'Path',
-                    'ERROR': 'Error',
-                    'METHOD': 'Method',
-                    'MESSAGE': 'Message',
-                    'DISMISS': 'Dismiss'
-                });
-                pipTranslate.translations('ru', {
-                    'ERROR_DETAILS': 'Детали ошибки',
-                    'CODE': 'Код ошибки',
-                    'PATH': 'Путь',
-                    'ERROR': 'Ошибка',
-                    'METHOD': 'Метод',
-                    'MESSAGE': 'Сообщение'
-                });
-                $scope.ok = params.ok || 'OK';
-                $scope.cancel = params.cancel || 'CANCEL';
-                $scope.errorDetails = 'ERROR_DETAILS';
-                $scope.dismissButton = 'DISMISS';
-                $scope.errorMessage = 'MESSAGE';
-                $scope.errorCode = 'CODE';
-                $scope.errorMethod = 'METHOD';
-                $scope.errorPath = 'PATH';
-                $scope.errorText = 'ERROR';                
-            } else {
-                $scope.ok = params.ok || 'OK';
-                $scope.cancel = params.cancel || 'Cancel';
-                $scope.errorDetails = 'Error details';
-                $scope.dismissButton = 'Dismiss';
-                $scope.errorMessage = 'Message';
-                $scope.errorCode = 'Code';
-                $scope.errorMethod = 'Method';
-                $scope.errorPath = 'Path';
-                $scope.error = 'Error';
-            }
-
-            $scope.theme = $rootScope.$theme
-            $scope.error = params.error;
-
-            $scope.onCancel = function () {
-                $mdDialog.cancel();
-            };
-
-            $scope.onOk = function () {
-                $mdDialog.hide();
-            };
-        }]
-    );
-
-})(window.angular);
-
-/**
- * @file Information dialog
- * @copyright Digital Living Software Corp. 2014-2016
- * @todo
- * - Improve sample in sampler app
- */
-
-(function (angular, _) {
+(function () {
     'use strict';
-
-    var thisModule = angular.module('pipInformationDialog',
-        ['ngMaterial', 'pipDialogs.Translate', 'pipDialogs.Templates']);
-
-    thisModule.factory('pipInformationDialog',
-        ['$mdDialog', function ($mdDialog) {
-            return {
-                show: function (params, callback) {
-                    $mdDialog.show({
-                        targetEvent: params.event,
-                        templateUrl: 'information/information.html',
-                        controller: 'pipInformationDialogController',
-                        locals: {params: params},
-                        clickOutsideToClose: true
-                    })
-                        .then(function () {
-                            if (callback) {
-                                callback();
-                            }
-                        });
-                }
-            };
-        }]
-    );
-
-    thisModule.controller('pipInformationDialogController',
-        ['$scope', '$rootScope', '$mdDialog', '$injector', 'params', function ($scope, $rootScope, $mdDialog, $injector, params) {
-            var content = params.message, item;
-
-            var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
-            if (pipTranslate) {
-                pipTranslate.translations('en', {
-                    'INFORMATION_TITLE': 'Information'
-                });
-                pipTranslate.translations('ru', {
-                    'INFORMATION_TITLE': 'Информация'
-                });
-
-                $scope.title = params.title || 'INFORMATION_TITLE';
-                $scope.ok = params.ok || 'OK';
-                content = pipTranslate.translate(content);
-            } else {
-                $scope.title = params.title || 'Information';
-                $scope.ok = params.ok || 'OK';
-            }
-
-            var pipFormat = $injector.has('pipFormat') ? $injector.get('pipFormat') : null;
-
-            $scope.theme = $rootScope.$theme;
-            if (params.item && pipFormat) {
-                item = _.truncate(params.item, 25);
-                content = pipFormat.sprintf(content, item);
-                console.log('content2', content);
-            }
-            $scope.content = content;
-
-            $scope.onOk = function () {
-                $mdDialog.hide();
-            };
-        }]
-    );
-
-})(window.angular, window._);
-
-/**
- * @file Options dialog
- * @copyright Digital Living Software Corp. 2014-2016
- * @todo
- * - Improve sample in sampler app
- * - Remove deleted hack in the controller
- */
-
-(function (angular, $, _) {
-    'use strict';
-
-    var thisModule = angular.module('pipOptionsDialog',
-        ['ngMaterial', 'pipDialogs.Translate', 'pipDialogs.Templates']);
-
-    thisModule.factory('pipOptionsDialog',
-        ['$mdDialog', function ($mdDialog) {
-            return {
-                show: function (params, successCallback, cancelCallback) {
-                    if (params.event) {
-                        params.event.stopPropagation();
-                        params.event.preventDefault();
+    var thisModule = angular.module('pipErrorDetailsDialog', ['ngMaterial', 'pipDialogs.Translate', 'pipDialogs.Templates']);
+    thisModule.factory('pipErrorDetailsDialog', ['$mdDialog', function ($mdDialog) {
+        return {
+            show: function (params, successCallback, cancelCallback) {
+                $mdDialog.show({
+                    targetEvent: params.event,
+                    templateUrl: 'error_details/error_details.html',
+                    controller: 'pipErrorDetailsDialogController',
+                    locals: { params: params },
+                    clickOutsideToClose: true
+                })
+                    .then(function () {
+                    if (successCallback) {
+                        successCallback();
                     }
-
-                    function focusToggleControl() {
-                        if (params.event && params.event.currentTarget) {
-                            params.event.currentTarget.focus();
-                        }
+                }, function () {
+                    if (cancelCallback) {
+                        cancelCallback();
                     }
+                });
+            }
+        };
+    }]);
+    thisModule.controller('pipErrorDetailsDialogController', ['$scope', '$rootScope', '$mdDialog', '$injector', 'params', function ($scope, $rootScope, $mdDialog, $injector, params) {
+        var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
+        if (pipTranslate) {
+            pipTranslate.translations('en', {
+                'ERROR_DETAILS': 'Error details',
+                'CODE': 'Error code',
+                'PATH': 'Path',
+                'ERROR': 'Error',
+                'METHOD': 'Method',
+                'MESSAGE': 'Message',
+                'DISMISS': 'Dismiss'
+            });
+            pipTranslate.translations('ru', {
+                'ERROR_DETAILS': 'Детали ошибки',
+                'CODE': 'Код ошибки',
+                'PATH': 'Путь',
+                'ERROR': 'Ошибка',
+                'METHOD': 'Метод',
+                'MESSAGE': 'Сообщение'
+            });
+            $scope.ok = params.ok || 'OK';
+            $scope.cancel = params.cancel || 'CANCEL';
+            $scope.errorDetails = 'ERROR_DETAILS';
+            $scope.dismissButton = 'DISMISS';
+            $scope.errorMessage = 'MESSAGE';
+            $scope.errorCode = 'CODE';
+            $scope.errorMethod = 'METHOD';
+            $scope.errorPath = 'PATH';
+            $scope.errorText = 'ERROR';
+        }
+        else {
+            $scope.ok = params.ok || 'OK';
+            $scope.cancel = params.cancel || 'Cancel';
+            $scope.errorDetails = 'Error details';
+            $scope.dismissButton = 'Dismiss';
+            $scope.errorMessage = 'Message';
+            $scope.errorCode = 'Code';
+            $scope.errorMethod = 'Method';
+            $scope.errorPath = 'Path';
+            $scope.error = 'Error';
+        }
+        $scope.theme = $rootScope.$theme;
+        $scope.error = params.error;
+        $scope.onCancel = function () {
+            $mdDialog.cancel();
+        };
+        $scope.onOk = function () {
+            $mdDialog.hide();
+        };
+    }]);
+})();
 
-                    $mdDialog.show({
-                        targetEvent: params.event,
-                        templateUrl: 'options/options.html',
-                        controller: 'pipOptionsDialogController',
-                        locals: {params: params},
-                        clickOutsideToClose: true
-                    })
+(function () {
+    'use strict';
+    var thisModule = angular.module('pipInformationDialog', ['ngMaterial', 'pipDialogs.Translate', 'pipDialogs.Templates']);
+    thisModule.factory('pipInformationDialog', ['$mdDialog', function ($mdDialog) {
+        return {
+            show: function (params, callback) {
+                $mdDialog.show({
+                    targetEvent: params.event,
+                    templateUrl: 'information/information.html',
+                    controller: 'pipInformationDialogController',
+                    locals: { params: params },
+                    clickOutsideToClose: true
+                })
+                    .then(function () {
+                    if (callback) {
+                        callback();
+                    }
+                });
+            }
+        };
+    }]);
+    thisModule.controller('pipInformationDialogController', ['$scope', '$rootScope', '$mdDialog', '$injector', 'params', function ($scope, $rootScope, $mdDialog, $injector, params) {
+        var content = params.message, item;
+        var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
+        if (pipTranslate) {
+            pipTranslate.translations('en', {
+                'INFORMATION_TITLE': 'Information'
+            });
+            pipTranslate.translations('ru', {
+                'INFORMATION_TITLE': 'Информация'
+            });
+            $scope.title = params.title || 'INFORMATION_TITLE';
+            $scope.ok = params.ok || 'OK';
+            content = pipTranslate.translate(content);
+        }
+        else {
+            $scope.title = params.title || 'Information';
+            $scope.ok = params.ok || 'OK';
+        }
+        var pipFormat = $injector.has('pipFormat') ? $injector.get('pipFormat') : null;
+        $scope.theme = $rootScope.$theme;
+        if (params.item && pipFormat) {
+            item = _.truncate(params.item, 25);
+            content = pipFormat.sprintf(content, item);
+            console.log('content2', content);
+        }
+        $scope.content = content;
+        $scope.onOk = function () {
+            $mdDialog.hide();
+        };
+    }]);
+})();
+
+(function () {
+    'use strict';
+    var thisModule = angular.module('pipOptionsDialog', ['ngMaterial', 'pipDialogs.Translate', 'pipDialogs.Templates']);
+    thisModule.factory('pipOptionsDialog', ['$mdDialog', function ($mdDialog) {
+        return {
+            show: function (params, successCallback, cancelCallback) {
+                if (params.event) {
+                    params.event.stopPropagation();
+                    params.event.preventDefault();
+                }
+                function focusToggleControl() {
+                    if (params.event && params.event.currentTarget) {
+                        params.event.currentTarget.focus();
+                    }
+                }
+                $mdDialog.show({
+                    targetEvent: params.event,
+                    templateUrl: 'options/options.html',
+                    controller: 'pipOptionsDialogController',
+                    locals: { params: params },
+                    clickOutsideToClose: true
+                })
                     .then(function (option) {
-                        focusToggleControl();
-
-                        if (successCallback) {
-                            successCallback(option);
-                        }
-                    }, function () {
-                        focusToggleControl();
-                        if (cancelCallback) {
-                            cancelCallback();
-                        }
-                    });
-                }
-            };
-        }]
-    );
-    thisModule.controller('pipOptionsDialogController',
-        ['$scope', '$rootScope', '$mdDialog', '$injector', 'params', function ($scope, $rootScope, $mdDialog, $injector, params) {
-            var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
-            if (pipTranslate) {
-                pipTranslate.translations('en', {
-                    'OPTIONS_TITLE': 'Choose Option'
+                    focusToggleControl();
+                    if (successCallback) {
+                        successCallback(option);
+                    }
+                }, function () {
+                    focusToggleControl();
+                    if (cancelCallback) {
+                        cancelCallback();
+                    }
                 });
-                pipTranslate.translations('ru', {
-                    'OPTIONS_TITLE': 'Выберите опцию'
-                });
-
-                $scope.title = params.title || 'OPTIONS_TITLE';
-                $scope.applyButtonTitle = params.appleButtonTitle || 'SELECT';
-            } else {
-                $scope.title = params.title || 'Choose Option';
-                $scope.applyButtonTitle = params.appleButtonTitle || 'Select';
             }
-
-            $scope.theme = $rootScope.$theme;
-            $scope.options = params.options;
-            $scope.selectedOption = _.find(params.options, {active: true}) || {};
-            $scope.selectedOptionName = $scope.selectedOption.name;
-            $scope.deleted = params.deleted;
-            $scope.deletedTitle = params.deletedTitle;
-            $scope.onOptionSelect = function (event, option) {
+        };
+    }]);
+    thisModule.controller('pipOptionsDialogController', ['$scope', '$rootScope', '$mdDialog', '$injector', 'params', function ($scope, $rootScope, $mdDialog, $injector, params) {
+        var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
+        if (pipTranslate) {
+            pipTranslate.translations('en', {
+                'OPTIONS_TITLE': 'Choose Option'
+            });
+            pipTranslate.translations('ru', {
+                'OPTIONS_TITLE': 'Выберите опцию'
+            });
+            $scope.title = params.title || 'OPTIONS_TITLE';
+            $scope.applyButtonTitle = params.appleButtonTitle || 'SELECT';
+        }
+        else {
+            $scope.title = params.title || 'Choose Option';
+            $scope.applyButtonTitle = params.appleButtonTitle || 'Select';
+        }
+        $scope.theme = $rootScope.$theme;
+        $scope.options = params.options;
+        $scope.selectedOption = _.find(params.options, { active: true }) || {};
+        $scope.selectedOptionName = $scope.selectedOption.name;
+        $scope.deleted = params.deleted;
+        $scope.deletedTitle = params.deletedTitle;
+        $scope.onOptionSelect = function (event, option) {
+            event.stopPropagation();
+            $scope.selectedOptionName = option.name;
+        };
+        $scope.onKeyPress = function (event) {
+            if (event.keyCode === 32 || event.keyCode === 13) {
                 event.stopPropagation();
-                $scope.selectedOptionName = option.name;
-            };
-            
-            $scope.onKeyPress = function (event) {
-                if (event.keyCode === 32 || event.keyCode === 13) {
-                    event.stopPropagation();
-                    event.preventDefault();
+                event.preventDefault();
+                $scope.onSelect();
+            }
+        };
+        $scope.onCancel = function () {
+            $mdDialog.cancel();
+        };
+        $scope.onSelect = function () {
+            var option;
+            option = _.find(params.options, { name: $scope.selectedOptionName });
+            $mdDialog.hide({ option: option, deleted: $scope.deleted });
+        };
+        function focusInput() {
+            var list;
+            list = $('.pip-options-dialog .pip-list');
+            list.focus();
+        }
+        setTimeout(focusInput, 500);
+    }]);
+})();
+
+(function () {
+    'use strict';
+    var thisModule = angular.module('pipOptionsBigDialog', ['ngMaterial', 'pipDialogs.Translate', 'pipDialogs.Templates']);
+    thisModule.factory('pipOptionsBigDialog', ['$mdDialog', function ($mdDialog) {
+        return {
+            show: function (params, successCallback, cancelCallback) {
+                if (params.event) {
+                    params.event.stopPropagation();
+                    params.event.preventDefault();
+                }
+                function focusToggleControl() {
+                    if (params.event && params.event.currentTarget) {
+                        params.event.currentTarget.focus();
+                    }
+                }
+                $mdDialog.show({
+                    targetEvent: params.event,
+                    templateUrl: 'options/options_big.html',
+                    controller: 'pipOptionsDialogBigController',
+                    locals: { params: params },
+                    clickOutsideToClose: true
+                })
+                    .then(function (option) {
+                    focusToggleControl();
+                    if (successCallback) {
+                        successCallback(option);
+                    }
+                }, function () {
+                    focusToggleControl();
+                    if (cancelCallback) {
+                        cancelCallback();
+                    }
+                });
+            }
+        };
+    }]);
+    thisModule.controller('pipOptionsDialogBigController', ['$scope', '$rootScope', '$mdDialog', '$injector', 'params', function ($scope, $rootScope, $mdDialog, $injector, params) {
+        var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
+        if (pipTranslate) {
+            pipTranslate.translations('en', {
+                'OPTIONS_TITLE': 'Choose Option'
+            });
+            pipTranslate.translations('ru', {
+                'OPTIONS_TITLE': 'Выберите опцию'
+            });
+            $scope.title = params.title || 'OPTIONS_TITLE';
+            $scope.applyButtonTitle = params.applyButtonTitle || 'SELECT';
+        }
+        else {
+            $scope.title = params.title || 'Choose Option';
+            $scope.applyButtonTitle = params.applyButtonTitle || 'Select';
+        }
+        $scope.theme = $rootScope.$theme;
+        $scope.options = params.options;
+        $scope.noActions = params.noActions || false;
+        $scope.noTitle = params.noTitle || false;
+        $scope.hint = params.hint || '';
+        $scope.selectedOption = _.find(params.options, { active: true }) || {};
+        $scope.selectedOptionName = $scope.selectedOption.name;
+        $scope.optionIndex = _.findIndex(params.options, $scope.selectedOption);
+        $scope.deleted = params.deleted;
+        $scope.deletedTitle = params.deletedTitle;
+        $scope.onOptionSelect = function (event, option) {
+            event.stopPropagation();
+            $scope.selectedOptionName = option.name;
+            if ($scope.noActions) {
+                $scope.onSelect();
+            }
+        };
+        $scope.onSelected = function () {
+            $scope.selectedOptionName = $scope.options[$scope.optionIndex].name;
+            if ($scope.noActions) {
+            }
+        };
+        $scope.onKeyUp = function (event, index) {
+            if (event.keyCode === 32 || event.keyCode === 13) {
+                event.stopPropagation();
+                event.preventDefault();
+                if (index !== undefined && index > -1 && index < $scope.options.length) {
+                    $scope.selectedOptionName = $scope.options[index].name;
                     $scope.onSelect();
                 }
-            };
-
-            $scope.onCancel = function () {
-                $mdDialog.cancel();
-            };
-
-            $scope.onSelect = function () {
-                var option;
-
-                option = _.find(params.options, {name: $scope.selectedOptionName});
-                $mdDialog.hide({option: option, deleted: $scope.deleted});
-            };
-
-            // Setting focus to input control
-            function focusInput() {
-                var list;
-
-                list = $('.pip-options-dialog .pip-list');
-                list.focus();
             }
+        };
+        $scope.onCancel = function () {
+            $mdDialog.cancel();
+        };
+        $scope.onSelect = function () {
+            var option;
+            option = _.find($scope.options, { name: $scope.selectedOptionName });
+            $mdDialog.hide({ option: option, deleted: $scope.deleted });
+        };
+        function focusInput() {
+            var list;
+            list = $('.pip-options-dialog .pip-list');
+            list.focus();
+        }
+        setTimeout(focusInput, 500);
+    }]);
+})();
 
-            setTimeout(focusInput, 500);
-        }]
-    );
 
-})(window.angular, window.jQuery, window._);
-
-/**
- * @file Options dialog
- * @copyright Digital Living Software Corp. 2014-2016
- * @todo
- * - Improve sample in sampler app
- * - Remove deleted hack in the controller
- */
-
-(function (angular, $, _) {
-    'use strict';
-
-    var thisModule = angular.module('pipOptionsBigDialog',
-        ['ngMaterial', 'pipDialogs.Translate', 'pipDialogs.Templates']);
-
-    thisModule.factory('pipOptionsBigDialog',
-        ['$mdDialog', function ($mdDialog) {
-            return {
-                show: function (params, successCallback, cancelCallback) {
-                    if (params.event) {
-                        params.event.stopPropagation();
-                        params.event.preventDefault();
-                    }
-
-                    function focusToggleControl() {
-                        if (params.event && params.event.currentTarget) {
-                            params.event.currentTarget.focus();
-                        }
-                    }
-
-                    $mdDialog.show({
-                        targetEvent: params.event,
-                        templateUrl: 'options/options_big.html',
-                        controller: 'pipOptionsDialogBigController',
-                        locals: {params: params},
-                        clickOutsideToClose: true
-                    })
-                    .then(function (option) {
-                        focusToggleControl();
-
-                        if (successCallback) {
-                            successCallback(option);
-                        }
-                    }, function () {
-                        focusToggleControl();
-                        if (cancelCallback) {
-                            cancelCallback();
-                        }
-                    });
-                }
-            };
-        }]
-    );
-
-    thisModule.controller('pipOptionsDialogBigController',
-        ['$scope', '$rootScope', '$mdDialog', '$injector', 'params', function ($scope, $rootScope, $mdDialog, $injector, params) {
-            var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
-            if (pipTranslate) {
-                pipTranslate.translations('en', {
-                    'OPTIONS_TITLE': 'Choose Option'
-                });
-                pipTranslate.translations('ru', {
-                    'OPTIONS_TITLE': 'Выберите опцию'
-                });
-
-                $scope.title = params.title || 'OPTIONS_TITLE';
-                $scope.applyButtonTitle = params.applyButtonTitle || 'SELECT';
-            } else {
-                $scope.title = params.title || 'Choose Option';
-                $scope.applyButtonTitle = params.applyButtonTitle || 'Select';
-            }
-
-            $scope.theme = $rootScope.$theme;
-            $scope.options = params.options;
-            $scope.noActions = params.noActions || false;
-            $scope.noTitle = params.noTitle || false;
-            $scope.hint = params.hint || '';
-            $scope.selectedOption = _.find(params.options, {active: true}) || {};
-            $scope.selectedOptionName = $scope.selectedOption.name;
-            $scope.optionIndex = _.findIndex(params.options, $scope.selectedOption);
-
-            $scope.deleted = params.deleted;
-            $scope.deletedTitle = params.deletedTitle;
-
-            $scope.onOptionSelect = function (event, option) {
-                event.stopPropagation();
-                $scope.selectedOptionName = option.name;
-
-                if ($scope.noActions) {
-                    $scope.onSelect();
-                }
-            };
-
-            $scope.onSelected = function () {
-                $scope.selectedOptionName = $scope.options[$scope.optionIndex].name;
-
-                if ($scope.noActions) {
-                    // $scope.onSelect();
-                }
-            };
-
-            $scope.onKeyUp = function (event, index) {
-                if (event.keyCode === 32 || event.keyCode === 13) {
-                    event.stopPropagation();
-                    event.preventDefault();
-                    if (index !== undefined && index > -1 && index < $scope.options.length) {
-                        $scope.selectedOptionName = $scope.options[index].name;
-                        $scope.onSelect();
-                    }
-                }
-            };
-            $scope.onCancel = function () {
-                $mdDialog.cancel();
-            };
-            $scope.onSelect = function () {
-                var option;
-
-                option = _.find($scope.options, {name: $scope.selectedOptionName});
-                $mdDialog.hide({option: option, deleted: $scope.deleted});
-            };
-            // Setting focus to input control
-            function focusInput() {
-                var list;
-
-                list = $('.pip-options-dialog .pip-list');
-                list.focus();
-            }
-
-            setTimeout(focusInput, 500);
-        }]
-    );
-
-})(window.angular, window.jQuery, window._);
 
 //# sourceMappingURL=pip-webui-dialogs.js.map

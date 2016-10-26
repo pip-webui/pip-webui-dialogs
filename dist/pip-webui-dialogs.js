@@ -258,6 +258,11 @@ module.run(['$templateCache', function($templateCache) {
 }]);
 })();
 
+/**
+ * @file Registration of dialogs
+ * @copyright Digital Living Software Corp. 2014-2016
+ */
+/* global angular */
 (function () {
     'use strict';
     angular.module('pipDialogs', [
@@ -269,6 +274,10 @@ module.run(['$templateCache', function($templateCache) {
     ]);
 })();
 
+/**
+ * @file Confirmation dialog
+ * @copyright Digital Living Software Corp. 2014-2016
+ */
 (function () {
     'use strict';
     var thisModule = angular.module('pipConfirmationDialog', ['ngMaterial', 'pipDialogs.Translate', 'pipDialogs.Templates']);
@@ -322,6 +331,11 @@ module.run(['$templateCache', function($templateCache) {
     }]);
 })();
 
+/**
+ * @file Optional filter to translate string resources
+ * @copyright Digital Living Software Corp. 2014-2016
+ */
+/* global angular */
 (function () {
     'use strict';
     var thisModule = angular.module('pipDialogs.Translate', []);
@@ -334,6 +348,12 @@ module.run(['$templateCache', function($templateCache) {
     }]);
 })();
 
+/**
+ * @file Error details dialog
+ * @copyright Digital Living Software Corp. 2014-2016
+ * @todo
+ * - Improve sample in sampler app
+ */
 (function () {
     'use strict';
     var thisModule = angular.module('pipErrorDetailsDialog', ['ngMaterial', 'pipDialogs.Translate', 'pipDialogs.Templates']);
@@ -411,6 +431,13 @@ module.run(['$templateCache', function($templateCache) {
     }]);
 })();
 
+/**
+ * @file Options dialog
+ * @copyright Digital Living Software Corp. 2014-2016
+ * @todo
+ * - Improve sample in sampler app
+ * - Remove deleted hack in the controller
+ */
 (function () {
     'use strict';
     var thisModule = angular.module('pipOptionsDialog', ['ngMaterial', 'pipDialogs.Translate', 'pipDialogs.Templates']);
@@ -488,6 +515,7 @@ module.run(['$templateCache', function($templateCache) {
             option = _.find(params.options, { name: $scope.selectedOptionName });
             $mdDialog.hide({ option: option, deleted: $scope.deleted });
         };
+        // Setting focus to input control
         function focusInput() {
             var list;
             list = $('.pip-options-dialog .pip-list');
@@ -497,6 +525,13 @@ module.run(['$templateCache', function($templateCache) {
     }]);
 })();
 
+/**
+ * @file Options dialog
+ * @copyright Digital Living Software Corp. 2014-2016
+ * @todo
+ * - Improve sample in sampler app
+ * - Remove deleted hack in the controller
+ */
 (function () {
     'use strict';
     var thisModule = angular.module('pipOptionsBigDialog', ['ngMaterial', 'pipDialogs.Translate', 'pipDialogs.Templates']);
@@ -589,6 +624,7 @@ module.run(['$templateCache', function($templateCache) {
             option = _.find($scope.options, { name: $scope.selectedOptionName });
             $mdDialog.hide({ option: option, deleted: $scope.deleted });
         };
+        // Setting focus to input control
         function focusInput() {
             var list;
             list = $('.pip-options-dialog .pip-list');
@@ -598,6 +634,12 @@ module.run(['$templateCache', function($templateCache) {
     }]);
 })();
 
+/**
+ * @file Information dialog
+ * @copyright Digital Living Software Corp. 2014-2016
+ * @todo
+ * - Improve sample in sampler app
+ */
 (function () {
     'use strict';
     var thisModule = angular.module('pipInformationDialog', ['ngMaterial', 'pipDialogs.Translate', 'pipDialogs.Templates']);

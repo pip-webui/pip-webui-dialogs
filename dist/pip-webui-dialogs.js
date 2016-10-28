@@ -102,6 +102,39 @@ try {
   module = angular.module('pipDialogs.Templates', []);
 }
 module.run(['$templateCache', function($templateCache) {
+  $templateCache.put('information/information.html',
+    '<!--\n' +
+    '@file Information dialog content\n' +
+    '@copyright Digital Living Software Corp. 2014-2016\n' +
+    '-->\n' +
+    '\n' +
+    '<md-dialog class="pip-dialog pip-information-dialog layout-column"\n' +
+    '           width="400" md-theme="{{theme}}">\n' +
+    '    <div class="pip-header">\n' +
+    '        <h3 >{{ title | translate }}</h3>\n' +
+    '    </div>\n' +
+    '    <div class="pip-body">\n' +
+    '        <div class="pip-content">\n' +
+    '            {{ content }}\n' +
+    '        </div>\n' +
+    '    </div>\n' +
+    '    <div class="pip-footer">\n' +
+    '        <div>\n' +
+    '            <md-button class="md-accent" ng-click="onOk()">{{ ok | translate }}</md-button>\n' +
+    '        </div>\n' +
+    '    </div>\n' +
+    '</md-dialog>\n' +
+    '');
+}]);
+})();
+
+(function(module) {
+try {
+  module = angular.module('pipDialogs.Templates');
+} catch (e) {
+  module = angular.module('pipDialogs.Templates', []);
+}
+module.run(['$templateCache', function($templateCache) {
   $templateCache.put('options/options.html',
     '<!--\n' +
     '@file Options dialog content\n' +
@@ -225,44 +258,6 @@ module.run(['$templateCache', function($templateCache) {
 }]);
 })();
 
-(function(module) {
-try {
-  module = angular.module('pipDialogs.Templates');
-} catch (e) {
-  module = angular.module('pipDialogs.Templates', []);
-}
-module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('information/information.html',
-    '<!--\n' +
-    '@file Information dialog content\n' +
-    '@copyright Digital Living Software Corp. 2014-2016\n' +
-    '-->\n' +
-    '\n' +
-    '<md-dialog class="pip-dialog pip-information-dialog layout-column"\n' +
-    '           width="400" md-theme="{{theme}}">\n' +
-    '    <div class="pip-header">\n' +
-    '        <h3 >{{ title | translate }}</h3>\n' +
-    '    </div>\n' +
-    '    <div class="pip-body">\n' +
-    '        <div class="pip-content">\n' +
-    '            {{ content }}\n' +
-    '        </div>\n' +
-    '    </div>\n' +
-    '    <div class="pip-footer">\n' +
-    '        <div>\n' +
-    '            <md-button class="md-accent" ng-click="onOk()">{{ ok | translate }}</md-button>\n' +
-    '        </div>\n' +
-    '    </div>\n' +
-    '</md-dialog>\n' +
-    '');
-}]);
-})();
-
-/**
- * @file Registration of dialogs
- * @copyright Digital Living Software Corp. 2014-2016
- */
-/* global angular */
 (function () {
     'use strict';
     angular.module('pipDialogs', [
@@ -274,10 +269,6 @@ module.run(['$templateCache', function($templateCache) {
     ]);
 })();
 
-/**
- * @file Confirmation dialog
- * @copyright Digital Living Software Corp. 2014-2016
- */
 (function () {
     'use strict';
     var thisModule = angular.module('pipConfirmationDialog', ['ngMaterial', 'pipDialogs.Translate', 'pipDialogs.Templates']);
@@ -331,11 +322,6 @@ module.run(['$templateCache', function($templateCache) {
     }]);
 })();
 
-/**
- * @file Optional filter to translate string resources
- * @copyright Digital Living Software Corp. 2014-2016
- */
-/* global angular */
 (function () {
     'use strict';
     var thisModule = angular.module('pipDialogs.Translate', []);
@@ -348,12 +334,6 @@ module.run(['$templateCache', function($templateCache) {
     }]);
 })();
 
-/**
- * @file Error details dialog
- * @copyright Digital Living Software Corp. 2014-2016
- * @todo
- * - Improve sample in sampler app
- */
 (function () {
     'use strict';
     var thisModule = angular.module('pipErrorDetailsDialog', ['ngMaterial', 'pipDialogs.Translate', 'pipDialogs.Templates']);
@@ -431,13 +411,59 @@ module.run(['$templateCache', function($templateCache) {
     }]);
 })();
 
-/**
- * @file Options dialog
- * @copyright Digital Living Software Corp. 2014-2016
- * @todo
- * - Improve sample in sampler app
- * - Remove deleted hack in the controller
- */
+(function () {
+    'use strict';
+    var thisModule = angular.module('pipInformationDialog', ['ngMaterial', 'pipDialogs.Translate', 'pipDialogs.Templates']);
+    thisModule.factory('pipInformationDialog', ['$mdDialog', function ($mdDialog) {
+        return {
+            show: function (params, callback) {
+                $mdDialog.show({
+                    targetEvent: params.event,
+                    templateUrl: 'information/information.html',
+                    controller: 'pipInformationDialogController',
+                    locals: { params: params },
+                    clickOutsideToClose: true
+                })
+                    .then(function () {
+                    if (callback) {
+                        callback();
+                    }
+                });
+            }
+        };
+    }]);
+    thisModule.controller('pipInformationDialogController', ['$scope', '$rootScope', '$mdDialog', '$injector', 'params', function ($scope, $rootScope, $mdDialog, $injector, params) {
+        var content = params.message, item;
+        var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
+        if (pipTranslate) {
+            pipTranslate.translations('en', {
+                'INFORMATION_TITLE': 'Information'
+            });
+            pipTranslate.translations('ru', {
+                'INFORMATION_TITLE': 'Информация'
+            });
+            $scope.title = params.title || 'INFORMATION_TITLE';
+            $scope.ok = params.ok || 'OK';
+            content = pipTranslate.translate(content);
+        }
+        else {
+            $scope.title = params.title || 'Information';
+            $scope.ok = params.ok || 'OK';
+        }
+        var pipFormat = $injector.has('pipFormat') ? $injector.get('pipFormat') : null;
+        $scope.theme = $rootScope.$theme;
+        if (params.item && pipFormat) {
+            item = _.truncate(params.item, 25);
+            content = pipFormat.sprintf(content, item);
+            console.log('content2', content);
+        }
+        $scope.content = content;
+        $scope.onOk = function () {
+            $mdDialog.hide();
+        };
+    }]);
+})();
+
 (function () {
     'use strict';
     var thisModule = angular.module('pipOptionsDialog', ['ngMaterial', 'pipDialogs.Translate', 'pipDialogs.Templates']);
@@ -515,7 +541,6 @@ module.run(['$templateCache', function($templateCache) {
             option = _.find(params.options, { name: $scope.selectedOptionName });
             $mdDialog.hide({ option: option, deleted: $scope.deleted });
         };
-        // Setting focus to input control
         function focusInput() {
             var list;
             list = $('.pip-options-dialog .pip-list');
@@ -525,13 +550,6 @@ module.run(['$templateCache', function($templateCache) {
     }]);
 })();
 
-/**
- * @file Options dialog
- * @copyright Digital Living Software Corp. 2014-2016
- * @todo
- * - Improve sample in sampler app
- * - Remove deleted hack in the controller
- */
 (function () {
     'use strict';
     var thisModule = angular.module('pipOptionsBigDialog', ['ngMaterial', 'pipDialogs.Translate', 'pipDialogs.Templates']);
@@ -624,72 +642,12 @@ module.run(['$templateCache', function($templateCache) {
             option = _.find($scope.options, { name: $scope.selectedOptionName });
             $mdDialog.hide({ option: option, deleted: $scope.deleted });
         };
-        // Setting focus to input control
         function focusInput() {
             var list;
             list = $('.pip-options-dialog .pip-list');
             list.focus();
         }
         setTimeout(focusInput, 500);
-    }]);
-})();
-
-/**
- * @file Information dialog
- * @copyright Digital Living Software Corp. 2014-2016
- * @todo
- * - Improve sample in sampler app
- */
-(function () {
-    'use strict';
-    var thisModule = angular.module('pipInformationDialog', ['ngMaterial', 'pipDialogs.Translate', 'pipDialogs.Templates']);
-    thisModule.factory('pipInformationDialog', ['$mdDialog', function ($mdDialog) {
-        return {
-            show: function (params, callback) {
-                $mdDialog.show({
-                    targetEvent: params.event,
-                    templateUrl: 'information/information.html',
-                    controller: 'pipInformationDialogController',
-                    locals: { params: params },
-                    clickOutsideToClose: true
-                })
-                    .then(function () {
-                    if (callback) {
-                        callback();
-                    }
-                });
-            }
-        };
-    }]);
-    thisModule.controller('pipInformationDialogController', ['$scope', '$rootScope', '$mdDialog', '$injector', 'params', function ($scope, $rootScope, $mdDialog, $injector, params) {
-        var content = params.message, item;
-        var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
-        if (pipTranslate) {
-            pipTranslate.translations('en', {
-                'INFORMATION_TITLE': 'Information'
-            });
-            pipTranslate.translations('ru', {
-                'INFORMATION_TITLE': 'Информация'
-            });
-            $scope.title = params.title || 'INFORMATION_TITLE';
-            $scope.ok = params.ok || 'OK';
-            content = pipTranslate.translate(content);
-        }
-        else {
-            $scope.title = params.title || 'Information';
-            $scope.ok = params.ok || 'OK';
-        }
-        var pipFormat = $injector.has('pipFormat') ? $injector.get('pipFormat') : null;
-        $scope.theme = $rootScope.$theme;
-        if (params.item && pipFormat) {
-            item = _.truncate(params.item, 25);
-            content = pipFormat.sprintf(content, item);
-            console.log('content2', content);
-        }
-        $scope.content = content;
-        $scope.onOk = function () {
-            $mdDialog.hide();
-        };
     }]);
 })();
 

@@ -1,6 +1,10 @@
+declare module pip {
 
 
 
 
 
 
+
+}
+

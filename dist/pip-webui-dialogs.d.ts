@@ -69,9 +69,11 @@ export class ErrorDetailsDialogController2 {
     theme: any;
     localStrings: ErrorDetailsData;
     error: ErrorDetailsData;
+    state: string;
     constructor($mdDialog: any, $injector: any, $rootScope: any, params: ErrorDetailsData);
     onOk(): void;
     onCancel(): void;
+    onNewState(state: string): void;
 }
 
 

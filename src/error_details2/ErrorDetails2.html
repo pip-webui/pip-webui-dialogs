@@ -5,7 +5,7 @@
 <md-dialog class="pip-dialog pip-error-details-dialog-2 layout-column" width="400" md-theme="{{vm.theme}}">
     <div class="pip-body">
         <div class="layout-row layout-align-row-start-center">
-            <h3>{{::'ERROR_HEADER' | translate}}</h3>
+            <h3 class="pip-title">{{::'ERROR_HEADER' | translate}}</h3>
         </div>
         <div class="layout-row layout-align-row-start-center pip-section">
             <div class="pip-title-section">
@@ -13,6 +13,33 @@
             </div>
             <div class="pip-text-section">
                 {{:: vm.error.time}}
+            </div>
+        </div>
+
+         <div class="layout-row layout-align-row-start-center pip-section">
+            <div class="pip-title-section">
+                {{::vm.localStrings.type | translate}}
+            </div>
+            <div class="pip-text-section">
+                {{:: vm.error.type}}
+            </div>
+        </div>
+
+        <div class="layout-row layout-align-row-start-center pip-section">
+            <div class="pip-title-section">
+                {{::vm.localStrings.correlationId | translate}}
+            </div>
+            <div class="pip-text-section">
+                {{:: vm.error.correlationId}}
+            </div>
+        </div>
+
+        <div class="layout-row layout-align-row-start-center pip-section">
+            <div class="pip-title-section">
+                {{::vm.localStrings.source | translate}}
+            </div>
+            <div class="pip-text-section">
+                {{:: vm.error.source}}
             </div>
         </div>
 

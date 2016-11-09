@@ -124,6 +124,7 @@ var ErrorDetailsDialogController2 = (function () {
     ErrorDetailsDialogController2.$inject = ['$mdDialog', '$injector', '$rootScope', 'params'];
     function ErrorDetailsDialogController2($mdDialog, $injector, $rootScope, params) {
         "ngInject";
+        this.state = 'message';
         this.localStrings = new ErrorDetailsData();
         this.error = params;
         var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
@@ -161,6 +162,9 @@ var ErrorDetailsDialogController2 = (function () {
     };
     ErrorDetailsDialogController2.prototype.onCancel = function () {
         this.$mdDialog.cancel();
+    };
+    ErrorDetailsDialogController2.prototype.onNewState = function (state) {
+        this.state = state;
     };
     return ErrorDetailsDialogController2;
 }());
@@ -694,7 +698,7 @@ try {
 }
 module.run(['$templateCache', function($templateCache) {
   $templateCache.put('error_details2/ErrorDetails2.html',
-    '<md-dialog class="pip-dialog pip-error-details-dialog-2 layout-column" width="400" md-theme="{{vm.theme}}"><div class="pip-body"><div class="layout-row layout-align-row-start-center"><h3>{{::\'ERROR_HEADER\' | translate}}</h3></div><div class="layout-row layout-align-row-start-center pip-section"><div class="pip-title-section">{{::vm.localStrings.time | translate}}</div><div class="pip-text-section">{{:: vm.error.time}}</div></div></div></md-dialog>');
+    '<md-dialog class="pip-dialog pip-error-details-dialog-2 layout-column" width="400" md-theme="{{vm.theme}}"><div class="pip-body"><div class="layout-row layout-align-row-start-center"><h3 class="pip-title">{{::\'ERROR_HEADER\' | translate}}</h3></div><div class="layout-row layout-align-row-start-center pip-section"><div class="pip-title-section">{{::vm.localStrings.time | translate}}</div><div class="pip-text-section">{{:: vm.error.time}}</div></div><div class="layout-row layout-align-row-start-center pip-section"><div class="pip-title-section">{{::vm.localStrings.type | translate}}</div><div class="pip-text-section">{{:: vm.error.type}}</div></div><div class="layout-row layout-align-row-start-center pip-section"><div class="pip-title-section">{{::vm.localStrings.correlationId | translate}}</div><div class="pip-text-section">{{:: vm.error.correlationId}}</div></div><div class="layout-row layout-align-row-start-center pip-section"><div class="pip-title-section">{{::vm.localStrings.source | translate}}</div><div class="pip-text-section">{{:: vm.error.source}}</div></div></div></md-dialog>');
 }]);
 })();
 

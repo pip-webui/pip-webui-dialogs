@@ -16,6 +16,7 @@ export class ErrorDetailsDialogController2 {
     public theme;
     public localStrings: ErrorDetailsData;
     public error: ErrorDetailsData;
+    public state: string = 'message';
 
     constructor(
         $mdDialog,
@@ -65,6 +66,10 @@ export class ErrorDetailsDialogController2 {
 
     public onCancel(): void {
         this.$mdDialog.cancel();
+    }
+
+    public onNewState(state: string): void {
+        this.state = state;
     }
 
 }

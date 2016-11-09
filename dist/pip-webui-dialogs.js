@@ -108,72 +108,56 @@ angular
 ]);
 },{"./confirmation":3,"./error_details":11,"./error_details2":8,"./information":14,"./options":19}],6:[function(require,module,exports){
 'use strict';
-var ErrorStrings = (function () {
-    function ErrorStrings() {
-        this.ok = 'OK';
-        this.cancel = 'Cancel';
-        this.errorDetails = 'Error details';
-        this.dismissButton = 'Dismiss';
-        this.errorMessage = 'Message';
-        this.errorCode = 'Code';
-        this.errorMethod = 'Method';
-        this.errorPath = 'Path';
-        this.error = 'Error';
-        this.errorText = 'Error';
+var ErrorDetailsData = (function () {
+    function ErrorDetailsData() {
     }
-    return ErrorStrings;
+    return ErrorDetailsData;
 }());
-exports.ErrorStrings = ErrorStrings;
-var ErrorParams = (function () {
-    function ErrorParams() {
-        this.ok = 'OK';
-        this.cancel = 'CANCEL';
-        this.error = 'ERROR';
+exports.ErrorDetailsData = ErrorDetailsData;
+var ErrorDetailsStrings = (function () {
+    function ErrorDetailsStrings() {
+        this.time = 'Time';
+        this.type = 'Type';
+        this.correlationId = 'CorrelationId';
+        this.source = 'Source';
+        this.message = 'Message';
+        this.trace = 'Trace';
     }
-    return ErrorParams;
+    return ErrorDetailsStrings;
 }());
-exports.ErrorParams = ErrorParams;
+exports.ErrorDetailsStrings = ErrorDetailsStrings;
 var ErrorDetailsDialogController2 = (function () {
     ErrorDetailsDialogController2.$inject = ['$mdDialog', '$injector', '$rootScope', 'params'];
     function ErrorDetailsDialogController2($mdDialog, $injector, $rootScope, params) {
         "ngInject";
-        this.config = new ErrorStrings();
+        this.localStrings = new ErrorDetailsStrings();
         var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
         if (pipTranslate) {
             pipTranslate.translations('en', {
-                'ERROR_DETAILS': 'Error details',
-                'CODE': 'Error code',
-                'PATH': 'Path',
-                'ERROR': 'Error',
-                'METHOD': 'Method',
+                'TIME': 'Time',
+                'TYPE': 'Type',
+                'CORRELATION_ID': 'CorrelationId',
+                'SOURCE': 'Source',
                 'MESSAGE': 'Message',
-                'DISMISS': 'Dismiss'
+                'TRACE': 'Trace'
             });
             pipTranslate.translations('ru', {
-                'ERROR_DETAILS': 'Детали ошибки',
-                'CODE': 'Код ошибки',
-                'PATH': 'Путь',
-                'ERROR': 'Ошибка',
-                'METHOD': 'Метод',
-                'MESSAGE': 'Сообщение'
+                'TIME': 'Время',
+                'TYPE': 'Тип',
+                'CORRELATION_ID': 'Id',
+                'SOURCE': 'Source',
+                'MESSAGE': 'Сообщение',
+                'TRACE': 'Trace'
             });
-            this.config.ok = params.ok;
-            this.config.cancel = params.cancel;
-            this.config.errorDetails = 'ERROR_DETAILS';
-            this.config.dismissButton = 'DISMISS';
-            this.config.errorMessage = 'MESSAGE';
-            this.config.errorCode = 'CODE';
-            this.config.errorMethod = 'METHOD';
-            this.config.errorPath = 'PATH';
-            this.config.errorText = 'ERROR';
-        }
-        else {
-            this.config.ok = params.ok;
-            this.config.cancel = params.cancel;
+            this.localStrings.time = 'TIME';
+            this.localStrings.type = 'TYPE';
+            this.localStrings.correlationId = 'CORRELATION_ID';
+            this.localStrings.source = 'SOURCE';
+            this.localStrings.message = 'MESSAGE';
+            this.localStrings.trace = 'TRACE';
         }
         this.$mdDialog = $mdDialog;
         this.theme = $rootScope.$theme;
-        this.config.error = params.error;
     }
     ErrorDetailsDialogController2.prototype.onOk = function () {
         this.$mdDialog.hide();
@@ -712,7 +696,7 @@ try {
 }
 module.run(['$templateCache', function($templateCache) {
   $templateCache.put('error_details2/ErrorDetails2.html',
-    '<md-dialog class="pip-dialog pip-error-details-dialog-2 layout-column" width="400" md-theme="{{vm.theme}}"><div class="pip-body"><div class="pip-header"><h3>{{::vm.config.errorDetails | translate}}</h3></div><div class="layout-row layout-align-start-center error-section text-body2 color-secondary-text" ng-if="vm.config.error.code || (vm.config.error.data && error.data.code)">{{::vm.config.errorCode | translate}}</div><div class="layout-row layout-align-start-center text-subhead1" ng-if="vm.config.error.code || (vm.config.error.data && vm.config.error.data.code)">{{vm.config.error.code || vm.config.error.data.code}}</div><div class="layout-row layout-align-start-center error-section text-body2 color-secondary-text" ng-if="vm.config.error.path || (vm.config.error.data && vm.config.error.data.path)">{{::vm.config.errorPath | translate}}</div><div class="layout-row layout-align-start-center text-subhead1" ng-if="vm.config.error.path || (vm.config.error.data && vm.config.error.data.path)">{{vm.config.error.path || vm.config.error.data.path}}</div><div class="error-section text-body2 color-secondary-text layout-row layout-align-start-center" ng-if="vm.config.error.error || (vm.config.error.data && vm.config.error.data.error)">{{::vm.config.errorText | translate}}</div><div class="layout-row layout-align-start-center text-subhead1" ng-if="vm.config.error.error || (vm.config.error.data && vm.config.error.data.error)">{{vm.config.error.error || vm.config.error.data.error}}</div><div class="error-section text-body2 color-secondary-text layout-row layout-align-start-center" ng-if="vm.config.error.method || (vm.config.error.data && vm.config.error.data.method)">{{::vm.config.errorMethod | translate}}</div><div class="layout-row layout-align-start-center text-subhead1" ng-if="vm.config.error.method || (vm.config.error.data && vm.config.error.data.method)">{{vm.config.error.method || vm.config.error.data.method}}</div><div class="error-section text-body2 color-secondary-text layout-row layout-align-start-center" ng-if="vm.config.error.message || (vm.config.error.data && vm.config.error.data.message)">{{::vm.config.errorMessage | translate}}</div><div class="layout-row layout-align-start-center text-subhead1" ng-if="vm.config.error.message || (vm.config.error.data && vm.config.error.data.message)">{{vm.config.error.message || vm.config.error.data.message}}</div></div><div class="pip-footer"><div><md-button class="md-accent m0" ng-click="vm.onOk()">{{::vm.config.dismissButton | translate}}</md-button></div></div></md-dialog>');
+    '<md-dialog class="pip-dialog pip-error-details-dialog-2 layout-column" width="400" md-theme="{{vm.theme}}"><div class="pip-body"><div class="pip-header"><h3>{{::vm.config.errorDetails | translate}}</h3></div></div><div class="pip-footer"><div><md-button class="md-accent m0" ng-click="vm.onOk()">{{::vm.config.dismissButton | translate}}</md-button></div></div></md-dialog>');
 }]);
 })();
 

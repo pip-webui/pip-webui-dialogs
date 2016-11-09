@@ -17,6 +17,7 @@ export class ErrorDetailsDialogController2 {
     public localStrings: ErrorDetailsData;
     public error: ErrorDetailsData;
     public state: string = 'message';
+    public buttonsCollections;
 
     constructor(
         $mdDialog,
@@ -58,6 +59,10 @@ export class ErrorDetailsDialogController2 {
 
         this.$mdDialog = $mdDialog;
         this.theme = $rootScope.$theme;
+        this.buttonsCollections = [
+                {id: 'message', name: this.localStrings.message,  disabled: false},
+                {id: 'trace', name: this.localStrings.trace,  disabled: false}
+            ];
     }
 
     public onOk(): void {

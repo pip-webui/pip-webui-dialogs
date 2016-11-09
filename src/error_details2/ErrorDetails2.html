@@ -42,6 +42,12 @@
                 {{:: vm.error.source}}
             </div>
         </div>
-
+        <pip-toggle-buttons ng-model="vm.state"
+                            pip-rebind="true"
+                            pip-buttons="vm.buttonsCollections"
+                            class="bm16">
+        </pip-toggle-buttons>
+        <div ng-if="vm.state == 'message'"  class="tm16">{{vm.error.message}}</div>
+        <div ng-if="vm.state == 'trace'"  class="tm16">{{vm.error.trace}}</div>
     </div>
 </md-dialog>

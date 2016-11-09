@@ -10,7 +10,7 @@
             'pipServices', 
             'pipTheme.Default', 'pipTheme.BootBarn', 'pipTheme', 
 
-            'pipDialogs',
+            'pipDialogs',   'pipButtons',
 
             'appDialogs.Information', 'appDialogs.Confirmation', 'appDialogs.Options', 'appDialogs.ErrorDetails'
         ]

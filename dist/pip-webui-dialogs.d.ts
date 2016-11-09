@@ -70,6 +70,7 @@ export class ErrorDetailsDialogController2 {
     localStrings: ErrorDetailsData;
     error: ErrorDetailsData;
     state: string;
+    buttonsCollections: any;
     constructor($mdDialog: any, $injector: any, $rootScope: any, params: ErrorDetailsData);
     onOk(): void;
     onCancel(): void;

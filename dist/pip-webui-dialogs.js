@@ -156,6 +156,10 @@ var ErrorDetailsDialogController2 = (function () {
         }
         this.$mdDialog = $mdDialog;
         this.theme = $rootScope.$theme;
+        this.buttonsCollections = [
+            { id: 'message', name: this.localStrings.message, disabled: false },
+            { id: 'trace', name: this.localStrings.trace, disabled: false }
+        ];
     }
     ErrorDetailsDialogController2.prototype.onOk = function () {
         this.$mdDialog.hide();
@@ -698,7 +702,7 @@ try {
 }
 module.run(['$templateCache', function($templateCache) {
   $templateCache.put('error_details2/ErrorDetails2.html',
-    '<md-dialog class="pip-dialog pip-error-details-dialog-2 layout-column" width="400" md-theme="{{vm.theme}}"><div class="pip-body"><div class="layout-row layout-align-row-start-center"><h3 class="pip-title">{{::\'ERROR_HEADER\' | translate}}</h3></div><div class="layout-row layout-align-row-start-center pip-section"><div class="pip-title-section">{{::vm.localStrings.time | translate}}</div><div class="pip-text-section">{{:: vm.error.time}}</div></div><div class="layout-row layout-align-row-start-center pip-section"><div class="pip-title-section">{{::vm.localStrings.type | translate}}</div><div class="pip-text-section">{{:: vm.error.type}}</div></div><div class="layout-row layout-align-row-start-center pip-section"><div class="pip-title-section">{{::vm.localStrings.correlationId | translate}}</div><div class="pip-text-section">{{:: vm.error.correlationId}}</div></div><div class="layout-row layout-align-row-start-center pip-section"><div class="pip-title-section">{{::vm.localStrings.source | translate}}</div><div class="pip-text-section">{{:: vm.error.source}}</div></div></div></md-dialog>');
+    '<md-dialog class="pip-dialog pip-error-details-dialog-2 layout-column" width="400" md-theme="{{vm.theme}}"><div class="pip-body"><div class="layout-row layout-align-row-start-center"><h3 class="pip-title">{{::\'ERROR_HEADER\' | translate}}</h3></div><div class="layout-row layout-align-row-start-center pip-section"><div class="pip-title-section">{{::vm.localStrings.time | translate}}</div><div class="pip-text-section">{{:: vm.error.time}}</div></div><div class="layout-row layout-align-row-start-center pip-section"><div class="pip-title-section">{{::vm.localStrings.type | translate}}</div><div class="pip-text-section">{{:: vm.error.type}}</div></div><div class="layout-row layout-align-row-start-center pip-section"><div class="pip-title-section">{{::vm.localStrings.correlationId | translate}}</div><div class="pip-text-section">{{:: vm.error.correlationId}}</div></div><div class="layout-row layout-align-row-start-center pip-section"><div class="pip-title-section">{{::vm.localStrings.source | translate}}</div><div class="pip-text-section">{{:: vm.error.source}}</div></div><pip-toggle-buttons ng-model="vm.state" pip-rebind="true" pip-buttons="vm.buttonsCollections" class="bm16"></pip-toggle-buttons><div ng-if="vm.state == \'message\'" class="tm16">{{vm.error.message}}</div><div ng-if="vm.state == \'trace\'" class="tm16">{{vm.error.trace}}</div></div></md-dialog>');
 }]);
 })();
 

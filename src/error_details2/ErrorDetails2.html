@@ -47,7 +47,7 @@
                             pip-buttons="vm.buttonsCollections"
                             class="bm16">
         </pip-toggle-buttons>
-        <div ng-if="vm.state == 'message'"  class="tm16">{{vm.error.message}}</div>
-        <div ng-if="vm.state == 'trace'"  class="tm16">{{vm.error.trace}}</div>
+        <div ng-if="vm.state == 'message'"  class="pip-text-error">{{vm.error.message}}</div>
+        <div ng-if="vm.state == 'trace'"  class="pip-text-error">{{vm.error.trace}}</div>
     </div>
 </md-dialog>

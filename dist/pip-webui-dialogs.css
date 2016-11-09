@@ -595,6 +595,9 @@ button:focus {
   vertical-align: middle;
   line-height: 48px;
 }
+.pip-dialog.pip-error-details-dialog-2 .pip-text-error {
+  margin-top: 16px;
+}
 .pip-dialog.pip-error-details-dialog-2 h3 {
   margin: 0;
   margin-bottom: 16px;

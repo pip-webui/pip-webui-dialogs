@@ -64,43 +64,35 @@
     }]);
 })();
 },{}],3:[function(require,module,exports){
-(function () {
-    'use strict';
-    angular.module('pipDialogs', [
-        'pipInformationDialog',
-        'pipConfirmationDialog',
-        'pipOptionsDialog',
-        'pipOptionsBigDialog',
-        'pipErrorDetailsDialog'
-    ]);
-})();
-},{}],4:[function(require,module,exports){
-(function () {
-    'use strict';
-    var thisModule = angular.module('pipErrorDetailsDialog', ['ngMaterial', 'pipDialogs.Translate', 'pipDialogs.Templates']);
-    thisModule.factory('pipErrorDetailsDialog', ['$mdDialog', function ($mdDialog) {
-        return {
-            show: function (params, successCallback, cancelCallback) {
-                $mdDialog.show({
-                    targetEvent: params.event,
-                    templateUrl: 'error_details/error_details.html',
-                    controller: 'pipErrorDetailsDialogController',
-                    locals: { params: params },
-                    clickOutsideToClose: true
-                })
-                    .then(function () {
-                    if (successCallback) {
-                        successCallback();
-                    }
-                }, function () {
-                    if (cancelCallback) {
-                        cancelCallback();
-                    }
-                });
-            }
-        };
-    }]);
-    thisModule.controller('pipErrorDetailsDialogController', ['$scope', '$rootScope', '$mdDialog', '$injector', 'params', function ($scope, $rootScope, $mdDialog, $injector, params) {
+'use strict';
+require('./error_details');
+angular
+    .module('pipDialogs', [
+    'pipErrorDetailsDialog'
+]);
+},{"./error_details":7}],4:[function(require,module,exports){
+'use strict';
+var ErrorStrings = (function () {
+    function ErrorStrings() {
+        this.ok = 'OK';
+        this.cancel = 'Cancel';
+        this.errorDetails = 'Error details';
+        this.dismissButton = 'Dismiss';
+        this.errorMessage = 'Message';
+        this.errorCode = 'Code';
+        this.errorMethod = 'Method';
+        this.errorPath = 'Path';
+        this.error = 'Error';
+        this.errorText = 'Error';
+    }
+    return ErrorStrings;
+}());
+exports.ErrorStrings = ErrorStrings;
+var ErrorDetailsDialogController = (function () {
+    ErrorDetailsDialogController.$inject = ['$mdDialog', 'pipTranslate', '$injector', '$rootScope', 'params'];
+    function ErrorDetailsDialogController($mdDialog, pipTranslate, $injector, $rootScope, params) {
+        "ngInject";
+        this.config = new ErrorStrings();
         var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
         if (pipTranslate) {
             pipTranslate.translations('en', {
@@ -120,38 +112,78 @@
                 'METHOD': 'Метод',
                 'MESSAGE': 'Сообщение'
             });
-            $scope.ok = params.ok || 'OK';
-            $scope.cancel = params.cancel || 'CANCEL';
-            $scope.errorDetails = 'ERROR_DETAILS';
-            $scope.dismissButton = 'DISMISS';
-            $scope.errorMessage = 'MESSAGE';
-            $scope.errorCode = 'CODE';
-            $scope.errorMethod = 'METHOD';
-            $scope.errorPath = 'PATH';
-            $scope.errorText = 'ERROR';
+            this.config.ok = params.ok || 'OK';
+            this.config.cancel = params.cancel || 'CANCEL';
+            this.config.errorDetails = 'ERROR_DETAILS';
+            this.config.dismissButton = 'DISMISS';
+            this.config.errorMessage = 'MESSAGE';
+            this.config.errorCode = 'CODE';
+            this.config.errorMethod = 'METHOD';
+            this.config.errorPath = 'PATH';
+            this.config.errorText = 'ERROR';
         }
         else {
-            $scope.ok = params.ok || 'OK';
-            $scope.cancel = params.cancel || 'Cancel';
-            $scope.errorDetails = 'Error details';
-            $scope.dismissButton = 'Dismiss';
-            $scope.errorMessage = 'Message';
-            $scope.errorCode = 'Code';
-            $scope.errorMethod = 'Method';
-            $scope.errorPath = 'Path';
-            $scope.error = 'Error';
+            this.config.ok = params.ok || 'OK';
+            this.config.cancel = params.cancel || 'Cancel';
         }
-        $scope.theme = $rootScope.$theme;
-        $scope.error = params.error;
-        $scope.onCancel = function () {
-            $mdDialog.cancel();
-        };
-        $scope.onOk = function () {
-            $mdDialog.hide();
-        };
-    }]);
-})();
+        this.$mdDialog = $mdDialog;
+        this.theme = $rootScope.$theme;
+        this.config.error = params.error;
+    }
+    ErrorDetailsDialogController.prototype.onOk = function () {
+        this.$mdDialog.hide();
+    };
+    ErrorDetailsDialogController.prototype.onCancel = function () {
+        this.$mdDialog.cancel();
+    };
+    return ErrorDetailsDialogController;
+}());
+exports.ErrorDetailsDialogController = ErrorDetailsDialogController;
+angular
+    .module('pipErrorDetailsDialog')
+    .controller('pipErrorDetailsDialogController', ErrorDetailsDialogController);
 },{}],5:[function(require,module,exports){
+var ErrorDetailsService = (function () {
+    ErrorDetailsService.$inject = ['$mdDialog'];
+    function ErrorDetailsService($mdDialog) {
+        this._mdDialog = $mdDialog;
+    }
+    ErrorDetailsService.prototype.show = function (params, successCallback, cancelCallback) {
+        this._mdDialog.show({
+            targetEvent: params.event,
+            templateUrl: 'error_details/ErrorDetails.html',
+            controller: 'pipErrorDetailsDialogController',
+            controllerAs: 'vm',
+            locals: { params: params },
+            clickOutsideToClose: true
+        })
+            .then(function () {
+            if (successCallback) {
+                successCallback();
+            }
+        }, function () {
+            if (cancelCallback) {
+                cancelCallback();
+            }
+        });
+    };
+    return ErrorDetailsService;
+}());
+angular
+    .module('pipErrorDetailsDialog')
+    .service('pipErrorDetailsDialog', ErrorDetailsService);
+},{}],6:[function(require,module,exports){
+
+},{}],7:[function(require,module,exports){
+'use strict';
+angular
+    .module('pipErrorDetailsDialog', [
+    'ngMaterial',
+    'pipDialogs.Translate',
+    'pipDialogs.Templates']);
+require('./ErrorDetailsService');
+require('./ErrorDetailsController');
+},{"./ErrorDetailsController":4,"./ErrorDetailsService":5}],8:[function(require,module,exports){
 (function () {
     'use strict';
     var thisModule = angular.module('pipInformationDialog', ['ngMaterial', 'pipDialogs.Translate', 'pipDialogs.Templates']);
@@ -204,7 +236,7 @@
         };
     }]);
 })();
-},{}],6:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 (function () {
     'use strict';
     var thisModule = angular.module('pipOptionsDialog', ['ngMaterial', 'pipDialogs.Translate', 'pipDialogs.Templates']);
@@ -290,7 +322,7 @@
         setTimeout(focusInput, 500);
     }]);
 })();
-},{}],7:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 (function () {
     'use strict';
     var thisModule = angular.module('pipOptionsBigDialog', ['ngMaterial', 'pipDialogs.Translate', 'pipDialogs.Templates']);
@@ -391,7 +423,7 @@
         setTimeout(focusInput, 500);
     }]);
 })();
-},{}],8:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 (function(module) {
 try {
   module = angular.module('pipDialogs.Templates');
@@ -411,8 +443,8 @@ try {
   module = angular.module('pipDialogs.Templates', []);
 }
 module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('error_details/error_details.html',
-    '<md-dialog class="pip-dialog pip-error-details-dialog layout-column" width="400" md-theme="{{theme}}"><div class="pip-body"><div class="pip-header"><h3>{{::errorDetails | translate}}</h3></div><div class="layout-row layout-align-start-center error-section text-body2 color-secondary-text" ng-if="error.code || (error.data && error.data.code)">{{::errorCode | translate}}</div><div class="layout-row layout-align-start-center text-subhead1" ng-if="error.code || (error.data && error.data.code)">{{error.code || error.data.code}}</div><div class="layout-row layout-align-start-center error-section text-body2 color-secondary-text" ng-if="error.path || (error.data && error.data.path)">{{::errorPath | translate}}</div><div class="layout-row layout-align-start-center text-subhead1" ng-if="error.path || (error.data && error.data.path)">{{error.path || error.data.path}}</div><div class="error-section text-body2 color-secondary-text layout-row layout-align-start-center" ng-if="error.error || (error.data && error.data.error)">{{::errorText | translate}}</div><div class="layout-row layout-align-start-center text-subhead1" ng-if="error.error || (error.data && error.data.error)">{{error.error || error.data.error}}</div><div class="error-section text-body2 color-secondary-text layout-row layout-align-start-center" ng-if="error.method || (error.data && error.data.method)">{{::errorMethod | translate}}</div><div class="layout-row layout-align-start-center text-subhead1" ng-if="error.method || (error.data && error.data.method)">{{error.method || error.data.method}}</div><div class="error-section text-body2 color-secondary-text layout-row layout-align-start-center" ng-if="error.message || (error.data && error.data.message)">{{::errorMessage | translate}}</div><div class="layout-row layout-align-start-center text-subhead1" ng-if="error.message || (error.data && error.data.message)">{{error.message || error.data.message}}</div></div><div class="pip-footer"><div><md-button class="md-accent m0" ng-click="onOk()">{{::dismissButton | translate}}</md-button></div></div></md-dialog>');
+  $templateCache.put('error_details/ErrorDetails.html',
+    '<md-dialog class="pip-dialog pip-error-details-dialog layout-column" width="400" md-theme="{{vm.theme}}"><div class="pip-body"><div class="pip-header"><h3>{{::vm.config.errorDetails | translate}}</h3></div><div class="layout-row layout-align-start-center error-section text-body2 color-secondary-text" ng-if="vm.config.error.code || (vm.config.error.data && error.data.code)">{{::vm.config.errorCode | translate}}</div><div class="layout-row layout-align-start-center text-subhead1" ng-if="vm.config.error.code || (vm.config.error.data && vm.config.error.data.code)">{{vm.config.error.code || vm.config.error.data.code}}</div><div class="layout-row layout-align-start-center error-section text-body2 color-secondary-text" ng-if="vm.config.error.path || (vm.config.error.data && vm.config.error.data.path)">{{::vm.config.errorPath | translate}}</div><div class="layout-row layout-align-start-center text-subhead1" ng-if="vm.config.error.path || (vm.config.error.data && vm.config.error.data.path)">{{vm.config.error.path || vm.config.error.data.path}}</div><div class="error-section text-body2 color-secondary-text layout-row layout-align-start-center" ng-if="vm.config.error.error || (vm.config.error.data && vm.config.error.data.error)">{{::vm.config.errorText | translate}}</div><div class="layout-row layout-align-start-center text-subhead1" ng-if="vm.config.error.error || (vm.config.error.data && vm.config.error.data.error)">{{vm.config.error.error || vm.config.error.data.error}}</div><div class="error-section text-body2 color-secondary-text layout-row layout-align-start-center" ng-if="vm.config.error.method || (vm.config.error.data && vm.config.error.data.method)">{{::vm.config.errorMethod | translate}}</div><div class="layout-row layout-align-start-center text-subhead1" ng-if="vm.config.error.method || (vm.config.error.data && vm.config.error.data.method)">{{vm.config.error.method || vm.config.error.data.method}}</div><div class="error-section text-body2 color-secondary-text layout-row layout-align-start-center" ng-if="vm.config.error.message || (vm.config.error.data && vm.config.error.data.message)">{{::vm.config.errorMessage | translate}}</div><div class="layout-row layout-align-start-center text-subhead1" ng-if="vm.config.error.message || (vm.config.error.data && vm.config.error.data.message)">{{vm.config.error.message || vm.config.error.data.message}}</div></div><div class="pip-footer"><div><md-button class="md-accent m0" ng-click="vm.onOk()">{{::vm.config.dismissButton | translate}}</md-button></div></div></md-dialog>');
 }]);
 })();
 
@@ -454,7 +486,7 @@ module.run(['$templateCache', function($templateCache) {
 
 
 
-},{}]},{},[1,2,3,4,5,7,6,8])(8)
+},{}]},{},[1,2,3,6,4,5,7,8,10,9,11])(11)
 });
 
 

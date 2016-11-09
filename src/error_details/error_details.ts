@@ -5,6 +5,7 @@
  * - Improve sample in sampler app
  */
 
+/*
 (function () {
     'use strict';
 
@@ -17,7 +18,7 @@
                 show: function (params, successCallback, cancelCallback) {
                     $mdDialog.show({
                         targetEvent: params.event,
-                        templateUrl: 'error_details/error_details.html',
+                        templateUrl: 'error_details/errorDetails.html',
                         controller: 'pipErrorDetailsDialogController',
                         locals: {params: params},
                         clickOutsideToClose: true
@@ -94,3 +95,4 @@
     );
 
 })();
+*/

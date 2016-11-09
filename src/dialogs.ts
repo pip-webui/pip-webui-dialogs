@@ -5,16 +5,17 @@
 
 /* global angular */
 
-(function () {
-    'use strict';
+'use strict';
 
-    angular.module('pipDialogs', [
-        'pipInformationDialog',
-        'pipConfirmationDialog',
-        'pipOptionsDialog',
-        'pipOptionsBigDialog',
+import './error_details';
+
+angular
+    .module('pipDialogs', [
+        //'pipInformationDialog',
+        //'pipConfirmationDialog',
+        //'pipOptionsDialog',
+        //'pipOptionsBigDialog',
         'pipErrorDetailsDialog'
     ]);
 
-})();
-
+export * from './error_details';

@@ -5,7 +5,7 @@
  * - Improve sample in sampler app
  * - Remove deleted hack in the controller
  */
-
+/*
 (function () {
     'use strict';
 
@@ -111,3 +111,4 @@
     );
 
 })();
+*/

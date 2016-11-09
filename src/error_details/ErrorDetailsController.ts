@@ -15,13 +15,24 @@ export class ErrorStrings {
     public errorText: string = 'Error';   
 }
 
+export class ErrorParams {
+    public ok: string = 'OK';
+    public cancel: string = 'CANCEL';
+    public error: string = 'ERROR';
+}
+
 export class ErrorDetailsDialogController {
 
     public $mdDialog;
     public theme;
     public config: ErrorStrings;
 
-    constructor($mdDialog, pipTranslate, $injector, $rootScope, params) {
+    constructor(
+        $mdDialog,
+        $injector,
+        pipTranslate, 
+        $rootScope, 
+        params: ErrorParams) {
         "ngInject";
         this.config = new ErrorStrings();
         var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
@@ -43,8 +54,8 @@ export class ErrorDetailsDialogController {
                     'METHOD': 'Метод',
                     'MESSAGE': 'Сообщение'
                 });
-                this.config.ok = params.ok || 'OK';
-                this.config.cancel = params.cancel || 'CANCEL';
+                this.config.ok = params.ok;
+                this.config.cancel = params.cancel;
                 this.config.errorDetails = 'ERROR_DETAILS';
                 this.config.dismissButton = 'DISMISS';
                 this.config.errorMessage = 'MESSAGE';
@@ -53,8 +64,8 @@ export class ErrorDetailsDialogController {
                 this.config.errorPath = 'PATH';
                 this.config.errorText = 'ERROR';                
             } else {
-                this.config.ok = params.ok || 'OK';
-                this.config.cancel = params.cancel || 'Cancel';
+                this.config.ok = params.ok;
+                this.config.cancel = params.cancel;
             }
             this.$mdDialog = $mdDialog;
             this.theme = $rootScope.$theme;

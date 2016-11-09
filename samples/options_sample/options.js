@@ -7,7 +7,7 @@
     var thisModule = angular.module('appDialogs.Options', []);
 
     thisModule.controller('OptionsController',
-        function ($scope, pipOptionsDialog, pipOptionsBigDialog, $injector, $timeout) {
+        function ($scope, pipOptionsDialog,  $injector, $timeout) { // pipOptionsBigDialog,
            
             var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
 

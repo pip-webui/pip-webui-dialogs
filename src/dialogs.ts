@@ -8,14 +8,18 @@
 'use strict';
 
 import './error_details';
+import './information';
+import './options';
 
 angular
     .module('pipDialogs', [
-        //'pipInformationDialog',
+        'pipInformationDialog',
         //'pipConfirmationDialog',
-        //'pipOptionsDialog',
+        'pipOptionsDialog',
         //'pipOptionsBigDialog',
         'pipErrorDetailsDialog'
     ]);
 
 export * from './error_details';
+export * from './information';
+export * from './options';

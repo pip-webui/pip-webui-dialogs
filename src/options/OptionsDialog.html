@@ -4,20 +4,20 @@
 -->
 
 <md-dialog class="pip-dialog pip-options-dialog layout-column"
-           min-width="400" md-theme="{{theme}}">
+           min-width="400" md-theme="{{vm.theme}}">
     <md-dialog-content class="pip-body lp0 tp0 rp0 bp24 pip-scroll">
         <div class="pip-header" >
-            <h3>{{::title | translate}}</h3>
-            <div ng-show="deletedTitle" class="header-option text-subhead1 divider-bottom">
-                <md-checkbox ng-model="deleted" aria-label="CHECKBOX">{{::deletedTitle | translate}}</md-checkbox>
+            <h3>{{::vm.config.title | translate}}</h3>
+            <div ng-show="vm.config.deletedTitle" class="header-option text-subhead1 divider-bottom">
+                <md-checkbox ng-model="deleted" aria-label="CHECKBOX">{{::vm.config.deletedTitle | translate}}</md-checkbox>
             </div>
         </div>
         <div class="pip-content">
-            <md-radio-group ng-model="selectedOptionName" class="pip-list md-primary" md-no-ink="true"
-                            ng-keypress="onKeyPress($event)" tabindex="0">
-                <div ng-repeat="option in options" class="pip-list-item" md-ink-ripple
-                     ui-event="{ click: 'onOptionSelect($event, option)' }"
-                     ng-class="{ selected: option.name == selectedOptionName }">
+            <md-radio-group ng-model="vm.selectedOptionName" class="pip-list md-primary" md-no-ink="true"
+                            ng-keypress="vm.onKeyPress($event)" tabindex="0">
+                <div ng-repeat="option in vm.config.options" class="pip-list-item" md-ink-ripple
+                     ui-event="{ click: 'vm.onOptionSelect($event, option)' }"
+                     ng-class="{ selected: option.name == vm.config.selectedOptionName }">
                     <div class="pip-list-item item-padding">
                         <md-icon class="pip-option-icon" md-svg-icon="icons:{{option.icon}}" ng-if="option.icon">
                         </md-icon>
@@ -25,6 +25,7 @@
                             {{::option.title | translate}}
                         </div>
                         <md-radio-button ng-value="option.name" tabindex="-1"
+                                        
                                          aria-label="{{::option.title | translate}}">
                         </md-radio-button>
                     </div>
@@ -35,8 +36,8 @@
     </md-dialog-content>
     <div class="pip-footer">
         <div>
-            <md-button class="pip-cancel" ng-click="onCancel()">{{::'CANCEL' | translate}}</md-button>
-            <md-button class="pip-submit md-accent" ng-click="onSelect()">{{::applyButtonTitle | translate}}</md-button>
+            <md-button class="pip-cancel" ng-click="vm.onCancel()">{{::'CANCEL' | translate}}</md-button>
+            <md-button class="pip-submit md-accent" ng-click="vm.onSelect()">{{::vm.config.applyButtonTitle | translate}}</md-button>
         </div>
     </div>
 </md-dialog>

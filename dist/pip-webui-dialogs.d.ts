@@ -56,19 +56,31 @@ class ErrorDetailsService {
 
 
 export class ErrorDetailsData {
+<<<<<<< HEAD
+=======
+}
+export class ErrorDetailsStrings {
+>>>>>>> 55e0335220aa8e1ac73f749ecc25c6b42196d0c9
     time: string;
     type: string;
     correlationId: string;
     source: string;
     message: string;
     trace: string;
+<<<<<<< HEAD
     event: any;
+=======
+>>>>>>> 55e0335220aa8e1ac73f749ecc25c6b42196d0c9
 }
 export class ErrorDetailsDialogController2 {
     $mdDialog: any;
     theme: any;
+<<<<<<< HEAD
     localStrings: ErrorDetailsData;
     error: ErrorDetailsData;
+=======
+    localStrings: ErrorDetailsStrings;
+>>>>>>> 55e0335220aa8e1ac73f749ecc25c6b42196d0c9
     constructor($mdDialog: any, $injector: any, $rootScope: any, params: ErrorDetailsData);
     onOk(): void;
     onCancel(): void;

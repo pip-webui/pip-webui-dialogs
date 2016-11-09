@@ -110,6 +110,15 @@ angular
 'use strict';
 var ErrorDetailsData = (function () {
     function ErrorDetailsData() {
+<<<<<<< HEAD
+=======
+    }
+    return ErrorDetailsData;
+}());
+exports.ErrorDetailsData = ErrorDetailsData;
+var ErrorDetailsStrings = (function () {
+    function ErrorDetailsStrings() {
+>>>>>>> 55e0335220aa8e1ac73f749ecc25c6b42196d0c9
         this.time = 'Time';
         this.type = 'Type';
         this.correlationId = 'CorrelationId';
@@ -117,13 +126,20 @@ var ErrorDetailsData = (function () {
         this.message = 'Message';
         this.trace = 'Trace';
     }
+<<<<<<< HEAD
     return ErrorDetailsData;
 }());
 exports.ErrorDetailsData = ErrorDetailsData;
+=======
+    return ErrorDetailsStrings;
+}());
+exports.ErrorDetailsStrings = ErrorDetailsStrings;
+>>>>>>> 55e0335220aa8e1ac73f749ecc25c6b42196d0c9
 var ErrorDetailsDialogController2 = (function () {
     ErrorDetailsDialogController2.$inject = ['$mdDialog', '$injector', '$rootScope', 'params'];
     function ErrorDetailsDialogController2($mdDialog, $injector, $rootScope, params) {
         "ngInject";
+<<<<<<< HEAD
         console.log(params);
         this.localStrings = new ErrorDetailsData();
         this.error = params;
@@ -131,6 +147,12 @@ var ErrorDetailsDialogController2 = (function () {
         if (pipTranslate) {
             pipTranslate.translations('en', {
                 'ERROR_HEADER': 'Error details',
+=======
+        this.localStrings = new ErrorDetailsStrings();
+        var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
+        if (pipTranslate) {
+            pipTranslate.translations('en', {
+>>>>>>> 55e0335220aa8e1ac73f749ecc25c6b42196d0c9
                 'TIME': 'Time',
                 'TYPE': 'Type',
                 'CORRELATION_ID': 'CorrelationId',
@@ -139,7 +161,10 @@ var ErrorDetailsDialogController2 = (function () {
                 'TRACE': 'Trace'
             });
             pipTranslate.translations('ru', {
+<<<<<<< HEAD
                 'ERROR_HEADER': 'Информация об ошибках',
+=======
+>>>>>>> 55e0335220aa8e1ac73f749ecc25c6b42196d0c9
                 'TIME': 'Время',
                 'TYPE': 'Тип',
                 'CORRELATION_ID': 'Id',
@@ -695,7 +720,11 @@ try {
 }
 module.run(['$templateCache', function($templateCache) {
   $templateCache.put('error_details2/ErrorDetails2.html',
+<<<<<<< HEAD
     '<md-dialog class="pip-dialog pip-error-details-dialog-2 layout-column" width="400" md-theme="{{vm.theme}}"><div class="pip-body"><div class="layout-row layout-align-row-start-center"><h3>{{::\'ERROR_HEADER\' | translate}}</h3></div><div class="layout-row layout-align-row-start-center pip-section"><div class="pip-title-section">{{::vm.localStrings.time | translate}}</div><div class="pip-text-section">{{:: vm.error.time}}</div></div></div></md-dialog>');
+=======
+    '<md-dialog class="pip-dialog pip-error-details-dialog-2 layout-column" width="400" md-theme="{{vm.theme}}"><div class="pip-body"><div class="pip-header"><h3>{{::vm.config.errorDetails | translate}}</h3></div></div><div class="pip-footer"><div><md-button class="md-accent m0" ng-click="vm.onOk()">{{::vm.config.dismissButton | translate}}</md-button></div></div></md-dialog>');
+>>>>>>> 55e0335220aa8e1ac73f749ecc25c6b42196d0c9
 }]);
 })();
 

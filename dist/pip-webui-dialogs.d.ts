@@ -1,5 +1,25 @@
 declare module pip.dialogs {
 
+export class ConfirmationParams {
+    ok: string;
+    title: string;
+    cancel: string;
+}
+export class ConfirmationDialogController {
+    $mdDialog: any;
+    theme: any;
+    config: ConfirmationParams;
+    constructor($mdDialog: any, $injector: any, $rootScope: any, params: ConfirmationParams);
+    onOk(): void;
+    onCancel(): void;
+}
+
+class ConfirmationService {
+    _mdDialog: any;
+    constructor($mdDialog: any);
+    show(params: any, successCallback: any, cancelCallback: any): void;
+}
+
 
 
 export class ErrorStrings {
@@ -23,7 +43,7 @@ export class ErrorDetailsDialogController {
     $mdDialog: any;
     theme: any;
     config: ErrorStrings;
-    constructor($mdDialog: any, $injector: any, pipTranslate: any, $rootScope: any, params: ErrorParams);
+    constructor($mdDialog: any, $injector: any, $rootScope: any, params: ErrorParams);
     onOk(): void;
     onCancel(): void;
 }
@@ -54,7 +74,7 @@ export class InformationDialogController {
     $mdDialog: any;
     theme: any;
     config: InformationStrings;
-    constructor($mdDialog: any, $injector: any, pipTranslate: any, $rootScope: any, params: InformationParams);
+    constructor($mdDialog: any, $injector: any, $rootScope: any, params: InformationParams);
     onOk(): void;
     onCancel(): void;
 }
@@ -88,7 +108,7 @@ export class OptionsBigDialogController {
     $mdDialog: any;
     theme: any;
     config: OptionsBigParams;
-    constructor($mdDialog: any, $injector: any, pipTranslate: any, $rootScope: any, params: OptionsBigParams);
+    constructor($mdDialog: any, $injector: any, $rootScope: any, params: OptionsBigParams);
     onOk(): void;
     onCancel(): void;
     onOptionSelect(event: any, option: any): void;
@@ -123,7 +143,7 @@ export class OptionsDialogController {
     $mdDialog: any;
     theme: any;
     config: OptionsParams;
-    constructor($mdDialog: any, $injector: any, pipTranslate: any, $rootScope: any, params: OptionsParams);
+    constructor($mdDialog: any, $injector: any, $rootScope: any, params: OptionsParams);
     onOk(): void;
     onCancel(): void;
     onOptionSelect(event: any, option: OptionsData): void;

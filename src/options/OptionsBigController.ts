@@ -30,8 +30,7 @@ export class OptionsBigDialogController {
 
     constructor(
         $mdDialog,
-        $injector,
-        pipTranslate, 
+        $injector, 
         $rootScope, 
         params: OptionsBigParams) {
         "ngInject";

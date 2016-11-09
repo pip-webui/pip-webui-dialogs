@@ -30,7 +30,6 @@ export class ErrorDetailsDialogController {
     constructor(
         $mdDialog,
         $injector,
-        pipTranslate, 
         $rootScope, 
         params: ErrorParams) {
         "ngInject";

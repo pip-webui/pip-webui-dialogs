@@ -27,8 +27,7 @@ export class OptionsDialogController {
 
     constructor(
         $mdDialog,
-        $injector,
-        pipTranslate, 
+        $injector, 
         $rootScope, 
         params: OptionsParams) {
         "ngInject";

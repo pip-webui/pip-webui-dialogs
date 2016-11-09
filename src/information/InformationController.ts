@@ -27,7 +27,6 @@ export class InformationDialogController {
     constructor(
         $mdDialog,
         $injector,
-        pipTranslate, 
         $rootScope, 
         params: InformationParams) {
         "ngInject";

@@ -1,57 +1,84 @@
 (function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}(g.pip || (g.pip = {})).dialogs = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-(function () {
-    'use strict';
-    var thisModule = angular.module('pipConfirmationDialog', ['ngMaterial', 'pipDialogs.Translate', 'pipDialogs.Templates']);
-    thisModule.factory('pipConfirmationDialog', ['$mdDialog', function ($mdDialog) {
-        return {
-            show: function (params, successCallback, cancelCallback) {
-                $mdDialog.show({
-                    targetEvent: params.event,
-                    templateUrl: 'confirmation/confirmation.html',
-                    controller: 'pipConfirmationDialogController',
-                    locals: { params: params },
-                    clickOutsideToClose: true
-                })
-                    .then(function () {
-                    if (successCallback) {
-                        successCallback();
-                    }
-                }, function () {
-                    if (cancelCallback) {
-                        cancelCallback();
-                    }
-                });
-            }
-        };
-    }]);
-    thisModule.controller('pipConfirmationDialogController', ['$scope', '$rootScope', '$mdDialog', '$injector', 'params', function ($scope, $rootScope, $mdDialog, $injector, params) {
+'use strict';
+var ConfirmationParams = (function () {
+    function ConfirmationParams() {
+        this.ok = 'OK';
+        this.cancel = 'Cancel';
+    }
+    return ConfirmationParams;
+}());
+exports.ConfirmationParams = ConfirmationParams;
+var ConfirmationDialogController = (function () {
+    ConfirmationDialogController.$inject = ['$mdDialog', '$injector', '$rootScope', 'params'];
+    function ConfirmationDialogController($mdDialog, $injector, $rootScope, params) {
+        "ngInject";
+        this.config = new ConfirmationParams();
         var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
         if (pipTranslate) {
-            pipTranslate.translations('en', {
-                'CONFIRM_TITLE': 'Confirm'
-            });
-            pipTranslate.translations('ru', {
-                'CONFIRM_TITLE': 'Подтвердите'
-            });
-            $scope.title = params.title || 'CONFIRM_TITLE';
-            $scope.ok = params.ok || 'OK';
-            $scope.cancel = params.cancel || 'CANCEL';
+            pipTranslate.translations('en', { 'CONFIRM_TITLE': 'Confirm' });
+            pipTranslate.translations('ru', { 'CONFIRM_TITLE': 'Подтвердите' });
+            this.config.title = params.title || 'CONFIRM_TITLE';
+            this.config.ok = params.ok || 'OK';
+            this.config.cancel = params.cancel || 'CANCEL';
         }
         else {
-            $scope.title = params.title || 'Confirm';
-            $scope.ok = params.ok || 'OK';
-            $scope.cancel = params.cancel || 'Cancel';
+            this.config.title = params.title || 'Confirm';
+            this.config.ok = params.ok || 'OK';
+            this.config.cancel = params.cancel || 'Cancel';
         }
-        $scope.theme = $rootScope.$theme;
-        $scope.onCancel = function () {
-            $mdDialog.cancel();
-        };
-        $scope.onOk = function () {
-            $mdDialog.hide();
-        };
-    }]);
-})();
+        this.$mdDialog = $mdDialog;
+        this.theme = $rootScope.$theme;
+    }
+    ConfirmationDialogController.prototype.onOk = function () {
+        this.$mdDialog.hide();
+    };
+    ConfirmationDialogController.prototype.onCancel = function () {
+        this.$mdDialog.cancel();
+    };
+    return ConfirmationDialogController;
+}());
+exports.ConfirmationDialogController = ConfirmationDialogController;
+angular
+    .module('pipConfirmationDialog', [
+    'ngMaterial',
+    'pipDialogs.Translate',
+    'pipDialogs.Templates'])
+    .controller('pipConfirmationDialogController', ConfirmationDialogController);
 },{}],2:[function(require,module,exports){
+var ConfirmationService = (function () {
+    ConfirmationService.$inject = ['$mdDialog'];
+    function ConfirmationService($mdDialog) {
+        this._mdDialog = $mdDialog;
+    }
+    ConfirmationService.prototype.show = function (params, successCallback, cancelCallback) {
+        this._mdDialog.show({
+            targetEvent: params.event,
+            templateUrl: 'confirmation/ConfirmationDialog.html',
+            controller: 'pipConfirmationDialogController',
+            controllerAs: 'vm',
+            locals: { params: params },
+            clickOutsideToClose: true
+        })
+            .then(function () {
+            if (successCallback) {
+                successCallback();
+            }
+        }, function () {
+            if (cancelCallback) {
+                cancelCallback();
+            }
+        });
+    };
+    return ConfirmationService;
+}());
+angular
+    .module('pipConfirmationDialog')
+    .service('pipConfirmationDialog', ConfirmationService);
+},{}],3:[function(require,module,exports){
+'use strict';
+require('./ConfirmationController');
+require('./ConfirmationService');
+},{"./ConfirmationController":1,"./ConfirmationService":2}],4:[function(require,module,exports){
 (function () {
     'use strict';
     var thisModule = angular.module('pipDialogs.Translate', []);
@@ -63,19 +90,21 @@
         };
     }]);
 })();
-},{}],3:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 'use strict';
 require('./error_details');
 require('./information');
 require('./options');
+require('./confirmation');
 angular
     .module('pipDialogs', [
     'pipInformationDialog',
+    'pipConfirmationDialog',
     'pipOptionsDialog',
     'pipOptionsBigDialog',
     'pipErrorDetailsDialog'
 ]);
-},{"./error_details":6,"./information":9,"./options":14}],4:[function(require,module,exports){
+},{"./confirmation":3,"./error_details":8,"./information":11,"./options":16}],6:[function(require,module,exports){
 'use strict';
 var ErrorStrings = (function () {
     function ErrorStrings() {
@@ -103,8 +132,8 @@ var ErrorParams = (function () {
 }());
 exports.ErrorParams = ErrorParams;
 var ErrorDetailsDialogController = (function () {
-    ErrorDetailsDialogController.$inject = ['$mdDialog', '$injector', 'pipTranslate', '$rootScope', 'params'];
-    function ErrorDetailsDialogController($mdDialog, $injector, pipTranslate, $rootScope, params) {
+    ErrorDetailsDialogController.$inject = ['$mdDialog', '$injector', '$rootScope', 'params'];
+    function ErrorDetailsDialogController($mdDialog, $injector, $rootScope, params) {
         "ngInject";
         this.config = new ErrorStrings();
         var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
@@ -156,7 +185,7 @@ exports.ErrorDetailsDialogController = ErrorDetailsDialogController;
 angular
     .module('pipErrorDetailsDialog')
     .controller('pipErrorDetailsDialogController', ErrorDetailsDialogController);
-},{}],5:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 var ErrorDetailsService = (function () {
     ErrorDetailsService.$inject = ['$mdDialog'];
     function ErrorDetailsService($mdDialog) {
@@ -186,7 +215,7 @@ var ErrorDetailsService = (function () {
 angular
     .module('pipErrorDetailsDialog')
     .service('pipErrorDetailsDialog', ErrorDetailsService);
-},{}],6:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 'use strict';
 angular
     .module('pipErrorDetailsDialog', [
@@ -195,7 +224,7 @@ angular
     'pipDialogs.Templates']);
 require('./ErrorDetailsService');
 require('./ErrorDetailsController');
-},{"./ErrorDetailsController":4,"./ErrorDetailsService":5}],7:[function(require,module,exports){
+},{"./ErrorDetailsController":6,"./ErrorDetailsService":7}],9:[function(require,module,exports){
 'use strict';
 var InformationStrings = (function () {
     function InformationStrings() {
@@ -212,8 +241,8 @@ var InformationParams = (function () {
 }());
 exports.InformationParams = InformationParams;
 var InformationDialogController = (function () {
-    InformationDialogController.$inject = ['$mdDialog', '$injector', 'pipTranslate', '$rootScope', 'params'];
-    function InformationDialogController($mdDialog, $injector, pipTranslate, $rootScope, params) {
+    InformationDialogController.$inject = ['$mdDialog', '$injector', '$rootScope', 'params'];
+    function InformationDialogController($mdDialog, $injector, $rootScope, params) {
         "ngInject";
         this.config = new InformationStrings();
         var content = params.message, item;
@@ -252,7 +281,7 @@ exports.InformationDialogController = InformationDialogController;
 angular
     .module('pipInformationDialog')
     .controller('pipInformationDialogController', InformationDialogController);
-},{}],8:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 var InformationService = (function () {
     InformationService.$inject = ['$mdDialog'];
     function InformationService($mdDialog) {
@@ -278,7 +307,7 @@ var InformationService = (function () {
 angular
     .module('pipInformationDialog')
     .service('pipInformationDialog', InformationService);
-},{}],9:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 'use strict';
 angular
     .module('pipInformationDialog', [
@@ -287,7 +316,7 @@ angular
     'pipDialogs.Templates']);
 require('./InformationService');
 require('./InformationController');
-},{"./InformationController":7,"./InformationService":8}],10:[function(require,module,exports){
+},{"./InformationController":9,"./InformationService":10}],12:[function(require,module,exports){
 'use strict';
 var OptionsBigData = (function () {
     function OptionsBigData() {
@@ -305,8 +334,8 @@ var OptionsBigParams = (function () {
 }());
 exports.OptionsBigParams = OptionsBigParams;
 var OptionsBigDialogController = (function () {
-    OptionsBigDialogController.$inject = ['$mdDialog', '$injector', 'pipTranslate', '$rootScope', 'params'];
-    function OptionsBigDialogController($mdDialog, $injector, pipTranslate, $rootScope, params) {
+    OptionsBigDialogController.$inject = ['$mdDialog', '$injector', '$rootScope', 'params'];
+    function OptionsBigDialogController($mdDialog, $injector, $rootScope, params) {
         "ngInject";
         this.onSelect = function () {
             var option;
@@ -377,7 +406,7 @@ exports.OptionsBigDialogController = OptionsBigDialogController;
 angular
     .module('pipOptionsBigDialog')
     .controller('pipOptionsBigDialogController', OptionsBigDialogController);
-},{}],11:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 var OptionsBigService = (function () {
     OptionsBigService.$inject = ['$mdDialog'];
     function OptionsBigService($mdDialog) {
@@ -407,7 +436,7 @@ var OptionsBigService = (function () {
 angular
     .module('pipOptionsBigDialog')
     .service('pipOptionsBigDialog', OptionsBigService);
-},{}],12:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 'use strict';
 var OptionsData = (function () {
     function OptionsData() {
@@ -424,8 +453,8 @@ var OptionsParams = (function () {
 }());
 exports.OptionsParams = OptionsParams;
 var OptionsDialogController = (function () {
-    OptionsDialogController.$inject = ['$mdDialog', '$injector', 'pipTranslate', '$rootScope', 'params'];
-    function OptionsDialogController($mdDialog, $injector, pipTranslate, $rootScope, params) {
+    OptionsDialogController.$inject = ['$mdDialog', '$injector', '$rootScope', 'params'];
+    function OptionsDialogController($mdDialog, $injector, $rootScope, params) {
         "ngInject";
         this.$mdDialog = $mdDialog;
         this.config = new OptionsParams();
@@ -482,7 +511,7 @@ exports.OptionsDialogController = OptionsDialogController;
 angular
     .module('pipOptionsDialog')
     .controller('pipOptionsDialogController', OptionsDialogController);
-},{}],13:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 var OptionsService = (function () {
     OptionsService.$inject = ['$mdDialog'];
     function OptionsService($mdDialog) {
@@ -512,7 +541,7 @@ var OptionsService = (function () {
 angular
     .module('pipOptionsDialog')
     .service('pipOptionsDialog', OptionsService);
-},{}],14:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 'use strict';
 angular
     .module('pipOptionsDialog', [
@@ -528,7 +557,7 @@ angular
     'pipDialogs.Templates']);
 require('./OptionsBigService');
 require('./OptionsBigController');
-},{"./OptionsBigController":10,"./OptionsBigService":11,"./OptionsController":12,"./OptionsService":13}],15:[function(require,module,exports){
+},{"./OptionsBigController":12,"./OptionsBigService":13,"./OptionsController":14,"./OptionsService":15}],17:[function(require,module,exports){
 (function(module) {
 try {
   module = angular.module('pipDialogs.Templates');
@@ -536,8 +565,8 @@ try {
   module = angular.module('pipDialogs.Templates', []);
 }
 module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('confirmation/confirmation.html',
-    '<md-dialog class="pip-dialog pip-confirmation-dialog layout-column" width="400" md-theme="{{::theme}}"><div class="pip-header"><h3>{{:: title}}</h3></div><div class="pip-footer"><div><md-button ng-click="onCancel()">{{:: cancel}}</md-button><md-button class="md-accent" ng-click="onOk()">{{:: ok}}</md-button></div></div></md-dialog>');
+  $templateCache.put('confirmation/ConfirmationDialog.html',
+    '<md-dialog class="pip-dialog pip-confirmation-dialog layout-column" width="400" md-theme="{{::vm.theme}}"><div class="pip-header"><h3>{{:: vm.config.title}}</h3></div><div class="pip-footer"><div><md-button ng-click="vm.onCancel()">{{:: vm.config.cancel}}</md-button><md-button class="md-accent" ng-click="vm.onOk()">{{:: vm.config.ok}}</md-button></div></div></md-dialog>');
 }]);
 })();
 
@@ -591,7 +620,7 @@ module.run(['$templateCache', function($templateCache) {
 
 
 
-},{}]},{},[1,2,3,4,5,6,9,7,8,14,10,11,12,13,15])(15)
+},{}]},{},[1,2,3,4,5,6,7,8,11,9,10,16,12,13,14,15,17])(17)
 });
 
 

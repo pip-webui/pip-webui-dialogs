@@ -1,14 +1,15 @@
+import { ErrorDetailsData } from  "./ErrorDetailsController2";
 
 class ErrorDetailsService2 {
     public _mdDialog;
     public constructor($mdDialog) {
         this._mdDialog = $mdDialog;
     }
-    public show(params, successCallback, cancelCallback) {
+    public show(params: ErrorDetailsData, successCallback, cancelCallback) {
          this._mdDialog.show({
             targetEvent: params.event,
-            templateUrl: 'error_details/ErrorDetails.html',
-            controller: 'pipErrorDetailsDialogController',
+            templateUrl: 'error_details2/ErrorDetails2.html',
+            controller: 'pipErrorDetails2DialogController',
             controllerAs: 'vm',
             locals: {params: params},
             clickOutsideToClose: true

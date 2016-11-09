@@ -62,11 +62,17 @@
                 );        
             };
             $scope.onErrorDialogOpen2 = function (event) {
+                let error = {
+                    time: 'Time',
+                    type:  'Type',
+                    correlationId: 'CorrelationId',
+                    source: 'Source',
+                    message: 'Message',
+                    trace:  'Trace' 
+                };
+                
                 pipErrorDetails2Dialog.show(
-                    {
-                        error: $scope.errorData,
-                        ok: 'Ok'
-                    },
+                    error,
                     function () {
                         console.log('Error show callback');  // eslint-disable-line
                     },

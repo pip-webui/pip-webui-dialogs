@@ -4,13 +4,17 @@
 -->
 <md-dialog class="pip-dialog pip-error-details-dialog-2 layout-column" width="400" md-theme="{{vm.theme}}">
     <div class="pip-body">
-        <div class="pip-header">
-            <h3>{{::vm.config.errorDetails | translate}}</h3>
+        <div class="layout-row layout-align-row-start-center">
+            <h3>{{::'ERROR_HEADER' | translate}}</h3>
         </div>
-    </div>
-    <div class="pip-footer">
-        <div>
-            <md-button class="md-accent m0" ng-click="vm.onOk()">{{::vm.config.dismissButton | translate}}</md-button>
+        <div class="layout-row layout-align-row-start-center pip-section">
+            <div class="pip-title-section">
+                {{::vm.localStrings.time | translate}}
+            </div>
+            <div class="pip-text-section">
+                {{:: vm.error.time}}
+            </div>
         </div>
+
     </div>
 </md-dialog>

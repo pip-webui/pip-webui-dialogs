@@ -55,37 +55,25 @@ class ErrorDetailsService {
 }
 
 
-export class ErrorStrings {
-    ok: string;
-    cancel: string;
-    errorDetails: string;
-    dismissButton: string;
-    errorMessage: string;
-    errorCode: string;
-    errorMethod: string;
-    errorPath: string;
-    error: string;
-    errorText: string;
-}
-export class ErrorParams {
-    ok: string;
-    cancel: string;
-    error: string;
+export class ErrorDetailsData {
+    time: string;
+    type: string;
+    correlationId: string;
+    source: string;
+    message: string;
+    trace: string;
+    event: any;
 }
 export class ErrorDetailsDialogController2 {
     $mdDialog: any;
     theme: any;
-    config: ErrorStrings;
-    constructor($mdDialog: any, $injector: any, $rootScope: any, params: ErrorParams);
+    localStrings: ErrorDetailsData;
+    error: ErrorDetailsData;
+    constructor($mdDialog: any, $injector: any, $rootScope: any, params: ErrorDetailsData);
     onOk(): void;
     onCancel(): void;
 }
 
-class ErrorDetailsService2 {
-    _mdDialog: any;
-    constructor($mdDialog: any);
-    show(params: any, successCallback: any, cancelCallback: any): void;
-}
 
 
 

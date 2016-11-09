@@ -4,7 +4,7 @@
     var thisModule = angular.module('appDialogs.ErrorDetails', []);
 
     thisModule.controller('ErrorDetailsController',
-        function ($scope, pipErrorDetailsDialog, $injector, $timeout) {
+        function ($scope, pipErrorDetailsDialog, pipErrorDetails2Dialog, $injector, $timeout) {
 
             var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
 
@@ -49,6 +49,20 @@
             
             $scope.onErrorDialogOpen = function (event) {
                 pipErrorDetailsDialog.show(
+                    {
+                        error: $scope.errorData,
+                        ok: 'Ok'
+                    },
+                    function () {
+                        console.log('Error show callback');  // eslint-disable-line
+                    },
+                    function () {
+                        console.log('Error show cancel callback');   // eslint-disable-line
+                    }
+                );        
+            };
+            $scope.onErrorDialogOpen2 = function (event) {
+                pipErrorDetails2Dialog.show(
                     {
                         error: $scope.errorData,
                         ok: 'Ok'

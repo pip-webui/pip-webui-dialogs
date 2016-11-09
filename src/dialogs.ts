@@ -8,6 +8,7 @@
 'use strict';
 
 import './error_details';
+import './error_details2';
 import './information';
 import './options';
 import './confirmation';
@@ -18,10 +19,12 @@ angular
         'pipConfirmationDialog',
         'pipOptionsDialog',
         'pipOptionsBigDialog',
-        'pipErrorDetailsDialog'
+        'pipErrorDetailsDialog',
+        'pipErrorDetails2Dialog'
     ]);
 
 export * from './error_details';
+export * from './error_details2';
 export * from './information';
 export * from './options';
 export * from './confirmation';

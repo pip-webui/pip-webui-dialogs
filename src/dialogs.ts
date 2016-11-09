@@ -16,7 +16,7 @@ angular
         'pipInformationDialog',
         //'pipConfirmationDialog',
         'pipOptionsDialog',
-        //'pipOptionsBigDialog',
+        'pipOptionsBigDialog',
         'pipErrorDetailsDialog'
     ]);
 

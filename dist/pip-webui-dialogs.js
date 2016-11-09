@@ -72,9 +72,10 @@ angular
     .module('pipDialogs', [
     'pipInformationDialog',
     'pipOptionsDialog',
+    'pipOptionsBigDialog',
     'pipErrorDetailsDialog'
 ]);
-},{"./error_details":6,"./information":9,"./options":12}],4:[function(require,module,exports){
+},{"./error_details":6,"./information":9,"./options":14}],4:[function(require,module,exports){
 'use strict';
 var ErrorStrings = (function () {
     function ErrorStrings() {
@@ -288,6 +289,134 @@ require('./InformationService');
 require('./InformationController');
 },{"./InformationController":7,"./InformationService":8}],10:[function(require,module,exports){
 'use strict';
+var OptionsBigData = (function () {
+    function OptionsBigData() {
+    }
+    return OptionsBigData;
+}());
+exports.OptionsBigData = OptionsBigData;
+var OptionsBigParams = (function () {
+    function OptionsBigParams() {
+        this.noTitle = false;
+        this.noActions = false;
+        this.optionIndex = 0;
+    }
+    return OptionsBigParams;
+}());
+exports.OptionsBigParams = OptionsBigParams;
+var OptionsBigDialogController = (function () {
+    OptionsBigDialogController.$inject = ['$mdDialog', '$injector', 'pipTranslate', '$rootScope', 'params'];
+    function OptionsBigDialogController($mdDialog, $injector, pipTranslate, $rootScope, params) {
+        "ngInject";
+        this.onSelect = function () {
+            var option;
+            option = _.find(this.config.options, { name: this.config.selectedOptionName }) || new OptionsBigData();
+            this.$mdDialog.hide({ option: option, deleted: this.config.deleted });
+        };
+        this.$mdDialog = $mdDialog;
+        this.config = new OptionsBigParams();
+        var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
+        if (pipTranslate) {
+            pipTranslate.translations('en', { 'OPTIONS_TITLE': 'Choose Option' });
+            pipTranslate.translations('ru', { 'OPTIONS_TITLE': 'Выберите опцию' });
+            this.config.title = params.title || 'OPTIONS_TITLE';
+            this.config.applyButtonTitle = params.applyButtonTitle || 'SELECT';
+        }
+        else {
+            this.config.title = params.title || 'Choose Option';
+            this.config.applyButtonTitle = params.applyButtonTitle || 'Select';
+        }
+        this.theme = $rootScope.$theme;
+        this.config.options = params.options;
+        this.config.selectedOption = _.find(params.options, { active: true }) || new OptionsBigData();
+        this.config.selectedOptionName = this.config.selectedOption.name;
+        this.config.deleted = params.deleted;
+        this.config.deletedTitle = params.deletedTitle;
+        this.config.noActions = params.noActions || false;
+        this.config.noTitle = params.noTitle || false;
+        this.config.hint = params.hint || '';
+        setTimeout(this.focusInput, 500);
+    }
+    OptionsBigDialogController.prototype.onOk = function () {
+        this.$mdDialog.hide();
+    };
+    OptionsBigDialogController.prototype.onCancel = function () {
+        this.$mdDialog.cancel();
+    };
+    OptionsBigDialogController.prototype.onOptionSelect = function (event, option) {
+        event.stopPropagation();
+        this.config.selectedOptionName = option.name;
+        if (this.config.noActions) {
+            this.onSelect();
+        }
+    };
+    OptionsBigDialogController.prototype.onSelected = function () {
+        this.config.selectedOptionName = this.config.options[this.config.optionIndex].name;
+        if (this.config.noActions) {
+            this.onSelect();
+        }
+    };
+    OptionsBigDialogController.prototype.onKeyUp = function (event, index) {
+        if (event.keyCode === 32 || event.keyCode === 13) {
+            event.stopPropagation();
+            event.preventDefault();
+            if (index !== undefined && index > -1 && index < this.config.options.length) {
+                this.config.selectedOptionName = this.config.options[index].name;
+                this.onSelect();
+            }
+        }
+    };
+    OptionsBigDialogController.prototype.focusInput = function () {
+        var list;
+        list = $('.pip-options-dialog .pip-list');
+        list.focus();
+    };
+    return OptionsBigDialogController;
+}());
+exports.OptionsBigDialogController = OptionsBigDialogController;
+angular
+    .module('pipOptionsBigDialog')
+    .controller('pipOptionsBigDialogController', OptionsBigDialogController);
+},{}],11:[function(require,module,exports){
+var OptionsBigService = (function () {
+    OptionsBigService.$inject = ['$mdDialog'];
+    function OptionsBigService($mdDialog) {
+        this._mdDialog = $mdDialog;
+    }
+    OptionsBigService.prototype.show = function (params, successCallback, cancelCallback) {
+        this._mdDialog.show({
+            targetEvent: params.event,
+            templateUrl: 'options/OptionsBigDialog.html',
+            controller: 'pipOptionsBigDialogController',
+            controllerAs: 'vm',
+            locals: { params: params },
+            clickOutsideToClose: true
+        })
+            .then(function (option) {
+            if (successCallback) {
+                successCallback(option);
+            }
+        }, function () {
+            if (cancelCallback) {
+                cancelCallback();
+            }
+        });
+    };
+    return OptionsBigService;
+}());
+angular
+    .module('pipOptionsBigDialog')
+    .service('pipOptionsBigDialog', OptionsBigService);
+},{}],12:[function(require,module,exports){
+'use strict';
+var OptionsData = (function () {
+    function OptionsData() {
+        this.icon = 'star';
+        this.active = true;
+    }
+    return OptionsData;
+}());
+exports.OptionsData = OptionsData;
 var OptionsParams = (function () {
     function OptionsParams() {
     }
@@ -313,7 +442,7 @@ var OptionsDialogController = (function () {
         }
         this.theme = $rootScope.$theme;
         this.config.options = params.options;
-        this.config.selectedOption = _.find(params.options, { active: true }) || {};
+        this.config.selectedOption = _.find(params.options, { active: true }) || new OptionsData();
         this.config.selectedOptionName = this.config.selectedOption.name;
         this.config.deleted = params.deleted;
         this.config.deletedTitle = params.deletedTitle;
@@ -353,7 +482,7 @@ exports.OptionsDialogController = OptionsDialogController;
 angular
     .module('pipOptionsDialog')
     .controller('pipOptionsDialogController', OptionsDialogController);
-},{}],11:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 var OptionsService = (function () {
     OptionsService.$inject = ['$mdDialog'];
     function OptionsService($mdDialog) {
@@ -383,7 +512,7 @@ var OptionsService = (function () {
 angular
     .module('pipOptionsDialog')
     .service('pipOptionsDialog', OptionsService);
-},{}],12:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 'use strict';
 angular
     .module('pipOptionsDialog', [
@@ -392,110 +521,14 @@ angular
     'pipDialogs.Templates']);
 require('./OptionsService');
 require('./OptionsController');
-},{"./OptionsController":10,"./OptionsService":11}],13:[function(require,module,exports){
-
-},{}],14:[function(require,module,exports){
-(function () {
-    'use strict';
-    var thisModule = angular.module('pipOptionsBigDialog', ['ngMaterial', 'pipDialogs.Translate', 'pipDialogs.Templates']);
-    thisModule.factory('pipOptionsBigDialog', ['$mdDialog', function ($mdDialog) {
-        return {
-            show: function (params, successCallback, cancelCallback) {
-                if (params.event) {
-                    params.event.stopPropagation();
-                    params.event.preventDefault();
-                }
-                function focusToggleControl() {
-                    if (params.event && params.event.currentTarget) {
-                        params.event.currentTarget.focus();
-                    }
-                }
-                $mdDialog.show({
-                    targetEvent: params.event,
-                    templateUrl: 'options/options_big.html',
-                    controller: 'pipOptionsDialogBigController',
-                    locals: { params: params },
-                    clickOutsideToClose: true
-                })
-                    .then(function (option) {
-                    focusToggleControl();
-                    if (successCallback) {
-                        successCallback(option);
-                    }
-                }, function () {
-                    focusToggleControl();
-                    if (cancelCallback) {
-                        cancelCallback();
-                    }
-                });
-            }
-        };
-    }]);
-    thisModule.controller('pipOptionsDialogBigController', ['$scope', '$rootScope', '$mdDialog', '$injector', 'params', function ($scope, $rootScope, $mdDialog, $injector, params) {
-        var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
-        if (pipTranslate) {
-            pipTranslate.translations('en', {
-                'OPTIONS_TITLE': 'Choose Option'
-            });
-            pipTranslate.translations('ru', {
-                'OPTIONS_TITLE': 'Выберите опцию'
-            });
-            $scope.title = params.title || 'OPTIONS_TITLE';
-            $scope.applyButtonTitle = params.applyButtonTitle || 'SELECT';
-        }
-        else {
-            $scope.title = params.title || 'Choose Option';
-            $scope.applyButtonTitle = params.applyButtonTitle || 'Select';
-        }
-        $scope.theme = $rootScope.$theme;
-        $scope.options = params.options;
-        $scope.noActions = params.noActions || false;
-        $scope.noTitle = params.noTitle || false;
-        $scope.hint = params.hint || '';
-        $scope.selectedOption = _.find(params.options, { active: true }) || {};
-        $scope.selectedOptionName = $scope.selectedOption.name;
-        $scope.optionIndex = _.findIndex(params.options, $scope.selectedOption);
-        $scope.deleted = params.deleted;
-        $scope.deletedTitle = params.deletedTitle;
-        $scope.onOptionSelect = function (event, option) {
-            event.stopPropagation();
-            $scope.selectedOptionName = option.name;
-            if ($scope.noActions) {
-                $scope.onSelect();
-            }
-        };
-        $scope.onSelected = function () {
-            $scope.selectedOptionName = $scope.options[$scope.optionIndex].name;
-            if ($scope.noActions) {
-            }
-        };
-        $scope.onKeyUp = function (event, index) {
-            if (event.keyCode === 32 || event.keyCode === 13) {
-                event.stopPropagation();
-                event.preventDefault();
-                if (index !== undefined && index > -1 && index < $scope.options.length) {
-                    $scope.selectedOptionName = $scope.options[index].name;
-                    $scope.onSelect();
-                }
-            }
-        };
-        $scope.onCancel = function () {
-            $mdDialog.cancel();
-        };
-        $scope.onSelect = function () {
-            var option;
-            option = _.find($scope.options, { name: $scope.selectedOptionName });
-            $mdDialog.hide({ option: option, deleted: $scope.deleted });
-        };
-        function focusInput() {
-            var list;
-            list = $('.pip-options-dialog .pip-list');
-            list.focus();
-        }
-        setTimeout(focusInput, 500);
-    }]);
-})();
-},{}],15:[function(require,module,exports){
+angular
+    .module('pipOptionsBigDialog', [
+    'ngMaterial',
+    'pipDialogs.Translate',
+    'pipDialogs.Templates']);
+require('./OptionsBigService');
+require('./OptionsBigController');
+},{"./OptionsBigController":10,"./OptionsBigService":11,"./OptionsController":12,"./OptionsService":13}],15:[function(require,module,exports){
 (function(module) {
 try {
   module = angular.module('pipDialogs.Templates');
@@ -539,8 +572,8 @@ try {
   module = angular.module('pipDialogs.Templates', []);
 }
 module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('options/OptionsBig.html',
-    '<md-dialog class="pip-dialog pip-options-dialog-big layout-column" min-width="400" md-theme="{{theme}}"><md-dialog-content class="pip-body pip-scroll" ng-class="{\'bp24\': !noActions}"><div class="pip-header" ng-class="{\'header-hint\': noTitle && hint}"><h3 class="m0" ng-if="!noTitle">{{::title | translate}}</h3><div ng-show="noTitle && hint" class="dialog-hint layout-row layout-align-start-center"><div class="hint-icon-container flex-fixed"><md-icon md-svg-icon="icons:info-circle-outline"></md-icon></div><div>{{::hint | translate}}</div></div></div><div class="content-divider" ng-if="!noTitle"></div><div class="pip-content"><div class="spacer8" ng-if="noTitle && hint"></div><md-list class="pip-menu pip-ref-list" pip-selected="optionIndex" index="{{optionIndex }}" pip-select="onSelected($event)"><md-list-item class="pip-ref-list-item pip-selectable layout-row layout-align-start-center" ng-class="{\'selected md-focused\' : option.name == selectedOptionName, \'divider-bottom\': $index != options.length - 1}" md-ink-ripple="" ng-keyup="onKeyUp($event, $index)" ng-repeat="option in options"><div class="pip-content content-stretch" ng-click="onOptionSelect($event, option)"><p class="pip-title spacer-right" ng-if="option.title" style="margin-bottom: 4px !important;">{{::option.title | translate}}</p><div class="pip-subtitle spacer-right" style="height: inherit" ng-if="option.subtitle">{{::option.subtitle | translate}}</div><div class="pip-subtitle spacer-right" style="height: inherit" ng-if="option.text" ng-bind-html="option.text | translate"></div></div></md-list-item></md-list></div><div class="spacer8" ng-if="noActions"></div></md-dialog-content><div class="pip-footer" ng-if="!noActions"><div><md-button class="pip-cancel" ng-click="onCancel()">{{::\'CANCEL\' | translate}}</md-button><md-button class="pip-submit md-accent" ng-click="onSelect()" style="margin-right: -6px">{{::applyButtonTitle | translate}}</md-button></div></div></md-dialog>');
+  $templateCache.put('options/OptionsBigDialog.html',
+    '<md-dialog class="pip-dialog pip-options-dialog-big layout-column" min-width="400" md-theme="{{vm.theme}}"><md-dialog-content class="pip-body pip-scroll" ng-class="{\'bp24\': !vm.config.noActions}"><div class="pip-header" ng-class="{\'header-hint\': vm.config.noTitle && vm.config.hint}"><h3 class="m0" ng-if="!vm.config.noTitle">{{::vm.config.title | translate}}</h3><div ng-show="vm.config.noTitle && vm.config.hint" class="dialog-hint layout-row layout-align-start-center"><div class="hint-icon-container flex-fixed"><md-icon md-svg-icon="icons:info-circle-outline"></md-icon></div><div>{{::vm.config.hint | translate}}</div></div></div><div class="content-divider" ng-if="!noTitle"></div><div class="pip-content"><div class="spacer8" ng-if="noTitle && hint"></div><md-list class="pip-menu pip-ref-list" pip-selected="vm.config.optionIndex" index="{{vm.config.optionIndex }}" pip-select="vm.onSelected($event)"><md-list-item class="pip-ref-list-item pip-selectable layout-row layout-align-start-center" ng-class="{\'selected md-focused\' : option.name == selectedOptionName, \'divider-bottom\': $index != options.length - 1}" md-ink-ripple="" ng-keyup="vm.onKeyUp($event, $index)" ng-repeat="option in vm.config.options"><div class="pip-content content-stretch" ng-click="vm.onOptionSelect($event, option)"><p class="pip-title spacer-right" ng-if="option.title" style="margin-bottom: 4px !important;">{{::option.title | translate}}</p><div class="pip-subtitle spacer-right" style="height: inherit" ng-if="option.subtitle">{{::option.subtitle | translate}}</div><div class="pip-subtitle spacer-right" style="height: inherit" ng-if="option.text" ng-bind-html="option.text | translate"></div></div></md-list-item></md-list></div><div class="spacer8" ng-if="vm.config.noActions"></div></md-dialog-content><div class="pip-footer" ng-if="!vm.config.noActions"><div><md-button class="pip-cancel" ng-click="vm.onCancel()">{{::\'CANCEL\' | translate}}</md-button><md-button class="pip-submit md-accent" ng-click="vm.onSelect()" style="margin-right: -6px">{{::vm.config.applyButtonTitle | translate}}</md-button></div></div></md-dialog>');
 }]);
 })();
 
@@ -558,7 +591,7 @@ module.run(['$templateCache', function($templateCache) {
 
 
 
-},{}]},{},[1,2,3,4,5,6,9,7,8,12,14,13,10,11,15])(15)
+},{}]},{},[1,2,3,4,5,6,9,7,8,14,10,11,12,13,15])(15)
 });
 
 

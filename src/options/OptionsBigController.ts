@@ -2,39 +2,42 @@
 
 import IWindowService = angular.IWindowService;
 
-export class OptionsData {
-    public icon: string = 'star';
+export class OptionsBigData {
     public name: string;
     public title: string;
-    public active: boolean = true; 
+    public subtitle: string;
 }
 
-export class OptionsParams {
+export class OptionsBigParams {
     public title: string;  
     public applyButtonTitle: string;
-    public options: OptionsData[];
-    public selectedOption: OptionsData;
+    public options: OptionsBigData[];
+    public selectedOption: OptionsBigData;
     public deleted;
     public selectedOptionName: string;
     public deletedTitle: string;
+    public hint: string;
+    public noTitle: boolean = false;
+    public noActions: boolean = false;
+    public optionIndex: number = 0;
 }
 
-export class OptionsDialogController {
+export class OptionsBigDialogController {
 
     public $mdDialog;
     public theme;
-    public config: OptionsParams;
+    public config: OptionsBigParams;
 
     constructor(
         $mdDialog,
         $injector,
         pipTranslate, 
         $rootScope, 
-        params: OptionsParams) {
+        params: OptionsBigParams) {
         "ngInject";
 
         this.$mdDialog = $mdDialog;
-        this.config = new OptionsParams();
+        this.config = new OptionsBigParams();
         var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
         if (pipTranslate) {
             pipTranslate.translations('en', { 'OPTIONS_TITLE': 'Choose Option'});
@@ -49,10 +52,13 @@ export class OptionsDialogController {
 
         this.theme = $rootScope.$theme;
         this.config.options = params.options;
-        this.config.selectedOption = _.find(params.options, {active: true}) || new OptionsData();
+        this.config.selectedOption = _.find(params.options, {active: true}) || new OptionsBigData();
         this.config.selectedOptionName = this.config.selectedOption.name;
         this.config.deleted = params.deleted;
         this.config.deletedTitle = params.deletedTitle;
+        this.config.noActions = params.noActions || false;
+        this.config.noTitle = params.noTitle || false;
+        this.config.hint = params.hint || '';
 
         setTimeout(this.focusInput, 500);
     }
@@ -65,26 +71,40 @@ export class OptionsDialogController {
         this.$mdDialog.cancel();
     }
 
-    public onOptionSelect(event, option: OptionsData) {
+    public onOptionSelect(event, option) {
         event.stopPropagation();
         this.config.selectedOptionName = option.name;
 
-    }
-            
-    public onKeyPress (event) {
-        if (event.keyCode === 32 || event.keyCode === 13) {
-            event.stopPropagation();
-            event.preventDefault();
+        if (this.config.noActions) {
             this.onSelect();
         }
     }
 
-    public onSelect() {
-        let option: OptionsData;
-        option = _.find(this.config.options, {name: this.config.selectedOptionName});
-        console.log(option);
-        this.$mdDialog.hide({option: option, deleted: this.config.deleted});
+    public onSelected() {
+        this.config.selectedOptionName = this.config.options[this.config.optionIndex].name;
+
+        if (this.config.noActions) {
+               this.onSelect();
+        }
     }
+
+    public onKeyUp(event, index) {
+        if (event.keyCode === 32 || event.keyCode === 13) {
+            event.stopPropagation();
+            event.preventDefault();
+            if (index !== undefined && index > -1 && index < this.config.options.length) {
+                this.config.selectedOptionName = this.config.options[index].name;
+                this.onSelect();
+            }
+        }
+    }
+    
+    public onSelect = function () {
+        let option;
+        option = _.find(this.config.options, {name: this.config.selectedOptionName}) || new OptionsBigData();
+        this.$mdDialog.hide({option: option, deleted: this.config.deleted});
+    };
+
 
     private focusInput() {
         let list;
@@ -95,5 +115,5 @@ export class OptionsDialogController {
 }
 
 angular
-    .module('pipOptionsDialog')
-    .controller('pipOptionsDialogController', OptionsDialogController);
+    .module('pipOptionsBigDialog')
+    .controller('pipOptionsBigDialogController', OptionsBigDialogController);

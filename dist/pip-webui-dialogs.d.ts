@@ -66,15 +66,58 @@ class InformationService {
 }
 
 
+export class OptionsBigData {
+    name: string;
+    title: string;
+    subtitle: string;
+}
+export class OptionsBigParams {
+    title: string;
+    applyButtonTitle: string;
+    options: OptionsBigData[];
+    selectedOption: OptionsBigData;
+    deleted: any;
+    selectedOptionName: string;
+    deletedTitle: string;
+    hint: string;
+    noTitle: boolean;
+    noActions: boolean;
+    optionIndex: number;
+}
+export class OptionsBigDialogController {
+    $mdDialog: any;
+    theme: any;
+    config: OptionsBigParams;
+    constructor($mdDialog: any, $injector: any, pipTranslate: any, $rootScope: any, params: OptionsBigParams);
+    onOk(): void;
+    onCancel(): void;
+    onOptionSelect(event: any, option: any): void;
+    onSelected(): void;
+    onKeyUp(event: any, index: any): void;
+    onSelect: () => void;
+    private focusInput();
+}
 
+class OptionsBigService {
+    _mdDialog: any;
+    constructor($mdDialog: any);
+    show(params: any, successCallback: any, cancelCallback: any): void;
+}
+
+export class OptionsData {
+    icon: string;
+    name: string;
+    title: string;
+    active: boolean;
+}
 export class OptionsParams {
     title: string;
     applyButtonTitle: string;
-    options: any;
-    selectedOption: any;
+    options: OptionsData[];
+    selectedOption: OptionsData;
     deleted: any;
     selectedOptionName: string;
-    deletedTitle: any;
+    deletedTitle: string;
 }
 export class OptionsDialogController {
     $mdDialog: any;
@@ -83,7 +126,7 @@ export class OptionsDialogController {
     constructor($mdDialog: any, $injector: any, pipTranslate: any, $rootScope: any, params: OptionsParams);
     onOk(): void;
     onCancel(): void;
-    onOptionSelect(event: any, option: any): void;
+    onOptionSelect(event: any, option: OptionsData): void;
     onKeyPress(event: any): void;
     onSelect(): void;
     private focusInput();
@@ -94,7 +137,6 @@ class OptionsService {
     constructor($mdDialog: any);
     show(params: any, successCallback: any, cancelCallback: any): void;
 }
-
 
 }
 

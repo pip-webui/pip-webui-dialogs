@@ -8,3 +8,13 @@ angular
 
 import './OptionsService';
 import './OptionsController';
+
+
+angular
+    .module('pipOptionsBigDialog', [
+        'ngMaterial', 
+        'pipDialogs.Translate',
+        'pipDialogs.Templates']);
+        
+import './OptionsBigService';
+import './OptionsBigController';

@@ -4,34 +4,35 @@
 -->
 
 <md-dialog class="pip-dialog pip-options-dialog-big layout-column"
-           min-width="400" md-theme="{{theme}}">
-    <md-dialog-content class="pip-body pip-scroll" ng-class="{'bp24': !noActions}">
-        <div class="pip-header" ng-class="{'header-hint': noTitle && hint}">
-            <h3 class="m0" ng-if="!noTitle">
-                {{::title | translate}}
+           min-width="400" md-theme="{{vm.theme}}">
+    <md-dialog-content class="pip-body pip-scroll" ng-class="{'bp24': !vm.config.noActions}">
+        <div class="pip-header" ng-class="{'header-hint': vm.config.noTitle && vm.config.hint}">
+            <h3 class="m0" ng-if="!vm.config.noTitle">
+                {{::vm.config.title | translate}}
             </h3>
-            <div ng-show="noTitle && hint" class="dialog-hint layout-row layout-align-start-center">
+            <div ng-show="vm.config.noTitle && vm.config.hint" 
+                 class="dialog-hint layout-row layout-align-start-center">
                 <div class="hint-icon-container flex-fixed" >
                     <md-icon md-svg-icon="icons:info-circle-outline"></md-icon>
                 </div>
-                <div>{{::hint | translate}}</div>
+                <div>{{::vm.config.hint | translate}}</div>
             </div>
         </div>
         <div class="content-divider" ng-if="!noTitle"></div>
         <div class="pip-content">
             <div class="spacer8" ng-if="noTitle && hint"></div>
             <md-list class="pip-menu  pip-ref-list"
-                     pip-selected="optionIndex" index="{{optionIndex }}"
-                     pip-select="onSelected($event)">
+                     pip-selected="vm.config.optionIndex" index="{{vm.config.optionIndex }}"
+                     pip-select="vm.onSelected($event)">
 
                 <md-list-item class="pip-ref-list-item pip-selectable layout-row layout-align-start-center"
                               ng-class="{'selected md-focused' : option.name == selectedOptionName,
                               'divider-bottom': $index != options.length - 1}"
                               md-ink-ripple
-                              ng-keyup="onKeyUp($event, $index)"
-                              ng-repeat="option in options" >
+                              ng-keyup="vm.onKeyUp($event, $index)"
+                              ng-repeat="option in vm.config.options" >
 
-                    <div class="pip-content  content-stretch" ng-click="onOptionSelect($event, option)">
+                    <div class="pip-content  content-stretch" ng-click="vm.onOptionSelect($event, option)">
                         <p class="pip-title spacer-right" ng-if="option.title" style="margin-bottom: 4px !important;">
                             {{::option.title | translate}}
                         </p>
@@ -50,14 +51,14 @@
 
             </md-list>
         </div>
-        <div class="spacer8" ng-if="noActions"></div>
+        <div class="spacer8" ng-if="vm.config.noActions"></div>
     </md-dialog-content>
 
-    <div class="pip-footer" ng-if="!noActions">
+    <div class="pip-footer" ng-if="!vm.config.noActions">
         <div>
-            <md-button class="pip-cancel" ng-click="onCancel()">{{::'CANCEL' | translate}}</md-button>
-            <md-button class="pip-submit md-accent" ng-click="onSelect()" style="margin-right: -6px">
-                {{::applyButtonTitle | translate}}
+            <md-button class="pip-cancel" ng-click="vm.onCancel()">{{::'CANCEL' | translate}}</md-button>
+            <md-button class="pip-submit md-accent" ng-click="vm.onSelect()" style="margin-right: -6px">
+                {{::vm.config.applyButtonTitle | translate}}
             </md-button>
         </div>
     </div>

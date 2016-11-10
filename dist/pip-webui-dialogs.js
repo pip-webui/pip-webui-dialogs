@@ -701,6 +701,18 @@ try {
   module = angular.module('pipDialogs.Templates', []);
 }
 module.run(['$templateCache', function($templateCache) {
+  $templateCache.put('error_details2/ErrorDetails2.html',
+    '<md-dialog class="pip-dialog pip-error-details-dialog-2 layout-column" width="400" md-theme="{{vm.theme}}"><div class="pip-body"><div class="layout-row layout-align-row-start-center"><h3 class="pip-title">{{::\'ERROR_HEADER\' | translate}}</h3></div><div class="layout-row layout-align-row-start-center pip-section"><div class="pip-title-section">{{::vm.localStrings.time | translate}}</div><div class="pip-text-section">{{:: vm.error.time}}</div></div><div class="layout-row layout-align-row-start-center pip-section"><div class="pip-title-section">{{::vm.localStrings.type | translate}}</div><div class="pip-text-section">{{:: vm.error.type}}</div></div><div class="layout-row layout-align-row-start-center pip-section"><div class="pip-title-section">{{::vm.localStrings.correlationId | translate}}</div><div class="pip-text-section">{{:: vm.error.correlationId}}</div></div><div class="layout-row layout-align-row-start-center pip-section"><div class="pip-title-section">{{::vm.localStrings.source | translate}}</div><div class="pip-text-section">{{:: vm.error.source}}</div></div><pip-toggle-buttons ng-model="vm.state" pip-rebind="true" pip-buttons="vm.buttonsCollections" class="bm16"></pip-toggle-buttons><div ng-if="vm.state == \'message\'" class="pip-text-error">{{vm.error.message}}</div><div ng-if="vm.state == \'trace\'" class="pip-text-error">{{vm.error.trace}}</div></div></md-dialog>');
+}]);
+})();
+
+(function(module) {
+try {
+  module = angular.module('pipDialogs.Templates');
+} catch (e) {
+  module = angular.module('pipDialogs.Templates', []);
+}
+module.run(['$templateCache', function($templateCache) {
   $templateCache.put('information/InformationDialog.html',
     '<md-dialog class="pip-dialog pip-information-dialog layout-column" width="400" md-theme="{{vm.theme}}"><div class="pip-header"><h3>{{:: vm.config.title | translate }}</h3></div><div class="pip-body"><div class="pip-content">{{ vm.config.content }}</div></div><div class="pip-footer"><div><md-button class="md-accent" ng-click="vm.onOk()">{{ vm.config.ok | translate }}</md-button></div></div></md-dialog>');
 }]);
@@ -727,18 +739,6 @@ try {
 module.run(['$templateCache', function($templateCache) {
   $templateCache.put('options/OptionsDialog.html',
     '<md-dialog class="pip-dialog pip-options-dialog layout-column" min-width="400" md-theme="{{vm.theme}}"><md-dialog-content class="pip-body lp0 tp0 rp0 bp24 pip-scroll"><div class="pip-header"><h3>{{::vm.config.title | translate}}</h3><div ng-show="vm.config.deletedTitle" class="header-option text-subhead1 divider-bottom"><md-checkbox ng-model="deleted" aria-label="CHECKBOX">{{::vm.config.deletedTitle | translate}}</md-checkbox></div></div><div class="pip-content"><md-radio-group ng-model="vm.selectedOptionName" class="pip-list md-primary" md-no-ink="true" ng-keypress="vm.onKeyPress($event)" tabindex="0"><div ng-repeat="option in vm.config.options" class="pip-list-item" md-ink-ripple="" ui-event="{ click: \'vm.onOptionSelect($event, option)\' }" ng-class="{ selected: option.name == vm.config.selectedOptionName }"><div class="pip-list-item item-padding"><md-icon class="pip-option-icon" md-svg-icon="icons:{{option.icon}}" ng-if="option.icon"></md-icon><div class="pip-option-title">{{::option.title | translate}}</div><md-radio-button ng-value="option.name" tabindex="-1" aria-label="{{::option.title | translate}}"></md-radio-button></div></div></md-radio-group></div></md-dialog-content><div class="pip-footer"><div><md-button class="pip-cancel" ng-click="vm.onCancel()">{{::\'CANCEL\' | translate}}</md-button><md-button class="pip-submit md-accent" ng-click="vm.onSelect()">{{::vm.config.applyButtonTitle | translate}}</md-button></div></div></md-dialog>');
-}]);
-})();
-
-(function(module) {
-try {
-  module = angular.module('pipDialogs.Templates');
-} catch (e) {
-  module = angular.module('pipDialogs.Templates', []);
-}
-module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('error_details2/ErrorDetails2.html',
-    '<md-dialog class="pip-dialog pip-error-details-dialog-2 layout-column" width="400" md-theme="{{vm.theme}}"><div class="pip-body"><div class="layout-row layout-align-row-start-center"><h3 class="pip-title">{{::\'ERROR_HEADER\' | translate}}</h3></div><div class="layout-row layout-align-row-start-center pip-section"><div class="pip-title-section">{{::vm.localStrings.time | translate}}</div><div class="pip-text-section">{{:: vm.error.time}}</div></div><div class="layout-row layout-align-row-start-center pip-section"><div class="pip-title-section">{{::vm.localStrings.type | translate}}</div><div class="pip-text-section">{{:: vm.error.type}}</div></div><div class="layout-row layout-align-row-start-center pip-section"><div class="pip-title-section">{{::vm.localStrings.correlationId | translate}}</div><div class="pip-text-section">{{:: vm.error.correlationId}}</div></div><div class="layout-row layout-align-row-start-center pip-section"><div class="pip-title-section">{{::vm.localStrings.source | translate}}</div><div class="pip-text-section">{{:: vm.error.source}}</div></div><pip-toggle-buttons ng-model="vm.state" pip-rebind="true" pip-buttons="vm.buttonsCollections" class="bm16"></pip-toggle-buttons><div ng-if="vm.state == \'message\'" class="pip-text-error">{{vm.error.message}}</div><div ng-if="vm.state == \'trace\'" class="pip-text-error">{{vm.error.trace}}</div></div></md-dialog>');
 }]);
 })();
 

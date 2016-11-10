@@ -4,7 +4,7 @@
     var thisModule = angular.module('appDialogs.ErrorDetails', []);
 
     thisModule.controller('ErrorDetailsController',
-        function ($scope, pipErrorDetailsDialog, pipErrorDetails2Dialog, $injector, $timeout) {
+        function ($scope, pipErrorDetailsDialog, $injector, $timeout) {  //pipErrorDetails2Dialog,
 
             var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
 
@@ -61,6 +61,7 @@
                     }
                 );        
             };
+            /*
             $scope.onErrorDialogOpen2 = function (event) {
                 let error = {
                     time: 'Time',
@@ -80,7 +81,7 @@
                         console.log('Error show cancel callback');   // eslint-disable-line
                     }
                 );        
-            };
+            };*/
         }
     );
 

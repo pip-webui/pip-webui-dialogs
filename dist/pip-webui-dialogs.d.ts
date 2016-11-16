@@ -21,6 +21,7 @@ class ConfirmationService {
 }
 
 
+
 export class ErrorStrings {
     ok: string;
     cancel: string;
@@ -52,7 +53,6 @@ class ErrorDetailsService {
     constructor($mdDialog: any);
     show(params: any, successCallback: any, cancelCallback: any): void;
 }
-
 
 
 

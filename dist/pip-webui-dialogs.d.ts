@@ -21,6 +21,7 @@ class ConfirmationService {
 }
 
 
+
 export class ErrorStrings {
     ok: string;
     cancel: string;
@@ -83,7 +84,6 @@ class InformationService {
     constructor($mdDialog: any);
     show(params: any, successCallback: any, cancelCallback: any): void;
 }
-
 
 
 export class OptionsBigData {

@@ -56,6 +56,36 @@ class ErrorDetailsService {
 
 
 
+export class InformationStrings {
+    ok: string;
+    title: string;
+    message: string;
+    error: string;
+    content: any;
+}
+export class InformationParams {
+    ok: string;
+    title: string;
+    message: string;
+    error: string;
+    item: any;
+}
+export class InformationDialogController {
+    $mdDialog: any;
+    theme: any;
+    config: InformationStrings;
+    constructor($mdDialog: any, $injector: any, $rootScope: any, params: InformationParams);
+    onOk(): void;
+    onCancel(): void;
+}
+
+class InformationService {
+    _mdDialog: any;
+    constructor($mdDialog: any);
+    show(params: any, successCallback: any, cancelCallback: any): void;
+}
+
+
 export class OptionsBigData {
     name: string;
     title: string;
@@ -123,36 +153,6 @@ export class OptionsDialogController {
 }
 
 class OptionsService {
-    _mdDialog: any;
-    constructor($mdDialog: any);
-    show(params: any, successCallback: any, cancelCallback: any): void;
-}
-
-
-export class InformationStrings {
-    ok: string;
-    title: string;
-    message: string;
-    error: string;
-    content: any;
-}
-export class InformationParams {
-    ok: string;
-    title: string;
-    message: string;
-    error: string;
-    item: any;
-}
-export class InformationDialogController {
-    $mdDialog: any;
-    theme: any;
-    config: InformationStrings;
-    constructor($mdDialog: any, $injector: any, $rootScope: any, params: InformationParams);
-    onOk(): void;
-    onCancel(): void;
-}
-
-class InformationService {
     _mdDialog: any;
     constructor($mdDialog: any);
     show(params: any, successCallback: any, cancelCallback: any): void;

@@ -22,7 +22,6 @@ class ConfirmationService {
 
 
 
-
 export class InformationStrings {
     ok: string;
     title: string;
@@ -51,6 +50,7 @@ class InformationService {
     constructor($mdDialog: any);
     show(params: any, successCallback: any, cancelCallback: any): void;
 }
+
 
 export class ErrorStrings {
     ok: string;

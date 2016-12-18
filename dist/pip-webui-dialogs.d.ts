@@ -22,38 +22,35 @@ class ConfirmationService {
 
 
 
-export class ErrorStrings {
+
+export class InformationStrings {
     ok: string;
-    cancel: string;
-    errorDetails: string;
-    dismissButton: string;
-    errorMessage: string;
-    errorCode: string;
-    errorMethod: string;
-    errorPath: string;
+    title: string;
+    message: string;
     error: string;
-    errorText: string;
+    content: any;
 }
-export class ErrorParams {
+export class InformationParams {
     ok: string;
-    cancel: string;
+    title: string;
+    message: string;
     error: string;
+    item: any;
 }
-export class ErrorDetailsDialogController {
+export class InformationDialogController {
     $mdDialog: any;
     theme: any;
-    config: ErrorStrings;
-    constructor($mdDialog: any, $injector: any, $rootScope: any, params: ErrorParams);
+    config: InformationStrings;
+    constructor($mdDialog: any, $injector: any, $rootScope: any, params: InformationParams);
     onOk(): void;
     onCancel(): void;
 }
 
-class ErrorDetailsService {
+class InformationService {
     _mdDialog: any;
     constructor($mdDialog: any);
     show(params: any, successCallback: any, cancelCallback: any): void;
 }
-
 
 
 export class OptionsBigData {
@@ -128,35 +125,38 @@ class OptionsService {
     show(params: any, successCallback: any, cancelCallback: any): void;
 }
 
-
-export class InformationStrings {
+export class ErrorStrings {
     ok: string;
-    title: string;
-    message: string;
+    cancel: string;
+    errorDetails: string;
+    dismissButton: string;
+    errorMessage: string;
+    errorCode: string;
+    errorMethod: string;
+    errorPath: string;
     error: string;
-    content: any;
+    errorText: string;
 }
-export class InformationParams {
+export class ErrorParams {
     ok: string;
-    title: string;
-    message: string;
+    cancel: string;
     error: string;
-    item: any;
 }
-export class InformationDialogController {
+export class ErrorDetailsDialogController {
     $mdDialog: any;
     theme: any;
-    config: InformationStrings;
-    constructor($mdDialog: any, $injector: any, $rootScope: any, params: InformationParams);
+    config: ErrorStrings;
+    constructor($mdDialog: any, $injector: any, $rootScope: any, params: ErrorParams);
     onOk(): void;
     onCancel(): void;
 }
 
-class InformationService {
+class ErrorDetailsService {
     _mdDialog: any;
     constructor($mdDialog: any);
     show(params: any, successCallback: any, cancelCallback: any): void;
 }
+
 
 }
 

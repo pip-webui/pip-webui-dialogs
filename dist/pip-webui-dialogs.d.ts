@@ -1,4 +1,8 @@
 declare module pip.dialogs {
+import './error_details';
+import './information';
+import './options';
+import './confirmation';
 
 export class ConfirmationParams {
     ok: string;
@@ -20,8 +24,47 @@ class ConfirmationService {
     show(params: any, successCallback: any, cancelCallback: any): void;
 }
 
+import './ConfirmationController';
+import './ConfirmationService';
 
 
+export class ErrorStrings {
+    ok: string;
+    cancel: string;
+    errorDetails: string;
+    dismissButton: string;
+    errorMessage: string;
+    errorCode: string;
+    errorMethod: string;
+    errorPath: string;
+    error: string;
+    errorText: string;
+}
+export class ErrorParams {
+    ok: string;
+    cancel: string;
+    error: string;
+}
+export class ErrorDetailsDialogController {
+    $mdDialog: any;
+    theme: any;
+    config: ErrorStrings;
+    constructor($mdDialog: any, $injector: any, $rootScope: any, params: ErrorParams);
+    onOk(): void;
+    onCancel(): void;
+}
+
+class ErrorDetailsService {
+    _mdDialog: any;
+    constructor($mdDialog: any);
+    show(params: any, successCallback: any, cancelCallback: any): void;
+}
+
+import './ErrorDetailsService';
+import './ErrorDetailsController';
+
+import './InformationService';
+import './InformationController';
 
 export class InformationStrings {
     ok: string;
@@ -52,6 +95,10 @@ class InformationService {
     show(params: any, successCallback: any, cancelCallback: any): void;
 }
 
+import './OptionsService';
+import './OptionsController';
+import './OptionsBigService';
+import './OptionsBigController';
 
 export class OptionsBigData {
     name: string;
@@ -124,39 +171,6 @@ class OptionsService {
     constructor($mdDialog: any);
     show(params: any, successCallback: any, cancelCallback: any): void;
 }
-
-export class ErrorStrings {
-    ok: string;
-    cancel: string;
-    errorDetails: string;
-    dismissButton: string;
-    errorMessage: string;
-    errorCode: string;
-    errorMethod: string;
-    errorPath: string;
-    error: string;
-    errorText: string;
-}
-export class ErrorParams {
-    ok: string;
-    cancel: string;
-    error: string;
-}
-export class ErrorDetailsDialogController {
-    $mdDialog: any;
-    theme: any;
-    config: ErrorStrings;
-    constructor($mdDialog: any, $injector: any, $rootScope: any, params: ErrorParams);
-    onOk(): void;
-    onCancel(): void;
-}
-
-class ErrorDetailsService {
-    _mdDialog: any;
-    constructor($mdDialog: any);
-    show(params: any, successCallback: any, cancelCallback: any): void;
-}
-
 
 }
 

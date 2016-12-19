@@ -22,6 +22,39 @@ class ConfirmationService {
 
 
 
+export class ErrorStrings {
+    ok: string;
+    cancel: string;
+    errorDetails: string;
+    dismissButton: string;
+    errorMessage: string;
+    errorCode: string;
+    errorMethod: string;
+    errorPath: string;
+    error: string;
+    errorText: string;
+}
+export class ErrorParams {
+    ok: string;
+    cancel: string;
+    error: string;
+}
+export class ErrorDetailsDialogController {
+    $mdDialog: any;
+    theme: any;
+    config: ErrorStrings;
+    constructor($mdDialog: any, $injector: any, $rootScope: any, params: ErrorParams);
+    onOk(): void;
+    onCancel(): void;
+}
+
+class ErrorDetailsService {
+    _mdDialog: any;
+    constructor($mdDialog: any);
+    show(params: any, successCallback: any, cancelCallback: any): void;
+}
+
+
 
 export class InformationStrings {
     ok: string;
@@ -124,39 +157,6 @@ class OptionsService {
     constructor($mdDialog: any);
     show(params: any, successCallback: any, cancelCallback: any): void;
 }
-
-export class ErrorStrings {
-    ok: string;
-    cancel: string;
-    errorDetails: string;
-    dismissButton: string;
-    errorMessage: string;
-    errorCode: string;
-    errorMethod: string;
-    errorPath: string;
-    error: string;
-    errorText: string;
-}
-export class ErrorParams {
-    ok: string;
-    cancel: string;
-    error: string;
-}
-export class ErrorDetailsDialogController {
-    $mdDialog: any;
-    theme: any;
-    config: ErrorStrings;
-    constructor($mdDialog: any, $injector: any, $rootScope: any, params: ErrorParams);
-    onOk(): void;
-    onCancel(): void;
-}
-
-class ErrorDetailsService {
-    _mdDialog: any;
-    constructor($mdDialog: any);
-    show(params: any, successCallback: any, cancelCallback: any): void;
-}
-
 
 }
 

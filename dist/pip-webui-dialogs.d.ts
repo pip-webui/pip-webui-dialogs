@@ -1,6 +1,5 @@
 declare module pip.dialogs {
 
-
 export class ConfirmationParams {
     ok: string;
     title: string;
@@ -20,6 +19,7 @@ class ConfirmationService {
     constructor($mdDialog: any);
     show(params: any, successCallback: any, cancelCallback: any): void;
 }
+
 
 
 export class ErrorStrings {

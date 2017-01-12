@@ -21,39 +21,6 @@ export interface IConfirmationService {
 
 
 
-export class ErrorStrings {
-    ok: string;
-    cancel: string;
-    errorDetails: string;
-    dismissButton: string;
-    errorMessage: string;
-    errorCode: string;
-    errorMethod: string;
-    errorPath: string;
-    error: string;
-    errorText: string;
-}
-export class ErrorParams {
-    ok: string;
-    cancel: string;
-    error: string;
-}
-export class ErrorDetailsDialogController {
-    $mdDialog: any;
-    theme: any;
-    config: ErrorStrings;
-    constructor($mdDialog: any, $injector: any, $rootScope: any, params: ErrorParams);
-    onOk(): void;
-    onCancel(): void;
-}
-
-class ErrorDetailsService {
-    _mdDialog: any;
-    constructor($mdDialog: any);
-    show(params: any, successCallback: any, cancelCallback: any): void;
-}
-
-
 
 export class InformationStrings {
     ok: string;
@@ -82,6 +49,39 @@ export interface IInformationService {
     show(params: any, successCallback?: () => void, cancelCallback?: () => void): any;
 }
 
+export class ErrorStrings {
+    ok: string;
+    cancel: string;
+    errorDetails: string;
+    dismissButton: string;
+    errorMessage: string;
+    errorCode: string;
+    errorMethod: string;
+    errorPath: string;
+    error: string;
+    errorText: string;
+}
+export class ErrorParams {
+    ok: string;
+    cancel: string;
+    error: string;
+}
+export class ErrorDetailsDialogController {
+    $mdDialog: any;
+    theme: any;
+    config: ErrorStrings;
+    constructor($mdDialog: any, $injector: any, $rootScope: any, params: ErrorParams);
+    onOk(): void;
+    onCancel(): void;
+}
+
+class ErrorDetailsService {
+    _mdDialog: angular.material.IDialogService;
+    constructor($mdDialog: angular.material.IDialogService);
+    show(params: any, successCallback: any, cancelCallback: any): void;
+}
+
+
 
 export class OptionsBigData {
     name: string;
@@ -101,11 +101,21 @@ export class OptionsBigParams {
     noActions: boolean;
     optionIndex: number;
 }
-export class OptionsBigDialogController {
-    $mdDialog: any;
-    theme: any;
+export interface IOptionsBigDialogController {
+    onOk(): void;
+    onCancel(): void;
+    onKeyUp(event: any, index: any): void;
+    onOptionSelect(event: any, option: any): any;
+    onSelected(): void;
+    onSelect: Function;
     config: OptionsBigParams;
-    constructor($mdDialog: any, $injector: any, $rootScope: any, params: OptionsBigParams);
+    theme: string;
+}
+export class OptionsBigDialogController implements IOptionsBigDialogController {
+    private $mdDialog;
+    theme: string;
+    config: OptionsBigParams;
+    constructor($mdDialog: angular.material.IDialogService, $injector: any, $rootScope: ng.IRootScopeService, params: OptionsBigParams);
     onOk(): void;
     onCancel(): void;
     onOptionSelect(event: any, option: any): void;

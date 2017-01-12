@@ -21,6 +21,7 @@ export class OptionsBigParams {
     public noActions: boolean = false;
     public optionIndex: number = 0;
 }
+
 export interface IOptionsBigDialogController {
     onOk(): void;
     onCancel(): void;

@@ -21,10 +21,20 @@ export class OptionsBigParams {
     public noActions: boolean = false;
     public optionIndex: number = 0;
 }
+export interface IOptionsBigDialogController {
+    onOk(): void;
+    onCancel(): void;
+    onKeyUp(event, index): void;
+    onOptionSelect(event, option);
+    onSelected(): void;
+    onSelect: Function;
+    config: OptionsBigParams;
+    theme: string;
+}
 
-export class OptionsBigDialogController {
+export class OptionsBigDialogController implements IOptionsBigDialogController {
 
-    public $mdDialog: angular.material.IDialogService;
+    private $mdDialog: angular.material.IDialogService;
     public theme: string;
     public config: OptionsBigParams;
 

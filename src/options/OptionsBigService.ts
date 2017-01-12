@@ -3,8 +3,8 @@ export interface IOptionsBigService {
 }
 
 class OptionsBigService implements IOptionsBigService {
-    public _mdDialog;
-    public constructor($mdDialog) {
+    public _mdDialog: angular.material.IDialogService;
+    constructor($mdDialog: angular.material.IDialogService) {
         this._mdDialog = $mdDialog;
     }
     public show(params, successCallback?: (option) => void, cancelCallback?: () => void): any {
@@ -25,7 +25,6 @@ class OptionsBigService implements IOptionsBigService {
                 cancelCallback();
             }
         });
-                
     }
     
 }

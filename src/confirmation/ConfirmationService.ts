@@ -1,7 +1,7 @@
 import { ConfirmationParams } from './ConfirmationController';
 
 export interface IConfirmationService {
-    show(params, successCallback?: () => void, cancelCallback?: () => void): any;
+    show(params: ConfirmationParams, successCallback?: () => void, cancelCallback?: () => void): any;
 }
 
 class ConfirmationService {

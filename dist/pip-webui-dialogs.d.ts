@@ -4,20 +4,19 @@ export class ConfirmationParams {
     ok: string;
     title: string;
     cancel: string;
+    event: any;
 }
 export class ConfirmationDialogController {
-    $mdDialog: any;
-    theme: any;
+    $mdDialog: angular.material.IDialogService;
+    theme: string;
     config: ConfirmationParams;
-    constructor($mdDialog: any, $injector: any, $rootScope: any, params: ConfirmationParams);
+    constructor($mdDialog: angular.material.IDialogService, $injector: any, $rootScope: ng.IRootScopeService, params: ConfirmationParams);
     onOk(): void;
     onCancel(): void;
 }
 
-class ConfirmationService {
-    _mdDialog: any;
-    constructor($mdDialog: any);
-    show(params: any, successCallback: any, cancelCallback: any): void;
+export interface IConfirmationService {
+    show(params: any, successCallback?: () => void, cancelCallback?: () => void): any;
 }
 
 
@@ -54,6 +53,36 @@ class ErrorDetailsService {
     show(params: any, successCallback: any, cancelCallback: any): void;
 }
 
+
+
+export class InformationStrings {
+    ok: string;
+    title: string;
+    message: string;
+    error: string;
+    content: any;
+}
+export class InformationParams {
+    ok: string;
+    title: string;
+    message: string;
+    error: string;
+    item: any;
+}
+export class InformationDialogController {
+    $mdDialog: any;
+    theme: any;
+    config: InformationStrings;
+    constructor($mdDialog: any, $injector: any, $rootScope: any, params: InformationParams);
+    onOk(): void;
+    onCancel(): void;
+}
+
+class InformationService {
+    _mdDialog: any;
+    constructor($mdDialog: any);
+    show(params: any, successCallback: any, cancelCallback: any): void;
+}
 
 
 export class OptionsBigData {
@@ -123,36 +152,6 @@ export class OptionsDialogController {
 }
 
 class OptionsService {
-    _mdDialog: any;
-    constructor($mdDialog: any);
-    show(params: any, successCallback: any, cancelCallback: any): void;
-}
-
-
-export class InformationStrings {
-    ok: string;
-    title: string;
-    message: string;
-    error: string;
-    content: any;
-}
-export class InformationParams {
-    ok: string;
-    title: string;
-    message: string;
-    error: string;
-    item: any;
-}
-export class InformationDialogController {
-    $mdDialog: any;
-    theme: any;
-    config: InformationStrings;
-    constructor($mdDialog: any, $injector: any, $rootScope: any, params: InformationParams);
-    onOk(): void;
-    onCancel(): void;
-}
-
-class InformationService {
     _mdDialog: any;
     constructor($mdDialog: any);
     show(params: any, successCallback: any, cancelCallback: any): void;

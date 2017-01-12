@@ -115,10 +115,8 @@ export class OptionsBigDialogController {
     private focusInput();
 }
 
-class OptionsBigService {
-    _mdDialog: any;
-    constructor($mdDialog: any);
-    show(params: any, successCallback: any, cancelCallback: any): void;
+export interface IOptionsBigService {
+    show(params: any, successCallback?: (option) => void, cancelCallback?: () => void): any;
 }
 
 export class OptionsData {

@@ -1,10 +1,13 @@
+export interface IOptionsBigService {
+    show(params, successCallback?: (option) => void, cancelCallback?: () => void): any;
+}
 
-class OptionsBigService {
+class OptionsBigService implements IOptionsBigService {
     public _mdDialog;
     public constructor($mdDialog) {
         this._mdDialog = $mdDialog;
     }
-    public show(params, successCallback, cancelCallback) {
+    public show(params, successCallback?: (option) => void, cancelCallback?: () => void): any {
          this._mdDialog.show({
             targetEvent: params.event,
             templateUrl: 'options/OptionsBigDialog.html',

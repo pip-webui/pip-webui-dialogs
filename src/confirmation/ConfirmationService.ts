@@ -1,10 +1,15 @@
+import { ConfirmationParams } from './ConfirmationController';
+
+export interface IConfirmationService {
+    show(params, successCallback?: () => void, cancelCallback?: () => void): any;
+}
 
 class ConfirmationService {
-    public _mdDialog;
-    public constructor($mdDialog) {
+    private _mdDialog: angular.material.IDialogService;
+    public constructor($mdDialog: angular.material.IDialogService) {
         this._mdDialog = $mdDialog;
     }
-    public show(params, successCallback, cancelCallback) {
+    public show(params: ConfirmationParams, successCallback?: () => void, cancelCallback?: () => void) {
         this._mdDialog.show({
             targetEvent: params.event,
             templateUrl: 'confirmation/ConfirmationDialog.html',

@@ -4,18 +4,19 @@ export class ConfirmationParams {
     public ok: string = 'OK';
     public title: string; 
     public cancel: string = 'Cancel';
+    public event: any;
 }
 
 export class ConfirmationDialogController {
 
-    public $mdDialog;
-    public theme;
+    public $mdDialog: angular.material.IDialogService;
+    public theme: string;
     public config: ConfirmationParams;
 
     constructor(
-        $mdDialog,
+        $mdDialog: angular.material.IDialogService,
         $injector,
-        $rootScope, 
+        $rootScope: ng.IRootScopeService,
         params: ConfirmationParams) {
         "ngInject";
         this.config = new ConfirmationParams();
@@ -36,7 +37,7 @@ export class ConfirmationDialogController {
         }
 
         this.$mdDialog = $mdDialog;
-        this.theme = $rootScope.$theme;
+        this.theme = $rootScope['$theme'];
     }
 
     public onOk(): void {

@@ -24,14 +24,14 @@ export class OptionsBigParams {
 
 export class OptionsBigDialogController {
 
-    public $mdDialog;
-    public theme;
+    public $mdDialog: angular.material.IDialogService;
+    public theme: string;
     public config: OptionsBigParams;
 
     constructor(
-        $mdDialog,
+        $mdDialog: angular.material.IDialogService,
         $injector, 
-        $rootScope, 
+        $rootScope: ng.IRootScopeService, 
         params: OptionsBigParams) {
         "ngInject";
 
@@ -49,7 +49,7 @@ export class OptionsBigDialogController {
             this.config.applyButtonTitle = params.applyButtonTitle || 'Select';
         }
 
-        this.theme = $rootScope.$theme;
+        this.theme = $rootScope['$theme'];
         this.config.options = params.options;
         this.config.selectedOption = _.find(params.options, {active: true}) || new OptionsBigData();
         this.config.selectedOptionName = this.config.selectedOption.name;

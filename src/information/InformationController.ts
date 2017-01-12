@@ -20,21 +20,21 @@ export class InformationParams {
 
 export class InformationDialogController {
 
-    public $mdDialog;
-    public theme;
+    public $mdDialog: angular.material.IDialogService;
+    public theme: string;
     public config: InformationStrings;
 
     constructor(
-        $mdDialog,
+        $mdDialog: angular.material.IDialogService,
         $injector,
-        $rootScope, 
+        $rootScope: ng.IRootScopeService, 
         params: InformationParams) {
         "ngInject";
         this.config = new InformationStrings();
 
-        var content = params.message, item;
+        let content = params.message, item;
 
-        var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
+        let pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
         if (pipTranslate) {
             pipTranslate.translations('en', { 'INFORMATION_TITLE': 'Information'});
             pipTranslate.translations('ru', { 'INFORMATION_TITLE': 'Информация' });
@@ -47,7 +47,7 @@ export class InformationDialogController {
             this.config.ok = params.ok || 'OK';
         }
 
-        var pipFormat = $injector.has('pipFormat') ? $injector.get('pipFormat') : null;
+        let pipFormat = $injector.has('pipFormat') ? $injector.get('pipFormat') : null;
 
         if (params.item && pipFormat) {
             item = _.truncate(params.item, 25);
@@ -57,7 +57,7 @@ export class InformationDialogController {
         this.config.content = content;
 
         this.$mdDialog = $mdDialog;
-        this.theme = $rootScope.$theme;
+        this.theme = $rootScope['$theme'];
         this.config.error = params.error;
     }
 

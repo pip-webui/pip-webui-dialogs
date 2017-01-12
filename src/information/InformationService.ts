@@ -1,11 +1,15 @@
+export interface IInformationService {
+    show(params, successCallback?: () => void, cancelCallback?: () => void): any;
+}
 
-class InformationService {
-    public _mdDialog;
-    public constructor($mdDialog) {
+class InformationService implements IInformationService {
+    private _mdDialog: angular.material.IDialogService;
+    
+    constructor($mdDialog: angular.material.IDialogService) {
         this._mdDialog = $mdDialog;
     }
 
-    public show(params, successCallback, cancelCallback) {
+    public show(params, successCallback?: () => void, cancelCallback?: () => void) {
          this._mdDialog.show({
             targetEvent: params.event,
             templateUrl: 'information/InformationDialog.html',

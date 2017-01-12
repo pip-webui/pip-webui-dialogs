@@ -16,7 +16,7 @@ export class ConfirmationDialogController {
 }
 
 export interface IConfirmationService {
-    show(params: any, successCallback?: () => void, cancelCallback?: () => void): any;
+    show(params: ConfirmationParams, successCallback?: () => void, cancelCallback?: () => void): any;
 }
 
 
@@ -70,18 +70,16 @@ export class InformationParams {
     item: any;
 }
 export class InformationDialogController {
-    $mdDialog: any;
-    theme: any;
+    $mdDialog: angular.material.IDialogService;
+    theme: string;
     config: InformationStrings;
-    constructor($mdDialog: any, $injector: any, $rootScope: any, params: InformationParams);
+    constructor($mdDialog: angular.material.IDialogService, $injector: any, $rootScope: ng.IRootScopeService, params: InformationParams);
     onOk(): void;
     onCancel(): void;
 }
 
-class InformationService {
-    _mdDialog: any;
-    constructor($mdDialog: any);
-    show(params: any, successCallback: any, cancelCallback: any): void;
+export interface IInformationService {
+    show(params: any, successCallback?: () => void, cancelCallback?: () => void): any;
 }
 
 

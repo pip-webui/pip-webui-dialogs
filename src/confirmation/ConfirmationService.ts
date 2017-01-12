@@ -4,9 +4,10 @@ export interface IConfirmationService {
     show(params: ConfirmationParams, successCallback?: () => void, cancelCallback?: () => void): any;
 }
 
-class ConfirmationService {
+class ConfirmationService implements IConfirmationService {
     private _mdDialog: angular.material.IDialogService;
-    public constructor($mdDialog: angular.material.IDialogService) {
+    
+    constructor($mdDialog: angular.material.IDialogService) {
         this._mdDialog = $mdDialog;
     }
     public show(params: ConfirmationParams, successCallback?: () => void, cancelCallback?: () => void) {

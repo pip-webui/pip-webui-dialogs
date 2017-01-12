@@ -269,7 +269,7 @@ var InformationDialogController = (function () {
         }
         this.config.content = content;
         this.$mdDialog = $mdDialog;
-        this.theme = $rootScope.$theme;
+        this.theme = $rootScope['$theme'];
         this.config.error = params.error;
     }
     InformationDialogController.prototype.onOk = function () {
@@ -285,6 +285,7 @@ angular
     .module('pipInformationDialog')
     .controller('pipInformationDialogController', InformationDialogController);
 },{}],10:[function(require,module,exports){
+"use strict";
 var InformationService = (function () {
     InformationService.$inject = ['$mdDialog'];
     function InformationService($mdDialog) {

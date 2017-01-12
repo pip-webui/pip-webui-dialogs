@@ -137,10 +137,10 @@ export class OptionsParams {
     deletedTitle: string;
 }
 export class OptionsDialogController {
-    $mdDialog: any;
-    theme: any;
+    $mdDialog: angular.material.IDialogService;
+    theme: string;
     config: OptionsParams;
-    constructor($mdDialog: any, $injector: any, $rootScope: any, params: OptionsParams);
+    constructor($mdDialog: angular.material.IDialogService, $injector: any, $rootScope: ng.IRootScopeService, params: OptionsParams);
     onOk(): void;
     onCancel(): void;
     onOptionSelect(event: any, option: OptionsData): void;
@@ -149,10 +149,8 @@ export class OptionsDialogController {
     private focusInput();
 }
 
-class OptionsService {
-    _mdDialog: any;
-    constructor($mdDialog: any);
-    show(params: any, successCallback: any, cancelCallback: any): void;
+export interface IOptionsService {
+    show(params: any, successCallback?: (option) => void, cancelCallback?: () => void): any;
 }
 
 }

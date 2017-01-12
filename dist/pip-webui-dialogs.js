@@ -474,7 +474,7 @@ var OptionsDialogController = (function () {
             this.config.title = params.title || 'Choose Option';
             this.config.applyButtonTitle = params.applyButtonTitle || 'Select';
         }
-        this.theme = $rootScope.$theme;
+        this.theme = $rootScope['$theme'];
         this.config.options = params.options;
         this.config.selectedOption = _.find(params.options, { active: true }) || new OptionsData();
         this.config.selectedOptionName = this.config.selectedOption.name;
@@ -517,6 +517,7 @@ angular
     .module('pipOptionsDialog')
     .controller('pipOptionsDialogController', OptionsDialogController);
 },{}],15:[function(require,module,exports){
+"use strict";
 var OptionsService = (function () {
     OptionsService.$inject = ['$mdDialog'];
     function OptionsService($mdDialog) {

@@ -412,6 +412,7 @@ angular
     .module('pipOptionsBigDialog')
     .controller('pipOptionsBigDialogController', OptionsBigDialogController);
 },{}],13:[function(require,module,exports){
+"use strict";
 var OptionsBigService = (function () {
     OptionsBigService.$inject = ['$mdDialog'];
     function OptionsBigService($mdDialog) {

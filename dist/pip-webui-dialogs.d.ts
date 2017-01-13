@@ -21,7 +21,6 @@ export interface IConfirmationService {
 
 
 
-
 export class InformationStrings {
     ok: string;
     title: string;
@@ -48,6 +47,7 @@ export class InformationDialogController {
 export interface IInformationService {
     show(params: any, successCallback?: () => void, cancelCallback?: () => void): any;
 }
+
 
 export class ErrorStrings {
     ok: string;
@@ -80,7 +80,6 @@ class ErrorDetailsService {
     constructor($mdDialog: angular.material.IDialogService);
     show(params: any, successCallback: any, cancelCallback: any): void;
 }
-
 
 
 export class OptionsBigData {
@@ -160,6 +159,7 @@ export class OptionsDialogController {
 export interface IOptionsService {
     show(params: any, successCallback?: (option) => void, cancelCallback?: () => void): any;
 }
+
 
 }
 

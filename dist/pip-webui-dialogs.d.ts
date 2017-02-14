@@ -1,6 +1,5 @@
 declare module pip.dialogs {
 
-
 export class ConfirmationParams {
     ok: string;
     title: string;
@@ -19,6 +18,7 @@ export class ConfirmationDialogController {
 export interface IConfirmationService {
     show(params: ConfirmationParams, successCallback?: () => void, cancelCallback?: () => void): any;
 }
+
 
 
 export class ErrorStrings {

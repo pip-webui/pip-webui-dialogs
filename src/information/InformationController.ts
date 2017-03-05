@@ -12,10 +12,10 @@ export class InformationStrings {
 
 export class InformationParams {
     public ok: string = 'OK';
-    public title: string; 
-    public message: string;
-    public error: string;
-    public item;
+    public title?: string; 
+    public message?: string;
+    public error?: string;
+    public item: any;
 }
 
 export class InformationDialogController {
@@ -26,33 +26,33 @@ export class InformationDialogController {
 
     constructor(
         $mdDialog: angular.material.IDialogService,
-        $injector,
+        $injector: ng.auto.IInjectorService,
         $rootScope: ng.IRootScopeService, 
-        params: InformationParams) {
+        params: InformationParams) 
+    {
         "ngInject";
         this.config = new InformationStrings();
 
         let content = params.message, item;
 
-        let pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
+        let pipTranslate: pip.services.ITranslateService = $injector.has('pipTranslate') ? <pip.services.ITranslateService>$injector.get('pipTranslate') : null;
         if (pipTranslate) {
             pipTranslate.translations('en', { 'INFORMATION_TITLE': 'Information'});
             pipTranslate.translations('ru', { 'INFORMATION_TITLE': 'Информация' });
 
-            this.config.title = params.title || 'INFORMATION_TITLE';
-            this.config.ok = params.ok || 'OK';
+            this.config.title = pipTranslate.translate(params.title) || pipTranslate.translate('INFORMATION_TITLE');
+            this.config.ok = pipTranslate.translate(params.ok) || pipTranslate.translate('OK');
             content = pipTranslate.translate(content);
         } else {
             this.config.title = params.title || 'Information';
             this.config.ok = params.ok || 'OK';
         }
 
-        let pipFormat = $injector.has('pipFormat') ? $injector.get('pipFormat') : null;
+        let pipFormat: pip.services.IFormat = $injector.has('pipFormat') ? <pip.services.IFormat>$injector.get('pipFormat') : null;
 
         if (params.item && pipFormat) {
             item = _.truncate(params.item, 25);
             content = pipFormat.sprintf(content, item);
-            console.log('content2', content);
         }
         this.config.content = content;
 

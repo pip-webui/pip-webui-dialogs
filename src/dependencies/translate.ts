@@ -10,11 +10,11 @@
 
     var thisModule = angular.module('pipDialogs.Translate', []);
 
-    thisModule.filter('translate', function ($injector) {
-        var pipTranslate = $injector.has('pipTranslate') 
-            ? $injector.get('pipTranslate') : null;
+    thisModule.filter('translate', function ($injector: ng.auto.IInjectorService) {
+        var pipTranslate: pip.services.ITranslateService = $injector.has('pipTranslate') 
+            ? <pip.services.ITranslateService>$injector.get('pipTranslate') : null;
 
-        return function (key) {
+        return function (key: string) {
             return pipTranslate  ? pipTranslate.translate(key) || key : key;
         }
     });

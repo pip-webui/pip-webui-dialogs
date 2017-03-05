@@ -1,10 +1,10 @@
 'use strict';
 
 export class ConfirmationParams {
-    public ok: string = 'OK';
-    public title: string; 
-    public cancel: string = 'Cancel';
-    public event: any;
+    public ok?: string = 'OK';
+    public title?: string; 
+    public cancel?: string = 'Cancel';
+    public event?: MouseEvent;
 }
 
 export class ConfirmationDialogController {
@@ -15,21 +15,23 @@ export class ConfirmationDialogController {
 
     constructor(
         $mdDialog: angular.material.IDialogService,
-        $injector,
+        $injector: ng.auto.IInjectorService,
         $rootScope: ng.IRootScopeService,
-        params: ConfirmationParams) {
+        params: ConfirmationParams) 
+    {
         "ngInject";
         this.config = new ConfirmationParams();
 
-        let pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
+        let pipTranslate: pip.services.ITranslateService;
+        pipTranslate = $injector.has('pipTranslate') ? <pip.services.ITranslateService>$injector.get('pipTranslate') : null;
 
         if (pipTranslate) {
             pipTranslate.translations('en', { 'CONFIRM_TITLE': 'Confirm' });
             pipTranslate.translations('ru', { 'CONFIRM_TITLE': 'Подтвердите'});
 
-            this.config.title = params.title || 'CONFIRM_TITLE';
-            this.config.ok = params.ok || 'OK';
-            this.config.cancel = params.cancel || 'CANCEL';
+            this.config.title = pipTranslate.translate(params.title) || pipTranslate.translate('CONFIRM_TITLE');
+            this.config.ok = pipTranslate.translate(params.ok) || pipTranslate.translate('OK');
+            this.config.cancel = pipTranslate.translate(params.cancel) || ('CANCEL');
         } else {
             this.config.title = params.title || 'Confirm';
             this.config.ok = params.ok || 'OK';

@@ -16,27 +16,29 @@ export class ErrorStrings {
 }
 
 export class ErrorParams {
-    public ok: string = 'OK';
-    public cancel: string = 'CANCEL';
-    public error: string = 'ERROR';
+    public ok?: string = 'OK';
+    public cancel?: string = 'CANCEL';
+    public error?: string = 'ERROR';
 }
 
 export class ErrorDetailsDialogController {
-
-    public $mdDialog;
-    public theme;
+    public $mdDialog: ng.material.IDialogService;
+    public theme: string;
     public config: ErrorStrings;
 
     constructor(
-        $mdDialog,
-        $injector,
-        $rootScope, 
-        params: ErrorParams) {
+        $mdDialog: ng.material.IDialogService,
+        $injector: ng.auto.IInjectorService,
+        $rootScope: ng.IRootScopeService, 
+        params: ErrorParams) 
+    {
         "ngInject";
         this.config = new ErrorStrings();
-        var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
+        let pipTranslate: pip.services.ITranslateService = $injector.has('pipTranslate') ? <pip.services.ITranslateService>$injector.get('pipTranslate') : null;
             if (pipTranslate) {
                 pipTranslate.translations('en', {
+                    'OK': 'Ok',
+                    'CANCEL': 'Cancel',
                     'ERROR_DETAILS': 'Error details',
                     'CODE': 'Error code',
                     'PATH': 'Path',
@@ -46,6 +48,8 @@ export class ErrorDetailsDialogController {
                     'DISMISS': 'Dismiss'
                 });
                 pipTranslate.translations('ru', {
+                    'OK': 'Ок',
+                    'CANCEL': 'Отмена',                    
                     'ERROR_DETAILS': 'Детали ошибки',
                     'CODE': 'Код ошибки',
                     'PATH': 'Путь',
@@ -53,18 +57,18 @@ export class ErrorDetailsDialogController {
                     'METHOD': 'Метод',
                     'MESSAGE': 'Сообщение'
                 });
-                this.config.ok = params.ok;
-                this.config.cancel = params.cancel;
-                this.config.errorDetails = 'ERROR_DETAILS';
-                this.config.dismissButton = 'DISMISS';
-                this.config.errorMessage = 'MESSAGE';
-                this.config.errorCode = 'CODE';
-                this.config.errorMethod = 'METHOD';
-                this.config.errorPath = 'PATH';
-                this.config.errorText = 'ERROR';                
+                this.config.ok = pipTranslate.translate(params.ok) || pipTranslate.translate('OK');
+                this.config.cancel = pipTranslate.translate(params.cancel) || pipTranslate.translate('CANCEL');
+                this.config.errorDetails = pipTranslate.translate('ERROR_DETAILS');
+                this.config.dismissButton = pipTranslate.translate('DISMISS');
+                this.config.errorMessage = pipTranslate.translate('MESSAGE');
+                this.config.errorCode = pipTranslate.translate('CODE');
+                this.config.errorMethod = pipTranslate.translate('METHOD');
+                this.config.errorPath = pipTranslate.translate('PATH');
+                this.config.errorText = pipTranslate.translate('ERROR');                
             } else {
-                this.config.ok = params.ok;
-                this.config.cancel = params.cancel;
+                this.config.ok = params.ok || 'Ok';
+                this.config.cancel = params.cancel || 'Cancel';
             }
             this.$mdDialog = $mdDialog;
             this.theme = $rootScope.$theme;

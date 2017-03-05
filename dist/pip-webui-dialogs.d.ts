@@ -2,15 +2,15 @@ declare module pip.dialogs {
 
 export class ConfirmationParams {
     ok: string;
-    title: string;
+    title?: string;
     cancel: string;
-    event: any;
+    event?: MouseEvent;
 }
 export class ConfirmationDialogController {
     $mdDialog: angular.material.IDialogService;
     theme: string;
     config: ConfirmationParams;
-    constructor($mdDialog: angular.material.IDialogService, $injector: any, $rootScope: ng.IRootScopeService, params: ConfirmationParams);
+    constructor($mdDialog: angular.material.IDialogService, $injector: ng.auto.IInjectorService, $rootScope: ng.IRootScopeService, params: ConfirmationParams);
     onOk(): void;
     onCancel(): void;
 }
@@ -39,10 +39,10 @@ export class ErrorParams {
     error: string;
 }
 export class ErrorDetailsDialogController {
-    $mdDialog: any;
-    theme: any;
+    $mdDialog: ng.material.IDialogService;
+    theme: string;
     config: ErrorStrings;
-    constructor($mdDialog: any, $injector: any, $rootScope: any, params: ErrorParams);
+    constructor($mdDialog: ng.material.IDialogService, $injector: ng.auto.IInjectorService, $rootScope: ng.IRootScopeService, params: ErrorParams);
     onOk(): void;
     onCancel(): void;
 }
@@ -55,48 +55,20 @@ class ErrorDetailsService {
 
 
 
-export class InformationStrings {
-    ok: string;
-    title: string;
-    message: string;
-    error: string;
-    content: any;
-}
-export class InformationParams {
-    ok: string;
-    title: string;
-    message: string;
-    error: string;
-    item: any;
-}
-export class InformationDialogController {
-    $mdDialog: angular.material.IDialogService;
-    theme: string;
-    config: InformationStrings;
-    constructor($mdDialog: angular.material.IDialogService, $injector: any, $rootScope: ng.IRootScopeService, params: InformationParams);
-    onOk(): void;
-    onCancel(): void;
-}
-
-export interface IInformationService {
-    show(params: any, successCallback?: () => void, cancelCallback?: () => void): any;
-}
-
-
 export class OptionsBigData {
     name: string;
     title: string;
     subtitle: string;
 }
 export class OptionsBigParams {
-    title: string;
-    applyButtonTitle: string;
-    options: OptionsBigData[];
-    selectedOption: OptionsBigData;
-    deleted: any;
-    selectedOptionName: string;
-    deletedTitle: string;
-    hint: string;
+    title?: string;
+    applyButtonTitle?: string;
+    options?: OptionsBigData[];
+    selectedOption?: OptionsBigData;
+    deleted?: boolean;
+    selectedOptionName?: string;
+    deletedTitle?: string;
+    hint?: string;
     noTitle: boolean;
     noActions: boolean;
     optionIndex: number;
@@ -104,8 +76,8 @@ export class OptionsBigParams {
 export interface IOptionsBigDialogController {
     onOk(): void;
     onCancel(): void;
-    onKeyUp(event: any, index: any): void;
-    onOptionSelect(event: any, option: any): any;
+    onKeyUp(event: JQueryKeyEventObject, index: number): void;
+    onOptionSelect(event: ng.IAngularEvent, option: OptionsBigData): any;
     onSelected(): void;
     onSelect: Function;
     config: OptionsBigParams;
@@ -115,12 +87,12 @@ export class OptionsBigDialogController implements IOptionsBigDialogController {
     private $mdDialog;
     theme: string;
     config: OptionsBigParams;
-    constructor($mdDialog: angular.material.IDialogService, $injector: any, $rootScope: ng.IRootScopeService, params: OptionsBigParams);
+    constructor($mdDialog: angular.material.IDialogService, $injector: ng.auto.IInjectorService, $rootScope: ng.IRootScopeService, params: OptionsBigParams);
     onOk(): void;
     onCancel(): void;
-    onOptionSelect(event: any, option: any): void;
+    onOptionSelect(event: ng.IAngularEvent, option: OptionsBigData): void;
     onSelected(): void;
-    onKeyUp(event: any, index: any): void;
+    onKeyUp(event: JQueryKeyEventObject, index: number): void;
     onSelect: () => void;
     private focusInput();
 }
@@ -136,29 +108,57 @@ export class OptionsData {
     active: boolean;
 }
 export class OptionsParams {
-    title: string;
-    applyButtonTitle: string;
-    options: OptionsData[];
-    selectedOption: OptionsData;
-    deleted: any;
-    selectedOptionName: string;
-    deletedTitle: string;
+    title?: string;
+    applyButtonTitle?: string;
+    options?: OptionsData[];
+    selectedOption?: OptionsData;
+    deleted?: boolean;
+    selectedOptionName?: string;
+    deletedTitle?: string;
 }
 export class OptionsDialogController {
     $mdDialog: angular.material.IDialogService;
     theme: string;
     config: OptionsParams;
-    constructor($mdDialog: angular.material.IDialogService, $injector: any, $rootScope: ng.IRootScopeService, params: OptionsParams);
+    constructor($mdDialog: angular.material.IDialogService, $injector: ng.auto.IInjectorService, $rootScope: ng.IRootScopeService, params: OptionsParams);
     onOk(): void;
     onCancel(): void;
-    onOptionSelect(event: any, option: OptionsData): void;
-    onKeyPress(event: any): void;
+    onOptionSelect(event: ng.IAngularEvent, option: OptionsData): void;
+    onKeyPress(event: JQueryKeyEventObject): void;
     onSelect(): void;
     private focusInput();
 }
 
 export interface IOptionsService {
     show(params: any, successCallback?: (option) => void, cancelCallback?: () => void): any;
+}
+
+
+export class InformationStrings {
+    ok: string;
+    title: string;
+    message: string;
+    error: string;
+    content: any;
+}
+export class InformationParams {
+    ok: string;
+    title?: string;
+    message?: string;
+    error?: string;
+    item: any;
+}
+export class InformationDialogController {
+    $mdDialog: angular.material.IDialogService;
+    theme: string;
+    config: InformationStrings;
+    constructor($mdDialog: angular.material.IDialogService, $injector: ng.auto.IInjectorService, $rootScope: ng.IRootScopeService, params: InformationParams);
+    onOk(): void;
+    onCancel(): void;
+}
+
+export interface IInformationService {
+    show(params: any, successCallback?: () => void, cancelCallback?: () => void): any;
 }
 
 }

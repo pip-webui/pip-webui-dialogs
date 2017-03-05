@@ -32,6 +32,7 @@ export class OptionsDialogController {
         params: OptionsParams) {
         "ngInject";
 
+console.log('params', params);
         this.$mdDialog = $mdDialog;
         this.config = new OptionsParams();
         var pipTranslate:pip.services.ITranslateService = $injector.has('pipTranslate') ? <pip.services.ITranslateService>$injector.get('pipTranslate') : null;
@@ -67,7 +68,6 @@ export class OptionsDialogController {
     public onOptionSelect(event: ng.IAngularEvent, option: OptionsData) {
         event.stopPropagation();
         this.config.selectedOptionName = option.name;
-
     }
             
     public onKeyPress (event: JQueryKeyEventObject) {

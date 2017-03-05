@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="pip-content">
-            <md-radio-group ng-model="vm.selectedOptionName" class="pip-list md-primary" md-no-ink="true"
+            <md-radio-group ng-model="vm.config.selectedOptionName" class="pip-list md-primary" md-no-ink="true"
                             ng-keypress="vm.onKeyPress($event)" tabindex="0">
                 <div ng-repeat="option in vm.config.options" class="pip-list-item" md-ink-ripple
                      ui-event="{ click: 'vm.onOptionSelect($event, option)' }"

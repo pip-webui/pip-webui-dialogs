@@ -9,14 +9,14 @@ export class OptionsBigData {
 }
 
 export class OptionsBigParams {
-    public title: string;  
-    public applyButtonTitle: string;
-    public options: OptionsBigData[];
-    public selectedOption: OptionsBigData;
-    public deleted;
-    public selectedOptionName: string;
-    public deletedTitle: string;
-    public hint: string;
+    public title?: string;  
+    public applyButtonTitle?: string;
+    public options?: OptionsBigData[];
+    public selectedOption?: OptionsBigData;
+    public deleted?: boolean;
+    public selectedOptionName?: string;
+    public deletedTitle?: string;
+    public hint?: string;
     public noTitle: boolean = false;
     public noActions: boolean = false;
     public optionIndex: number = 0;
@@ -25,8 +25,8 @@ export class OptionsBigParams {
 export interface IOptionsBigDialogController {
     onOk(): void;
     onCancel(): void;
-    onKeyUp(event, index): void;
-    onOptionSelect(event, option);
+    onKeyUp(event: JQueryKeyEventObject, index: number): void;
+    onOptionSelect(event: ng.IAngularEvent, option: OptionsBigData);
     onSelected(): void;
     onSelect: Function;
     config: OptionsBigParams;
@@ -41,20 +41,21 @@ export class OptionsBigDialogController implements IOptionsBigDialogController {
 
     constructor(
         $mdDialog: angular.material.IDialogService,
-        $injector, 
+        $injector: ng.auto.IInjectorService, 
         $rootScope: ng.IRootScopeService, 
-        params: OptionsBigParams) {
+        params: OptionsBigParams) 
+    {
         "ngInject";
 
         this.$mdDialog = $mdDialog;
         this.config = new OptionsBigParams();
-        var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
+        var pipTranslate: pip.services.ITranslateService = $injector.has('pipTranslate') ? <pip.services.ITranslateService>$injector.get('pipTranslate') : null;
         if (pipTranslate) {
             pipTranslate.translations('en', { 'OPTIONS_TITLE': 'Choose Option'});
             pipTranslate.translations('ru', { 'OPTIONS_TITLE': 'Выберите опцию'});
 
-            this.config.title = params.title || 'OPTIONS_TITLE';
-            this.config.applyButtonTitle = params.applyButtonTitle || 'SELECT';
+            this.config.title =  pipTranslate.translate(params.title) || pipTranslate.translate('OPTIONS_TITLE');
+            this.config.applyButtonTitle = pipTranslate.translate(params.applyButtonTitle) || pipTranslate.translate('SELECT');
         } else {
             this.config.title = params.title || 'Choose Option';
             this.config.applyButtonTitle = params.applyButtonTitle || 'Select';
@@ -81,7 +82,7 @@ export class OptionsBigDialogController implements IOptionsBigDialogController {
         this.$mdDialog.cancel();
     }
 
-    public onOptionSelect(event, option) {
+    public onOptionSelect(event: ng.IAngularEvent, option: OptionsBigData) {
         event.stopPropagation();
         this.config.selectedOptionName = option.name;
 
@@ -98,7 +99,7 @@ export class OptionsBigDialogController implements IOptionsBigDialogController {
         }
     }
 
-    public onKeyUp(event, index) {
+    public onKeyUp(event: JQueryKeyEventObject, index: number) {
         if (event.keyCode === 32 || event.keyCode === 13) {
             event.stopPropagation();
             event.preventDefault();
@@ -110,8 +111,8 @@ export class OptionsBigDialogController implements IOptionsBigDialogController {
     }
     
     public onSelect = function () {
-        let option;
-        option = _.find(this.config.options, {name: this.config.selectedOptionName}) || new OptionsBigData();
+        let option: OptionsBigData;
+        option = <OptionsBigData>_.find(this.config.options, {name: this.config.selectedOptionName}) || new OptionsBigData();
         this.$mdDialog.hide({option: option, deleted: this.config.deleted});
     };
 

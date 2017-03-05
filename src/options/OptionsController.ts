@@ -10,13 +10,13 @@ export class OptionsData {
 }
 
 export class OptionsParams {
-    public title: string;  
-    public applyButtonTitle: string;
-    public options: OptionsData[];
-    public selectedOption: OptionsData;
-    public deleted;
-    public selectedOptionName: string;
-    public deletedTitle: string;
+    public title?: string;  
+    public applyButtonTitle?: string;
+    public options?: OptionsData[];
+    public selectedOption?: OptionsData;
+    public deleted?: boolean;
+    public selectedOptionName?: string;
+    public deletedTitle?: string;
 }
 
 export class OptionsDialogController {
@@ -27,20 +27,20 @@ export class OptionsDialogController {
 
     constructor(
         $mdDialog: angular.material.IDialogService,
-        $injector, 
+        $injector: ng.auto.IInjectorService, 
         $rootScope: ng.IRootScopeService, 
         params: OptionsParams) {
         "ngInject";
 
         this.$mdDialog = $mdDialog;
         this.config = new OptionsParams();
-        var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
+        var pipTranslate:pip.services.ITranslateService = $injector.has('pipTranslate') ? <pip.services.ITranslateService>$injector.get('pipTranslate') : null;
         if (pipTranslate) {
             pipTranslate.translations('en', { 'OPTIONS_TITLE': 'Choose Option'});
             pipTranslate.translations('ru', { 'OPTIONS_TITLE': 'Выберите опцию'});
 
-            this.config.title = params.title || 'OPTIONS_TITLE';
-            this.config.applyButtonTitle = params.applyButtonTitle || 'SELECT';
+            this.config.title = pipTranslate.translate(params.title) || pipTranslate.translate('OPTIONS_TITLE');
+            this.config.applyButtonTitle = pipTranslate.translate(params.applyButtonTitle) || pipTranslate.translate('SELECT');
         } else {
             this.config.title = params.title || 'Choose Option';
             this.config.applyButtonTitle = params.applyButtonTitle || 'Select';
@@ -64,13 +64,13 @@ export class OptionsDialogController {
         this.$mdDialog.cancel();
     }
 
-    public onOptionSelect(event, option: OptionsData) {
+    public onOptionSelect(event: ng.IAngularEvent, option: OptionsData) {
         event.stopPropagation();
         this.config.selectedOptionName = option.name;
 
     }
             
-    public onKeyPress (event) {
+    public onKeyPress (event: JQueryKeyEventObject) {
         if (event.keyCode === 32 || event.keyCode === 13) {
             event.stopPropagation();
             event.preventDefault();
@@ -81,7 +81,7 @@ export class OptionsDialogController {
     public onSelect() {
         let option: OptionsData;
         option = _.find(this.config.options, {name: this.config.selectedOptionName});
-        console.log(option);
+
         this.$mdDialog.hide({option: option, deleted: this.config.deleted});
     }
 

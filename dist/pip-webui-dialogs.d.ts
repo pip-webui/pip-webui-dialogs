@@ -23,6 +23,7 @@ export interface IConfirmationService {
 }
 
 
+
 export class ErrorDetailsDialogController {
     private _injector;
     $mdDialog: ng.material.IDialogService;
@@ -58,7 +59,6 @@ export class ErrorStrings {
     error: string;
     errorText: string;
 }
-
 
 
 export class InformationDialogController {

@@ -1,9 +1,10 @@
-
 class ErrorDetailsService {
     public _mdDialog: angular.material.IDialogService;
+
     public constructor($mdDialog: angular.material.IDialogService) {
         this._mdDialog = $mdDialog;
     }
+    
     public show(params, successCallback, cancelCallback) {
          this._mdDialog.show({
             targetEvent: params.event,

@@ -1,24 +1,8 @@
-'use strict';
-
-import IWindowService = angular.IWindowService;
-
-export class InformationStrings {
-    public ok: string = 'OK';
-    public title: string; 
-    public message: string;
-    public error: string;
-    public content;
-}
-
-export class InformationParams {
-    public ok: string = 'OK';
-    public title?: string; 
-    public message?: string;
-    public error?: string;
-    public item: any;
-}
+import { InformationParams } from './InformationParams';
+import { InformationStrings } from './InformationStrings';
 
 export class InformationDialogController {
+    private _injector: ng.auto.IInjectorService;
 
     public $mdDialog: angular.material.IDialogService;
     public theme: string;
@@ -32,10 +16,20 @@ export class InformationDialogController {
     {
         "ngInject";
         this.config = new InformationStrings();
+        this._injector = $injector;
+
+        this.initTranslate(params)
+
+        this.$mdDialog = $mdDialog;
+        this.theme = $rootScope['$theme'];
+        this.config.error = params.error;
+    }
+
+    private initTranslate(params: InformationParams): void {
+        let pipTranslate: pip.services.ITranslateService;
+        pipTranslate = this._injector.has('pipTranslate') ? <pip.services.ITranslateService>this._injector.get('pipTranslate') : null;
 
         let content = params.message, item;
-
-        let pipTranslate: pip.services.ITranslateService = $injector.has('pipTranslate') ? <pip.services.ITranslateService>$injector.get('pipTranslate') : null;
         if (pipTranslate) {
             pipTranslate.translations('en', { 'INFORMATION_TITLE': 'Information'});
             pipTranslate.translations('ru', { 'INFORMATION_TITLE': 'Информация' });
@@ -48,17 +42,14 @@ export class InformationDialogController {
             this.config.ok = params.ok || 'OK';
         }
 
-        let pipFormat: pip.services.IFormat = $injector.has('pipFormat') ? <pip.services.IFormat>$injector.get('pipFormat') : null;
+        let pipFormat: pip.services.IFormat = this._injector.has('pipFormat') ? <pip.services.IFormat>this._injector.get('pipFormat') : null;
 
         if (params.item && pipFormat) {
             item = _.truncate(params.item, 25);
             content = pipFormat.sprintf(content, item);
         }
-        this.config.content = content;
 
-        this.$mdDialog = $mdDialog;
-        this.theme = $rootScope['$theme'];
-        this.config.error = params.error;
+        this.config.content = content;        
     }
 
     public onOk(): void {

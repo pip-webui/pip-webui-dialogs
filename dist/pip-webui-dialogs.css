@@ -308,30 +308,30 @@ input:focus, p:focus, div:focus, li:focus, md-list-item:focus, md-list:focus, a:
   background-color: rgba(158, 158, 158, 0.2);
   border-left: 5px solid rgba(33, 150, 243, 0.5) !important; }
 
-.pip-dialog.pip-options-dialog .pip-header {
+.pip-options-dialog .pip-header {
   display: block;
   padding: 24px 24px 16px 24px !important; }
-  .pip-dialog.pip-options-dialog .pip-header h3 {
+  .pip-options-dialog .pip-header h3 {
     width: 100%;
     text-align: left;
     margin: 0 0 16px 0; }
-  .pip-dialog.pip-options-dialog .pip-header md-checkbox {
+  .pip-options-dialog .pip-header md-checkbox {
     font-size: 16px;
     margin: 0px !important; }
-  .pip-dialog.pip-options-dialog .pip-header .header-option {
+  .pip-options-dialog .pip-header .header-option {
     padding-top: 0px !important;
     padding-bottom: 24px !important; }
 
-.pip-dialog.pip-options-dialog .pip-body {
+.pip-options-dialog .pip-body {
   padding-left: 0px !important;
   padding-right: 0px !important;
   padding-top: 0px !important;
   padding-bottom: 24px !important; }
 
-.pip-dialog.pip-options-dialog .pip-list-item.item-padding {
+.pip-options-dialog .pip-list-item.item-padding {
   padding: 0px 24px !important; }
 
-.pip-dialog.pip-options-dialog .pip-list-item {
+.pip-options-dialog .pip-list-item {
   cursor: pointer;
   width: 100%;
   height: 48px;
@@ -351,7 +351,7 @@ input:focus, p:focus, div:focus, li:focus, md-list-item:focus, md-list:focus, a:
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center; }
-  .pip-dialog.pip-options-dialog .pip-list-item .pip-option-title {
+  .pip-options-dialog .pip-list-item .pip-option-title {
     text-align: start;
     text-transform: none;
     font: normal 500 16px Roboto, "Helvetica Neue", sans-serif;
@@ -363,14 +363,14 @@ input:focus, p:focus, div:focus, li:focus, md-list-item:focus, md-list:focus, a:
     -webkit-flex: 1 1 auto;
     -ms-flex: 1 1 auto;
     flex: 1 1 auto; }
-  .pip-dialog.pip-options-dialog .pip-list-item .pip-option-icon {
+  .pip-options-dialog .pip-list-item .pip-option-icon {
     -webkit-box-flex: 0 0 auto;
     -moz-box-flex: 0 0 auto;
     -webkit-flex: 0 0 auto;
     -ms-flex: 0 0 auto;
     flex: 0 0 auto;
     margin-right: 12px; }
-  .pip-dialog.pip-options-dialog .pip-list-item md-radio-button {
+  .pip-options-dialog .pip-list-item md-radio-button {
     width: 20px;
     -webkit-box-flex: 0 0 auto;
     -moz-box-flex: 0 0 auto;
@@ -378,33 +378,33 @@ input:focus, p:focus, div:focus, li:focus, md-list-item:focus, md-list:focus, a:
     -ms-flex: 0 0 auto;
     flex: 0 0 auto;
     margin: 0px !important; }
-  .pip-dialog.pip-options-dialog .pip-list-item.selected, .pip-dialog.pip-options-dialog .pip-list-item:hover {
+  .pip-options-dialog .pip-list-item.selected, .pip-options-dialog .pip-list-item:hover {
     background-color: rgba(0, 0, 0, 0.1); }
 
-.pip-dialog.pip-options-dialog md-dialog-content {
+.pip-options-dialog md-dialog-content {
   max-height: 500px;
   overflow-y: overlay !important; }
-  .pip-dialog.pip-options-dialog md-dialog-content .pip-content .pip-list-item {
+  .pip-options-dialog md-dialog-content .pip-content .pip-list-item {
     padding-left: 24px;
     padding-right: 24px; }
 
-.pip-dialog.pip-options-dialog-big .pip-header {
+.pip-options-dialog-big .pip-header {
   display: block;
   padding: 24px 24px 16px 24px !important; }
-  .pip-dialog.pip-options-dialog-big .pip-header h3 {
+  .pip-options-dialog-big .pip-header h3 {
     width: 100%;
     text-align: left;
     margin: 0 0 16px 0; }
-  .pip-dialog.pip-options-dialog-big .pip-header md-checkbox {
+  .pip-options-dialog-big .pip-header md-checkbox {
     font-size: 16px; }
 
-.pip-dialog.pip-options-dialog-big .pip-body {
+.pip-options-dialog-big .pip-body {
   padding: 0px !important; }
 
-.pip-dialog.pip-options-dialog-big .pip-menu {
+.pip-options-dialog-big .pip-menu {
   width: 100% !important; }
 
-.pip-dialog.pip-options-dialog-big .pip-list-item {
+.pip-options-dialog-big .pip-list-item {
   cursor: pointer;
   width: 100%;
   display: -webkit-box;
@@ -419,7 +419,7 @@ input:focus, p:focus, div:focus, li:focus, md-list-item:focus, md-list:focus, a:
   flex-direction: row;
   padding-top: 12px;
   padding-bottom: 12px; }
-  .pip-dialog.pip-options-dialog-big .pip-list-item md-radio-button {
+  .pip-options-dialog-big .pip-list-item md-radio-button {
     width: 20px;
     height: 20px;
     margin-top: 10px;
@@ -428,83 +428,83 @@ input:focus, p:focus, div:focus, li:focus, md-list-item:focus, md-list:focus, a:
     -webkit-flex: 0 0 auto;
     -ms-flex: 0 0 auto;
     flex: 0 0 auto; }
-  .pip-dialog.pip-options-dialog-big .pip-list-item .pip-content {
+  .pip-options-dialog-big .pip-list-item .pip-content {
     width: calc(100% - 44px);
     line-height: initial !important; }
-    .pip-dialog.pip-options-dialog-big .pip-list-item .pip-content .pip-title,
-    .pip-dialog.pip-options-dialog-big .pip-list-item .pip-content .pip-subtitle {
+    .pip-options-dialog-big .pip-list-item .pip-content .pip-title,
+    .pip-options-dialog-big .pip-list-item .pip-content .pip-subtitle {
       margin: 0; }
-    .pip-dialog.pip-options-dialog-big .pip-list-item .pip-content .pip-title {
+    .pip-options-dialog-big .pip-list-item .pip-content .pip-title {
       font: normal 500 16px Roboto, "Helvetica Neue", sans-serif;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
       margin-top: 1px !important;
       margin-bottom: 4px !important; }
-    .pip-dialog.pip-options-dialog-big .pip-list-item .pip-content .pip-subtitle {
+    .pip-options-dialog-big .pip-list-item .pip-content .pip-subtitle {
       font: normal 400 14px Roboto, "Helvetica Neue", sans-serif;
       color: rgba(0, 0, 0, 0.54); }
-    .pip-dialog.pip-options-dialog-big .pip-list-item .pip-content .pip-text {
+    .pip-options-dialog-big .pip-list-item .pip-content .pip-text {
       font: normal 400 16px Roboto, "Helvetica Neue", sans-serif;
       line-height: 22px !important; }
-  .pip-dialog.pip-options-dialog-big .pip-list-item.selected, .pip-dialog.pip-options-dialog-big .pip-list-item:hover {
+  .pip-options-dialog-big .pip-list-item.selected, .pip-options-dialog-big .pip-list-item:hover {
     background-color: rgba(0, 0, 0, 0.1); }
 
-.pip-dialog.pip-options-dialog-big .header-hint {
+.pip-options-dialog-big .header-hint {
   background-color: rgba(0, 0, 0, 0.08) !important;
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   padding: 24px 24px 24px 24px !important; }
 
-.pip-dialog.pip-options-dialog-big .dialog-hint {
+.pip-options-dialog-big .dialog-hint {
   line-height: 19px;
   font-size: 13px;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   font-style: normal;
   font-weight: normal; }
-  .pip-dialog.pip-options-dialog-big .dialog-hint md-icon {
+  .pip-options-dialog-big .dialog-hint md-icon {
     font-size: 24px;
     width: 24px !important;
     height: 24px !important;
     margin: 0 16px 0 0 !important; }
 
-.pip-dialog.pip-options-dialog-big .hint-icon-container {
+.pip-options-dialog-big .hint-icon-container {
   width: 40px; }
 
-.pip-dialog.pip-options-dialog-big .content-divider {
+.pip-options-dialog-big .content-divider {
   border-top: 1px solid rgba(0, 0, 0, 0.12);
   margin-bottom: 8px;
   margin-top: 8px; }
 
-.pip-dialog.pip-options-dialog-big .spacer8 {
+.pip-options-dialog-big .spacer8 {
   height: 8px; }
 
-.pip-dialog.pip-options-dialog-big .content-stretch {
+.pip-options-dialog-big .content-stretch {
   max-width: 100% !important; }
 
-.pip-dialog.pip-options-dialog-big .spacer-right {
+.pip-options-dialog-big .spacer-right {
   padding-right: 24px !important; }
 
 @media (max-width: 1200px) {
-  .pip-dialog.pip-options-dialog-big .spacer-right {
+  .pip-options-dialog-big .spacer-right {
     padding-right: 16px !important; } }
 
-.pip-dialog.pip-confirmation-dialog .pip-header {
+.pip-confirmation-dialog .pip-header {
   line-height: 24px; }
-  .pip-dialog.pip-confirmation-dialog .pip-header h3 {
+  .pip-confirmation-dialog .pip-header h3 {
     margin: 0px; }
 
-.pip-dialog.pip-confirmation-dialog .pip-footer {
+.pip-confirmation-dialog .pip-footer {
   border-top: 0 !important; }
 
-.pip-dialog.pip-error-details-dialog .error-section {
+.pip-error-details-dialog .error-section {
   height: 48px !important; }
 
-.pip-dialog.pip-error-details-dialog .pip-header {
+.pip-error-details-dialog .pip-header {
   padding: 0px !important; }
-  .pip-dialog.pip-error-details-dialog .pip-header h3 {
+  .pip-error-details-dialog .pip-header h3 {
     margin: 0px; }
 
-.pip-dialog.pip-information-dialog .pip-header h3 {
+.pip-information-dialog .pip-header h3 {
   margin: 0px; }
 
 .pip-dialog .pip-footer {

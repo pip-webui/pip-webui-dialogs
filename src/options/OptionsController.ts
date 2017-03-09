@@ -1,23 +1,5 @@
-'use strict';
-
-import IWindowService = angular.IWindowService;
-
-export class OptionsData {
-    public icon: string = 'star';
-    public name: string;
-    public title: string;
-    public active: boolean = true; 
-}
-
-export class OptionsParams {
-    public title?: string;  
-    public applyButtonTitle?: string;
-    public options?: OptionsData[];
-    public selectedOption?: OptionsData;
-    public deleted?: boolean;
-    public selectedOptionName?: string;
-    public deletedTitle?: string;
-}
+import { OptionsData } from './OptionsData';
+import { OptionsParams } from './OptionsParams';
 
 export class OptionsDialogController {
 

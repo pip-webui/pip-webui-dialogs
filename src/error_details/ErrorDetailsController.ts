@@ -1,27 +1,9 @@
-'use strict';
-
-import IWindowService = angular.IWindowService;
-
-export class ErrorStrings {
-    public ok: string = 'OK';
-    public cancel: string = 'Cancel';
-    public errorDetails: string = 'Error details';
-    public dismissButton: string = 'Dismiss';
-    public errorMessage: string = 'Message';
-    public errorCode: string = 'Code';
-    public errorMethod: string = 'Method';
-    public errorPath: string = 'Path';
-    public error: string = 'Error';
-    public errorText: string = 'Error';   
-}
-
-export class ErrorParams {
-    public ok: string = 'OK';
-    public cancel: string = 'CANCEL';
-    public error: string = 'ERROR';
-}
+import { ErrorStrings } from './ErrorStrings';
+import { ErrorParams } from './ErrorParams';
 
 export class ErrorDetailsDialogController {
+    private _injector: ng.auto.IInjectorService;
+
     public $mdDialog: ng.material.IDialogService;
     public theme: string;
     public config: ErrorStrings;
@@ -29,13 +11,22 @@ export class ErrorDetailsDialogController {
     constructor(
         $mdDialog: ng.material.IDialogService,
         $injector: ng.auto.IInjectorService,
-        $rootScope: ng.IRootScopeService, 
-        params: ErrorParams) 
-    {
+        $rootScope: ng.IRootScopeService,
+        params: ErrorParams) {
         "ngInject";
         this.config = new ErrorStrings();
-        let pipTranslate: pip.services.ITranslateService = $injector.has('pipTranslate') 
-            ? <pip.services.ITranslateService>$injector.get('pipTranslate') : null;
+        this._injector = $injector;
+
+        this.initTranslate(params);
+
+        this.$mdDialog = $mdDialog;
+        this.theme = $rootScope.$theme;
+        this.config.error = params.error;
+    }
+
+    private initTranslate(params: ErrorParams): void {
+        let pipTranslate: pip.services.ITranslateService;
+        pipTranslate = this._injector.has('pipTranslate') ? <pip.services.ITranslateService>this._injector.get('pipTranslate') : null;
 
         if (pipTranslate) {
             pipTranslate.translations('en', {
@@ -51,7 +42,7 @@ export class ErrorDetailsDialogController {
             });
             pipTranslate.translations('ru', {
                 'OK': 'Ок',
-                'CANCEL': 'Отмена',                    
+                'CANCEL': 'Отмена',
                 'ERROR_DETAILS': 'Детали ошибки',
                 'CODE': 'Код ошибки',
                 'PATH': 'Путь',
@@ -67,17 +58,13 @@ export class ErrorDetailsDialogController {
             this.config.errorCode = pipTranslate.translate('CODE');
             this.config.errorMethod = pipTranslate.translate('METHOD');
             this.config.errorPath = pipTranslate.translate('PATH');
-            this.config.errorText = pipTranslate.translate('ERROR');                
+            this.config.errorText = pipTranslate.translate('ERROR');
         } else {
             this.config.ok = params.ok || 'Ok';
             this.config.cancel = params.cancel || 'Cancel';
         }
-        
-        this.$mdDialog = $mdDialog;
-        this.theme = $rootScope.$theme;
-        this.config.error = params.error;
     }
-
+    
     public onOk(): void {
         this.$mdDialog.hide();
     }

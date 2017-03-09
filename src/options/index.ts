@@ -1,4 +1,3 @@
-'use strict';
 
 angular
     .module('pipOptionsDialog', [
@@ -15,6 +14,11 @@ angular
         'ngMaterial', 
         'pipDialogs.Translate',
         'pipDialogs.Templates']);
-        
+
+import './OptionsBigParams';
+import './OptionsBigData';
+import './OptionsData';
+import './OptionsParams';
+import './IOptionsBigDialogController';        
 import './OptionsBigService';
 import './OptionsBigController';

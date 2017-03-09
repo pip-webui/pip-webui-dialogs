@@ -1,39 +1,9 @@
-'use strict';
-
-import IWindowService = angular.IWindowService;
-
-export class OptionsBigData {
-    public name: string;
-    public title: string;
-    public subtitle: string;
-}
-
-export class OptionsBigParams {
-    public title?: string;  
-    public applyButtonTitle?: string;
-    public options?: OptionsBigData[];
-    public selectedOption?: OptionsBigData;
-    public deleted?: boolean;
-    public selectedOptionName?: string;
-    public deletedTitle?: string;
-    public hint?: string;
-    public noTitle: boolean = false;
-    public noActions: boolean = false;
-    public optionIndex: number = 0;
-}
-
-export interface IOptionsBigDialogController {
-    onOk(): void;
-    onCancel(): void;
-    onKeyUp(event: JQueryKeyEventObject, index: number): void;
-    onOptionSelect(event: ng.IAngularEvent, option: OptionsBigData);
-    onSelected(): void;
-    onSelect: Function;
-    config: OptionsBigParams;
-    theme: string;
-}
+import { OptionsBigParams } from './OptionsBigParams';
+import { OptionsBigData } from './OptionsBigData';
+import { IOptionsBigDialogController } from './IOptionsBigDialogController';
 
 export class OptionsBigDialogController implements IOptionsBigDialogController {
+    private _injector: ng.auto.IInjectorService;
 
     private $mdDialog: angular.material.IDialogService;
     public theme: string;
@@ -49,19 +19,12 @@ export class OptionsBigDialogController implements IOptionsBigDialogController {
 
         this.$mdDialog = $mdDialog;
         this.config = new OptionsBigParams();
-        var pipTranslate: pip.services.ITranslateService = $injector.has('pipTranslate') ? <pip.services.ITranslateService>$injector.get('pipTranslate') : null;
-        if (pipTranslate) {
-            pipTranslate.translations('en', { 'OPTIONS_TITLE': 'Choose Option'});
-            pipTranslate.translations('ru', { 'OPTIONS_TITLE': 'Выберите опцию'});
+        this._injector = $injector;
 
-            this.config.title =  pipTranslate.translate(params.title) || pipTranslate.translate('OPTIONS_TITLE');
-            this.config.applyButtonTitle = pipTranslate.translate(params.applyButtonTitle) || pipTranslate.translate('SELECT');
-        } else {
-            this.config.title = params.title || 'Choose Option';
-            this.config.applyButtonTitle = params.applyButtonTitle || 'Select';
-        }
+        this.initTranslate(params)
 
         this.theme = $rootScope['$theme'];
+        
         this.config.options = params.options;
         this.config.selectedOption = _.find(params.options, {active: true}) || new OptionsBigData();
         this.config.selectedOptionName = this.config.selectedOption.name;
@@ -72,6 +35,22 @@ export class OptionsBigDialogController implements IOptionsBigDialogController {
         this.config.hint = params.hint || '';
 
         setTimeout(this.focusInput, 500);
+    }
+
+    private initTranslate(params: OptionsBigParams): void {
+        let pipTranslate: pip.services.ITranslateService;
+        pipTranslate = this._injector.has('pipTranslate') ? <pip.services.ITranslateService>this._injector.get('pipTranslate') : null;
+
+        if (pipTranslate) {
+            pipTranslate.translations('en', { 'OPTIONS_TITLE': 'Choose Option'});
+            pipTranslate.translations('ru', { 'OPTIONS_TITLE': 'Выберите опцию'});
+
+            this.config.title =  pipTranslate.translate(params.title) || pipTranslate.translate('OPTIONS_TITLE');
+            this.config.applyButtonTitle = pipTranslate.translate(params.applyButtonTitle) || pipTranslate.translate('SELECT');
+        } else {
+            this.config.title = params.title || 'Choose Option';
+            this.config.applyButtonTitle = params.applyButtonTitle || 'Select';
+        }        
     }
 
     public onOk(): void {

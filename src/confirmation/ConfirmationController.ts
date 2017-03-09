@@ -1,6 +1,7 @@
 import { ConfirmationParams } from './ConfirmationParams';
 
 export class ConfirmationDialogController {
+    private _injector: ng.auto.IInjectorService;
 
     public $mdDialog: angular.material.IDialogService;
     public theme: string;
@@ -14,9 +15,17 @@ export class ConfirmationDialogController {
     {
         "ngInject";
         this.config = new ConfirmationParams();
+        this._injector = $injector;
 
+        this.initTranslate(params);
+
+        this.$mdDialog = $mdDialog;
+        this.theme = $rootScope['$theme'];
+    }
+
+    private initTranslate(params: ConfirmationParams): void {
         let pipTranslate: pip.services.ITranslateService;
-        pipTranslate = $injector.has('pipTranslate') ? <pip.services.ITranslateService>$injector.get('pipTranslate') : null;
+        pipTranslate = this._injector.has('pipTranslate') ? <pip.services.ITranslateService>this._injector.get('pipTranslate') : null;
 
         if (pipTranslate) {
             pipTranslate.translations('en', { 'CONFIRM_TITLE': 'Confirm' });
@@ -30,9 +39,6 @@ export class ConfirmationDialogController {
             this.config.ok = params.ok || 'OK';
             this.config.cancel = params.cancel || 'Cancel';
         }
-
-        this.$mdDialog = $mdDialog;
-        this.theme = $rootScope['$theme'];
     }
 
     public onOk(): void {

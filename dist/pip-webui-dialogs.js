@@ -47,6 +47,7 @@ angular
     'pipDialogs.Templates'
 ])
     .controller('pipConfirmationDialogController', ConfirmationDialogController);
+
 },{}],2:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -79,11 +80,13 @@ var ConfirmationService = (function () {
 angular
     .module('pipConfirmationDialog')
     .service('pipConfirmationDialog', ConfirmationService);
+
 },{}],3:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
 require("./ConfirmationController");
 require("./ConfirmationService");
+
 },{"./ConfirmationController":1,"./ConfirmationService":2}],4:[function(require,module,exports){
 (function () {
     'use strict';
@@ -96,6 +99,7 @@ require("./ConfirmationService");
         };
     }]);
 })();
+
 },{}],5:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -111,6 +115,7 @@ angular
     'pipOptionsBigDialog',
     'pipErrorDetailsDialog',
 ]);
+
 },{"./confirmation":3,"./error_details":8,"./information":11,"./options":16}],6:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -197,6 +202,7 @@ exports.ErrorDetailsDialogController = ErrorDetailsDialogController;
 angular
     .module('pipErrorDetailsDialog')
     .controller('pipErrorDetailsDialogController', ErrorDetailsDialogController);
+
 },{}],7:[function(require,module,exports){
 var ErrorDetailsService = (function () {
     ErrorDetailsService.$inject = ['$mdDialog'];
@@ -227,6 +233,7 @@ var ErrorDetailsService = (function () {
 angular
     .module('pipErrorDetailsDialog')
     .service('pipErrorDetailsDialog', ErrorDetailsService);
+
 },{}],8:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -238,6 +245,7 @@ angular
 ]);
 require("./ErrorDetailsService");
 require("./ErrorDetailsController");
+
 },{"./ErrorDetailsController":6,"./ErrorDetailsService":7}],9:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -295,6 +303,7 @@ exports.InformationDialogController = InformationDialogController;
 angular
     .module('pipInformationDialog')
     .controller('pipInformationDialogController', InformationDialogController);
+
 },{}],10:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -323,6 +332,7 @@ var InformationService = (function () {
 angular
     .module('pipInformationDialog')
     .service('pipInformationDialog', InformationService);
+
 },{}],11:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -334,6 +344,7 @@ angular
 ]);
 require("./InformationService");
 require("./InformationController");
+
 },{"./InformationController":9,"./InformationService":10}],12:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -425,6 +436,7 @@ exports.OptionsBigDialogController = OptionsBigDialogController;
 angular
     .module('pipOptionsBigDialog')
     .controller('pipOptionsBigDialogController', OptionsBigDialogController);
+
 },{}],13:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -457,6 +469,7 @@ var OptionsBigService = (function () {
 angular
     .module('pipOptionsBigDialog')
     .service('pipOptionsBigDialog', OptionsBigService);
+
 },{}],14:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -478,7 +491,6 @@ var OptionsDialogController = (function () {
     OptionsDialogController.$inject = ['$mdDialog', '$injector', '$rootScope', 'params'];
     function OptionsDialogController($mdDialog, $injector, $rootScope, params) {
         "ngInject";
-        console.log('params', params);
         this.$mdDialog = $mdDialog;
         this.config = new OptionsParams();
         var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
@@ -509,7 +521,6 @@ var OptionsDialogController = (function () {
     OptionsDialogController.prototype.onOptionSelect = function (event, option) {
         event.stopPropagation();
         this.config.selectedOptionName = option.name;
-        console.log('onOptionSelect', event, option);
     };
     OptionsDialogController.prototype.onKeyPress = function (event) {
         if (event.keyCode === 32 || event.keyCode === 13) {
@@ -519,7 +530,6 @@ var OptionsDialogController = (function () {
         }
     };
     OptionsDialogController.prototype.onSelect = function () {
-        console.log('onSelect');
         var option;
         option = _.find(this.config.options, { name: this.config.selectedOptionName });
         this.$mdDialog.hide({ option: option, deleted: this.config.deleted });
@@ -535,6 +545,7 @@ exports.OptionsDialogController = OptionsDialogController;
 angular
     .module('pipOptionsDialog')
     .controller('pipOptionsDialogController', OptionsDialogController);
+
 },{}],15:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -567,6 +578,7 @@ var OptionsService = (function () {
 angular
     .module('pipOptionsDialog')
     .service('pipOptionsDialog', OptionsService);
+
 },{}],16:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -586,6 +598,7 @@ angular
 ]);
 require("./OptionsBigService");
 require("./OptionsBigController");
+
 },{"./OptionsBigController":12,"./OptionsBigService":13,"./OptionsController":14,"./OptionsService":15}],17:[function(require,module,exports){
 (function(module) {
 try {
@@ -595,23 +608,7 @@ try {
 }
 module.run(['$templateCache', function($templateCache) {
   $templateCache.put('confirmation/ConfirmationDialog.html',
-    '<!--\n' +
-    '@file Confirmation dialog template\n' +
-    '@copyright Digital Living Software Corp. 2014-2016\n' +
-    '-->\n' +
-    '\n' +
-    '<md-dialog class="pip-dialog pip-confirmation-dialog layout-column" width="400" md-theme="{{::vm.theme}}">\n' +
-    '    <div class="pip-header">\n' +
-    '        <h3>{{:: vm.config.title}}</h3>\n' +
-    '    </div>\n' +
-    '    <div class="pip-footer">\n' +
-    '        <div>\n' +
-    '            <md-button ng-click="vm.onCancel()">{{:: vm.config.cancel}}</md-button>\n' +
-    '            <md-button class="md-accent" ng-click="vm.onOk()">{{:: vm.config.ok}}</md-button>\n' +
-    '        </div>\n' +
-    '    </div>\n' +
-    '</md-dialog>\n' +
-    '');
+    '<md-dialog class="pip-dialog pip-confirmation-dialog layout-column" width="400" md-theme="{{::vm.theme}}"><div class="pip-header"><h3>{{:: vm.config.title}}</h3></div><div class="pip-footer"><div><md-button ng-click="vm.onCancel()">{{:: vm.config.cancel}}</md-button><md-button class="md-accent" ng-click="vm.onOk()">{{:: vm.config.ok}}</md-button></div></div></md-dialog>');
 }]);
 })();
 
@@ -623,196 +620,7 @@ try {
 }
 module.run(['$templateCache', function($templateCache) {
   $templateCache.put('error_details/ErrorDetails.html',
-    '<!--\n' +
-    '@file Confirmation dialog template\n' +
-    '@copyright Digital Living Software Corp. 2014-2016\n' +
-    '-->\n' +
-    '\n' +
-    '<md-dialog class="pip-dialog pip-error-details-dialog layout-column" width="400" md-theme="{{vm.theme}}">\n' +
-    '    <div class="pip-body">\n' +
-    '        <div class="pip-header">\n' +
-    '            <h3>{{::vm.config.errorDetails | translate}}</h3>\n' +
-    '        </div>\n' +
-    '        <div class="layout-row layout-align-start-center error-section text-body2 color-secondary-text"\n' +
-    '             ng-if="vm.config.error.code || (vm.config.error.data && error.data.code)">\n' +
-    '            {{::vm.config.errorCode | translate}}\n' +
-    '        </div>\n' +
-    '        <div class="layout-row layout-align-start-center text-subhead1" ng-if="vm.config.error.code || (vm.config.error.data && vm.config.error.data.code)">\n' +
-    '            {{vm.config.error.code || vm.config.error.data.code}}\n' +
-    '        </div>\n' +
-    '\n' +
-    '        <div class="layout-row layout-align-start-center error-section text-body2 color-secondary-text"\n' +
-    '             ng-if="vm.config.error.path || (vm.config.error.data && vm.config.error.data.path)">\n' +
-    '            {{::vm.config.errorPath | translate}}\n' +
-    '        </div>\n' +
-    '        <div class="layout-row layout-align-start-center text-subhead1" ng-if="vm.config.error.path || (vm.config.error.data && vm.config.error.data.path)">\n' +
-    '            {{vm.config.error.path || vm.config.error.data.path}}\n' +
-    '        </div>\n' +
-    '\n' +
-    '        <div class="error-section text-body2 color-secondary-text layout-row layout-align-start-center"\n' +
-    '             ng-if="vm.config.error.error || (vm.config.error.data && vm.config.error.data.error)">\n' +
-    '            {{::vm.config.errorText | translate}}\n' +
-    '        </div>\n' +
-    '        <div class="layout-row layout-align-start-center text-subhead1" ng-if="vm.config.error.error || (vm.config.error.data && vm.config.error.data.error)">\n' +
-    '            {{vm.config.error.error || vm.config.error.data.error}}\n' +
-    '        </div>\n' +
-    '\n' +
-    '        <div class="error-section text-body2 color-secondary-text layout-row layout-align-start-center"\n' +
-    '             ng-if="vm.config.error.method || (vm.config.error.data && vm.config.error.data.method)">\n' +
-    '            {{::vm.config.errorMethod | translate}}\n' +
-    '        </div>\n' +
-    '        <div class="layout-row layout-align-start-center text-subhead1" ng-if="vm.config.error.method || (vm.config.error.data && vm.config.error.data.method)">\n' +
-    '            {{vm.config.error.method || vm.config.error.data.method}}\n' +
-    '        </div>\n' +
-    '\n' +
-    '        <div class="error-section text-body2 color-secondary-text layout-row layout-align-start-center"\n' +
-    '             ng-if="vm.config.error.message || (vm.config.error.data && vm.config.error.data.message)">\n' +
-    '            {{::vm.config.errorMessage | translate}}\n' +
-    '        </div>\n' +
-    '        <div class="layout-row layout-align-start-center text-subhead1"\n' +
-    '             ng-if="vm.config.error.message || (vm.config.error.data && vm.config.error.data.message)">\n' +
-    '            {{vm.config.error.message || vm.config.error.data.message}}\n' +
-    '        </div>\n' +
-    '    </div>\n' +
-    '    <div class="pip-footer">\n' +
-    '        <div>\n' +
-    '            <md-button class="md-accent m0" ng-click="vm.onOk()">{{::vm.config.dismissButton | translate}}</md-button>\n' +
-    '        </div>\n' +
-    '    </div>\n' +
-    '</md-dialog>\n' +
-    '');
-}]);
-})();
-
-(function(module) {
-try {
-  module = angular.module('pipDialogs.Templates');
-} catch (e) {
-  module = angular.module('pipDialogs.Templates', []);
-}
-module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('options/OptionsBigDialog.html',
-    '<!--\n' +
-    '@file Options dialog content\n' +
-    '@copyright Digital Living Software Corp. 2014-2016\n' +
-    '-->\n' +
-    '\n' +
-    '<md-dialog class="pip-dialog pip-options-dialog-big layout-column"\n' +
-    '           min-width="400" md-theme="{{vm.theme}}">\n' +
-    '    <md-dialog-content class="pip-body pip-scroll" ng-class="{\'bp24\': !vm.config.noActions}">\n' +
-    '        <div class="pip-header" ng-class="{\'header-hint\': vm.config.noTitle && vm.config.hint}">\n' +
-    '            <h3 class="m0" ng-if="!vm.config.noTitle">\n' +
-    '                {{::vm.config.title | translate}}\n' +
-    '            </h3>\n' +
-    '            <div ng-show="vm.config.noTitle && vm.config.hint" \n' +
-    '                 class="dialog-hint layout-row layout-align-start-center">\n' +
-    '                <div class="hint-icon-container flex-fixed" >\n' +
-    '                    <md-icon md-svg-icon="icons:info-circle-outline"></md-icon>\n' +
-    '                </div>\n' +
-    '                <div>{{::vm.config.hint | translate}}</div>\n' +
-    '            </div>\n' +
-    '        </div>\n' +
-    '        <div class="content-divider" ng-if="!noTitle"></div>\n' +
-    '        <div class="pip-content">\n' +
-    '            <div class="spacer8" ng-if="noTitle && hint"></div>\n' +
-    '            <md-list class="pip-menu  pip-ref-list"\n' +
-    '                     pip-selected="vm.config.optionIndex" index="{{vm.config.optionIndex }}"\n' +
-    '                     pip-select="vm.onSelected($event)">\n' +
-    '\n' +
-    '                <md-list-item class="pip-ref-list-item pip-selectable layout-row layout-align-start-center"\n' +
-    '                              ng-class="{\'selected md-focused\' : option.name == selectedOptionName,\n' +
-    '                              \'divider-bottom\': $index != options.length - 1}"\n' +
-    '                              md-ink-ripple\n' +
-    '                              ng-keyup="vm.onKeyUp($event, $index)"\n' +
-    '                              ng-repeat="option in vm.config.options" >\n' +
-    '\n' +
-    '                    <div class="pip-content  content-stretch" ng-click="vm.onOptionSelect($event, option)">\n' +
-    '                        <p class="pip-title spacer-right" ng-if="option.title" style="margin-bottom: 4px !important;">\n' +
-    '                            {{::option.title | translate}}\n' +
-    '                        </p>\n' +
-    '                        <div class="pip-subtitle spacer-right"\n' +
-    '                             style="height: inherit"\n' +
-    '                             ng-if="option.subtitle">\n' +
-    '                            {{::option.subtitle | translate}}\n' +
-    '                        </div>\n' +
-    '                        <div class="pip-subtitle spacer-right"\n' +
-    '                             style="height: inherit" ng-if="option.text"\n' +
-    '                             ng-bind-html="option.text | translate">\n' +
-    '                        </div>\n' +
-    '                    </div>\n' +
-    '\n' +
-    '                </md-list-item>\n' +
-    '\n' +
-    '            </md-list>\n' +
-    '        </div>\n' +
-    '        <div class="spacer8" ng-if="vm.config.noActions"></div>\n' +
-    '    </md-dialog-content>\n' +
-    '\n' +
-    '    <div class="pip-footer" ng-if="!vm.config.noActions">\n' +
-    '        <div>\n' +
-    '            <md-button class="pip-cancel" ng-click="vm.onCancel()">{{::\'CANCEL\' | translate}}</md-button>\n' +
-    '            <md-button class="pip-submit md-accent" ng-click="vm.onSelect()" style="margin-right: -6px">\n' +
-    '                {{::vm.config.applyButtonTitle | translate}}\n' +
-    '            </md-button>\n' +
-    '        </div>\n' +
-    '    </div>\n' +
-    '</md-dialog>\n' +
-    '');
-}]);
-})();
-
-(function(module) {
-try {
-  module = angular.module('pipDialogs.Templates');
-} catch (e) {
-  module = angular.module('pipDialogs.Templates', []);
-}
-module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('options/OptionsDialog.html',
-    '<!--\n' +
-    '@file Options dialog content\n' +
-    '@copyright Digital Living Software Corp. 2014-2016\n' +
-    '-->\n' +
-    '\n' +
-    '<md-dialog class="pip-dialog pip-options-dialog layout-column"\n' +
-    '           min-width="400" md-theme="{{vm.theme}}">\n' +
-    '    <md-dialog-content class="pip-body lp0 tp0 rp0 bp24 pip-scroll">\n' +
-    '        <div class="pip-header" >\n' +
-    '            <h3>{{::vm.config.title | translate}}</h3>\n' +
-    '            <div ng-show="vm.config.deletedTitle" class="header-option text-subhead1 divider-bottom">\n' +
-    '                <md-checkbox ng-model="deleted" aria-label="CHECKBOX">{{::vm.config.deletedTitle | translate}}</md-checkbox>\n' +
-    '            </div>\n' +
-    '        </div>\n' +
-    '        <div class="pip-content">\n' +
-    '            <md-radio-group ng-model="vm.config.selectedOptionName" class="pip-list md-primary" md-no-ink="true"\n' +
-    '                            ng-keypress="vm.onKeyPress($event)" tabindex="0">\n' +
-    '                <div ng-repeat="option in vm.config.options" class="pip-list-item" md-ink-ripple\n' +
-    '                     ui-event="{ click: \'vm.onOptionSelect($event, option)\' }"\n' +
-    '                     ng-class="{ selected: option.name == vm.config.selectedOptionName }">\n' +
-    '                    <div class="pip-list-item item-padding">\n' +
-    '                        <md-icon class="pip-option-icon" md-svg-icon="icons:{{option.icon}}" ng-if="option.icon">\n' +
-    '                        </md-icon>\n' +
-    '                        <div class="pip-option-title">\n' +
-    '                            {{::option.title | translate}}\n' +
-    '                        </div>\n' +
-    '                        <md-radio-button ng-value="option.name" tabindex="-1"\n' +
-    '                                        \n' +
-    '                                         aria-label="{{::option.title | translate}}">\n' +
-    '                        </md-radio-button>\n' +
-    '                    </div>\n' +
-    '\n' +
-    '                </div>\n' +
-    '            </md-radio-group>\n' +
-    '        </div>\n' +
-    '    </md-dialog-content>\n' +
-    '    <div class="pip-footer">\n' +
-    '        <div>\n' +
-    '            <md-button class="pip-cancel" ng-click="vm.onCancel()">{{::\'CANCEL\' | translate}}</md-button>\n' +
-    '            <md-button class="pip-submit md-accent" ng-click="vm.onSelect()">{{::vm.config.applyButtonTitle | translate}}</md-button>\n' +
-    '        </div>\n' +
-    '    </div>\n' +
-    '</md-dialog>\n' +
-    '');
+    '<md-dialog class="pip-dialog pip-error-details-dialog layout-column" width="400" md-theme="{{vm.theme}}"><div class="pip-body"><div class="pip-header"><h3>{{::vm.config.errorDetails | translate}}</h3></div><div class="layout-row layout-align-start-center error-section text-body2 color-secondary-text" ng-if="vm.config.error.code || (vm.config.error.data && error.data.code)">{{::vm.config.errorCode | translate}}</div><div class="layout-row layout-align-start-center text-subhead1" ng-if="vm.config.error.code || (vm.config.error.data && vm.config.error.data.code)">{{vm.config.error.code || vm.config.error.data.code}}</div><div class="layout-row layout-align-start-center error-section text-body2 color-secondary-text" ng-if="vm.config.error.path || (vm.config.error.data && vm.config.error.data.path)">{{::vm.config.errorPath | translate}}</div><div class="layout-row layout-align-start-center text-subhead1" ng-if="vm.config.error.path || (vm.config.error.data && vm.config.error.data.path)">{{vm.config.error.path || vm.config.error.data.path}}</div><div class="error-section text-body2 color-secondary-text layout-row layout-align-start-center" ng-if="vm.config.error.error || (vm.config.error.data && vm.config.error.data.error)">{{::vm.config.errorText | translate}}</div><div class="layout-row layout-align-start-center text-subhead1" ng-if="vm.config.error.error || (vm.config.error.data && vm.config.error.data.error)">{{vm.config.error.error || vm.config.error.data.error}}</div><div class="error-section text-body2 color-secondary-text layout-row layout-align-start-center" ng-if="vm.config.error.method || (vm.config.error.data && vm.config.error.data.method)">{{::vm.config.errorMethod | translate}}</div><div class="layout-row layout-align-start-center text-subhead1" ng-if="vm.config.error.method || (vm.config.error.data && vm.config.error.data.method)">{{vm.config.error.method || vm.config.error.data.method}}</div><div class="error-section text-body2 color-secondary-text layout-row layout-align-start-center" ng-if="vm.config.error.message || (vm.config.error.data && vm.config.error.data.message)">{{::vm.config.errorMessage | translate}}</div><div class="layout-row layout-align-start-center text-subhead1" ng-if="vm.config.error.message || (vm.config.error.data && vm.config.error.data.message)">{{vm.config.error.message || vm.config.error.data.message}}</div></div><div class="pip-footer"><div><md-button class="md-accent m0" ng-click="vm.onOk()">{{::vm.config.dismissButton | translate}}</md-button></div></div></md-dialog>');
 }]);
 })();
 
@@ -824,28 +632,31 @@ try {
 }
 module.run(['$templateCache', function($templateCache) {
   $templateCache.put('information/InformationDialog.html',
-    '<!--\n' +
-    '@file Information dialog content\n' +
-    '@copyright Digital Living Software Corp. 2014-2016\n' +
-    '-->\n' +
-    '\n' +
-    '<md-dialog class="pip-dialog pip-information-dialog layout-column"\n' +
-    '           width="400" md-theme="{{vm.theme}}">\n' +
-    '    <div class="pip-header">\n' +
-    '        <h3 >{{:: vm.config.title | translate }}</h3>\n' +
-    '    </div>\n' +
-    '    <div class="pip-body">\n' +
-    '        <div class="pip-content">\n' +
-    '            {{ vm.config.content }}\n' +
-    '        </div>\n' +
-    '    </div>\n' +
-    '    <div class="pip-footer">\n' +
-    '        <div>\n' +
-    '            <md-button class="md-accent" ng-click="vm.onOk()">{{ vm.config.ok | translate }}</md-button>\n' +
-    '        </div>\n' +
-    '    </div>\n' +
-    '</md-dialog>\n' +
-    '');
+    '<md-dialog class="pip-dialog pip-information-dialog layout-column" width="400" md-theme="{{vm.theme}}"><div class="pip-header"><h3>{{:: vm.config.title | translate }}</h3></div><div class="pip-body"><div class="pip-content">{{ vm.config.content }}</div></div><div class="pip-footer"><div><md-button class="md-accent" ng-click="vm.onOk()">{{ vm.config.ok | translate }}</md-button></div></div></md-dialog>');
+}]);
+})();
+
+(function(module) {
+try {
+  module = angular.module('pipDialogs.Templates');
+} catch (e) {
+  module = angular.module('pipDialogs.Templates', []);
+}
+module.run(['$templateCache', function($templateCache) {
+  $templateCache.put('options/OptionsBigDialog.html',
+    '<md-dialog class="pip-dialog pip-options-dialog-big layout-column" min-width="400" md-theme="{{vm.theme}}"><md-dialog-content class="pip-body pip-scroll" ng-class="{\'bp24\': !vm.config.noActions}"><div class="pip-header" ng-class="{\'header-hint\': vm.config.noTitle && vm.config.hint}"><h3 class="m0" ng-if="!vm.config.noTitle">{{::vm.config.title | translate}}</h3><div ng-show="vm.config.noTitle && vm.config.hint" class="dialog-hint layout-row layout-align-start-center"><div class="hint-icon-container flex-fixed"><md-icon md-svg-icon="icons:info-circle-outline"></md-icon></div><div>{{::vm.config.hint | translate}}</div></div></div><div class="content-divider" ng-if="!noTitle"></div><div class="pip-content"><div class="spacer8" ng-if="noTitle && hint"></div><md-list class="pip-menu pip-ref-list" pip-selected="vm.config.optionIndex" index="{{vm.config.optionIndex }}" pip-select="vm.onSelected($event)"><md-list-item class="pip-ref-list-item pip-selectable layout-row layout-align-start-center" ng-class="{\'selected md-focused\' : option.name == selectedOptionName, \'divider-bottom\': $index != options.length - 1}" md-ink-ripple="" ng-keyup="vm.onKeyUp($event, $index)" ng-repeat="option in vm.config.options"><div class="pip-content content-stretch" ng-click="vm.onOptionSelect($event, option)"><p class="pip-title spacer-right" ng-if="option.title" style="margin-bottom: 4px !important;">{{::option.title | translate}}</p><div class="pip-subtitle spacer-right" style="height: inherit" ng-if="option.subtitle">{{::option.subtitle | translate}}</div><div class="pip-subtitle spacer-right" style="height: inherit" ng-if="option.text" ng-bind-html="option.text | translate"></div></div></md-list-item></md-list></div><div class="spacer8" ng-if="vm.config.noActions"></div></md-dialog-content><div class="pip-footer" ng-if="!vm.config.noActions"><div><md-button class="pip-cancel" ng-click="vm.onCancel()">{{::\'CANCEL\' | translate}}</md-button><md-button class="pip-submit md-accent" ng-click="vm.onSelect()" style="margin-right: -6px">{{::vm.config.applyButtonTitle | translate}}</md-button></div></div></md-dialog>');
+}]);
+})();
+
+(function(module) {
+try {
+  module = angular.module('pipDialogs.Templates');
+} catch (e) {
+  module = angular.module('pipDialogs.Templates', []);
+}
+module.run(['$templateCache', function($templateCache) {
+  $templateCache.put('options/OptionsDialog.html',
+    '<md-dialog class="pip-dialog pip-options-dialog layout-column" min-width="400" md-theme="{{vm.theme}}"><md-dialog-content class="pip-body lp0 tp0 rp0 bp24 pip-scroll"><div class="pip-header"><h3>{{::vm.config.title | translate}}</h3><div ng-show="vm.config.deletedTitle" class="header-option text-subhead1 divider-bottom"><md-checkbox ng-model="deleted" aria-label="CHECKBOX">{{::vm.config.deletedTitle | translate}}</md-checkbox></div></div><div class="pip-content"><md-radio-group ng-model="vm.config.selectedOptionName" class="pip-list md-primary" md-no-ink="true" ng-keypress="vm.onKeyPress($event)" tabindex="0"><div ng-repeat="option in vm.config.options" class="pip-list-item" md-ink-ripple="" ui-event="{ click: \'vm.onOptionSelect($event, option)\' }" ng-class="{ selected: option.name == vm.config.selectedOptionName }"><div class="pip-list-item item-padding"><md-icon class="pip-option-icon" md-svg-icon="icons:{{option.icon}}" ng-if="option.icon"></md-icon><div class="pip-option-title">{{::option.title | translate}}</div><md-radio-button ng-value="option.name" tabindex="-1" aria-label="{{::option.title | translate}}"></md-radio-button></div></div></md-radio-group></div></md-dialog-content><div class="pip-footer"><div><md-button class="pip-cancel" ng-click="vm.onCancel()">{{::\'CANCEL\' | translate}}</md-button><md-button class="pip-submit md-accent" ng-click="vm.onSelect()">{{::vm.config.applyButtonTitle | translate}}</md-button></div></div></md-dialog>');
 }]);
 })();
 

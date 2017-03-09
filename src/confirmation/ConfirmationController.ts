@@ -1,11 +1,4 @@
-'use strict';
-
-export class ConfirmationParams {
-    public ok: string = 'OK';
-    public title?: string; 
-    public cancel: string = 'Cancel';
-    public event?: MouseEvent;
-}
+import { ConfirmationParams } from './ConfirmationParams';
 
 export class ConfirmationDialogController {
 
@@ -56,5 +49,6 @@ angular
     .module('pipConfirmationDialog', [
         'ngMaterial', 
         'pipDialogs.Translate',
-        'pipDialogs.Templates'])
+        'pipDialogs.Templates'
+    ])
     .controller('pipConfirmationDialogController', ConfirmationDialogController);

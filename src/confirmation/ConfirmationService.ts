@@ -1,4 +1,4 @@
-import { ConfirmationParams } from './ConfirmationController';
+import { ConfirmationParams } from './ConfirmationParams';
 
 export interface IConfirmationService {
     show(params: ConfirmationParams, successCallback?: () => void, cancelCallback?: () => void): any;
@@ -10,6 +10,7 @@ class ConfirmationService implements IConfirmationService {
     constructor($mdDialog: angular.material.IDialogService) {
         this._mdDialog = $mdDialog;
     }
+
     public show(params: ConfirmationParams, successCallback?: () => void, cancelCallback?: () => void) {
         this._mdDialog.show({
             targetEvent: params.event,
@@ -23,7 +24,8 @@ class ConfirmationService implements IConfirmationService {
             if (successCallback) {
                 successCallback();
             }
-        }, () => {
+        }, 
+        () => {
             if (cancelCallback) {
                 cancelCallback();
             }

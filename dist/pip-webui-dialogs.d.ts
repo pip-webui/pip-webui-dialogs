@@ -1,11 +1,5 @@
 declare module pip.dialogs {
 
-export class ConfirmationParams {
-    ok: string;
-    title?: string;
-    cancel: string;
-    event?: MouseEvent;
-}
 export class ConfirmationDialogController {
     $mdDialog: angular.material.IDialogService;
     theme: string;
@@ -15,8 +9,44 @@ export class ConfirmationDialogController {
     onCancel(): void;
 }
 
+export class ConfirmationParams {
+    ok: string;
+    title?: string;
+    cancel: string;
+    event?: MouseEvent;
+}
+
 export interface IConfirmationService {
     show(params: ConfirmationParams, successCallback?: () => void, cancelCallback?: () => void): any;
+}
+
+
+
+export class InformationStrings {
+    ok: string;
+    title: string;
+    message: string;
+    error: string;
+    content: any;
+}
+export class InformationParams {
+    ok: string;
+    title?: string;
+    message?: string;
+    error?: string;
+    item: any;
+}
+export class InformationDialogController {
+    $mdDialog: angular.material.IDialogService;
+    theme: string;
+    config: InformationStrings;
+    constructor($mdDialog: angular.material.IDialogService, $injector: ng.auto.IInjectorService, $rootScope: ng.IRootScopeService, params: InformationParams);
+    onOk(): void;
+    onCancel(): void;
+}
+
+export interface IInformationService {
+    show(params: any, successCallback?: () => void, cancelCallback?: () => void): any;
 }
 
 
@@ -50,35 +80,6 @@ class ErrorDetailsService {
     _mdDialog: angular.material.IDialogService;
     constructor($mdDialog: angular.material.IDialogService);
     show(params: any, successCallback: any, cancelCallback: any): void;
-}
-
-
-
-export class InformationStrings {
-    ok: string;
-    title: string;
-    message: string;
-    error: string;
-    content: any;
-}
-export class InformationParams {
-    ok: string;
-    title?: string;
-    message?: string;
-    error?: string;
-    item: any;
-}
-export class InformationDialogController {
-    $mdDialog: angular.material.IDialogService;
-    theme: string;
-    config: InformationStrings;
-    constructor($mdDialog: angular.material.IDialogService, $injector: ng.auto.IInjectorService, $rootScope: ng.IRootScopeService, params: InformationParams);
-    onOk(): void;
-    onCancel(): void;
-}
-
-export interface IInformationService {
-    show(params: any, successCallback?: () => void, cancelCallback?: () => void): any;
 }
 
 

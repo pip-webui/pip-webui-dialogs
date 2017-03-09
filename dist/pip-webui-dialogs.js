@@ -1,19 +1,12 @@
 (function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}(g.pip || (g.pip = {})).dialogs = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-'use strict';
+"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var ConfirmationParams = (function () {
-    function ConfirmationParams() {
-        this.ok = 'OK';
-        this.cancel = 'Cancel';
-    }
-    return ConfirmationParams;
-}());
-exports.ConfirmationParams = ConfirmationParams;
+var ConfirmationParams_1 = require("./ConfirmationParams");
 var ConfirmationDialogController = (function () {
     ConfirmationDialogController.$inject = ['$mdDialog', '$injector', '$rootScope', 'params'];
     function ConfirmationDialogController($mdDialog, $injector, $rootScope, params) {
         "ngInject";
-        this.config = new ConfirmationParams();
+        this.config = new ConfirmationParams_1.ConfirmationParams();
         var pipTranslate;
         pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
         if (pipTranslate) {
@@ -48,7 +41,19 @@ angular
 ])
     .controller('pipConfirmationDialogController', ConfirmationDialogController);
 
-},{}],2:[function(require,module,exports){
+},{"./ConfirmationParams":2}],2:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var ConfirmationParams = (function () {
+    function ConfirmationParams() {
+        this.ok = 'OK';
+        this.cancel = 'Cancel';
+    }
+    return ConfirmationParams;
+}());
+exports.ConfirmationParams = ConfirmationParams;
+
+},{}],3:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var ConfirmationService = (function () {
@@ -81,13 +86,14 @@ angular
     .module('pipConfirmationDialog')
     .service('pipConfirmationDialog', ConfirmationService);
 
-},{}],3:[function(require,module,exports){
-'use strict';
+},{}],4:[function(require,module,exports){
+"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 require("./ConfirmationController");
 require("./ConfirmationService");
+require("./ConfirmationParams");
 
-},{"./ConfirmationController":1,"./ConfirmationService":2}],4:[function(require,module,exports){
+},{"./ConfirmationController":1,"./ConfirmationParams":2,"./ConfirmationService":3}],5:[function(require,module,exports){
 (function () {
     'use strict';
     var thisModule = angular.module('pipDialogs.Translate', []);
@@ -100,7 +106,7 @@ require("./ConfirmationService");
     }]);
 })();
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
 require("./error_details");
@@ -116,7 +122,7 @@ angular
     'pipErrorDetailsDialog',
 ]);
 
-},{"./confirmation":3,"./error_details":8,"./information":11,"./options":16}],6:[function(require,module,exports){
+},{"./confirmation":4,"./error_details":9,"./information":12,"./options":17}],7:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
 var ErrorStrings = (function () {
@@ -149,7 +155,8 @@ var ErrorDetailsDialogController = (function () {
     function ErrorDetailsDialogController($mdDialog, $injector, $rootScope, params) {
         "ngInject";
         this.config = new ErrorStrings();
-        var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
+        var pipTranslate = $injector.has('pipTranslate')
+            ? $injector.get('pipTranslate') : null;
         if (pipTranslate) {
             pipTranslate.translations('en', {
                 'OK': 'Ok',
@@ -203,7 +210,7 @@ angular
     .module('pipErrorDetailsDialog')
     .controller('pipErrorDetailsDialogController', ErrorDetailsDialogController);
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 var ErrorDetailsService = (function () {
     ErrorDetailsService.$inject = ['$mdDialog'];
     function ErrorDetailsService($mdDialog) {
@@ -234,7 +241,7 @@ angular
     .module('pipErrorDetailsDialog')
     .service('pipErrorDetailsDialog', ErrorDetailsService);
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
 angular
@@ -246,7 +253,7 @@ angular
 require("./ErrorDetailsService");
 require("./ErrorDetailsController");
 
-},{"./ErrorDetailsController":6,"./ErrorDetailsService":7}],9:[function(require,module,exports){
+},{"./ErrorDetailsController":7,"./ErrorDetailsService":8}],10:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
 var InformationStrings = (function () {
@@ -304,7 +311,7 @@ angular
     .module('pipInformationDialog')
     .controller('pipInformationDialogController', InformationDialogController);
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var InformationService = (function () {
@@ -333,7 +340,7 @@ angular
     .module('pipInformationDialog')
     .service('pipInformationDialog', InformationService);
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
 angular
@@ -345,7 +352,7 @@ angular
 require("./InformationService");
 require("./InformationController");
 
-},{"./InformationController":9,"./InformationService":10}],12:[function(require,module,exports){
+},{"./InformationController":10,"./InformationService":11}],13:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
 var OptionsBigData = (function () {
@@ -437,7 +444,7 @@ angular
     .module('pipOptionsBigDialog')
     .controller('pipOptionsBigDialogController', OptionsBigDialogController);
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var OptionsBigService = (function () {
@@ -470,7 +477,7 @@ angular
     .module('pipOptionsBigDialog')
     .service('pipOptionsBigDialog', OptionsBigService);
 
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
 var OptionsData = (function () {
@@ -546,7 +553,7 @@ angular
     .module('pipOptionsDialog')
     .controller('pipOptionsDialogController', OptionsDialogController);
 
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var OptionsService = (function () {
@@ -579,7 +586,7 @@ angular
     .module('pipOptionsDialog')
     .service('pipOptionsDialog', OptionsService);
 
-},{}],16:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
 angular
@@ -599,7 +606,7 @@ angular
 require("./OptionsBigService");
 require("./OptionsBigController");
 
-},{"./OptionsBigController":12,"./OptionsBigService":13,"./OptionsController":14,"./OptionsService":15}],17:[function(require,module,exports){
+},{"./OptionsBigController":13,"./OptionsBigService":14,"./OptionsController":15,"./OptionsService":16}],18:[function(require,module,exports){
 (function(module) {
 try {
   module = angular.module('pipDialogs.Templates');
@@ -619,8 +626,8 @@ try {
   module = angular.module('pipDialogs.Templates', []);
 }
 module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('error_details/ErrorDetails.html',
-    '<md-dialog class="pip-dialog pip-error-details-dialog layout-column" width="400" md-theme="{{vm.theme}}"><div class="pip-body"><div class="pip-header"><h3>{{::vm.config.errorDetails | translate}}</h3></div><div class="layout-row layout-align-start-center error-section text-body2 color-secondary-text" ng-if="vm.config.error.code || (vm.config.error.data && error.data.code)">{{::vm.config.errorCode | translate}}</div><div class="layout-row layout-align-start-center text-subhead1" ng-if="vm.config.error.code || (vm.config.error.data && vm.config.error.data.code)">{{vm.config.error.code || vm.config.error.data.code}}</div><div class="layout-row layout-align-start-center error-section text-body2 color-secondary-text" ng-if="vm.config.error.path || (vm.config.error.data && vm.config.error.data.path)">{{::vm.config.errorPath | translate}}</div><div class="layout-row layout-align-start-center text-subhead1" ng-if="vm.config.error.path || (vm.config.error.data && vm.config.error.data.path)">{{vm.config.error.path || vm.config.error.data.path}}</div><div class="error-section text-body2 color-secondary-text layout-row layout-align-start-center" ng-if="vm.config.error.error || (vm.config.error.data && vm.config.error.data.error)">{{::vm.config.errorText | translate}}</div><div class="layout-row layout-align-start-center text-subhead1" ng-if="vm.config.error.error || (vm.config.error.data && vm.config.error.data.error)">{{vm.config.error.error || vm.config.error.data.error}}</div><div class="error-section text-body2 color-secondary-text layout-row layout-align-start-center" ng-if="vm.config.error.method || (vm.config.error.data && vm.config.error.data.method)">{{::vm.config.errorMethod | translate}}</div><div class="layout-row layout-align-start-center text-subhead1" ng-if="vm.config.error.method || (vm.config.error.data && vm.config.error.data.method)">{{vm.config.error.method || vm.config.error.data.method}}</div><div class="error-section text-body2 color-secondary-text layout-row layout-align-start-center" ng-if="vm.config.error.message || (vm.config.error.data && vm.config.error.data.message)">{{::vm.config.errorMessage | translate}}</div><div class="layout-row layout-align-start-center text-subhead1" ng-if="vm.config.error.message || (vm.config.error.data && vm.config.error.data.message)">{{vm.config.error.message || vm.config.error.data.message}}</div></div><div class="pip-footer"><div><md-button class="md-accent m0" ng-click="vm.onOk()">{{::vm.config.dismissButton | translate}}</md-button></div></div></md-dialog>');
+  $templateCache.put('information/InformationDialog.html',
+    '<md-dialog class="pip-dialog pip-information-dialog layout-column" width="400" md-theme="{{vm.theme}}"><div class="pip-header"><h3>{{:: vm.config.title | translate }}</h3></div><div class="pip-body"><div class="pip-content">{{ vm.config.content }}</div></div><div class="pip-footer"><div><md-button class="md-accent" ng-click="vm.onOk()">{{ vm.config.ok | translate }}</md-button></div></div></md-dialog>');
 }]);
 })();
 
@@ -631,8 +638,8 @@ try {
   module = angular.module('pipDialogs.Templates', []);
 }
 module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('information/InformationDialog.html',
-    '<md-dialog class="pip-dialog pip-information-dialog layout-column" width="400" md-theme="{{vm.theme}}"><div class="pip-header"><h3>{{:: vm.config.title | translate }}</h3></div><div class="pip-body"><div class="pip-content">{{ vm.config.content }}</div></div><div class="pip-footer"><div><md-button class="md-accent" ng-click="vm.onOk()">{{ vm.config.ok | translate }}</md-button></div></div></md-dialog>');
+  $templateCache.put('error_details/ErrorDetails.html',
+    '<md-dialog class="pip-dialog pip-error-details-dialog layout-column" width="400" md-theme="{{vm.theme}}"><div class="pip-body"><div class="pip-header"><h3>{{::vm.config.errorDetails | translate}}</h3></div><div class="layout-row layout-align-start-center error-section text-body2 color-secondary-text" ng-if="vm.config.error.code || (vm.config.error.data && error.data.code)">{{::vm.config.errorCode | translate}}</div><div class="layout-row layout-align-start-center text-subhead1" ng-if="vm.config.error.code || (vm.config.error.data && vm.config.error.data.code)">{{vm.config.error.code || vm.config.error.data.code}}</div><div class="layout-row layout-align-start-center error-section text-body2 color-secondary-text" ng-if="vm.config.error.path || (vm.config.error.data && vm.config.error.data.path)">{{::vm.config.errorPath | translate}}</div><div class="layout-row layout-align-start-center text-subhead1" ng-if="vm.config.error.path || (vm.config.error.data && vm.config.error.data.path)">{{vm.config.error.path || vm.config.error.data.path}}</div><div class="error-section text-body2 color-secondary-text layout-row layout-align-start-center" ng-if="vm.config.error.error || (vm.config.error.data && vm.config.error.data.error)">{{::vm.config.errorText | translate}}</div><div class="layout-row layout-align-start-center text-subhead1" ng-if="vm.config.error.error || (vm.config.error.data && vm.config.error.data.error)">{{vm.config.error.error || vm.config.error.data.error}}</div><div class="error-section text-body2 color-secondary-text layout-row layout-align-start-center" ng-if="vm.config.error.method || (vm.config.error.data && vm.config.error.data.method)">{{::vm.config.errorMethod | translate}}</div><div class="layout-row layout-align-start-center text-subhead1" ng-if="vm.config.error.method || (vm.config.error.data && vm.config.error.data.method)">{{vm.config.error.method || vm.config.error.data.method}}</div><div class="error-section text-body2 color-secondary-text layout-row layout-align-start-center" ng-if="vm.config.error.message || (vm.config.error.data && vm.config.error.data.message)">{{::vm.config.errorMessage | translate}}</div><div class="layout-row layout-align-start-center text-subhead1" ng-if="vm.config.error.message || (vm.config.error.data && vm.config.error.data.message)">{{vm.config.error.message || vm.config.error.data.message}}</div></div><div class="pip-footer"><div><md-button class="md-accent m0" ng-click="vm.onOk()">{{::vm.config.dismissButton | translate}}</md-button></div></div></md-dialog>');
 }]);
 })();
 
@@ -662,7 +669,7 @@ module.run(['$templateCache', function($templateCache) {
 
 
 
-},{}]},{},[17,1,2,3,4,5,6,7,8,11,9,10,16,12,13,14,15])(17)
+},{}]},{},[18,1,2,3,4,5,6,7,8,9,12,10,11,17,13,14,15,16])(18)
 });
 
 //# sourceMappingURL=pip-webui-dialogs.js.map

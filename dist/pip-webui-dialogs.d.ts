@@ -15,28 +15,6 @@ export interface IConfirmationService {
 
 
 
-
-export class InformationDialogParams {
-    event?: MouseEvent;
-    ok?: string;
-    title?: string;
-    message: string;
-    item?: any;
-}
-
-export interface IInformationService {
-    show(params: InformationDialogParams, successCallback?: () => void, cancelCallback?: () => void): any;
-}
-
-export class InformationDialogStrings {
-    ok: string;
-    title: string;
-    message: string;
-    error: string;
-    content: any;
-}
-
-
 export interface IConfirmationService {
     show(params: ErrorDialogParams, successCallback?: () => void, cancelCallback?: () => void): any;
 }
@@ -55,7 +33,6 @@ export class ErrorDialogStrings {
     errorPath: string;
     errorText: string;
 }
-
 
 
 
@@ -113,6 +90,29 @@ export class OptionsDialogResult {
 export interface IOptionsDialogService {
     show(params: OptionsDialogParams, successCallback?: (result: OptionsDialogResult) => void, cancelCallback?: () => void): any;
 }
+
+
+
+export class InformationDialogParams {
+    event?: MouseEvent;
+    ok?: string;
+    title?: string;
+    message: string;
+    item?: any;
+}
+
+export interface IInformationService {
+    show(params: InformationDialogParams, successCallback?: () => void, cancelCallback?: () => void): any;
+}
+
+export class InformationDialogStrings {
+    ok: string;
+    title: string;
+    message: string;
+    error: string;
+    content: any;
+}
+
 
 }
 

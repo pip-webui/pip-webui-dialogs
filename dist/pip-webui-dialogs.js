@@ -55,6 +55,7 @@ angular
     'pipDialogs.Templates'
 ])
     .controller('pipConfirmationDialogController', ConfirmationDialogController);
+
 },{"./ConfirmationDialogParams":2}],2:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -64,6 +65,7 @@ var ConfirmationDialogParams = (function () {
     return ConfirmationDialogParams;
 }());
 exports.ConfirmationDialogParams = ConfirmationDialogParams;
+
 },{}],3:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -97,12 +99,14 @@ var ConfirmationService = (function () {
 angular
     .module('pipConfirmationDialog')
     .service('pipConfirmationDialog', ConfirmationService);
+
 },{}],4:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 require("./ConfirmationDialogController");
 require("./ConfirmationDialogService");
 require("./ConfirmationDialogParams");
+
 },{"./ConfirmationDialogController":1,"./ConfirmationDialogParams":2,"./ConfirmationDialogService":3}],5:[function(require,module,exports){
 (function () {
     'use strict';
@@ -115,6 +119,7 @@ require("./ConfirmationDialogParams");
         };
     }]);
 })();
+
 },{}],6:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -130,6 +135,7 @@ angular
     'pipOptionsBigDialog',
     'pipErrorDetailsDialog'
 ]);
+
 },{"./confirmation":4,"./error_details":11,"./information":16,"./options":27}],7:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
@@ -222,6 +228,7 @@ var ErrorDetailsDialogController = (function (_super) {
 angular
     .module('pipErrorDetailsDialog')
     .controller('pipErrorDetailsDialogController', ErrorDetailsDialogController);
+
 },{"./ErrorDialogParams":9,"./ErrorDialogStrings":10}],8:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -255,6 +262,7 @@ var ErrorDetailsService = (function () {
 angular
     .module('pipErrorDetailsDialog')
     .service('pipErrorDetailsDialog', ErrorDetailsService);
+
 },{}],9:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -264,6 +272,7 @@ var ErrorDialogParams = (function () {
     return ErrorDialogParams;
 }());
 exports.ErrorDialogParams = ErrorDialogParams;
+
 },{}],10:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -279,6 +288,7 @@ var ErrorDialogStrings = (function () {
     return ErrorDialogStrings;
 }());
 exports.ErrorDialogStrings = ErrorDialogStrings;
+
 },{}],11:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -292,6 +302,7 @@ require("./ErrorDialogParams");
 require("./ErrorDialogStrings");
 require("./ErrorDetailsDialogService");
 require("./ErrorDetailsDialogController");
+
 },{"./ErrorDetailsDialogController":7,"./ErrorDetailsDialogService":8,"./ErrorDialogParams":9,"./ErrorDialogStrings":10}],12:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
@@ -351,6 +362,7 @@ var InformationDialogController = (function (_super) {
 angular
     .module('pipInformationDialog')
     .controller('pipInformationDialogController', InformationDialogController);
+
 },{"./InformationDialogParams":13}],13:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -360,6 +372,7 @@ var InformationDialogParams = (function () {
     return InformationDialogParams;
 }());
 exports.InformationDialogParams = InformationDialogParams;
+
 },{}],14:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -389,6 +402,7 @@ var InformationService = (function () {
 angular
     .module('pipInformationDialog')
     .service('pipInformationDialog', InformationService);
+
 },{}],15:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -399,6 +413,7 @@ var InformationDialogStrings = (function () {
     return InformationDialogStrings;
 }());
 exports.InformationDialogStrings = InformationDialogStrings;
+
 },{}],16:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -412,6 +427,7 @@ require("./InformationDialogParams");
 require("./InformationDialogStrings");
 require("./InformationDialogService");
 require("./InformationDialogController");
+
 },{"./InformationDialogController":12,"./InformationDialogParams":13,"./InformationDialogService":14,"./InformationDialogStrings":15}],17:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
@@ -506,6 +522,7 @@ var OptionsBigDialogController = (function (_super) {
 angular
     .module('pipOptionsBigDialog')
     .controller('pipOptionsBigDialogController', OptionsBigDialogController);
+
 },{"./OptionsBigDialogData":18,"./OptionsBigDialogParams":19}],18:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -515,6 +532,7 @@ var OptionsBigDialogData = (function () {
     return OptionsBigDialogData;
 }());
 exports.OptionsBigDialogData = OptionsBigDialogData;
+
 },{}],19:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -524,6 +542,7 @@ var OptionsBigDialogParams = (function () {
     return OptionsBigDialogParams;
 }());
 exports.OptionsBigDialogParams = OptionsBigDialogParams;
+
 },{}],20:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -533,6 +552,7 @@ var OptionsBigDialogResult = (function () {
     return OptionsBigDialogResult;
 }());
 exports.OptionsBigDialogResult = OptionsBigDialogResult;
+
 },{}],21:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -566,6 +586,7 @@ var OptionsBigDialogService = (function () {
 angular
     .module('pipOptionsBigDialog')
     .service('pipOptionsBigDialog', OptionsBigDialogService);
+
 },{}],22:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
@@ -648,6 +669,7 @@ var OptionsDialogController = (function (_super) {
 angular
     .module('pipOptionsDialog')
     .controller('pipOptionsDialogController', OptionsDialogController);
+
 },{"./OptionsDialogParams":24}],23:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -659,6 +681,7 @@ var OptionsDialogData = (function () {
     return OptionsDialogData;
 }());
 exports.OptionsDialogData = OptionsDialogData;
+
 },{}],24:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -668,6 +691,7 @@ var OptionsDialogParams = (function () {
     return OptionsDialogParams;
 }());
 exports.OptionsDialogParams = OptionsDialogParams;
+
 },{}],25:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -677,6 +701,7 @@ var OptionsDialogResult = (function () {
     return OptionsDialogResult;
 }());
 exports.OptionsDialogResult = OptionsDialogResult;
+
 },{}],26:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -710,6 +735,7 @@ var OptionsDialogService = (function () {
 angular
     .module('pipOptionsDialog')
     .service('pipOptionsDialog', OptionsDialogService);
+
 },{}],27:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -735,6 +761,7 @@ require("./OptionsBigDialogData");
 require("./OptionsBigDialogResult");
 require("./OptionsBigDialogService");
 require("./OptionsBigDialogController");
+
 },{"./OptionsBigDialogController":17,"./OptionsBigDialogData":18,"./OptionsBigDialogParams":19,"./OptionsBigDialogResult":20,"./OptionsBigDialogService":21,"./OptionsDialogController":22,"./OptionsDialogData":23,"./OptionsDialogParams":24,"./OptionsDialogResult":25,"./OptionsDialogService":26}],28:[function(require,module,exports){
 (function(module) {
 try {
@@ -744,56 +771,7 @@ try {
 }
 module.run(['$templateCache', function($templateCache) {
   $templateCache.put('confirmation/ConfirmationDialog.html',
-    '<!--\n' +
-    '@file Confirmation dialog template\n' +
-    '@copyright Digital Living Software Corp. 2014-2016\n' +
-    '-->\n' +
-    '\n' +
-    '<md-dialog class="pip-dialog pip-confirmation-dialog layout-column" width="400" md-theme="{{ ::$ctrl.theme }}">\n' +
-    '    <div class="pip-header">\n' +
-    '        <h3>{{ :: $ctrl.title }}</h3>\n' +
-    '    </div>\n' +
-    '    <div class="pip-footer">\n' +
-    '        <div>\n' +
-    '            <md-button ng-click="$ctrl.onCancel()">{{ :: $ctrl.cancel }}</md-button>\n' +
-    '            <md-button class="md-accent" ng-click="$ctrl.onOk()">{{ :: $ctrl.ok }}</md-button>\n' +
-    '        </div>\n' +
-    '    </div>\n' +
-    '</md-dialog>\n' +
-    '');
-}]);
-})();
-
-(function(module) {
-try {
-  module = angular.module('pipDialogs.Templates');
-} catch (e) {
-  module = angular.module('pipDialogs.Templates', []);
-}
-module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('information/InformationDialog.html',
-    '<!--\n' +
-    '@file Information dialog content\n' +
-    '@copyright Digital Living Software Corp. 2014-2016\n' +
-    '-->\n' +
-    '\n' +
-    '<md-dialog class="pip-dialog pip-information-dialog layout-column"\n' +
-    '           width="400" md-theme="{{ $ctrl.theme }}">\n' +
-    '    <div class="pip-header">\n' +
-    '        <h3 >{{:: $ctrl.title | translate }}</h3>\n' +
-    '    </div>\n' +
-    '    <div class="pip-body">\n' +
-    '        <div class="pip-content">\n' +
-    '            {{ $ctrl.content }}\n' +
-    '        </div>\n' +
-    '    </div>\n' +
-    '    <div class="pip-footer">\n' +
-    '        <div>\n' +
-    '            <md-button class="md-accent" ng-click="$ctrl.onOk()">{{ $ctrl.ok | translate }}</md-button>\n' +
-    '        </div>\n' +
-    '    </div>\n' +
-    '</md-dialog>\n' +
-    '');
+    '<md-dialog class="pip-dialog pip-confirmation-dialog layout-column" width="400" md-theme="{{ ::$ctrl.theme }}"><div class="pip-header"><h3>{{ :: $ctrl.title }}</h3></div><div class="pip-footer"><div><md-button ng-click="$ctrl.onCancel()">{{ :: $ctrl.cancel }}</md-button><md-button class="md-accent" ng-click="$ctrl.onOk()">{{ :: $ctrl.ok }}</md-button></div></div></md-dialog>');
 }]);
 })();
 
@@ -805,65 +783,7 @@ try {
 }
 module.run(['$templateCache', function($templateCache) {
   $templateCache.put('error_details/ErrorDetails.html',
-    '<!--\n' +
-    '@file Confirmation dialog template\n' +
-    '@copyright Digital Living Software Corp. 2014-2016\n' +
-    '-->\n' +
-    '\n' +
-    '<md-dialog class="pip-dialog pip-error-details-dialog layout-column" width="400" md-theme="{{ $ctrl.theme }}">\n' +
-    '    <div class="pip-body">\n' +
-    '        <div class="pip-header">\n' +
-    '            <h3>{{ ::$ctrl.strings.errorDetails | translate }}</h3>\n' +
-    '        </div>\n' +
-    '        <div class="layout-row layout-align-start-center error-section text-body2 color-secondary-text"\n' +
-    '             ng-if="$ctrl.error.code || ($ctrl.error.data && $ctrl.error.data.code)">\n' +
-    '            {{ ::$ctrl.strings.errorCode | translate }}\n' +
-    '        </div>\n' +
-    '        <div class="layout-row layout-align-start-center text-subhead1" ng-if="$ctrl.error.code || ($ctrl.error.data && $ctrl.error.data.code)">\n' +
-    '            {{ $ctrl.error.code || $ctrl.error.data.code }}\n' +
-    '        </div>\n' +
-    '\n' +
-    '        <div class="layout-row layout-align-start-center error-section text-body2 color-secondary-text"\n' +
-    '             ng-if="$ctrl.error.path || ($ctrl.error.data && $ctrl.error.data.path)">\n' +
-    '            {{ ::$ctrl.strings.errorPath | translate }}\n' +
-    '        </div>\n' +
-    '        <div class="layout-row layout-align-start-center text-subhead1" ng-if="$ctrl.error.path || ($ctrl.error.data && $ctrl.error.data.path)">\n' +
-    '            {{ $ctrl.error.path || $ctrl.error.data.path }}\n' +
-    '        </div>\n' +
-    '\n' +
-    '        <div class="error-section text-body2 color-secondary-text layout-row layout-align-start-center"\n' +
-    '             ng-if="$ctrl.isString($ctrl.error) || $ctrl.error.error || ($ctrl.error.data && $ctrl.error.data.error)">\n' +
-    '            {{ ::$ctrl.strings.errorText | translate }}\n' +
-    '        </div>\n' +
-    '        <div class="layout-row layout-align-start-center text-subhead1" ng-if="$ctrl.error.error || ($ctrl.error.data && $ctrl.error.data.error)">\n' +
-    '            {{ $ctrl.getErrorText() }}\n' +
-    '            <!--{{ $ctrl.error.error || $ctrl.error.data.error }}-->\n' +
-    '        </div>\n' +
-    '\n' +
-    '        <div class="error-section text-body2 color-secondary-text layout-row layout-align-start-center"\n' +
-    '             ng-if="$ctrl.error.method || ($ctrl.error.data && $ctrl.error.data.method)">\n' +
-    '            {{ ::$ctrl.strings.errorMethod | translate }}\n' +
-    '        </div>\n' +
-    '        <div class="layout-row layout-align-start-center text-subhead1" ng-if="$ctrl.error.method || ($ctrl.error.data && $ctrl.error.data.method)">\n' +
-    '            {{ $ctrl.error.method || $ctrl.error.data.method }}\n' +
-    '        </div>\n' +
-    '\n' +
-    '        <div class="error-section text-body2 color-secondary-text layout-row layout-align-start-center"\n' +
-    '             ng-if="$ctrl.error.message || ($ctrl.error.data && $ctrl.error.data.message)">\n' +
-    '            {{ ::$ctrl.strings.errorMessage | translate }}\n' +
-    '        </div>\n' +
-    '        <div class="layout-row layout-align-start-center text-subhead1"\n' +
-    '             ng-if="$ctrl.error.message || ($ctrl.error.data && $ctrl.error.data.message)">\n' +
-    '            {{ $ctrl.error.message || $ctrl.error.data.message }}\n' +
-    '        </div>\n' +
-    '    </div>\n' +
-    '    <div class="pip-footer">\n' +
-    '        <div>\n' +
-    '            <md-button class="md-accent m0" ng-click="$ctrl.onOk()">{{ ::$ctrl.dismissButton | translate }}</md-button>\n' +
-    '        </div>\n' +
-    '    </div>\n' +
-    '</md-dialog>\n' +
-    '');
+    '<md-dialog class="pip-dialog pip-error-details-dialog layout-column" width="400" md-theme="{{ $ctrl.theme }}"><div class="pip-body"><div class="pip-header"><h3>{{ ::$ctrl.strings.errorDetails | translate }}</h3></div><div class="layout-row layout-align-start-center error-section text-body2 color-secondary-text" ng-if="$ctrl.error.code || ($ctrl.error.data && $ctrl.error.data.code)">{{ ::$ctrl.strings.errorCode | translate }}</div><div class="layout-row layout-align-start-center text-subhead1" ng-if="$ctrl.error.code || ($ctrl.error.data && $ctrl.error.data.code)">{{ $ctrl.error.code || $ctrl.error.data.code }}</div><div class="layout-row layout-align-start-center error-section text-body2 color-secondary-text" ng-if="$ctrl.error.path || ($ctrl.error.data && $ctrl.error.data.path)">{{ ::$ctrl.strings.errorPath | translate }}</div><div class="layout-row layout-align-start-center text-subhead1" ng-if="$ctrl.error.path || ($ctrl.error.data && $ctrl.error.data.path)">{{ $ctrl.error.path || $ctrl.error.data.path }}</div><div class="error-section text-body2 color-secondary-text layout-row layout-align-start-center" ng-if="$ctrl.isString($ctrl.error) || $ctrl.error.error || ($ctrl.error.data && $ctrl.error.data.error)">{{ ::$ctrl.strings.errorText | translate }}</div><div class="layout-row layout-align-start-center text-subhead1" ng-if="$ctrl.error.error || ($ctrl.error.data && $ctrl.error.data.error)">{{ $ctrl.getErrorText() }}</div><div class="error-section text-body2 color-secondary-text layout-row layout-align-start-center" ng-if="$ctrl.error.method || ($ctrl.error.data && $ctrl.error.data.method)">{{ ::$ctrl.strings.errorMethod | translate }}</div><div class="layout-row layout-align-start-center text-subhead1" ng-if="$ctrl.error.method || ($ctrl.error.data && $ctrl.error.data.method)">{{ $ctrl.error.method || $ctrl.error.data.method }}</div><div class="error-section text-body2 color-secondary-text layout-row layout-align-start-center" ng-if="$ctrl.error.message || ($ctrl.error.data && $ctrl.error.data.message)">{{ ::$ctrl.strings.errorMessage | translate }}</div><div class="layout-row layout-align-start-center text-subhead1" ng-if="$ctrl.error.message || ($ctrl.error.data && $ctrl.error.data.message)">{{ $ctrl.error.message || $ctrl.error.data.message }}</div></div><div class="pip-footer"><div><md-button class="md-accent m0" ng-click="$ctrl.onOk()">{{ ::$ctrl.dismissButton | translate }}</md-button></div></div></md-dialog>');
 }]);
 })();
 
@@ -875,74 +795,7 @@ try {
 }
 module.run(['$templateCache', function($templateCache) {
   $templateCache.put('options/OptionsBigDialog.html',
-    '<!--\n' +
-    '@file Options dialog content\n' +
-    '@copyright Digital Living Software Corp. 2014-2016\n' +
-    '-->\n' +
-    '\n' +
-    '<md-dialog class="pip-dialog pip-options-dialog-big layout-column"\n' +
-    '           min-width="400" md-theme="{{ $ctrl.theme }}">\n' +
-    '    <md-dialog-content class="pip-body pip-scroll" ng-class="{\'bp24\': !$ctrl.noActions}">\n' +
-    '        <div class="pip-header" ng-class="{\'header-hint\': $ctrl.noTitle && $ctrl.hint}">\n' +
-    '            <h3 class="m0" ng-if="!$ctrl.noTitle">\n' +
-    '                {{ ::$ctrl.title | translate }}\n' +
-    '            </h3>\n' +
-    '            <div ng-show="$ctrl.noTitle && $ctrl.hint" \n' +
-    '                 class="dialog-hint layout-row layout-align-start-center">\n' +
-    '                <div class="hint-icon-container flex-fixed" >\n' +
-    '                    <md-icon md-svg-icon="icons:info-circle-outline"></md-icon>\n' +
-    '                </div>\n' +
-    '                <div>{{ ::$ctrl.hint | translate }}</div>\n' +
-    '            </div>\n' +
-    '        </div>\n' +
-    '        <div class="content-divider" ng-if="!noTitle"></div>\n' +
-    '        <div class="pip-content">\n' +
-    '            <div class="spacer8" ng-if="noTitle && hint"></div>\n' +
-    '            <md-list class="pip-menu  pip-ref-list"\n' +
-    '                     pip-selected="$ctrl.optionIndex" index="{{ $ctrl.optionIndex }}"\n' +
-    '                     pip-select="$ctrl.onSelected($event)">\n' +
-    '\n' +
-    '                <md-list-item class="pip-ref-list-item pip-selectable layout-row layout-align-start-center"\n' +
-    '                              ng-class="{\'selected md-focused\' : option.name == $ctrl.selectedOptionName,\n' +
-    '                              \'divider-bottom\': $index != options.length - 1}"\n' +
-    '                              md-ink-ripple\n' +
-    '                              ng-keyup="$ctrl.onKeyUp($event, $index)"\n' +
-    '                              ng-repeat="option in $ctrl.options" >\n' +
-    '\n' +
-    '                    <div class="pip-content  content-stretch" ng-click="$ctrl.onOptionSelect($event, option)">\n' +
-    '                        <p class="pip-title spacer-right" ng-if="option.title" style="margin-bottom: 4px !important;">\n' +
-    '                            {{ ::option.title | translate }}\n' +
-    '                        </p>\n' +
-    '                        <div class="pip-subtitle spacer-right"\n' +
-    '                             style="height: inherit"\n' +
-    '                             ng-if="option.subtitle">\n' +
-    '                            {{ ::option.subtitle | translate }}\n' +
-    '                        </div>\n' +
-    '                        <div class="pip-subtitle spacer-right"\n' +
-    '                             style="height: inherit" ng-if="option.text"\n' +
-    '                             ng-bind-html="option.text | translate">\n' +
-    '                        </div>\n' +
-    '                    </div>\n' +
-    '\n' +
-    '                </md-list-item>\n' +
-    '\n' +
-    '            </md-list>\n' +
-    '        </div>\n' +
-    '        <div class="spacer8" ng-if="$ctrl.noActions"></div>\n' +
-    '    </md-dialog-content>\n' +
-    '\n' +
-    '    <div class="pip-footer" ng-if="!$ctrl.noActions">\n' +
-    '        <div>\n' +
-    '            <md-button class="pip-cancel" ng-click="$ctrl.onCancel()">\n' +
-    '                {{ ::\'CANCEL\' | translate }}\n' +
-    '            </md-button>\n' +
-    '            <md-button class="pip-submit md-accent" ng-click="$ctrl.onSelect()" style="margin-right: -6px">\n' +
-    '                {{ ::$ctrl.ok | translate }}\n' +
-    '            </md-button>\n' +
-    '        </div>\n' +
-    '    </div>\n' +
-    '</md-dialog>\n' +
-    '');
+    '<md-dialog class="pip-dialog pip-options-dialog-big layout-column" min-width="400" md-theme="{{ $ctrl.theme }}"><md-dialog-content class="pip-body pip-scroll" ng-class="{\'bp24\': !$ctrl.noActions}"><div class="pip-header" ng-class="{\'header-hint\': $ctrl.noTitle && $ctrl.hint}"><h3 class="m0" ng-if="!$ctrl.noTitle">{{ ::$ctrl.title | translate }}</h3><div ng-show="$ctrl.noTitle && $ctrl.hint" class="dialog-hint layout-row layout-align-start-center"><div class="hint-icon-container flex-fixed"><md-icon md-svg-icon="icons:info-circle-outline"></md-icon></div><div>{{ ::$ctrl.hint | translate }}</div></div></div><div class="content-divider" ng-if="!noTitle"></div><div class="pip-content"><div class="spacer8" ng-if="noTitle && hint"></div><md-list class="pip-menu pip-ref-list" pip-selected="$ctrl.optionIndex" index="{{ $ctrl.optionIndex }}" pip-select="$ctrl.onSelected($event)"><md-list-item class="pip-ref-list-item pip-selectable layout-row layout-align-start-center" ng-class="{\'selected md-focused\' : option.name == $ctrl.selectedOptionName, \'divider-bottom\': $index != options.length - 1}" md-ink-ripple="" ng-keyup="$ctrl.onKeyUp($event, $index)" ng-repeat="option in $ctrl.options"><div class="pip-content content-stretch" ng-click="$ctrl.onOptionSelect($event, option)"><p class="pip-title spacer-right" ng-if="option.title" style="margin-bottom: 4px !important;">{{ ::option.title | translate }}</p><div class="pip-subtitle spacer-right" style="height: inherit" ng-if="option.subtitle">{{ ::option.subtitle | translate }}</div><div class="pip-subtitle spacer-right" style="height: inherit" ng-if="option.text" ng-bind-html="option.text | translate"></div></div></md-list-item></md-list></div><div class="spacer8" ng-if="$ctrl.noActions"></div></md-dialog-content><div class="pip-footer" ng-if="!$ctrl.noActions"><div><md-button class="pip-cancel" ng-click="$ctrl.onCancel()">{{ ::\'CANCEL\' | translate }}</md-button><md-button class="pip-submit md-accent" ng-click="$ctrl.onSelect()" style="margin-right: -6px">{{ ::$ctrl.ok | translate }}</md-button></div></div></md-dialog>');
 }]);
 })();
 
@@ -954,50 +807,19 @@ try {
 }
 module.run(['$templateCache', function($templateCache) {
   $templateCache.put('options/OptionsDialog.html',
-    '<!--\n' +
-    '@file Options dialog content\n' +
-    '@copyright Digital Living Software Corp. 2014-2016\n' +
-    '-->\n' +
-    '\n' +
-    '<md-dialog class="pip-dialog pip-options-dialog layout-column"\n' +
-    '           min-width="400" md-theme="{{ $ctrl.theme }}">\n' +
-    '    <md-dialog-content class="pip-body lp0 tp0 rp0 bp24 pip-scroll">\n' +
-    '        <div class="pip-header" >\n' +
-    '            <h3>{{ ::$ctrl.title | translate }}</h3>\n' +
-    '            <div ng-show="$ctrl.checkboxOptionCaption" class="header-option text-subhead1 divider-bottom">\n' +
-    '                <md-checkbox ng-model="$ctrl.isCheckboxOption" aria-label="CHECKBOX">{{ ::$ctrl.checkboxOptionCaption | translate }}</md-checkbox>\n' +
-    '            </div>\n' +
-    '        </div>\n' +
-    '        <div class="pip-content">\n' +
-    '            <md-radio-group ng-model="$ctrl.selectedOptionName" class="pip-list md-primary" md-no-ink="true"\n' +
-    '                            ng-keypress="$ctrl.onKeyPress($event)" tabindex="0">\n' +
-    '                <div ng-repeat="option in $ctrl.options" class="pip-list-item" md-ink-ripple\n' +
-    '                     ui-event="{ click: \'$ctrl.onOptionSelect($event, option)\' }"\n' +
-    '                     ng-class="{ selected: option.name == $ctrl.selectedOptionName }">\n' +
-    '                    <div class="pip-list-item item-padding">\n' +
-    '                        <md-icon class="pip-option-icon" md-svg-icon="icons:{{ option.icon }}" ng-if="option.icon">\n' +
-    '                        </md-icon>\n' +
-    '                        <div class="pip-option-title">\n' +
-    '                            {{ ::option.title | translate }}\n' +
-    '                        </div>\n' +
-    '                        <md-radio-button ng-value="option.name" tabindex="-1"\n' +
-    '                                        \n' +
-    '                                         aria-label="{{ ::option.title | translate }}">\n' +
-    '                        </md-radio-button>\n' +
-    '                    </div>\n' +
-    '\n' +
-    '                </div>\n' +
-    '            </md-radio-group>\n' +
-    '        </div>\n' +
-    '    </md-dialog-content>\n' +
-    '    <div class="pip-footer">\n' +
-    '        <div>\n' +
-    '            <md-button class="pip-cancel" ng-click="$ctrl.onCancel()">{{ ::\'CANCEL\' | translate }}</md-button>\n' +
-    '            <md-button class="pip-submit md-accent" ng-click="$ctrl.onSelect()">{{ ::$ctrl.ok | translate }}</md-button>\n' +
-    '        </div>\n' +
-    '    </div>\n' +
-    '</md-dialog>\n' +
-    '');
+    '<md-dialog class="pip-dialog pip-options-dialog layout-column" min-width="400" md-theme="{{ $ctrl.theme }}"><md-dialog-content class="pip-body lp0 tp0 rp0 bp24 pip-scroll"><div class="pip-header"><h3>{{ ::$ctrl.title | translate }}</h3><div ng-show="$ctrl.checkboxOptionCaption" class="header-option text-subhead1 divider-bottom"><md-checkbox ng-model="$ctrl.isCheckboxOption" aria-label="CHECKBOX">{{ ::$ctrl.checkboxOptionCaption | translate }}</md-checkbox></div></div><div class="pip-content"><md-radio-group ng-model="$ctrl.selectedOptionName" class="pip-list md-primary" md-no-ink="true" ng-keypress="$ctrl.onKeyPress($event)" tabindex="0"><div ng-repeat="option in $ctrl.options" class="pip-list-item" md-ink-ripple="" ui-event="{ click: \'$ctrl.onOptionSelect($event, option)\' }" ng-class="{ selected: option.name == $ctrl.selectedOptionName }"><div class="pip-list-item item-padding"><md-icon class="pip-option-icon" md-svg-icon="icons:{{ option.icon }}" ng-if="option.icon"></md-icon><div class="pip-option-title">{{ ::option.title | translate }}</div><md-radio-button ng-value="option.name" tabindex="-1" aria-label="{{ ::option.title | translate }}"></md-radio-button></div></div></md-radio-group></div></md-dialog-content><div class="pip-footer"><div><md-button class="pip-cancel" ng-click="$ctrl.onCancel()">{{ ::\'CANCEL\' | translate }}</md-button><md-button class="pip-submit md-accent" ng-click="$ctrl.onSelect()">{{ ::$ctrl.ok | translate }}</md-button></div></div></md-dialog>');
+}]);
+})();
+
+(function(module) {
+try {
+  module = angular.module('pipDialogs.Templates');
+} catch (e) {
+  module = angular.module('pipDialogs.Templates', []);
+}
+module.run(['$templateCache', function($templateCache) {
+  $templateCache.put('information/InformationDialog.html',
+    '<md-dialog class="pip-dialog pip-information-dialog layout-column" width="400" md-theme="{{ $ctrl.theme }}"><div class="pip-header"><h3>{{:: $ctrl.title | translate }}</h3></div><div class="pip-body"><div class="pip-content">{{ $ctrl.content }}</div></div><div class="pip-footer"><div><md-button class="md-accent" ng-click="$ctrl.onOk()">{{ $ctrl.ok | translate }}</md-button></div></div></md-dialog>');
 }]);
 })();
 

@@ -394,7 +394,7 @@ var OptionsBigDialogController = (function () {
         this.onSelect = function () {
             var option;
             option = _.find(this.config.options, { name: this.config.selectedOptionName }) || new OptionsBigDialogData_1.OptionsBigDialogData();
-            this.$mdDialog.hide({ option: option, deleted: this.config.deleted });
+            this.$mdDialog.hide({ option: option });
         };
         this.$mdDialog = $mdDialog;
         this.config = new OptionsBigDialogParams_1.OptionsBigDialogParams();
@@ -404,8 +404,6 @@ var OptionsBigDialogController = (function () {
         this.config.options = params.options;
         this.config.selectedOption = _.find(params.options, { active: true }) || null;
         this.config.selectedOptionName = params.selectedOptionName;
-        this.config.deleted = params.deleted;
-        this.config.deletedTitle = params.deletedTitle;
         this.config.noActions = params.noActions || false;
         this.config.noTitle = params.noTitle || false;
         this.config.hint = params.hint || '';
@@ -425,11 +423,11 @@ var OptionsBigDialogController = (function () {
             pipTranslate.translations('en', { 'OPTIONS_TITLE': 'Choose Option' });
             pipTranslate.translations('ru', { 'OPTIONS_TITLE': 'Выберите опцию' });
             this.config.title = pipTranslate.translate(params.title) || pipTranslate.translate('OPTIONS_TITLE');
-            this.config.applyButtonTitle = pipTranslate.translate(params.applyButtonTitle) || pipTranslate.translate('SELECT');
+            this.config.ok = pipTranslate.translate(params.ok) || pipTranslate.translate('SELECT');
         }
         else {
             this.config.title = params.title || 'Choose Option';
-            this.config.applyButtonTitle = params.applyButtonTitle || 'Select';
+            this.config.ok = params.ok || 'Select';
         }
     };
     OptionsBigDialogController.prototype.onOk = function () {
@@ -548,18 +546,18 @@ var OptionsDialogController = (function () {
             pipTranslate.translations('en', { 'OPTIONS_TITLE': 'Choose Option' });
             pipTranslate.translations('ru', { 'OPTIONS_TITLE': 'Выберите опцию' });
             this.config.title = pipTranslate.translate(params.title) || pipTranslate.translate('OPTIONS_TITLE');
-            this.config.applyButtonTitle = pipTranslate.translate(params.applyButtonTitle) || pipTranslate.translate('SELECT');
+            this.config.ok = pipTranslate.translate(params.ok) || pipTranslate.translate('SELECT');
         }
         else {
             this.config.title = params.title || 'Choose Option';
-            this.config.applyButtonTitle = params.applyButtonTitle || 'Select';
+            this.config.ok = params.ok || 'Select';
         }
         this.theme = $rootScope['$theme'];
         this.config.options = params.options;
         this.config.selectedOption = _.find(params.options, { active: true }) || new OptionsDialogData_1.OptionsDialogData();
         this.config.selectedOptionName = this.config.selectedOption.name;
-        this.config.deleted = params.deleted;
-        this.config.deletedTitle = params.deletedTitle;
+        this.config.isCheckboxOption = params.isCheckboxOption;
+        this.config.checkboxOptionCaption = params.checkboxOptionCaption;
         setTimeout(this.focusInput, 500);
     }
     OptionsDialogController.prototype.onOk = function () {
@@ -582,7 +580,7 @@ var OptionsDialogController = (function () {
     OptionsDialogController.prototype.onSelect = function () {
         var option;
         option = _.find(this.config.options, { name: this.config.selectedOptionName });
-        this.$mdDialog.hide({ option: option, deleted: this.config.deleted });
+        this.$mdDialog.hide({ option: option, isCheckboxOption: this.config.isCheckboxOption });
     };
     OptionsDialogController.prototype.focusInput = function () {
         var list;
@@ -881,7 +879,7 @@ module.run(['$templateCache', function($templateCache) {
     '                {{ ::\'CANCEL\' | translate }}\n' +
     '            </md-button>\n' +
     '            <md-button class="pip-submit md-accent" ng-click="vm.onSelect()" style="margin-right: -6px">\n' +
-    '                {{ ::vm.config.applyButtonTitle | translate }}\n' +
+    '                {{ ::vm.config.ok | translate }}\n' +
     '            </md-button>\n' +
     '        </div>\n' +
     '    </div>\n' +
@@ -904,12 +902,12 @@ module.run(['$templateCache', function($templateCache) {
     '-->\n' +
     '\n' +
     '<md-dialog class="pip-dialog pip-options-dialog layout-column"\n' +
-    '           min-width="400" md-theme="{{vm.theme}}">\n' +
+    '           min-width="400" md-theme="{{ vm.theme }}">\n' +
     '    <md-dialog-content class="pip-body lp0 tp0 rp0 bp24 pip-scroll">\n' +
     '        <div class="pip-header" >\n' +
-    '            <h3>{{::vm.config.title | translate}}</h3>\n' +
-    '            <div ng-show="vm.config.deletedTitle" class="header-option text-subhead1 divider-bottom">\n' +
-    '                <md-checkbox ng-model="deleted" aria-label="CHECKBOX">{{::vm.config.deletedTitle | translate}}</md-checkbox>\n' +
+    '            <h3>{{ ::vm.config.title | translate }}</h3>\n' +
+    '            <div ng-show="vm.config.checkboxOptionCaption" class="header-option text-subhead1 divider-bottom">\n' +
+    '                <md-checkbox ng-model="vm.config.isCheckboxOption" aria-label="CHECKBOX">{{ ::vm.config.checkboxOptionCaption | translate }}</md-checkbox>\n' +
     '            </div>\n' +
     '        </div>\n' +
     '        <div class="pip-content">\n' +
@@ -919,14 +917,14 @@ module.run(['$templateCache', function($templateCache) {
     '                     ui-event="{ click: \'vm.onOptionSelect($event, option)\' }"\n' +
     '                     ng-class="{ selected: option.name == vm.config.selectedOptionName }">\n' +
     '                    <div class="pip-list-item item-padding">\n' +
-    '                        <md-icon class="pip-option-icon" md-svg-icon="icons:{{option.icon}}" ng-if="option.icon">\n' +
+    '                        <md-icon class="pip-option-icon" md-svg-icon="icons:{{ option.icon }}" ng-if="option.icon">\n' +
     '                        </md-icon>\n' +
     '                        <div class="pip-option-title">\n' +
-    '                            {{::option.title | translate}}\n' +
+    '                            {{ ::option.title | translate }}\n' +
     '                        </div>\n' +
     '                        <md-radio-button ng-value="option.name" tabindex="-1"\n' +
     '                                        \n' +
-    '                                         aria-label="{{::option.title | translate}}">\n' +
+    '                                         aria-label="{{ ::option.title | translate }}">\n' +
     '                        </md-radio-button>\n' +
     '                    </div>\n' +
     '\n' +
@@ -936,8 +934,8 @@ module.run(['$templateCache', function($templateCache) {
     '    </md-dialog-content>\n' +
     '    <div class="pip-footer">\n' +
     '        <div>\n' +
-    '            <md-button class="pip-cancel" ng-click="vm.onCancel()">{{::\'CANCEL\' | translate}}</md-button>\n' +
-    '            <md-button class="pip-submit md-accent" ng-click="vm.onSelect()">{{::vm.config.applyButtonTitle | translate}}</md-button>\n' +
+    '            <md-button class="pip-cancel" ng-click="vm.onCancel()">{{ ::\'CANCEL\' | translate }}</md-button>\n' +
+    '            <md-button class="pip-submit md-accent" ng-click="vm.onSelect()">{{ ::vm.config.ok | translate }}</md-button>\n' +
     '        </div>\n' +
     '    </div>\n' +
     '</md-dialog>\n' +

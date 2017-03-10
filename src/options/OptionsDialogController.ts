@@ -19,22 +19,22 @@ class OptionsDialogController {
         this.config = new OptionsDialogParams();
         var pipTranslate: pip.services.ITranslateService = $injector.has('pipTranslate') ? <pip.services.ITranslateService>$injector.get('pipTranslate') : null;
         if (pipTranslate) {
-            pipTranslate.translations('en', { 'OPTIONS_TITLE': 'Choose Option'});
-            pipTranslate.translations('ru', { 'OPTIONS_TITLE': 'Выберите опцию'});
+            pipTranslate.translations('en', { 'OPTIONS_TITLE': 'Choose Option' });
+            pipTranslate.translations('ru', { 'OPTIONS_TITLE': 'Выберите опцию' });
 
             this.config.title = pipTranslate.translate(params.title) || pipTranslate.translate('OPTIONS_TITLE');
-            this.config.applyButtonTitle = pipTranslate.translate(params.applyButtonTitle) || pipTranslate.translate('SELECT');
+            this.config.ok = pipTranslate.translate(params.ok) || pipTranslate.translate('SELECT');
         } else {
             this.config.title = params.title || 'Choose Option';
-            this.config.applyButtonTitle = params.applyButtonTitle || 'Select';
+            this.config.ok = params.ok || 'Select';
         }
 
         this.theme = $rootScope['$theme'];
         this.config.options = params.options;
         this.config.selectedOption = _.find(params.options, {active: true}) || new OptionsDialogData();
         this.config.selectedOptionName = this.config.selectedOption.name;
-        this.config.deleted = params.deleted;
-        this.config.deletedTitle = params.deletedTitle;
+        this.config.isCheckboxOption = params.isCheckboxOption;
+        this.config.checkboxOptionCaption = params.checkboxOptionCaption;
 
         setTimeout(this.focusInput, 500);
     }
@@ -62,9 +62,9 @@ class OptionsDialogController {
 
     public onSelect() {
         let option: OptionsDialogData;
-        option = _.find(this.config.options, {name: this.config.selectedOptionName});
+        option = _.find(this.config.options, { name: this.config.selectedOptionName });
 
-        this.$mdDialog.hide({option: option, deleted: this.config.deleted});
+        this.$mdDialog.hide({ option: option, isCheckboxOption: this.config.isCheckboxOption });
     }
 
     private focusInput() {

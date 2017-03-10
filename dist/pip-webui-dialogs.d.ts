@@ -73,12 +73,10 @@ export class OptionsBigDialogData {
 export class OptionsBigDialogParams {
     event?: MouseEvent;
     title?: string;
-    applyButtonTitle?: string;
+    ok?: string;
     options?: OptionsBigDialogData[];
     selectedOption?: OptionsBigDialogData;
     selectedOptionName?: string;
-    deleted?: boolean;
-    deletedTitle?: string;
     hint?: string;
     noTitle: boolean;
     noActions: boolean;
@@ -86,7 +84,7 @@ export class OptionsBigDialogParams {
 
 export class OptionsBigDialogResult {
     option: OptionsBigDialogData;
-    deleted: boolean;
+    isCheckboxOption: boolean;
 }
 
 export interface IOptionsBigDialogService {
@@ -102,19 +100,19 @@ export class OptionsDialogData {
 }
 
 export class OptionsDialogParams {
-    event: MouseEvent;
+    event?: MouseEvent;
     title?: string;
-    applyButtonTitle?: string;
+    ok?: string;
     options?: OptionsDialogData[];
     selectedOption?: OptionsDialogData;
-    deleted?: boolean;
     selectedOptionName?: string;
-    deletedTitle?: string;
+    isCheckboxOption?: boolean;
+    checkboxOptionCaption?: string;
 }
 
 export class OptionsDialogResult {
     option: OptionsDialogData;
-    deleted: boolean;
+    isCheckboxOption: boolean;
 }
 
 export interface IOptionsDialogService {

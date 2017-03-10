@@ -6,15 +6,15 @@ export class OptionsDialogParams {
     // Dialog title 
     public title?: string;
     // confirm button title
-    public applyButtonTitle?: string;
+    public ok?: string;
     // Dialog options array
     public options?: OptionsDialogData[];
     // Selected option by default
     public selectedOption?: OptionsDialogData;
     // Selected Option Name
     public selectedOptionName?: string;
-    // Show checkbox
-    public deleted?: boolean;
-    // Checkbox caption
-    public deletedTitle?: string;
+    // Value for checkbox option
+    public isCheckboxOption?: boolean;
+    // Checkbox caption, Checkbox visible if caption is set
+    public checkboxOptionCaption?: string;
 }

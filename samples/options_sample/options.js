@@ -14,6 +14,7 @@
             if (pipTranslate) {
                 pipTranslate.translations('en', {
                     OPEN_OPTIONS: 'Open options dialog',
+                    OPEN_OPTIONS_WITH_CHECKBOX: 'Open options dialog  with checkbox',
                     OPEN_OPTIONS_BIG: 'Open big options dialog',
                     OPTIONS_DIALOG: 'Options dialog',
                     OPEN_OPTIONS_BIG_CONTRIBS: 'Open big options dialog with buttons',
@@ -23,6 +24,7 @@
                 });
                 pipTranslate.translations('ru', {
                     OPEN_OPTIONS: 'Открыть диалог выбора',
+                    OPEN_OPTIONS_WITH_CHECKBOX: 'Открыть диалог выбора с чекбоксом',
                     OPEN_OPTIONS_BIG: 'Открыть большой диалог выбора',
                     OPTIONS_DIALOG: 'Диалог выбора',
                     OPEN_OPTIONS_BIG_CONTRIBS: 'Открыть большой диалог с кнопками',
@@ -32,6 +34,7 @@
                 });
                 $scope.titleOptions = pipTranslate.translate('OPTIONS_DIALOG');
                 $scope.openOptions = pipTranslate.translate('OPEN_OPTIONS');
+                $scope.openOptionsWithCheckbox = pipTranslate.translate('OPEN_OPTIONS_WITH_CHECKBOX');
                 $scope.openOptionsBig = pipTranslate.translate('OPEN_OPTIONS_BIG');
                 $scope.openOptionsBigButton = pipTranslate.translate('OPEN_OPTIONS_BIG_CONTRIBS');
                 $scope.openOptionsBigHint = pipTranslate.translate('OPEN_ROLE_DIALOG');
@@ -40,6 +43,7 @@
             } else {
                 $scope.titleOptions = 'Options dialog';
                 $scope.openOptions = 'Open options dialog';
+                $scope.openOptionsWithCheckbox = 'Open options dialog with checkbox';
                 $scope.openOptionsBig = 'Open big options dialog';
                 $scope.openOptionsBigButton = 'Open big options dialog with buttons';
                 $scope.openOptionsBigHint = 'Open big dialog with hint';
@@ -73,7 +77,34 @@
                         event: event,
                         title: 'Choose Option',
                         options: options,
-                        selectedOptionName: $scope.activeOptionName
+                        selectedOptionName: $scope.activeOptionName                       
+
+                    },
+                    function (result) {
+                        var optionName = result && result.option ? result.option.name : null;
+
+                        setActive(options, optionName);
+                        console.log('Selected option: ' + optionName);
+                    }
+                );
+            };
+
+            $scope.onOptionsDialogWithCheckboxOpen = function (event) {
+                var options = [
+                    { icon: 'star', name: 'option_1', title: 'Option 1', active: true },
+                    { icon: 'star', name: 'option_2', title: 'Option 2' },
+                    { icon: 'star', name: 'option_3', title: 'Option 3' },
+                    { name: 'option_4', title: 'Option 4' },
+                    { name: 'option_5', title: 'Option 5' }
+                ];
+                pipOptionsDialog.show(
+                    {
+                        event: event,
+                        title: 'Choose Option',
+                        options: options,
+                        selectedOptionName: $scope.activeOptionName,
+                        isCheckboxOption: true,
+                        checkboxOptionCaption: 'Set by default'                        
 
                     },
                     function (result) {

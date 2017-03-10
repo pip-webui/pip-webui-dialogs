@@ -6,17 +6,13 @@ export class OptionsBigDialogParams {
     // Dialog title 
     public title?: string;  
     // confirm button title
-    public applyButtonTitle?: string;
+    public ok?: string;
     // Dialog options array
     public options?: OptionsBigDialogData[];
     // Selected option by default
     public selectedOption?: OptionsBigDialogData;
     // Selected Option Name
     public selectedOptionName?: string;    
-    // Show checkbox
-    public deleted?: boolean;
-    // Checkbox caption
-    public deletedTitle?: string;
     // Dialog hint title
     public hint?: string;
     // Show title

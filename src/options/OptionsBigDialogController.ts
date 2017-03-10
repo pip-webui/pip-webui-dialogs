@@ -8,6 +8,8 @@ class OptionsBigDialogController {
     public theme: string;
     public config: OptionsBigDialogParams;
 
+    public optionIndex: number;
+
     constructor(
         $mdDialog: angular.material.IDialogService,
         $injector: ng.auto.IInjectorService, 
@@ -25,13 +27,20 @@ class OptionsBigDialogController {
         this.theme = $rootScope['$theme'];
         
         this.config.options = params.options;
-        this.config.selectedOption = _.find(params.options, {active: true}) || new OptionsBigDialogData();
-        this.config.selectedOptionName = this.config.selectedOption.name;
+        this.config.selectedOption = _.find(params.options, {active: true}) || null;
+        this.config.selectedOptionName = params.selectedOptionName;
         this.config.deleted = params.deleted;
         this.config.deletedTitle = params.deletedTitle;
         this.config.noActions = params.noActions || false;
         this.config.noTitle = params.noTitle || false;
         this.config.hint = params.hint || '';
+        let name: string = this.config.selectedOption ? this.config.selectedOption.name : this.config.selectedOptionName;
+        let index: number = _.findIndex(this.config.options, (opt: OptionsBigDialogData) => {
+            return opt.name == name;
+        });
+        this.optionIndex = index == -1 ? 0 : index;
+        this.config.selectedOption = this.config.options[this.optionIndex];
+        this.config.selectedOptionName = this.config.selectedOption.name;
 
         setTimeout(this.focusInput, 500);
     }
@@ -70,7 +79,7 @@ class OptionsBigDialogController {
     }
 
     public onSelected() {
-        this.config.selectedOptionName = this.config.options[this.config.optionIndex].name;
+        this.config.selectedOptionName = this.config.options[this.optionIndex].name;
 
         if (this.config.noActions) {
                this.onSelect();

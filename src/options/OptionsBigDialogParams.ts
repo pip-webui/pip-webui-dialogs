@@ -1,15 +1,27 @@
 import { OptionsBigDialogData } from './OptionsBigDialogData';
 
 export class OptionsBigDialogParams {
+    // Mouse event
+    public event?: MouseEvent;   
+    // Dialog title 
     public title?: string;  
+    // confirm button title
     public applyButtonTitle?: string;
+    // Dialog options array
     public options?: OptionsBigDialogData[];
+    // Selected option by default
     public selectedOption?: OptionsBigDialogData;
+    // Selected Option Name
+    public selectedOptionName?: string;    
+    // Show checkbox
     public deleted?: boolean;
-    public selectedOptionName?: string;
+    // Checkbox caption
     public deletedTitle?: string;
+    // Dialog hint title
     public hint?: string;
+    // Show title
     public noTitle: boolean = false;
+    // Show action button
     public noActions: boolean = false;
-    public optionIndex: number = 0;
 }
+

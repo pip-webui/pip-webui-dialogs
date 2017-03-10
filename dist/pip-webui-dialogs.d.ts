@@ -2,10 +2,10 @@ declare module pip.dialogs {
 
 
 export class ConfirmationDialogParams {
-    ok: string;
-    title?: string;
-    cancel: string;
     event?: MouseEvent;
+    ok?: string;
+    title?: string;
+    cancel?: string;
 }
 
 export interface IConfirmationService {
@@ -20,10 +20,10 @@ export interface IConfirmationService {
 }
 
 export class ErrorDialogParams {
-    event: MouseEvent;
-    ok: string;
-    cancel: string;
-    error: string;
+    event?: MouseEvent;
+    ok?: string;
+    cancel?: string;
+    error: any;
 }
 
 export class ErrorDialogStrings {
@@ -43,11 +43,11 @@ export class ErrorDialogStrings {
 
 
 export class InformationDialogParams {
-    ok: string;
+    event?: MouseEvent;
+    ok?: string;
     title?: string;
-    message?: string;
-    error?: string;
-    item: any;
+    message: string;
+    item?: any;
 }
 
 export interface IInformationService {
@@ -71,17 +71,17 @@ export class OptionsBigDialogData {
 }
 
 export class OptionsBigDialogParams {
+    event?: MouseEvent;
     title?: string;
     applyButtonTitle?: string;
     options?: OptionsBigDialogData[];
     selectedOption?: OptionsBigDialogData;
-    deleted?: boolean;
     selectedOptionName?: string;
+    deleted?: boolean;
     deletedTitle?: string;
     hint?: string;
     noTitle: boolean;
     noActions: boolean;
-    optionIndex: number;
 }
 
 export class OptionsBigDialogResult {

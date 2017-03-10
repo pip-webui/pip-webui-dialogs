@@ -22,14 +22,14 @@ class InformationDialogController {
 
         this.$mdDialog = $mdDialog;
         this.theme = $rootScope['$theme'];
-        this.config.error = params.error;
     }
 
     private initTranslate(params: InformationDialogParams): void {
         let pipTranslate: pip.services.ITranslateService;
         pipTranslate = this._injector.has('pipTranslate') ? <pip.services.ITranslateService>this._injector.get('pipTranslate') : null;
 
-        let content = params.message, item;
+        let content: string = params.message;
+        let item: string;
         if (pipTranslate) {
             pipTranslate.translations('en', { 'INFORMATION_TITLE': 'Information'});
             pipTranslate.translations('ru', { 'INFORMATION_TITLE': 'Информация' });
@@ -45,7 +45,7 @@ class InformationDialogController {
         let pipFormat: pip.services.IFormat = this._injector.has('pipFormat') ? <pip.services.IFormat>this._injector.get('pipFormat') : null;
 
         if (params.item && pipFormat) {
-            item = _.truncate(params.item, 25);
+            // item = _.truncate(params.item, 25);
             content = pipFormat.sprintf(content, item);
         }
 

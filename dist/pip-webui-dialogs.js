@@ -287,12 +287,12 @@ var InformationDialogController = (function () {
         this.initTranslate(params);
         this.$mdDialog = $mdDialog;
         this.theme = $rootScope['$theme'];
-        this.config.error = params.error;
     }
     InformationDialogController.prototype.initTranslate = function (params) {
         var pipTranslate;
         pipTranslate = this._injector.has('pipTranslate') ? this._injector.get('pipTranslate') : null;
-        var content = params.message, item;
+        var content = params.message;
+        var item;
         if (pipTranslate) {
             pipTranslate.translations('en', { 'INFORMATION_TITLE': 'Information' });
             pipTranslate.translations('ru', { 'INFORMATION_TITLE': 'Информация' });
@@ -306,7 +306,6 @@ var InformationDialogController = (function () {
         }
         var pipFormat = this._injector.has('pipFormat') ? this._injector.get('pipFormat') : null;
         if (params.item && pipFormat) {
-            item = _.truncate(params.item, 25);
             content = pipFormat.sprintf(content, item);
         }
         this.config.content = content;
@@ -403,13 +402,20 @@ var OptionsBigDialogController = (function () {
         this.initTranslate(params);
         this.theme = $rootScope['$theme'];
         this.config.options = params.options;
-        this.config.selectedOption = _.find(params.options, { active: true }) || new OptionsBigDialogData_1.OptionsBigDialogData();
-        this.config.selectedOptionName = this.config.selectedOption.name;
+        this.config.selectedOption = _.find(params.options, { active: true }) || null;
+        this.config.selectedOptionName = params.selectedOptionName;
         this.config.deleted = params.deleted;
         this.config.deletedTitle = params.deletedTitle;
         this.config.noActions = params.noActions || false;
         this.config.noTitle = params.noTitle || false;
         this.config.hint = params.hint || '';
+        var name = this.config.selectedOption ? this.config.selectedOption.name : this.config.selectedOptionName;
+        var index = _.findIndex(this.config.options, function (opt) {
+            return opt.name == name;
+        });
+        this.optionIndex = index == -1 ? 0 : index;
+        this.config.selectedOption = this.config.options[this.optionIndex];
+        this.config.selectedOptionName = this.config.selectedOption.name;
         setTimeout(this.focusInput, 500);
     }
     OptionsBigDialogController.prototype.initTranslate = function (params) {
@@ -440,7 +446,7 @@ var OptionsBigDialogController = (function () {
         }
     };
     OptionsBigDialogController.prototype.onSelected = function () {
-        this.config.selectedOptionName = this.config.options[this.config.optionIndex].name;
+        this.config.selectedOptionName = this.config.options[this.optionIndex].name;
         if (this.config.noActions) {
             this.onSelect();
         }
@@ -481,7 +487,6 @@ var OptionsBigDialogParams = (function () {
     function OptionsBigDialogParams() {
         this.noTitle = false;
         this.noActions = false;
-        this.optionIndex = 0;
     }
     return OptionsBigDialogParams;
 }());
@@ -838,7 +843,7 @@ module.run(['$templateCache', function($templateCache) {
     '        <div class="pip-content">\n' +
     '            <div class="spacer8" ng-if="noTitle && hint"></div>\n' +
     '            <md-list class="pip-menu  pip-ref-list"\n' +
-    '                     pip-selected="vm.config.optionIndex" index="{{ vm.config.optionIndex }}"\n' +
+    '                     pip-selected="vm.optionIndex" index="{{ vm.optionIndex }}"\n' +
     '                     pip-select="vm.onSelected($event)">\n' +
     '\n' +
     '                <md-list-item class="pip-ref-list-item pip-selectable layout-row layout-align-start-center"\n' +

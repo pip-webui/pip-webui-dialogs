@@ -42,6 +42,28 @@ export class ErrorDialogStrings {
 
 
 
+export class InformationDialogParams {
+    ok: string;
+    title?: string;
+    message?: string;
+    error?: string;
+    item: any;
+}
+
+export interface IInformationService {
+    show(params: InformationDialogParams, successCallback?: () => void, cancelCallback?: () => void): any;
+}
+
+export class InformationDialogStrings {
+    ok: string;
+    title: string;
+    message: string;
+    error: string;
+    content: any;
+}
+
+
+
 export class OptionsBigDialogData {
     name: string;
     title: string;
@@ -97,28 +119,6 @@ export class OptionsDialogResult {
 
 export interface IOptionsDialogService {
     show(params: OptionsDialogParams, successCallback?: (result: OptionsDialogResult) => void, cancelCallback?: () => void): any;
-}
-
-
-
-export class InformationDialogParams {
-    ok: string;
-    title?: string;
-    message?: string;
-    error?: string;
-    item: any;
-}
-
-export interface IInformationService {
-    show(params: InformationDialogParams, successCallback?: () => void, cancelCallback?: () => void): any;
-}
-
-export class InformationDialogStrings {
-    ok: string;
-    title: string;
-    message: string;
-    error: string;
-    content: any;
 }
 
 }

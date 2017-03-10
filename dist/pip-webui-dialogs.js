@@ -780,6 +780,39 @@ try {
   module = angular.module('pipDialogs.Templates', []);
 }
 module.run(['$templateCache', function($templateCache) {
+  $templateCache.put('information/InformationDialog.html',
+    '<!--\n' +
+    '@file Information dialog content\n' +
+    '@copyright Digital Living Software Corp. 2014-2016\n' +
+    '-->\n' +
+    '\n' +
+    '<md-dialog class="pip-dialog pip-information-dialog layout-column"\n' +
+    '           width="400" md-theme="{{ vm.theme }}">\n' +
+    '    <div class="pip-header">\n' +
+    '        <h3 >{{:: vm.config.title | translate }}</h3>\n' +
+    '    </div>\n' +
+    '    <div class="pip-body">\n' +
+    '        <div class="pip-content">\n' +
+    '            {{ vm.config.content }}\n' +
+    '        </div>\n' +
+    '    </div>\n' +
+    '    <div class="pip-footer">\n' +
+    '        <div>\n' +
+    '            <md-button class="md-accent" ng-click="vm.onOk()">{{ vm.config.ok | translate }}</md-button>\n' +
+    '        </div>\n' +
+    '    </div>\n' +
+    '</md-dialog>\n' +
+    '');
+}]);
+})();
+
+(function(module) {
+try {
+  module = angular.module('pipDialogs.Templates');
+} catch (e) {
+  module = angular.module('pipDialogs.Templates', []);
+}
+module.run(['$templateCache', function($templateCache) {
   $templateCache.put('options/OptionsBigDialog.html',
     '<!--\n' +
     '@file Options dialog content\n' +
@@ -787,29 +820,29 @@ module.run(['$templateCache', function($templateCache) {
     '-->\n' +
     '\n' +
     '<md-dialog class="pip-dialog pip-options-dialog-big layout-column"\n' +
-    '           min-width="400" md-theme="{{vm.theme}}">\n' +
+    '           min-width="400" md-theme="{{ vm.theme }}">\n' +
     '    <md-dialog-content class="pip-body pip-scroll" ng-class="{\'bp24\': !vm.config.noActions}">\n' +
     '        <div class="pip-header" ng-class="{\'header-hint\': vm.config.noTitle && vm.config.hint}">\n' +
     '            <h3 class="m0" ng-if="!vm.config.noTitle">\n' +
-    '                {{::vm.config.title | translate}}\n' +
+    '                {{ ::vm.config.title | translate }}\n' +
     '            </h3>\n' +
     '            <div ng-show="vm.config.noTitle && vm.config.hint" \n' +
     '                 class="dialog-hint layout-row layout-align-start-center">\n' +
     '                <div class="hint-icon-container flex-fixed" >\n' +
     '                    <md-icon md-svg-icon="icons:info-circle-outline"></md-icon>\n' +
     '                </div>\n' +
-    '                <div>{{::vm.config.hint | translate}}</div>\n' +
+    '                <div>{{ ::vm.config.hint | translate }}</div>\n' +
     '            </div>\n' +
     '        </div>\n' +
     '        <div class="content-divider" ng-if="!noTitle"></div>\n' +
     '        <div class="pip-content">\n' +
     '            <div class="spacer8" ng-if="noTitle && hint"></div>\n' +
     '            <md-list class="pip-menu  pip-ref-list"\n' +
-    '                     pip-selected="vm.config.optionIndex" index="{{vm.config.optionIndex }}"\n' +
+    '                     pip-selected="vm.config.optionIndex" index="{{ vm.config.optionIndex }}"\n' +
     '                     pip-select="vm.onSelected($event)">\n' +
     '\n' +
     '                <md-list-item class="pip-ref-list-item pip-selectable layout-row layout-align-start-center"\n' +
-    '                              ng-class="{\'selected md-focused\' : option.name == selectedOptionName,\n' +
+    '                              ng-class="{\'selected md-focused\' : option.name == vm.config.selectedOptionName,\n' +
     '                              \'divider-bottom\': $index != options.length - 1}"\n' +
     '                              md-ink-ripple\n' +
     '                              ng-keyup="vm.onKeyUp($event, $index)"\n' +
@@ -817,12 +850,12 @@ module.run(['$templateCache', function($templateCache) {
     '\n' +
     '                    <div class="pip-content  content-stretch" ng-click="vm.onOptionSelect($event, option)">\n' +
     '                        <p class="pip-title spacer-right" ng-if="option.title" style="margin-bottom: 4px !important;">\n' +
-    '                            {{::option.title | translate}}\n' +
+    '                            {{ ::option.title | translate }}\n' +
     '                        </p>\n' +
     '                        <div class="pip-subtitle spacer-right"\n' +
     '                             style="height: inherit"\n' +
     '                             ng-if="option.subtitle">\n' +
-    '                            {{::option.subtitle | translate}}\n' +
+    '                            {{ ::option.subtitle | translate }}\n' +
     '                        </div>\n' +
     '                        <div class="pip-subtitle spacer-right"\n' +
     '                             style="height: inherit" ng-if="option.text"\n' +
@@ -839,9 +872,11 @@ module.run(['$templateCache', function($templateCache) {
     '\n' +
     '    <div class="pip-footer" ng-if="!vm.config.noActions">\n' +
     '        <div>\n' +
-    '            <md-button class="pip-cancel" ng-click="vm.onCancel()">{{::\'CANCEL\' | translate}}</md-button>\n' +
+    '            <md-button class="pip-cancel" ng-click="vm.onCancel()">\n' +
+    '                {{ ::\'CANCEL\' | translate }}\n' +
+    '            </md-button>\n' +
     '            <md-button class="pip-submit md-accent" ng-click="vm.onSelect()" style="margin-right: -6px">\n' +
-    '                {{::vm.config.applyButtonTitle | translate}}\n' +
+    '                {{ ::vm.config.applyButtonTitle | translate }}\n' +
     '            </md-button>\n' +
     '        </div>\n' +
     '    </div>\n' +
@@ -898,39 +933,6 @@ module.run(['$templateCache', function($templateCache) {
     '        <div>\n' +
     '            <md-button class="pip-cancel" ng-click="vm.onCancel()">{{::\'CANCEL\' | translate}}</md-button>\n' +
     '            <md-button class="pip-submit md-accent" ng-click="vm.onSelect()">{{::vm.config.applyButtonTitle | translate}}</md-button>\n' +
-    '        </div>\n' +
-    '    </div>\n' +
-    '</md-dialog>\n' +
-    '');
-}]);
-})();
-
-(function(module) {
-try {
-  module = angular.module('pipDialogs.Templates');
-} catch (e) {
-  module = angular.module('pipDialogs.Templates', []);
-}
-module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('information/InformationDialog.html',
-    '<!--\n' +
-    '@file Information dialog content\n' +
-    '@copyright Digital Living Software Corp. 2014-2016\n' +
-    '-->\n' +
-    '\n' +
-    '<md-dialog class="pip-dialog pip-information-dialog layout-column"\n' +
-    '           width="400" md-theme="{{ vm.theme }}">\n' +
-    '    <div class="pip-header">\n' +
-    '        <h3 >{{:: vm.config.title | translate }}</h3>\n' +
-    '    </div>\n' +
-    '    <div class="pip-body">\n' +
-    '        <div class="pip-content">\n' +
-    '            {{ vm.config.content }}\n' +
-    '        </div>\n' +
-    '    </div>\n' +
-    '    <div class="pip-footer">\n' +
-    '        <div>\n' +
-    '            <md-button class="md-accent" ng-click="vm.onOk()">{{ vm.config.ok | translate }}</md-button>\n' +
     '        </div>\n' +
     '    </div>\n' +
     '</md-dialog>\n' +

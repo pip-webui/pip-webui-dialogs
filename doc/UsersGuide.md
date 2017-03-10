@@ -11,26 +11,26 @@
 
 ## <a name="install"></a> Installing
 
-Add dependency to **pip-webui** into your **bower.json** or **package.json** file depending what you use.
+Add dependency to **pip-webui-ws** into your **bower.json** or **package.json** file depending what you use.
 ```javascript
 "dependencies": {
   ...
-  "pip-webui": "*"
+  "pip-webui-ws": "*"
   ...
 }
 ```
 
 Alternatively you can install **pip-webui** manually using **bower**:
 ```bash
-bower install pip-webui
+bower install pip-webui-ws
 ```
 
 or install it using **npm**:
 ```bash
-npm install pip-webui
+npm install pip-webui-ws
 ```
 
-Include **pip-webui** files into your web application.
+Include **pip-webui-ws** files into your web application.
 ```html
 <link rel="stylesheet" href=".../pip-webui-lib.min.css"/>
 <link rel="stylesheet" href=".../pip-webui.min.css"/>
@@ -63,11 +63,23 @@ angular.module('myApp',[..., 'pipDialogs']);
         }
     );
 ```
-
-<img src="images/img-info-dialog.png"/>
+### Parametrs
+| Parametr | Type | Description | 
+|---|---|---|
+| event | MouseEvent | Mouse event |
+| ok | string | Confirm button caption |
+| title | string | Dialog title |
+| message | string | Dialog messag. You can use formatting options (%s, %d etc.) |
+| item | any | Paramentrs for message string |
 
 ### Methods
 * **show** - open information dialog
+
+Information dialog
+
+<img src="images/img-info-dialog.png"/>
+
+See online samples [here...](http://webui.pipdevs.com/pip-webui-dialogs/index.html#/information)
 
 ## <a name="confirmation_dialog"></a> pipConfirmationDialog
 
@@ -91,8 +103,22 @@ angular.module('myApp',[..., 'pipDialogs']);
     );
 ```
 
+### Parametrs
+| Parametr | Type | Description | 
+|---|---|---|
+| event | MouseEvent | Mouse event |
+| ok | string | Confirm button caption |
+| title | string | Dialog title |
+| cancel | string | Cancel button caption |
+
 ### Methods
 * **show** - open confirmation dialog
+
+Confirmation dialog
+
+<img src="images/img-confirm-dialog.png"/>
+
+See online samples [here...](http://webui.pipdevs.com/pip-webui-dialogs/index.html#/confirmation)
 
 ## <a name="error_dialog"></a> pipErrorDialog
 
@@ -110,10 +136,22 @@ angular.module('myApp',[..., 'pipDialogs']);
  );
 ```
 
-<img src="images/img-errors-dialog.png"/>
+### Parametrs
+| Parametr | Type | Description | 
+|---|---|---|
+| event | MouseEvent | Mouse event |
+| ok | string | Confirm button caption |
+| cancel | string | Error object or string |
+| error | any | Cancel button caption |
 
 ### Methods
 * **show** - open errors details dialog
+
+Error details dialog
+
+<img src="images/img-errors-dialog.png"/>
+
+See online samples [here...](http://webui.pipdevs.com/pip-webui-dialogs/index.html#/error_details)
 
 ## <a name="options_dialog"></a> pipOptionsDialog
 
@@ -140,10 +178,97 @@ angular.module('myApp',[..., 'pipDialogs']);
     );
 ```
 
-<img src="images/img-options-dialog.png"/>
+### Parametrs
+| Parametr | Type | Description | 
+|---|---|---|
+| event | MouseEvent | Mouse event |
+| title | string | Dialog title |
+| ok | string | confirm button title |
+| selectedOption | OptionsDialogData {name: string, title: string, icon?: string, active?: boolean} | Cancel button caption |
+| options | OptionsDialogData[]   | Dialog options array |
+| selectedOptionName | string | Selected Option Name |
+| isCheckboxOption | boolean | Value for additional option |
+| checkboxOptionCaption | any | Checkbox caption, additional option visible if caption is set |
+
 
 ### Methods
 * **show** - open options dialog
+
+Option dialog
+
+<img src="images/img-options-dialog.png"/>
+
+See online samples [here...](http://webui.pipdevs.com/pip-webui-dialogs/index.html#/options)
+
+Option dialog with additional option
+
+<img src="images/img-options-dialog-with-additional-option.png"/>
+
+See online samples [here...](http://webui.pipdevs.com/pip-webui-dialogs/index.html#/options)
+
+## <a name="options_big_dialog"></a> pipOptionsBigDialog
+
+**pipOptionsBigDialog** allows to pick one from several available options. Each option can have additional discription in *subtitle* filed.
+
+### Usage
+```javascript
+    var options = [
+        { name: 'option_1', title: 'Option 1', subtitle: 'Assertively engineer stand-alone information vis-a-vis ethical partnerships. Dynamically extend accurate data after strategic infrastructures. Globally matrix intuitive potentialities without' },
+        { name: 'option_2', title: 'Option 2', subtitle: 'A goal, that is not important by itself and only needed as a step toward a bigger goal' },
+        { name: 'option_3', title: 'Option 3', subtitle: 'Small subtitle' },
+        { name: 'option_4', title: 'Big title: Energistically transition multimedia based ideas without mission-critical schemas. 4', subtitle: 'Small subtitle' }
+
+    ];
+    pipOptionsBigDialog.show(
+        {
+            event: event,
+            noActions: true,
+            noTitle: true,
+            hint: 'Роли позволяют отделить свою работу от работы других партнеров.',
+            options: options,
+            selectedOptionName: $scope.activeOptionName
+        },
+        function (result) {
+            var optionName = result && result.option ? result.option.name : null;
+            setActive(options, optionName);
+            console.log('Selected option: ' + optionName);
+        }
+    );
+```
+
+### Parametrs
+| Parametr | Type | Description | 
+|---|---|---|
+| event | MouseEvent | Mouse event |
+| title | string | Dialog title |
+| ok | string | confirm button title |
+| selectedOption | OptionsDialogData {name: string, title: string, icon?: string, active?: boolean} | Cancel button caption |
+| options | OptionsDialogData[]   | Dialog options array |
+| selectedOptionName | string | Selected Option Name |
+| hint | string | Dialog hint title |
+| noTitle | boolean | Title is hide |
+| noActions | boolean | Action button is hide. When you select an option, the dialog is closed. |
+
+### Methods
+* **show** - open options dialog
+
+Option dialog with subtitles.
+
+<img src="images/img-options-big-dialog.png"/>
+
+See online samples [here...](http://webui.pipdevs.com/pip-webui-dialogs/index.html#/options)
+
+Option dialog with subtitles and without action button.
+
+<img src="images/img-options-big-dialog-no-action.png"/>
+
+See online samples [here...](http://webui.pipdevs.com/pip-webui-dialogs/index.html#/options)
+
+Option dialog with subtitles, with title hint and without action button.
+
+<img src="images/img-options-big-dialog-with-hint.png"/>
+
+See online samples [here...](http://webui.pipdevs.com/pip-webui-dialogs/index.html#/options)
 
 ## <a name="issues"></a> Questions and bugs
 

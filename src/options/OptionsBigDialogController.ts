@@ -1,24 +1,23 @@
-import { OptionsBigParams } from './OptionsBigParams';
-import { OptionsBigData } from './OptionsBigData';
-import { IOptionsBigDialogController } from './IOptionsBigDialogController';
+import { OptionsBigDialogParams } from './OptionsBigDialogParams';
+import { OptionsBigDialogData } from './OptionsBigDialogData';
 
-export class OptionsBigDialogController implements IOptionsBigDialogController {
+class OptionsBigDialogController {
     private _injector: ng.auto.IInjectorService;
 
     private $mdDialog: angular.material.IDialogService;
     public theme: string;
-    public config: OptionsBigParams;
+    public config: OptionsBigDialogParams;
 
     constructor(
         $mdDialog: angular.material.IDialogService,
         $injector: ng.auto.IInjectorService, 
         $rootScope: ng.IRootScopeService, 
-        params: OptionsBigParams) 
+        params: OptionsBigDialogParams) 
     {
         "ngInject";
 
         this.$mdDialog = $mdDialog;
-        this.config = new OptionsBigParams();
+        this.config = new OptionsBigDialogParams();
         this._injector = $injector;
 
         this.initTranslate(params)
@@ -26,7 +25,7 @@ export class OptionsBigDialogController implements IOptionsBigDialogController {
         this.theme = $rootScope['$theme'];
         
         this.config.options = params.options;
-        this.config.selectedOption = _.find(params.options, {active: true}) || new OptionsBigData();
+        this.config.selectedOption = _.find(params.options, {active: true}) || new OptionsBigDialogData();
         this.config.selectedOptionName = this.config.selectedOption.name;
         this.config.deleted = params.deleted;
         this.config.deletedTitle = params.deletedTitle;
@@ -37,7 +36,7 @@ export class OptionsBigDialogController implements IOptionsBigDialogController {
         setTimeout(this.focusInput, 500);
     }
 
-    private initTranslate(params: OptionsBigParams): void {
+    private initTranslate(params: OptionsBigDialogParams): void {
         let pipTranslate: pip.services.ITranslateService;
         pipTranslate = this._injector.has('pipTranslate') ? <pip.services.ITranslateService>this._injector.get('pipTranslate') : null;
 
@@ -61,7 +60,7 @@ export class OptionsBigDialogController implements IOptionsBigDialogController {
         this.$mdDialog.cancel();
     }
 
-    public onOptionSelect(event: ng.IAngularEvent, option: OptionsBigData) {
+    public onOptionSelect(event: ng.IAngularEvent, option: OptionsBigDialogData) {
         event.stopPropagation();
         this.config.selectedOptionName = option.name;
 
@@ -90,8 +89,8 @@ export class OptionsBigDialogController implements IOptionsBigDialogController {
     }
     
     public onSelect = function () {
-        let option: OptionsBigData;
-        option = <OptionsBigData>_.find(this.config.options, {name: this.config.selectedOptionName}) || new OptionsBigData();
+        let option: OptionsBigDialogData;
+        option = <OptionsBigDialogData>_.find(this.config.options, {name: this.config.selectedOptionName}) || new OptionsBigDialogData();
         this.$mdDialog.hide({option: option, deleted: this.config.deleted});
     };
 

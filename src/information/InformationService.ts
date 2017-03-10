@@ -1,5 +1,7 @@
+import { InformationParams } from './InformationParams';
+
 export interface IInformationService {
-    show(params, successCallback?: () => void, cancelCallback?: () => void): any;
+    show(params: InformationParams, successCallback?: () => void, cancelCallback?: () => void): any;
 }
 
 class InformationService implements IInformationService {

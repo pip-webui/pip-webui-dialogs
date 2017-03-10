@@ -1,10 +1,10 @@
-import { OptionsBigData } from './OptionsBigData';
+import { OptionsBigDialogData } from './OptionsBigDialogData';
 
-export class OptionsBigParams {
+export class OptionsBigDialogParams {
     public title?: string;  
     public applyButtonTitle?: string;
-    public options?: OptionsBigData[];
-    public selectedOption?: OptionsBigData;
+    public options?: OptionsBigDialogData[];
+    public selectedOption?: OptionsBigDialogData;
     public deleted?: boolean;
     public selectedOptionName?: string;
     public deletedTitle?: string;

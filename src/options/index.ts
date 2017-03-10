@@ -5,8 +5,11 @@ angular
         'pipDialogs.Translate',
         'pipDialogs.Templates']);
 
-import './OptionsService';
-import './OptionsController';
+import './OptionsDialogData';
+import './OptionsDialogParams';
+import './OptionsDialogResult';
+import './OptionsDialogService';
+import './OptionsDialogController';
 
 
 angular
@@ -15,10 +18,8 @@ angular
         'pipDialogs.Translate',
         'pipDialogs.Templates']);
 
-import './OptionsBigParams';
-import './OptionsBigData';
-import './OptionsData';
-import './OptionsParams';
-import './IOptionsBigDialogController';        
-import './OptionsBigService';
-import './OptionsBigController';
+import './OptionsBigDialogParams';
+import './OptionsBigDialogData';
+import './OptionsBigDialogResult';
+import './OptionsBigDialogService';
+import './OptionsBigDialogController';

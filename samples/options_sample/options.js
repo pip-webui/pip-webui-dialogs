@@ -65,8 +65,8 @@
                             { name: 'option_5', title: 'Option 5' }
                         ]
                     },
-                    function (option) {
-                        var optionName = option ? option.name : null;
+                    function (result) {
+                        var optionName = result && result.option ? result.option.name : null;
 
                         console.log('Selected option: ' + optionName);
                     }
@@ -86,8 +86,8 @@
 
                         ]
                     },
-                    function (option) {
-                        var optionName = option ? option.option.name : null;
+                    function (result) {
+                        var optionName = result && result.option ? result.option.name : null;
 
                         console.log('Selected option: ' + optionName);
                     }
@@ -109,8 +109,8 @@
 
                         ]
                     },
-                    function (option) {
-                        var optionName = option ? option.option.name : null;
+                    function (result) {
+                        var optionName = result && result.option ? result.option.name : null;
 
                         console.log('Selected option: ' + optionName);
                     }
@@ -127,8 +127,8 @@
 
                         ]
                     },
-                    function (option) {
-                        var optionName = option ? option.name : null;
+                    function (result) {
+                        var optionName = result && result.option ? result.option.name : null;
 
                         console.log('Selected option: ' + optionName);
                     }

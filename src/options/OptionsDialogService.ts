@@ -1,14 +1,16 @@
+import { OptionsDialogParams } from './OptionsDialogParams';
+import { OptionsDialogResult } from './OptionsDialogResult';
 
-export interface IOptionsService {
-    show(params, successCallback?: (option) => void, cancelCallback?: () => void): any;
+export interface IOptionsDialogService {
+    show(params: OptionsDialogParams, successCallback?: (result: OptionsDialogResult) => void, cancelCallback?: () => void): any;
 }
 
-class OptionsService implements IOptionsService {
+class OptionsDialogService implements IOptionsDialogService {
     public _mdDialog: angular.material.IDialogService;
     public constructor($mdDialog: angular.material.IDialogService) {
         this._mdDialog = $mdDialog;
     }
-    public  show(params, successCallback?: (option) => void, cancelCallback?: () => void): any {
+    public  show(params: OptionsDialogParams, successCallback?: (result: OptionsDialogResult) => void, cancelCallback?: () => void): any {
          this._mdDialog.show({
             targetEvent: params.event,
             templateUrl: 'options/OptionsDialog.html',
@@ -17,11 +19,12 @@ class OptionsService implements IOptionsService {
             locals: {params: params},
             clickOutsideToClose: true
          })
-        .then((option) => {
+        .then((result: OptionsDialogResult) => {
             if (successCallback) {
-                successCallback(option.option);
+                successCallback(result);
             }
-        }, () => {
+        }, 
+        () => {
             if (cancelCallback) {
                 cancelCallback();
             }
@@ -33,4 +36,4 @@ class OptionsService implements IOptionsService {
 
 angular
     .module('pipOptionsDialog')
-    .service('pipOptionsDialog', OptionsService);
+    .service('pipOptionsDialog', OptionsDialogService);

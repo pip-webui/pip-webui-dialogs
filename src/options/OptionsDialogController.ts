@@ -1,21 +1,22 @@
-import { OptionsData } from './OptionsData';
-import { OptionsParams } from './OptionsParams';
+import { OptionsDialogData } from './OptionsDialogData';
+import { OptionsDialogParams } from './OptionsDialogParams';
+import { OptionsDialogResult } from './OptionsDialogResult';
 
 export class OptionsDialogController {
 
     public $mdDialog: angular.material.IDialogService;
     public theme: string;
-    public config: OptionsParams;
+    public config: OptionsDialogParams;
 
     constructor(
         $mdDialog: angular.material.IDialogService,
         $injector: ng.auto.IInjectorService, 
         $rootScope: ng.IRootScopeService, 
-        params: OptionsParams) {
+        params: OptionsDialogParams) {
         "ngInject";
 
         this.$mdDialog = $mdDialog;
-        this.config = new OptionsParams();
+        this.config = new OptionsDialogParams();
         var pipTranslate: pip.services.ITranslateService = $injector.has('pipTranslate') ? <pip.services.ITranslateService>$injector.get('pipTranslate') : null;
         if (pipTranslate) {
             pipTranslate.translations('en', { 'OPTIONS_TITLE': 'Choose Option'});
@@ -30,7 +31,7 @@ export class OptionsDialogController {
 
         this.theme = $rootScope['$theme'];
         this.config.options = params.options;
-        this.config.selectedOption = _.find(params.options, {active: true}) || new OptionsData();
+        this.config.selectedOption = _.find(params.options, {active: true}) || new OptionsDialogData();
         this.config.selectedOptionName = this.config.selectedOption.name;
         this.config.deleted = params.deleted;
         this.config.deletedTitle = params.deletedTitle;
@@ -46,7 +47,7 @@ export class OptionsDialogController {
         this.$mdDialog.cancel();
     }
 
-    public onOptionSelect(event: ng.IAngularEvent, option: OptionsData) {
+    public onOptionSelect(event: ng.IAngularEvent, option: OptionsDialogData) {
         event.stopPropagation();
         this.config.selectedOptionName = option.name;
     }
@@ -60,7 +61,7 @@ export class OptionsDialogController {
     }
 
     public onSelect() {
-        let option: OptionsData;
+        let option: OptionsDialogData;
         option = _.find(this.config.options, {name: this.config.selectedOptionName});
 
         this.$mdDialog.hide({option: option, deleted: this.config.deleted});

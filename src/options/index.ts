@@ -1,4 +1,3 @@
-
 angular
     .module('pipOptionsDialog', [
         'ngMaterial', 
@@ -11,15 +10,7 @@ import './OptionsDialogResult';
 import './OptionsDialogService';
 import './OptionsDialogController';
 
-
-angular
-    .module('pipOptionsBigDialog', [
-        'ngMaterial', 
-        'pipDialogs.Translate',
-        'pipDialogs.Templates']);
-
-import './OptionsBigDialogParams';
-import './OptionsBigDialogData';
-import './OptionsBigDialogResult';
-import './OptionsBigDialogService';
-import './OptionsBigDialogController';
+export * from './OptionsDialogData';
+export * from './OptionsDialogParams';
+export * from './OptionsDialogResult';
+export * from './OptionsDialogService';

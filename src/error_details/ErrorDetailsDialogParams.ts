@@ -1,4 +1,4 @@
-export class ErrorDialogParams {
+export class ErrorDetailsDialogParams {
     // Mouse event
     public event?: MouseEvent;
     // Close button label

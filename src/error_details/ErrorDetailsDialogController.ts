@@ -1,7 +1,15 @@
-import { ErrorDialogStrings } from './ErrorDialogStrings';
-import { ErrorDialogParams } from './ErrorDialogParams';
+import { ErrorDetailsDialogParams } from './ErrorDetailsDialogParams';
 
-class ErrorDetailsDialogController extends ErrorDialogParams {
+class ErrorDialogStrings {
+    public errorDetails: string = 'Error details';
+    public errorMessage: string = 'Message';
+    public errorCode: string = 'Code';
+    public errorMethod: string = 'Method';
+    public errorPath: string = 'Path';
+    public errorText: string = 'Error';   
+}
+
+class ErrorDetailsDialogController extends ErrorDetailsDialogParams {
     private _injector: ng.auto.IInjectorService;
 
     public $mdDialog: ng.material.IDialogService;
@@ -31,7 +39,8 @@ class ErrorDetailsDialogController extends ErrorDialogParams {
 
     private initTranslate(): void {
         let pipTranslate: pip.services.ITranslateService;
-        pipTranslate = this._injector.has('pipTranslate') ? <pip.services.ITranslateService>this._injector.get('pipTranslate') : null;
+        pipTranslate = this._injector.has('pipTranslate') 
+            ? <pip.services.ITranslateService>this._injector.get('pipTranslate') : null;
 
         if (pipTranslate) {
             pipTranslate.translations('en', {

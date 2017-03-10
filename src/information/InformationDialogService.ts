@@ -1,10 +1,7 @@
 import { InformationDialogParams } from './InformationDialogParams';
+import { IInformationDialogService } from './IInformationDialogService';
 
-export interface IInformationService {
-    show(params: InformationDialogParams, successCallback?: () => void, cancelCallback?: () => void): any;
-}
-
-class InformationService implements IInformationService {
+class InformationDialogService implements IInformationDialogService {
     private _mdDialog: angular.material.IDialogService;
     
     constructor($mdDialog: angular.material.IDialogService) {
@@ -33,4 +30,4 @@ class InformationService implements IInformationService {
 
 angular
     .module('pipInformationDialog')
-    .service('pipInformationDialog', InformationService);
+    .service('pipInformationDialog', InformationDialogService);

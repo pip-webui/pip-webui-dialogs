@@ -1,7 +1,7 @@
 module.exports = {
     module: {
         name: 'pipDialogs',
-        styles: 'dialogs',
+        styles: 'index',
         export: 'pip.dialogs',
         standalone: 'pip.dialogs'
     },

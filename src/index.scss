@@ -1,0 +1,25 @@
+﻿@import "css_light/index";
+
+@import "dependencies/RefItem";
+@import "dependencies/RefList";
+@import "dependencies/Selectable";
+@import "options/OptionsDialog";
+@import "options_big/OptionsBigDialog";
+@import "confirmation/ConfirmationDialog";
+@import "error_details/ErrorDetailsDialog";
+@import "information/InformationDialog";
+
+.pip-dialog {
+    .pip-footer {
+        padding-left: 12px;
+        padding-right: 10px;
+    }    
+
+    .md-button {
+        min-width: 24px;
+    }     
+
+    h3 {
+        font: $font-title;     
+    }  
+}

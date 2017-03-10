@@ -1,5 +1,12 @@
 import { InformationDialogParams } from './InformationDialogParams';
-import { InformationDialogStrings } from './InformationDialogStrings';
+
+export class InformationDialogStrings {
+    public ok: string = 'OK';
+    public title: string; 
+    public message: string;
+    public error: string;
+    public content;
+}
 
 class InformationDialogController extends InformationDialogParams {
     private _injector: ng.auto.IInjectorService;
@@ -26,7 +33,8 @@ class InformationDialogController extends InformationDialogParams {
 
     private initTranslate(): void {
         let pipTranslate: pip.services.ITranslateService;
-        pipTranslate = this._injector.has('pipTranslate') ? <pip.services.ITranslateService>this._injector.get('pipTranslate') : null;
+        pipTranslate = this._injector.has('pipTranslate') 
+            ? <pip.services.ITranslateService>this._injector.get('pipTranslate') : null;
 
         let content: string = this.message;
         let item: string;
@@ -42,7 +50,8 @@ class InformationDialogController extends InformationDialogParams {
             this.ok = this.ok || 'OK';
         }
 
-        let pipFormat: pip.services.IFormat = this._injector.has('pipFormat') ? <pip.services.IFormat>this._injector.get('pipFormat') : null;
+        let pipFormat: pip.services.IFormat = this._injector.has('pipFormat') 
+            ? <pip.services.IFormat>this._injector.get('pipFormat') : null;
 
         if (this.item && pipFormat) {
             // item = _.truncate(params.item, 25);

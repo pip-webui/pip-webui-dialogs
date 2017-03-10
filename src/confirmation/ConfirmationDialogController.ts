@@ -24,7 +24,8 @@ class ConfirmationDialogController extends  ConfirmationDialogParams {
 
     private initTranslate(): void {
         let pipTranslate: pip.services.ITranslateService;
-        pipTranslate = this._injector.has('pipTranslate') ? <pip.services.ITranslateService>this._injector.get('pipTranslate') : null;
+        pipTranslate = this._injector.has('pipTranslate') 
+            ? <pip.services.ITranslateService>this._injector.get('pipTranslate') : null;
 
         if (pipTranslate) {
             pipTranslate.translations('en', { 'CONFIRM_TITLE': 'Confirm' });
@@ -51,9 +52,5 @@ class ConfirmationDialogController extends  ConfirmationDialogParams {
 }
 
 angular
-    .module('pipConfirmationDialog', [
-        'ngMaterial', 
-        'pipDialogs.Translate',
-        'pipDialogs.Templates'
-    ])
+    .module('pipConfirmationDialog')
     .controller('pipConfirmationDialogController', ConfirmationDialogController);

@@ -36,7 +36,8 @@ class OptionsBigDialogController extends OptionsBigDialogParams {
 
     private initTranslate(): void {
         let pipTranslate: pip.services.ITranslateService;
-        pipTranslate = this._injector.has('pipTranslate') ? <pip.services.ITranslateService>this._injector.get('pipTranslate') : null;
+        pipTranslate = this._injector.has('pipTranslate') 
+            ? <pip.services.ITranslateService>this._injector.get('pipTranslate') : null;
 
         if (pipTranslate) {
             pipTranslate.translations('en', { 'OPTIONS_TITLE': 'Choose Option' });
@@ -91,7 +92,6 @@ class OptionsBigDialogController extends OptionsBigDialogParams {
         option = <OptionsBigDialogData>_.find(this.options, { name: this.selectedOptionName }) || new OptionsBigDialogData();
         this.$mdDialog.hide({ option: option });
     };
-
 
     private focusInput() {
         let list;

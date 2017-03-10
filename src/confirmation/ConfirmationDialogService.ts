@@ -1,10 +1,7 @@
 import { ConfirmationDialogParams } from './ConfirmationDialogParams';
+import { IConfirmationDialogService } from './IConfirmationDialogService';
 
-export interface IConfirmationService {
-    show(params: ConfirmationDialogParams, successCallback?: () => void, cancelCallback?: () => void): any;
-}
-
-class ConfirmationService implements IConfirmationService {
+class ConfirmationDialogService implements IConfirmationDialogService {
     private _mdDialog: angular.material.IDialogService;
     
     constructor($mdDialog: angular.material.IDialogService) {
@@ -37,4 +34,4 @@ class ConfirmationService implements IConfirmationService {
 
 angular
     .module('pipConfirmationDialog')
-    .service('pipConfirmationDialog', ConfirmationService);
+    .service('pipConfirmationDialog', ConfirmationDialogService);

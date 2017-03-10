@@ -5,6 +5,8 @@ angular
         'pipDialogs.Templates']);
 
 import './InformationDialogParams';
-import './InformationDialogStrings';
 import './InformationDialogService';
 import './InformationDialogController';
+
+export * from './IInformationDialogService';
+export * from './InformationDialogParams';

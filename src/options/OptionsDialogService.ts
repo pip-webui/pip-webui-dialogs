@@ -1,16 +1,16 @@
 import { OptionsDialogParams } from './OptionsDialogParams';
 import { OptionsDialogResult } from './OptionsDialogResult';
-
-export interface IOptionsDialogService {
-    show(params: OptionsDialogParams, successCallback?: (result: OptionsDialogResult) => void, cancelCallback?: () => void): any;
-}
+import { IOptionsDialogService } from './IOptionsDialogService';
 
 class OptionsDialogService implements IOptionsDialogService {
     public _mdDialog: angular.material.IDialogService;
     public constructor($mdDialog: angular.material.IDialogService) {
         this._mdDialog = $mdDialog;
     }
-    public  show(params: OptionsDialogParams, successCallback?: (result: OptionsDialogResult) => void, cancelCallback?: () => void): any {
+    public  show(params: OptionsDialogParams, 
+        successCallback?: (result: OptionsDialogResult) => void, 
+        cancelCallback?: () => void): any {
+        
          this._mdDialog.show({
             targetEvent: params.event,
             templateUrl: 'options/OptionsDialog.html',

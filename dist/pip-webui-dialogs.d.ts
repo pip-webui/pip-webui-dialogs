@@ -8,59 +8,28 @@ export class ConfirmationDialogParams {
     cancel?: string;
 }
 
-export interface IConfirmationService {
+
+export interface IConfirmationDialogService {
     show(params: ConfirmationDialogParams, successCallback?: () => void, cancelCallback?: () => void): any;
 }
 
 
 
-
-export interface IConfirmationService {
-    show(params: ErrorDialogParams, successCallback?: () => void, cancelCallback?: () => void): any;
-}
-
-export class ErrorDialogParams {
+export class ErrorDetailsDialogParams {
     event?: MouseEvent;
     dismissButton?: string;
     error: any;
 }
 
-export class ErrorDialogStrings {
-    errorDetails: string;
-    errorMessage: string;
-    errorCode: string;
-    errorMethod: string;
-    errorPath: string;
-    errorText: string;
+
+export interface IErrorDetailsDialogService {
+    show(params: ErrorDetailsDialogParams, successCallback?: () => void, cancelCallback?: () => void): any;
 }
 
 
 
-export class OptionsBigDialogData {
-    name: string;
-    title: string;
-    subtitle: string;
-}
-
-export class OptionsBigDialogParams {
-    event?: MouseEvent;
-    title?: string;
-    ok?: string;
-    options?: OptionsBigDialogData[];
-    selectedOption?: OptionsBigDialogData;
-    selectedOptionName?: string;
-    hint?: string;
-    noTitle: any;
-    noActions: any;
-}
-
-export class OptionsBigDialogResult {
-    option: OptionsBigDialogData;
-    isCheckboxOption: boolean;
-}
-
-export interface IOptionsBigDialogService {
-    show(params: OptionsBigDialogParams, successCallback?: (result: OptionsBigDialogResult) => void, cancelCallback?: () => void): any;
+export interface IOptionsDialogService {
+    show(params: OptionsDialogParams, successCallback?: (result: OptionsDialogResult) => void, cancelCallback?: () => void): any;
 }
 
 
@@ -87,21 +56,9 @@ export class OptionsDialogResult {
     isCheckboxOption: boolean;
 }
 
-export interface IOptionsDialogService {
-    show(params: OptionsDialogParams, successCallback?: (result: OptionsDialogResult) => void, cancelCallback?: () => void): any;
-}
 
 
-
-export class InformationDialogParams {
-    event?: MouseEvent;
-    ok?: string;
-    title?: string;
-    message: string;
-    item?: any;
-}
-
-export interface IInformationService {
+export interface IInformationDialogService {
     show(params: InformationDialogParams, successCallback?: () => void, cancelCallback?: () => void): any;
 }
 
@@ -112,6 +69,45 @@ export class InformationDialogStrings {
     error: string;
     content: any;
 }
+
+export class InformationDialogParams {
+    event?: MouseEvent;
+    ok?: string;
+    title?: string;
+    message: string;
+    item?: any;
+}
+
+
+
+export interface IOptionsBigDialogService {
+    show(params: OptionsBigDialogParams, successCallback?: (result: OptionsBigDialogResult) => void, cancelCallback?: () => void): any;
+}
+
+
+export class OptionsBigDialogData {
+    name: string;
+    title: string;
+    subtitle: string;
+}
+
+export class OptionsBigDialogParams {
+    event?: MouseEvent;
+    title?: string;
+    ok?: string;
+    options?: OptionsBigDialogData[];
+    selectedOption?: OptionsBigDialogData;
+    selectedOptionName?: string;
+    hint?: string;
+    noTitle: any;
+    noActions: any;
+}
+
+export class OptionsBigDialogResult {
+    option: OptionsBigDialogData;
+    isCheckboxOption: boolean;
+}
+
 
 
 }

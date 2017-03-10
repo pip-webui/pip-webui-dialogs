@@ -1,6 +1,7 @@
 ﻿import './error_details';
 import './information';
 import './options';
+import './options_big';
 import './confirmation';
 
 angular
@@ -14,5 +15,6 @@ angular
 
 export * from './error_details';
 export * from './information';
-export * from './options';
 export * from './confirmation';
+export * from './options';
+export * from './options_big';

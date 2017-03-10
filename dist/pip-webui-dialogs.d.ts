@@ -50,37 +50,6 @@ export class ErrorStrings {
 }
 
 
-export class InformationDialogController {
-    private _injector;
-    $mdDialog: angular.material.IDialogService;
-    theme: string;
-    config: InformationStrings;
-    constructor($mdDialog: angular.material.IDialogService, $injector: ng.auto.IInjectorService, $rootScope: ng.IRootScopeService, params: InformationParams);
-    private initTranslate(params);
-    onOk(): void;
-    onCancel(): void;
-}
-
-export class InformationParams {
-    ok: string;
-    title?: string;
-    message?: string;
-    error?: string;
-    item: any;
-}
-
-export interface IInformationService {
-    show(params: any, successCallback?: () => void, cancelCallback?: () => void): any;
-}
-
-export class InformationStrings {
-    ok: string;
-    title: string;
-    message: string;
-    error: string;
-    content: any;
-}
-
 
 export class InformationDialogController {
     private _injector;
@@ -183,7 +152,6 @@ export class OptionsDialogResult {
 export interface IOptionsDialogService {
     show(params: OptionsDialogParams, successCallback?: (result: OptionsDialogResult) => void, cancelCallback?: () => void): any;
 }
-
 
 }
 

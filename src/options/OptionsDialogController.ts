@@ -2,41 +2,54 @@ import { OptionsDialogData } from './OptionsDialogData';
 import { OptionsDialogParams } from './OptionsDialogParams';
 import { OptionsDialogResult } from './OptionsDialogResult';
 
-class OptionsDialogController {
-
+class OptionsDialogController extends OptionsDialogParams {
+    private _injector: ng.auto.IInjectorService;
     public $mdDialog: angular.material.IDialogService;
     public theme: string;
-    public config: OptionsDialogParams;
+    public optionIndex: number;
 
     constructor(
         $mdDialog: angular.material.IDialogService,
         $injector: ng.auto.IInjectorService, 
-        $rootScope: ng.IRootScopeService, 
-        params: OptionsDialogParams) {
+        $rootScope: ng.IRootScopeService) 
+    {
         "ngInject";
 
+        super();
         this.$mdDialog = $mdDialog;
-        this.config = new OptionsDialogParams();
-        var pipTranslate: pip.services.ITranslateService = $injector.has('pipTranslate') ? <pip.services.ITranslateService>$injector.get('pipTranslate') : null;
+        this._injector = $injector;
+        this.theme = $rootScope['$theme'];
+        this.options = this.options || [];
+
+        this.initTranslate();
+        
+        this.selectedOption = _.find(this.options, {active: true}) || null;
+        let name: string = this.selectedOption ? this.selectedOption.name : this.selectedOptionName;
+        let index: number = _.findIndex(this.options, (opt: OptionsDialogData) => {
+            return opt.name == name;
+        });
+        this.optionIndex = index == -1 ? 0 : index;
+        this.selectedOption = this.options[this.optionIndex];
+        this.selectedOptionName = this.selectedOption.name;
+
+        setTimeout(this.focusInput, 500);
+    }
+
+    private initTranslate(): void {
+        let pipTranslate: pip.services.ITranslateService;
+        pipTranslate = this._injector.has('pipTranslate') ? <pip.services.ITranslateService>this._injector.get('pipTranslate') : null;
+
         if (pipTranslate) {
             pipTranslate.translations('en', { 'OPTIONS_TITLE': 'Choose Option' });
             pipTranslate.translations('ru', { 'OPTIONS_TITLE': 'Выберите опцию' });
 
-            this.config.title = pipTranslate.translate(params.title) || pipTranslate.translate('OPTIONS_TITLE');
-            this.config.ok = pipTranslate.translate(params.ok) || pipTranslate.translate('SELECT');
+            this.title = pipTranslate.translate(this.title) || pipTranslate.translate('OPTIONS_TITLE');
+            this.ok = pipTranslate.translate(this.ok) || pipTranslate.translate('SELECT');
         } else {
-            this.config.title = params.title || 'Choose Option';
-            this.config.ok = params.ok || 'Select';
+            this.title = this.title || 'Choose Option';
+            this.ok = this.ok || 'Select';
         }
-
-        this.theme = $rootScope['$theme'];
-        this.config.options = params.options;
-        this.config.selectedOption = _.find(params.options, {active: true}) || new OptionsDialogData();
-        this.config.selectedOptionName = this.config.selectedOption.name;
-        this.config.isCheckboxOption = params.isCheckboxOption;
-        this.config.checkboxOptionCaption = params.checkboxOptionCaption;
-
-        setTimeout(this.focusInput, 500);
+              
     }
 
     public onOk(): void {
@@ -49,7 +62,7 @@ class OptionsDialogController {
 
     public onOptionSelect(event: ng.IAngularEvent, option: OptionsDialogData) {
         event.stopPropagation();
-        this.config.selectedOptionName = option.name;
+        this.selectedOptionName = option.name;
     }
             
     public onKeyPress (event: JQueryKeyEventObject) {
@@ -62,9 +75,9 @@ class OptionsDialogController {
 
     public onSelect() {
         let option: OptionsDialogData;
-        option = _.find(this.config.options, { name: this.config.selectedOptionName });
+        option = _.find(this.options, { name: this.selectedOptionName });
 
-        this.$mdDialog.hide({ option: option, isCheckboxOption: this.config.isCheckboxOption });
+        this.$mdDialog.hide({ option: option, isCheckboxOption: this.isCheckboxOption });
     }
 
     private focusInput() {

@@ -16,7 +16,7 @@ class ConfirmationService implements IConfirmationService {
             targetEvent: params.event,
             templateUrl: 'confirmation/ConfirmationDialog.html',
             controller: 'pipConfirmationDialogController',
-            controllerAs: 'vm',
+            controllerAs: '$ctrl',
             locals: params,
             bindToController: true,
             clickOutsideToClose: true

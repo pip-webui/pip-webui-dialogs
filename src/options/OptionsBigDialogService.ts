@@ -15,8 +15,9 @@ class OptionsBigDialogService implements IOptionsBigDialogService {
             targetEvent: params.event,
             templateUrl: 'options/OptionsBigDialog.html',
             controller: 'pipOptionsBigDialogController',
-            controllerAs: 'vm',
-            locals: {params: params},
+            controllerAs: '$ctrl',
+            locals: params,
+            bindToController: true,        
             clickOutsideToClose: true
          })
         .then((result: OptionsBigDialogResult) => {

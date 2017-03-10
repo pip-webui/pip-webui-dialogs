@@ -16,8 +16,8 @@ export class OptionsBigDialogParams {
     // Dialog hint title
     public hint?: string;
     // Show title
-    public noTitle: boolean = false;
+    public noTitle;
     // Show action button
-    public noActions: boolean = false;
+    public noActions;
 }
 

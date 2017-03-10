@@ -15,32 +15,6 @@ export interface IConfirmationService {
 
 
 
-export interface IConfirmationService {
-    show(params: ErrorDialogParams, successCallback?: () => void, cancelCallback?: () => void): any;
-}
-
-export class ErrorDialogParams {
-    event?: MouseEvent;
-    ok?: string;
-    cancel?: string;
-    error: any;
-}
-
-export class ErrorDialogStrings {
-    ok: string;
-    cancel: string;
-    errorDetails: string;
-    dismissButton: string;
-    errorMessage: string;
-    errorCode: string;
-    errorMethod: string;
-    errorPath: string;
-    error: string;
-    errorText: string;
-}
-
-
-
 
 export class InformationDialogParams {
     event?: MouseEvent;
@@ -63,6 +37,27 @@ export class InformationDialogStrings {
 }
 
 
+export interface IConfirmationService {
+    show(params: ErrorDialogParams, successCallback?: () => void, cancelCallback?: () => void): any;
+}
+
+export class ErrorDialogParams {
+    event?: MouseEvent;
+    dismissButton?: string;
+    error: any;
+}
+
+export class ErrorDialogStrings {
+    errorDetails: string;
+    errorMessage: string;
+    errorCode: string;
+    errorMethod: string;
+    errorPath: string;
+    errorText: string;
+}
+
+
+
 
 export class OptionsBigDialogData {
     name: string;
@@ -78,8 +73,8 @@ export class OptionsBigDialogParams {
     selectedOption?: OptionsBigDialogData;
     selectedOptionName?: string;
     hint?: string;
-    noTitle: boolean;
-    noActions: boolean;
+    noTitle: any;
+    noActions: any;
 }
 
 export class OptionsBigDialogResult {

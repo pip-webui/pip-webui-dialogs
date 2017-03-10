@@ -16,8 +16,9 @@ class InformationService implements IInformationService {
             targetEvent: params.event,
             templateUrl: 'information/InformationDialog.html',
             controller: 'pipInformationDialogController',
-            controllerAs: 'vm',
-            locals: { params: params},
+            controllerAs: '$ctrl',
+            locals: params,
+            bindToController: true,
             clickOutsideToClose: true
          })
         .then(function () {

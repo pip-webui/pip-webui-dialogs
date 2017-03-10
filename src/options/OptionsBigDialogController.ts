@@ -1,49 +1,40 @@
 import { OptionsBigDialogParams } from './OptionsBigDialogParams';
 import { OptionsBigDialogData } from './OptionsBigDialogData';
 
-class OptionsBigDialogController {
+class OptionsBigDialogController extends OptionsBigDialogParams {
     private _injector: ng.auto.IInjectorService;
-
     private $mdDialog: angular.material.IDialogService;
-    public theme: string;
-    public config: OptionsBigDialogParams;
 
+    public theme: string;
     public optionIndex: number;
 
     constructor(
         $mdDialog: angular.material.IDialogService,
         $injector: ng.auto.IInjectorService, 
-        $rootScope: ng.IRootScopeService, 
-        params: OptionsBigDialogParams) 
+        $rootScope: ng.IRootScopeService) 
     {
         "ngInject";
 
+        super();
         this.$mdDialog = $mdDialog;
-        this.config = new OptionsBigDialogParams();
         this._injector = $injector;
-
-        this.initTranslate(params)
-
         this.theme = $rootScope['$theme'];
-        
-        this.config.options = params.options;
-        this.config.selectedOption = _.find(params.options, {active: true}) || null;
-        this.config.selectedOptionName = params.selectedOptionName;
-        this.config.noActions = params.noActions || false;
-        this.config.noTitle = params.noTitle || false;
-        this.config.hint = params.hint || '';
-        let name: string = this.config.selectedOption ? this.config.selectedOption.name : this.config.selectedOptionName;
-        let index: number = _.findIndex(this.config.options, (opt: OptionsBigDialogData) => {
+
+        this.initTranslate()
+
+        this.selectedOption = _.find(this.options, {active: true}) || null;
+        let name: string = this.selectedOption ? this.selectedOption.name : this.selectedOptionName;
+        let index: number = _.findIndex(this.options, (opt: OptionsBigDialogData) => {
             return opt.name == name;
         });
         this.optionIndex = index == -1 ? 0 : index;
-        this.config.selectedOption = this.config.options[this.optionIndex];
-        this.config.selectedOptionName = this.config.selectedOption.name;
+        this.selectedOption = this.options[this.optionIndex];
+        this.selectedOptionName = this.selectedOption.name;
 
         setTimeout(this.focusInput, 500);
     }
 
-    private initTranslate(params: OptionsBigDialogParams): void {
+    private initTranslate(): void {
         let pipTranslate: pip.services.ITranslateService;
         pipTranslate = this._injector.has('pipTranslate') ? <pip.services.ITranslateService>this._injector.get('pipTranslate') : null;
 
@@ -51,11 +42,11 @@ class OptionsBigDialogController {
             pipTranslate.translations('en', { 'OPTIONS_TITLE': 'Choose Option' });
             pipTranslate.translations('ru', { 'OPTIONS_TITLE': 'Выберите опцию' });
 
-            this.config.title =  pipTranslate.translate(params.title) || pipTranslate.translate('OPTIONS_TITLE');
-            this.config.ok = pipTranslate.translate(params.ok) || pipTranslate.translate('SELECT');
+            this.title =  pipTranslate.translate(this.title) || pipTranslate.translate('OPTIONS_TITLE');
+            this.ok = pipTranslate.translate(this.ok) || pipTranslate.translate('SELECT');
         } else {
-            this.config.title = params.title || 'Choose Option';
-            this.config.ok = params.ok || 'Select';
+            this.title = this.title || 'Choose Option';
+            this.ok = this.ok || 'Select';
         }        
     }
 
@@ -69,17 +60,17 @@ class OptionsBigDialogController {
 
     public onOptionSelect(event: ng.IAngularEvent, option: OptionsBigDialogData) {
         event.stopPropagation();
-        this.config.selectedOptionName = option.name;
+        this.selectedOptionName = option.name;
 
-        if (this.config.noActions) {
+        if (this.noActions) {
             this.onSelect();
         }
     }
 
     public onSelected() {
-        this.config.selectedOptionName = this.config.options[this.optionIndex].name;
+        this.selectedOptionName = this.options[this.optionIndex].name;
 
-        if (this.config.noActions) {
+        if (this.noActions) {
                this.onSelect();
         }
     }
@@ -88,8 +79,8 @@ class OptionsBigDialogController {
         if (event.keyCode === 32 || event.keyCode === 13) {
             event.stopPropagation();
             event.preventDefault();
-            if (index !== undefined && index > -1 && index < this.config.options.length) {
-                this.config.selectedOptionName = this.config.options[index].name;
+            if (index !== undefined && index > -1 && index < this.options.length) {
+                this.selectedOptionName = this.options[index].name;
                 this.onSelect();
             }
         }
@@ -97,7 +88,7 @@ class OptionsBigDialogController {
     
     public onSelect = function () {
         let option: OptionsBigDialogData;
-        option = <OptionsBigDialogData>_.find(this.config.options, { name: this.config.selectedOptionName }) || new OptionsBigDialogData();
+        option = <OptionsBigDialogData>_.find(this.options, { name: this.selectedOptionName }) || new OptionsBigDialogData();
         this.$mdDialog.hide({ option: option });
     };
 

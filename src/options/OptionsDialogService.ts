@@ -15,8 +15,9 @@ class OptionsDialogService implements IOptionsDialogService {
             targetEvent: params.event,
             templateUrl: 'options/OptionsDialog.html',
             controller: 'pipOptionsDialogController',
-            controllerAs: 'vm',
-            locals: {params: params},
+            controllerAs: '$ctrl',
+            locals: params,
+            bindToController: true,
             clickOutsideToClose: true
          })
         .then((result: OptionsDialogResult) => {

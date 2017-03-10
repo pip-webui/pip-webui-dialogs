@@ -2,7 +2,7 @@ export class InformationDialogParams {
     // Mouse event
     public event?: MouseEvent;
     // Confirm button caption
-    public ok?: string = 'OK';
+    public ok?: string;
     // Dialog title
     public title?: string; 
     // Dialog messag. You can use formatting options (%s, %d etc.). 

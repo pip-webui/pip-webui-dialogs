@@ -16,8 +16,9 @@ class ErrorDetailsService {
             targetEvent: params.event,
             templateUrl: 'error_details/ErrorDetails.html',
             controller: 'pipErrorDetailsDialogController',
-            controllerAs: 'vm',
-            locals: {params: params}, // todo bindToController: true,
+            controllerAs: '$ctrl',
+            locals: params, 
+            bindToController: true,
             clickOutsideToClose: true
          })
         .then(() => {

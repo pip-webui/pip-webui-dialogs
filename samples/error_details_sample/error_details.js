@@ -51,7 +51,7 @@
                 pipErrorDetailsDialog.show(
                     {
                         error: $scope.errorData,
-                        ok: 'Ok'
+                        dismissButton: 'Ok'
                     },
                     function () {
                         console.log('Error show callback');  // eslint-disable-line

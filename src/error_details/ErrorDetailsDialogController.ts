@@ -1,30 +1,35 @@
 import { ErrorDialogStrings } from './ErrorDialogStrings';
 import { ErrorDialogParams } from './ErrorDialogParams';
 
-class ErrorDetailsDialogController {
+class ErrorDetailsDialogController extends ErrorDialogParams {
     private _injector: ng.auto.IInjectorService;
 
     public $mdDialog: ng.material.IDialogService;
     public theme: string;
-    public config: ErrorDialogStrings;
+    public strings: ErrorDialogStrings;
 
     constructor(
         $mdDialog: ng.material.IDialogService,
         $injector: ng.auto.IInjectorService,
-        $rootScope: ng.IRootScopeService,
-        params: ErrorDialogParams) {
+        $rootScope: ng.IRootScopeService) 
+    {
         "ngInject";
-        this.config = new ErrorDialogStrings();
+        
+        super();
+
+        this.strings = new ErrorDialogStrings();
         this._injector = $injector;
-
-        this.initTranslate(params);
-
         this.$mdDialog = $mdDialog;
         this.theme = $rootScope.$theme;
-        this.config.error = params.error;
+
+        this.initTranslate();
+
+        if (!this.error) {
+            this.error = '<none>';             
+        }
     }
 
-    private initTranslate(params: ErrorDialogParams): void {
+    private initTranslate(): void {
         let pipTranslate: pip.services.ITranslateService;
         pipTranslate = this._injector.has('pipTranslate') ? <pip.services.ITranslateService>this._injector.get('pipTranslate') : null;
 
@@ -50,18 +55,16 @@ class ErrorDetailsDialogController {
                 'METHOD': 'Метод',
                 'MESSAGE': 'Сообщение'
             });
-            this.config.ok = pipTranslate.translate(params.ok) || pipTranslate.translate('OK');
-            this.config.cancel = pipTranslate.translate(params.cancel) || pipTranslate.translate('CANCEL');
-            this.config.errorDetails = pipTranslate.translate('ERROR_DETAILS');
-            this.config.dismissButton = pipTranslate.translate('DISMISS');
-            this.config.errorMessage = pipTranslate.translate('MESSAGE');
-            this.config.errorCode = pipTranslate.translate('CODE');
-            this.config.errorMethod = pipTranslate.translate('METHOD');
-            this.config.errorPath = pipTranslate.translate('PATH');
-            this.config.errorText = pipTranslate.translate('ERROR');
+            this.dismissButton = pipTranslate.translate(this.dismissButton) || pipTranslate.translate('DISMISS');
+
+            this.strings.errorDetails = pipTranslate.translate('ERROR_DETAILS');
+            this.strings.errorMessage = pipTranslate.translate('MESSAGE');
+            this.strings.errorCode = pipTranslate.translate('CODE');
+            this.strings.errorMethod = pipTranslate.translate('METHOD');
+            this.strings.errorPath = pipTranslate.translate('PATH');
+            this.strings.errorText = pipTranslate.translate('ERROR');
         } else {
-            this.config.ok = params.ok || 'Ok';
-            this.config.cancel = params.cancel || 'Cancel';
+            this.dismissButton = this.dismissButton || 'Dismiss';
         }
     }
     
@@ -69,8 +72,24 @@ class ErrorDetailsDialogController {
         this.$mdDialog.hide();
     }
 
-    public onCancel(): void {
-        this.$mdDialog.cancel();
+    public isString(error): boolean {
+        return _.isString(error);
+    }
+
+    public getErrorText(): string {
+        let error: string;
+
+        if (_.isString(this.error)) { 
+            return this.error
+        } 
+        if (this.error && this.error.error) {
+            return this.error.error.toString();
+        }
+        if (this.error && this.error.data && this.error.data.error) {
+            return this.error.data.error.toString();
+        }
+        
+        return '<none>';
     }
 
 }

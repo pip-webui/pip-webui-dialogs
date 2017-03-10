@@ -1,10 +1,8 @@
 export class ErrorDialogParams {
     // Mouse event
     public event?: MouseEvent;
-    // Confirm button caption
-    public ok?: string = 'OK';
-    // Cancel button caption
-    public cancel?: string = 'CANCEL';
+    // Close button label
+    public dismissButton?: string;
     // Error object or string
-    public error: any = 'ERROR';
+    public error: any;
 }

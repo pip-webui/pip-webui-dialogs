@@ -4,7 +4,7 @@ angular
         'pipDialogs.Translate', 
         'pipDialogs.Templates']);
 
-import './InformationParams';
-import './InformationStrings';
-import './InformationService';
-import './InformationController';
+import './InformationDialogParams';
+import './InformationDialogStrings';
+import './InformationDialogService';
+import './InformationDialogController';

@@ -11,7 +11,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var ConfirmationParams_1 = require("./ConfirmationParams");
+var ConfirmationDialogParams_1 = require("./ConfirmationDialogParams");
 var ConfirmationDialogController = (function (_super) {
     __extends(ConfirmationDialogController, _super);
     ConfirmationDialogController.$inject = ['$mdDialog', '$injector', '$rootScope'];
@@ -47,7 +47,7 @@ var ConfirmationDialogController = (function (_super) {
         this.$mdDialog.cancel();
     };
     return ConfirmationDialogController;
-}(ConfirmationParams_1.ConfirmationParams));
+}(ConfirmationDialogParams_1.ConfirmationDialogParams));
 angular
     .module('pipConfirmationDialog', [
     'ngMaterial',
@@ -55,17 +55,17 @@ angular
     'pipDialogs.Templates'
 ])
     .controller('pipConfirmationDialogController', ConfirmationDialogController);
-},{"./ConfirmationParams":2}],2:[function(require,module,exports){
+},{"./ConfirmationDialogParams":2}],2:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var ConfirmationParams = (function () {
-    function ConfirmationParams() {
+var ConfirmationDialogParams = (function () {
+    function ConfirmationDialogParams() {
         this.ok = 'OK';
         this.cancel = 'Cancel';
     }
-    return ConfirmationParams;
+    return ConfirmationDialogParams;
 }());
-exports.ConfirmationParams = ConfirmationParams;
+exports.ConfirmationDialogParams = ConfirmationDialogParams;
 },{}],3:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -102,10 +102,10 @@ angular
 },{}],4:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-require("./ConfirmationController");
-require("./ConfirmationService");
-require("./ConfirmationParams");
-},{"./ConfirmationController":1,"./ConfirmationParams":2,"./ConfirmationService":3}],5:[function(require,module,exports){
+require("./ConfirmationDialogController");
+require("./ConfirmationDialogService");
+require("./ConfirmationDialogParams");
+},{"./ConfirmationDialogController":1,"./ConfirmationDialogParams":2,"./ConfirmationDialogService":3}],5:[function(require,module,exports){
 (function () {
     'use strict';
     var thisModule = angular.module('pipDialogs.Translate', []);
@@ -135,12 +135,12 @@ angular
 },{"./confirmation":4,"./error_details":11,"./information":16,"./options":27}],7:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var ErrorStrings_1 = require("./ErrorStrings");
+var ErrorDialogStrings_1 = require("./ErrorDialogStrings");
 var ErrorDetailsDialogController = (function () {
     ErrorDetailsDialogController.$inject = ['$mdDialog', '$injector', '$rootScope', 'params'];
     function ErrorDetailsDialogController($mdDialog, $injector, $rootScope, params) {
         "ngInject";
-        this.config = new ErrorStrings_1.ErrorStrings();
+        this.config = new ErrorDialogStrings_1.ErrorDialogStrings();
         this._injector = $injector;
         this.initTranslate(params);
         this.$mdDialog = $mdDialog;
@@ -195,11 +195,10 @@ var ErrorDetailsDialogController = (function () {
     };
     return ErrorDetailsDialogController;
 }());
-exports.ErrorDetailsDialogController = ErrorDetailsDialogController;
 angular
     .module('pipErrorDetailsDialog')
     .controller('pipErrorDetailsDialogController', ErrorDetailsDialogController);
-},{"./ErrorStrings":10}],8:[function(require,module,exports){
+},{"./ErrorDialogStrings":10}],8:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var ErrorDetailsService = (function () {
@@ -234,20 +233,20 @@ angular
 },{}],9:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var ErrorParams = (function () {
-    function ErrorParams() {
+var ErrorDialogParams = (function () {
+    function ErrorDialogParams() {
         this.ok = 'OK';
         this.cancel = 'CANCEL';
         this.error = 'ERROR';
     }
-    return ErrorParams;
+    return ErrorDialogParams;
 }());
-exports.ErrorParams = ErrorParams;
+exports.ErrorDialogParams = ErrorDialogParams;
 },{}],10:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var ErrorStrings = (function () {
-    function ErrorStrings() {
+var ErrorDialogStrings = (function () {
+    function ErrorDialogStrings() {
         this.ok = 'OK';
         this.cancel = 'Cancel';
         this.errorDetails = 'Error details';
@@ -259,9 +258,9 @@ var ErrorStrings = (function () {
         this.error = 'Error';
         this.errorText = 'Error';
     }
-    return ErrorStrings;
+    return ErrorDialogStrings;
 }());
-exports.ErrorStrings = ErrorStrings;
+exports.ErrorDialogStrings = ErrorDialogStrings;
 },{}],11:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -271,19 +270,19 @@ angular
     'pipDialogs.Translate',
     'pipDialogs.Templates'
 ]);
-require("./ErrorParams");
-require("./ErrorStrings");
-require("./ErrorDetailsService");
-require("./ErrorDetailsController");
-},{"./ErrorDetailsController":7,"./ErrorDetailsService":8,"./ErrorParams":9,"./ErrorStrings":10}],12:[function(require,module,exports){
+require("./ErrorDialogParams");
+require("./ErrorDialogStrings");
+require("./ErrorDetailsDialogService");
+require("./ErrorDetailsDialogController");
+},{"./ErrorDetailsDialogController":7,"./ErrorDetailsDialogService":8,"./ErrorDialogParams":9,"./ErrorDialogStrings":10}],12:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var InformationStrings_1 = require("./InformationStrings");
+var InformationDialogStrings_1 = require("./InformationDialogStrings");
 var InformationDialogController = (function () {
     InformationDialogController.$inject = ['$mdDialog', '$injector', '$rootScope', 'params'];
     function InformationDialogController($mdDialog, $injector, $rootScope, params) {
         "ngInject";
-        this.config = new InformationStrings_1.InformationStrings();
+        this.config = new InformationDialogStrings_1.InformationDialogStrings();
         this._injector = $injector;
         this.initTranslate(params);
         this.$mdDialog = $mdDialog;
@@ -320,20 +319,19 @@ var InformationDialogController = (function () {
     };
     return InformationDialogController;
 }());
-exports.InformationDialogController = InformationDialogController;
 angular
     .module('pipInformationDialog')
     .controller('pipInformationDialogController', InformationDialogController);
-},{"./InformationStrings":15}],13:[function(require,module,exports){
+},{"./InformationDialogStrings":15}],13:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var InformationParams = (function () {
-    function InformationParams() {
+var InformationDialogParams = (function () {
+    function InformationDialogParams() {
         this.ok = 'OK';
     }
-    return InformationParams;
+    return InformationDialogParams;
 }());
-exports.InformationParams = InformationParams;
+exports.InformationDialogParams = InformationDialogParams;
 },{}],14:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -365,13 +363,13 @@ angular
 },{}],15:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var InformationStrings = (function () {
-    function InformationStrings() {
+var InformationDialogStrings = (function () {
+    function InformationDialogStrings() {
         this.ok = 'OK';
     }
-    return InformationStrings;
+    return InformationDialogStrings;
 }());
-exports.InformationStrings = InformationStrings;
+exports.InformationDialogStrings = InformationDialogStrings;
 },{}],16:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -381,11 +379,11 @@ angular
     'pipDialogs.Translate',
     'pipDialogs.Templates'
 ]);
-require("./InformationParams");
-require("./InformationStrings");
-require("./InformationService");
-require("./InformationController");
-},{"./InformationController":12,"./InformationParams":13,"./InformationService":14,"./InformationStrings":15}],17:[function(require,module,exports){
+require("./InformationDialogParams");
+require("./InformationDialogStrings");
+require("./InformationDialogService");
+require("./InformationDialogController");
+},{"./InformationDialogController":12,"./InformationDialogParams":13,"./InformationDialogService":14,"./InformationDialogStrings":15}],17:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var OptionsBigDialogParams_1 = require("./OptionsBigDialogParams");
@@ -588,7 +586,6 @@ var OptionsDialogController = (function () {
     };
     return OptionsDialogController;
 }());
-exports.OptionsDialogController = OptionsDialogController;
 angular
     .module('pipOptionsDialog')
     .controller('pipOptionsDialogController', OptionsDialogController);
@@ -720,88 +717,55 @@ module.run(['$templateCache', function($templateCache) {
     '@copyright Digital Living Software Corp. 2014-2016\n' +
     '-->\n' +
     '\n' +
-    '<md-dialog class="pip-dialog pip-error-details-dialog layout-column" width="400" md-theme="{{vm.theme}}">\n' +
+    '<md-dialog class="pip-dialog pip-error-details-dialog layout-column" width="400" md-theme="{{ vm.theme }}">\n' +
     '    <div class="pip-body">\n' +
     '        <div class="pip-header">\n' +
-    '            <h3>{{::vm.config.errorDetails | translate}}</h3>\n' +
+    '            <h3>{{ ::vm.config.errorDetails | translate }}</h3>\n' +
     '        </div>\n' +
     '        <div class="layout-row layout-align-start-center error-section text-body2 color-secondary-text"\n' +
     '             ng-if="vm.config.error.code || (vm.config.error.data && error.data.code)">\n' +
-    '            {{::vm.config.errorCode | translate}}\n' +
+    '            {{ ::vm.config.errorCode | translate }}\n' +
     '        </div>\n' +
     '        <div class="layout-row layout-align-start-center text-subhead1" ng-if="vm.config.error.code || (vm.config.error.data && vm.config.error.data.code)">\n' +
-    '            {{vm.config.error.code || vm.config.error.data.code}}\n' +
+    '            {{ vm.config.error.code || vm.config.error.data.code }}\n' +
     '        </div>\n' +
     '\n' +
     '        <div class="layout-row layout-align-start-center error-section text-body2 color-secondary-text"\n' +
     '             ng-if="vm.config.error.path || (vm.config.error.data && vm.config.error.data.path)">\n' +
-    '            {{::vm.config.errorPath | translate}}\n' +
+    '            {{ ::vm.config.errorPath | translate }}\n' +
     '        </div>\n' +
     '        <div class="layout-row layout-align-start-center text-subhead1" ng-if="vm.config.error.path || (vm.config.error.data && vm.config.error.data.path)">\n' +
-    '            {{vm.config.error.path || vm.config.error.data.path}}\n' +
+    '            {{ vm.config.error.path || vm.config.error.data.path }}\n' +
     '        </div>\n' +
     '\n' +
     '        <div class="error-section text-body2 color-secondary-text layout-row layout-align-start-center"\n' +
     '             ng-if="vm.config.error.error || (vm.config.error.data && vm.config.error.data.error)">\n' +
-    '            {{::vm.config.errorText | translate}}\n' +
+    '            {{ ::vm.config.errorText | translate }}\n' +
     '        </div>\n' +
     '        <div class="layout-row layout-align-start-center text-subhead1" ng-if="vm.config.error.error || (vm.config.error.data && vm.config.error.data.error)">\n' +
-    '            {{vm.config.error.error || vm.config.error.data.error}}\n' +
+    '            {{ vm.config.error.error || vm.config.error.data.error }}\n' +
     '        </div>\n' +
     '\n' +
     '        <div class="error-section text-body2 color-secondary-text layout-row layout-align-start-center"\n' +
     '             ng-if="vm.config.error.method || (vm.config.error.data && vm.config.error.data.method)">\n' +
-    '            {{::vm.config.errorMethod | translate}}\n' +
+    '            {{ ::vm.config.errorMethod | translate }}\n' +
     '        </div>\n' +
     '        <div class="layout-row layout-align-start-center text-subhead1" ng-if="vm.config.error.method || (vm.config.error.data && vm.config.error.data.method)">\n' +
-    '            {{vm.config.error.method || vm.config.error.data.method}}\n' +
+    '            {{ vm.config.error.method || vm.config.error.data.method }}\n' +
     '        </div>\n' +
     '\n' +
     '        <div class="error-section text-body2 color-secondary-text layout-row layout-align-start-center"\n' +
     '             ng-if="vm.config.error.message || (vm.config.error.data && vm.config.error.data.message)">\n' +
-    '            {{::vm.config.errorMessage | translate}}\n' +
+    '            {{ ::vm.config.errorMessage | translate }}\n' +
     '        </div>\n' +
     '        <div class="layout-row layout-align-start-center text-subhead1"\n' +
     '             ng-if="vm.config.error.message || (vm.config.error.data && vm.config.error.data.message)">\n' +
-    '            {{vm.config.error.message || vm.config.error.data.message}}\n' +
+    '            {{ vm.config.error.message || vm.config.error.data.message }}\n' +
     '        </div>\n' +
     '    </div>\n' +
     '    <div class="pip-footer">\n' +
     '        <div>\n' +
-    '            <md-button class="md-accent m0" ng-click="vm.onOk()">{{::vm.config.dismissButton | translate}}</md-button>\n' +
-    '        </div>\n' +
-    '    </div>\n' +
-    '</md-dialog>\n' +
-    '');
-}]);
-})();
-
-(function(module) {
-try {
-  module = angular.module('pipDialogs.Templates');
-} catch (e) {
-  module = angular.module('pipDialogs.Templates', []);
-}
-module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('information/InformationDialog.html',
-    '<!--\n' +
-    '@file Information dialog content\n' +
-    '@copyright Digital Living Software Corp. 2014-2016\n' +
-    '-->\n' +
-    '\n' +
-    '<md-dialog class="pip-dialog pip-information-dialog layout-column"\n' +
-    '           width="400" md-theme="{{vm.theme}}">\n' +
-    '    <div class="pip-header">\n' +
-    '        <h3 >{{:: vm.config.title | translate }}</h3>\n' +
-    '    </div>\n' +
-    '    <div class="pip-body">\n' +
-    '        <div class="pip-content">\n' +
-    '            {{ vm.config.content }}\n' +
-    '        </div>\n' +
-    '    </div>\n' +
-    '    <div class="pip-footer">\n' +
-    '        <div>\n' +
-    '            <md-button class="md-accent" ng-click="vm.onOk()">{{ vm.config.ok | translate }}</md-button>\n' +
+    '            <md-button class="md-accent m0" ng-click="vm.onOk()">{{ ::vm.config.dismissButton | translate }}</md-button>\n' +
     '        </div>\n' +
     '    </div>\n' +
     '</md-dialog>\n' +
@@ -934,6 +898,39 @@ module.run(['$templateCache', function($templateCache) {
     '        <div>\n' +
     '            <md-button class="pip-cancel" ng-click="vm.onCancel()">{{::\'CANCEL\' | translate}}</md-button>\n' +
     '            <md-button class="pip-submit md-accent" ng-click="vm.onSelect()">{{::vm.config.applyButtonTitle | translate}}</md-button>\n' +
+    '        </div>\n' +
+    '    </div>\n' +
+    '</md-dialog>\n' +
+    '');
+}]);
+})();
+
+(function(module) {
+try {
+  module = angular.module('pipDialogs.Templates');
+} catch (e) {
+  module = angular.module('pipDialogs.Templates', []);
+}
+module.run(['$templateCache', function($templateCache) {
+  $templateCache.put('information/InformationDialog.html',
+    '<!--\n' +
+    '@file Information dialog content\n' +
+    '@copyright Digital Living Software Corp. 2014-2016\n' +
+    '-->\n' +
+    '\n' +
+    '<md-dialog class="pip-dialog pip-information-dialog layout-column"\n' +
+    '           width="400" md-theme="{{ vm.theme }}">\n' +
+    '    <div class="pip-header">\n' +
+    '        <h3 >{{:: vm.config.title | translate }}</h3>\n' +
+    '    </div>\n' +
+    '    <div class="pip-body">\n' +
+    '        <div class="pip-content">\n' +
+    '            {{ vm.config.content }}\n' +
+    '        </div>\n' +
+    '    </div>\n' +
+    '    <div class="pip-footer">\n' +
+    '        <div>\n' +
+    '            <md-button class="md-accent" ng-click="vm.onOk()">{{ vm.config.ok | translate }}</md-button>\n' +
     '        </div>\n' +
     '    </div>\n' +
     '</md-dialog>\n' +

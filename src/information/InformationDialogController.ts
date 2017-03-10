@@ -1,21 +1,21 @@
-import { InformationParams } from './InformationParams';
-import { InformationStrings } from './InformationStrings';
+import { InformationDialogParams } from './InformationDialogParams';
+import { InformationDialogStrings } from './InformationDialogStrings';
 
-export class InformationDialogController {
+class InformationDialogController {
     private _injector: ng.auto.IInjectorService;
 
     public $mdDialog: angular.material.IDialogService;
     public theme: string;
-    public config: InformationStrings;
+    public config: InformationDialogStrings;
 
     constructor(
         $mdDialog: angular.material.IDialogService,
         $injector: ng.auto.IInjectorService,
         $rootScope: ng.IRootScopeService, 
-        params: InformationParams) 
+        params: InformationDialogParams) 
     {
         "ngInject";
-        this.config = new InformationStrings();
+        this.config = new InformationDialogStrings();
         this._injector = $injector;
 
         this.initTranslate(params)
@@ -25,7 +25,7 @@ export class InformationDialogController {
         this.config.error = params.error;
     }
 
-    private initTranslate(params: InformationParams): void {
+    private initTranslate(params: InformationDialogParams): void {
         let pipTranslate: pip.services.ITranslateService;
         pipTranslate = this._injector.has('pipTranslate') ? <pip.services.ITranslateService>this._injector.get('pipTranslate') : null;
 

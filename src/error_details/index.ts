@@ -4,7 +4,7 @@ angular
         'pipDialogs.Translate',
         'pipDialogs.Templates']);
 
-import './ErrorParams';
-import './ErrorStrings';
-import './ErrorDetailsService';
-import './ErrorDetailsController';
+import './ErrorDialogParams';
+import './ErrorDialogStrings';
+import './ErrorDetailsDialogService';
+import './ErrorDetailsDialogController';

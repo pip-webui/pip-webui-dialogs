@@ -2,7 +2,7 @@ import { OptionsDialogData } from './OptionsDialogData';
 import { OptionsDialogParams } from './OptionsDialogParams';
 import { OptionsDialogResult } from './OptionsDialogResult';
 
-export class OptionsDialogController {
+class OptionsDialogController {
 
     public $mdDialog: angular.material.IDialogService;
     public theme: string;

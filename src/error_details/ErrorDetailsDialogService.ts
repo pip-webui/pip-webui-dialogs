@@ -1,7 +1,7 @@
-import { ErrorParams } from './ErrorParams';
+import { ErrorDialogParams } from './ErrorDialogParams';
 
 export interface IConfirmationService {
-    show(params: ErrorParams, successCallback?: () => void, cancelCallback?: () => void): any;
+    show(params: ErrorDialogParams, successCallback?: () => void, cancelCallback?: () => void): any;
 }
 
 class ErrorDetailsService {
@@ -11,7 +11,7 @@ class ErrorDetailsService {
         this._mdDialog = $mdDialog;
     }
     
-    public show(params: ErrorParams, successCallback?: () => void, cancelCallback?: () => void) {
+    public show(params: ErrorDialogParams, successCallback?: () => void, cancelCallback?: () => void) {
          this._mdDialog.show({
             targetEvent: params.event,
             templateUrl: 'error_details/ErrorDetails.html',

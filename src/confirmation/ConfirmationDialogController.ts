@@ -1,6 +1,6 @@
-import { ConfirmationParams } from './ConfirmationParams';
+import { ConfirmationDialogParams } from './ConfirmationDialogParams';
 
-class ConfirmationDialogController extends  ConfirmationParams {
+class ConfirmationDialogController extends  ConfirmationDialogParams {
     private _injector: ng.auto.IInjectorService;
 
     public $mdDialog: angular.material.IDialogService;

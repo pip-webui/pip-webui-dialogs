@@ -1,7 +1,7 @@
-import { ConfirmationParams } from './ConfirmationParams';
+import { ConfirmationDialogParams } from './ConfirmationDialogParams';
 
 export interface IConfirmationService {
-    show(params: ConfirmationParams, successCallback?: () => void, cancelCallback?: () => void): any;
+    show(params: ConfirmationDialogParams, successCallback?: () => void, cancelCallback?: () => void): any;
 }
 
 class ConfirmationService implements IConfirmationService {
@@ -11,7 +11,7 @@ class ConfirmationService implements IConfirmationService {
         this._mdDialog = $mdDialog;
     }
 
-    public show(params: ConfirmationParams, successCallback?: () => void, cancelCallback?: () => void) {
+    public show(params: ConfirmationDialogParams, successCallback?: () => void, cancelCallback?: () => void) {
         this._mdDialog.show({
             targetEvent: params.event,
             templateUrl: 'confirmation/ConfirmationDialog.html',

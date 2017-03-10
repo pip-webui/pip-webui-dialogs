@@ -1,3 +1,3 @@
-import './ConfirmationController';
-import './ConfirmationService';
-import './ConfirmationParams';
+import './ConfirmationDialogController';
+import './ConfirmationDialogService';
+import './ConfirmationDialogParams';

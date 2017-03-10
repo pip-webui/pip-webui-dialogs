@@ -1,4 +1,4 @@
-export class ErrorStrings {
+export class ErrorDialogStrings {
     public ok: string = 'OK';
     public cancel: string = 'Cancel';
     public errorDetails: string = 'Error details';

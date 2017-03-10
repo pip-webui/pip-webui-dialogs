@@ -5,12 +5,12 @@
 
 <md-dialog class="pip-dialog pip-confirmation-dialog layout-column" width="400" md-theme="{{ ::vm.theme }}">
     <div class="pip-header">
-        <h3>{{ :: vm.config.title }}</h3>
+        <h3>{{ :: vm.title }}</h3>
     </div>
     <div class="pip-footer">
         <div>
-            <md-button ng-click="vm.onCancel()">{{ :: vm.config.cancel }}</md-button>
-            <md-button class="md-accent" ng-click="vm.onOk()">{{ :: vm.config.ok }}</md-button>
+            <md-button ng-click="vm.onCancel()">{{ :: vm.cancel }}</md-button>
+            <md-button class="md-accent" ng-click="vm.onOk()">{{ :: vm.ok }}</md-button>
         </div>
     </div>
 </md-dialog>

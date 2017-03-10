@@ -1,29 +1,28 @@
 import { ConfirmationParams } from './ConfirmationParams';
 
-export class ConfirmationDialogController {
+class ConfirmationDialogController extends  ConfirmationParams {
     private _injector: ng.auto.IInjectorService;
 
     public $mdDialog: angular.material.IDialogService;
     public theme: string;
-    public config: ConfirmationParams;
 
     constructor(
         $mdDialog: angular.material.IDialogService,
         $injector: ng.auto.IInjectorService,
-        $rootScope: ng.IRootScopeService,
-        params: ConfirmationParams) 
+        $rootScope: ng.IRootScopeService) 
     {
         "ngInject";
-        this.config = new ConfirmationParams();
+
+        super();
         this._injector = $injector;
 
-        this.initTranslate(params);
+        this.initTranslate();
 
         this.$mdDialog = $mdDialog;
         this.theme = $rootScope['$theme'];
     }
 
-    private initTranslate(params: ConfirmationParams): void {
+    private initTranslate(): void {
         let pipTranslate: pip.services.ITranslateService;
         pipTranslate = this._injector.has('pipTranslate') ? <pip.services.ITranslateService>this._injector.get('pipTranslate') : null;
 
@@ -31,13 +30,13 @@ export class ConfirmationDialogController {
             pipTranslate.translations('en', { 'CONFIRM_TITLE': 'Confirm' });
             pipTranslate.translations('ru', { 'CONFIRM_TITLE': 'Подтвердите'});
 
-            this.config.title = pipTranslate.translate(params.title) || pipTranslate.translate('CONFIRM_TITLE');
-            this.config.ok = pipTranslate.translate(params.ok) || pipTranslate.translate('OK');
-            this.config.cancel = pipTranslate.translate(params.cancel) || ('CANCEL');
+            this.title = pipTranslate.translate(this.title) || pipTranslate.translate('CONFIRM_TITLE');
+            this.ok = pipTranslate.translate(this.ok) || pipTranslate.translate('OK');
+            this.cancel = pipTranslate.translate(this.cancel) || ('CANCEL');
         } else {
-            this.config.title = params.title || 'Confirm';
-            this.config.ok = params.ok || 'OK';
-            this.config.cancel = params.cancel || 'Cancel';
+            this.title = this.title || 'Confirm';
+            this.ok = this.ok || 'OK';
+            this.cancel = this.cancel || 'Cancel';
         }
     }
 

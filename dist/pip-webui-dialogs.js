@@ -55,6 +55,7 @@ angular
     'pipDialogs.Templates'
 ])
     .controller('pipConfirmationDialogController', ConfirmationDialogController);
+
 },{"./ConfirmationParams":2}],2:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -66,6 +67,7 @@ var ConfirmationParams = (function () {
     return ConfirmationParams;
 }());
 exports.ConfirmationParams = ConfirmationParams;
+
 },{}],3:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -99,12 +101,14 @@ var ConfirmationService = (function () {
 angular
     .module('pipConfirmationDialog')
     .service('pipConfirmationDialog', ConfirmationService);
+
 },{}],4:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 require("./ConfirmationController");
 require("./ConfirmationService");
 require("./ConfirmationParams");
+
 },{"./ConfirmationController":1,"./ConfirmationParams":2,"./ConfirmationService":3}],5:[function(require,module,exports){
 (function () {
     'use strict';
@@ -117,6 +121,7 @@ require("./ConfirmationParams");
         };
     }]);
 })();
+
 },{}],6:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -132,7 +137,12 @@ angular
     'pipOptionsBigDialog',
     'pipErrorDetailsDialog'
 ]);
+<<<<<<< HEAD
 },{"./confirmation":4,"./error_details":11,"./information":16,"./options":27}],7:[function(require,module,exports){
+=======
+
+},{"./confirmation":4,"./error_details":11,"./information":16,"./options":26}],7:[function(require,module,exports){
+>>>>>>> e8a3b4d015931858baa6935e22e00defb83e64c6
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var ErrorStrings_1 = require("./ErrorStrings");
@@ -199,6 +209,7 @@ exports.ErrorDetailsDialogController = ErrorDetailsDialogController;
 angular
     .module('pipErrorDetailsDialog')
     .controller('pipErrorDetailsDialogController', ErrorDetailsDialogController);
+
 },{"./ErrorStrings":10}],8:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -231,6 +242,7 @@ var ErrorDetailsService = (function () {
 angular
     .module('pipErrorDetailsDialog')
     .service('pipErrorDetailsDialog', ErrorDetailsService);
+
 },{}],9:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -243,6 +255,7 @@ var ErrorParams = (function () {
     return ErrorParams;
 }());
 exports.ErrorParams = ErrorParams;
+
 },{}],10:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -262,6 +275,7 @@ var ErrorStrings = (function () {
     return ErrorStrings;
 }());
 exports.ErrorStrings = ErrorStrings;
+
 },{}],11:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -275,6 +289,7 @@ require("./ErrorParams");
 require("./ErrorStrings");
 require("./ErrorDetailsService");
 require("./ErrorDetailsController");
+
 },{"./ErrorDetailsController":7,"./ErrorDetailsService":8,"./ErrorParams":9,"./ErrorStrings":10}],12:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -324,6 +339,7 @@ exports.InformationDialogController = InformationDialogController;
 angular
     .module('pipInformationDialog')
     .controller('pipInformationDialogController', InformationDialogController);
+
 },{"./InformationStrings":15}],13:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -334,6 +350,7 @@ var InformationParams = (function () {
     return InformationParams;
 }());
 exports.InformationParams = InformationParams;
+
 },{}],14:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -362,6 +379,7 @@ var InformationService = (function () {
 angular
     .module('pipInformationDialog')
     .service('pipInformationDialog', InformationService);
+
 },{}],15:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -372,6 +390,7 @@ var InformationStrings = (function () {
     return InformationStrings;
 }());
 exports.InformationStrings = InformationStrings;
+
 },{}],16:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -385,11 +404,21 @@ require("./InformationParams");
 require("./InformationStrings");
 require("./InformationService");
 require("./InformationController");
+
 },{"./InformationController":12,"./InformationParams":13,"./InformationService":14,"./InformationStrings":15}],17:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+<<<<<<< HEAD
 var OptionsBigDialogParams_1 = require("./OptionsBigDialogParams");
 var OptionsBigDialogData_1 = require("./OptionsBigDialogData");
+=======
+
+},{}],18:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var OptionsBigParams_1 = require("./OptionsBigParams");
+var OptionsBigData_1 = require("./OptionsBigData");
+>>>>>>> e8a3b4d015931858baa6935e22e00defb83e64c6
 var OptionsBigDialogController = (function () {
     OptionsBigDialogController.$inject = ['$mdDialog', '$injector', '$rootScope', 'params'];
     function OptionsBigDialogController($mdDialog, $injector, $rootScope, params) {
@@ -467,7 +496,12 @@ var OptionsBigDialogController = (function () {
 angular
     .module('pipOptionsBigDialog')
     .controller('pipOptionsBigDialogController', OptionsBigDialogController);
+<<<<<<< HEAD
 },{"./OptionsBigDialogData":18,"./OptionsBigDialogParams":19}],18:[function(require,module,exports){
+=======
+
+},{"./OptionsBigData":19,"./OptionsBigParams":20}],19:[function(require,module,exports){
+>>>>>>> e8a3b4d015931858baa6935e22e00defb83e64c6
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var OptionsBigDialogData = (function () {
@@ -475,8 +509,14 @@ var OptionsBigDialogData = (function () {
     }
     return OptionsBigDialogData;
 }());
+<<<<<<< HEAD
 exports.OptionsBigDialogData = OptionsBigDialogData;
 },{}],19:[function(require,module,exports){
+=======
+exports.OptionsBigData = OptionsBigData;
+
+},{}],20:[function(require,module,exports){
+>>>>>>> e8a3b4d015931858baa6935e22e00defb83e64c6
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var OptionsBigDialogParams = (function () {
@@ -496,7 +536,12 @@ var OptionsBigDialogResult = (function () {
     }
     return OptionsBigDialogResult;
 }());
+<<<<<<< HEAD
 exports.OptionsBigDialogResult = OptionsBigDialogResult;
+=======
+exports.OptionsBigParams = OptionsBigParams;
+
+>>>>>>> e8a3b4d015931858baa6935e22e00defb83e64c6
 },{}],21:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -528,7 +573,12 @@ var OptionsBigDialogService = (function () {
 }());
 angular
     .module('pipOptionsBigDialog')
+<<<<<<< HEAD
     .service('pipOptionsBigDialog', OptionsBigDialogService);
+=======
+    .service('pipOptionsBigDialog', OptionsBigService);
+
+>>>>>>> e8a3b4d015931858baa6935e22e00defb83e64c6
 },{}],22:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -592,7 +642,12 @@ exports.OptionsDialogController = OptionsDialogController;
 angular
     .module('pipOptionsDialog')
     .controller('pipOptionsDialogController', OptionsDialogController);
+<<<<<<< HEAD
 },{"./OptionsDialogData":23,"./OptionsDialogParams":24}],23:[function(require,module,exports){
+=======
+
+},{"./OptionsData":23,"./OptionsParams":24}],23:[function(require,module,exports){
+>>>>>>> e8a3b4d015931858baa6935e22e00defb83e64c6
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var OptionsDialogData = (function () {
@@ -602,7 +657,12 @@ var OptionsDialogData = (function () {
     }
     return OptionsDialogData;
 }());
+<<<<<<< HEAD
 exports.OptionsDialogData = OptionsDialogData;
+=======
+exports.OptionsData = OptionsData;
+
+>>>>>>> e8a3b4d015931858baa6935e22e00defb83e64c6
 },{}],24:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -611,7 +671,12 @@ var OptionsDialogParams = (function () {
     }
     return OptionsDialogParams;
 }());
+<<<<<<< HEAD
 exports.OptionsDialogParams = OptionsDialogParams;
+=======
+exports.OptionsParams = OptionsParams;
+
+>>>>>>> e8a3b4d015931858baa6935e22e00defb83e64c6
 },{}],25:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -652,8 +717,14 @@ var OptionsDialogService = (function () {
 }());
 angular
     .module('pipOptionsDialog')
+<<<<<<< HEAD
     .service('pipOptionsDialog', OptionsDialogService);
 },{}],27:[function(require,module,exports){
+=======
+    .service('pipOptionsDialog', OptionsService);
+
+},{}],26:[function(require,module,exports){
+>>>>>>> e8a3b4d015931858baa6935e22e00defb83e64c6
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 angular
@@ -673,12 +744,24 @@ angular
     'pipDialogs.Translate',
     'pipDialogs.Templates'
 ]);
+<<<<<<< HEAD
 require("./OptionsBigDialogParams");
 require("./OptionsBigDialogData");
 require("./OptionsBigDialogResult");
 require("./OptionsBigDialogService");
 require("./OptionsBigDialogController");
 },{"./OptionsBigDialogController":17,"./OptionsBigDialogData":18,"./OptionsBigDialogParams":19,"./OptionsBigDialogResult":20,"./OptionsBigDialogService":21,"./OptionsDialogController":22,"./OptionsDialogData":23,"./OptionsDialogParams":24,"./OptionsDialogResult":25,"./OptionsDialogService":26}],28:[function(require,module,exports){
+=======
+require("./OptionsBigParams");
+require("./OptionsBigData");
+require("./OptionsData");
+require("./OptionsParams");
+require("./IOptionsBigDialogController");
+require("./OptionsBigService");
+require("./OptionsBigController");
+
+},{"./IOptionsBigDialogController":17,"./OptionsBigController":18,"./OptionsBigData":19,"./OptionsBigParams":20,"./OptionsBigService":21,"./OptionsController":22,"./OptionsData":23,"./OptionsParams":24,"./OptionsService":25}],27:[function(require,module,exports){
+>>>>>>> e8a3b4d015931858baa6935e22e00defb83e64c6
 (function(module) {
 try {
   module = angular.module('pipDialogs.Templates');
@@ -687,7 +770,11 @@ try {
 }
 module.run(['$templateCache', function($templateCache) {
   $templateCache.put('confirmation/ConfirmationDialog.html',
+<<<<<<< HEAD
     '<md-dialog class="pip-dialog pip-confirmation-dialog layout-column" width="400" md-theme="{{ ::vm.theme }}"><div class="pip-header"><h3>{{ :: vm.title }}</h3></div><div class="pip-footer"><div><md-button ng-click="vm.onCancel()">{{ :: vm.cancel }}</md-button><md-button class="md-accent" ng-click="vm.onOk()">{{ :: vm.ok }}</md-button></div></div></md-dialog>');
+=======
+    '<md-dialog class="pip-dialog pip-confirmation-dialog layout-column" width="400" md-theme="{{ ::vm.theme }}"><div class="pip-header"><h3>{{ :: vm.config.title }}</h3></div><div class="pip-footer"><div><md-button ng-click="vm.onCancel()">{{ :: vm.config.cancel }}</md-button><md-button class="md-accent" ng-click="vm.onOk()">{{ :: vm.config.ok }}</md-button></div></div></md-dialog>');
+>>>>>>> e8a3b4d015931858baa6935e22e00defb83e64c6
 }]);
 })();
 

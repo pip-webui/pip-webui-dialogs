@@ -14,6 +14,7 @@
             if (pipTranslate) {
                 pipTranslate.translations('en', {
                     OPEN_OPTIONS: 'Open options dialog',
+                    OPTIONS_BIG_DIALOG: 'Options dialog with option subtitle',
                     OPEN_OPTIONS_WITH_CHECKBOX: 'Open options dialog  with checkbox',
                     OPEN_OPTIONS_BIG: 'Open big options dialog',
                     OPTIONS_DIALOG: 'Options dialog',
@@ -24,6 +25,7 @@
                 });
                 pipTranslate.translations('ru', {
                     OPEN_OPTIONS: 'Открыть диалог выбора',
+                    OPTIONS_BIG_DIALOG: 'Открыть диалог выбора с описанием опций',
                     OPEN_OPTIONS_WITH_CHECKBOX: 'Открыть диалог выбора с чекбоксом',
                     OPEN_OPTIONS_BIG: 'Открыть большой диалог выбора',
                     OPTIONS_DIALOG: 'Диалог выбора',
@@ -33,6 +35,7 @@
                     CODE: 'Пример кода'
                 });
                 $scope.titleOptions = pipTranslate.translate('OPTIONS_DIALOG');
+                $scope.titleBigOptions = pipTranslate.translate('OPTIONS_BIG_DIALOG');
                 $scope.openOptions = pipTranslate.translate('OPEN_OPTIONS');
                 $scope.openOptionsWithCheckbox = pipTranslate.translate('OPEN_OPTIONS_WITH_CHECKBOX');
                 $scope.openOptionsBig = pipTranslate.translate('OPEN_OPTIONS_BIG');
@@ -42,6 +45,7 @@
                 $scope.code = pipTranslate.translate('CODE');
             } else {
                 $scope.titleOptions = 'Options dialog';
+                $scope.titleBigOptions = 'Options dialog with option subtitle';
                 $scope.openOptions = 'Open options dialog';
                 $scope.openOptionsWithCheckbox = 'Open options dialog with checkbox';
                 $scope.openOptionsBig = 'Open big options dialog';

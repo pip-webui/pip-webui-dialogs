@@ -102,5 +102,8 @@ class OptionsBigDialogController extends OptionsBigDialogParams {
 }
 
 angular
-    .module('pipOptionsBigDialog')
+    .module('pipOptionsBigDialog', [
+        'ngMaterial', 
+        'pipDialogs.Translate',
+        'pipDialogs.Templates'])
     .controller('pipOptionsBigDialogController', OptionsBigDialogController);

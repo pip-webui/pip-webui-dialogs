@@ -104,5 +104,8 @@ class ErrorDetailsDialogController extends ErrorDetailsDialogParams {
 }
 
 angular
-    .module('pipErrorDetailsDialog')
+    .module('pipErrorDetailsDialog', [
+        'ngMaterial', 
+        'pipDialogs.Translate',
+        'pipDialogs.Templates'])
     .controller('pipErrorDetailsDialogController', ErrorDetailsDialogController);

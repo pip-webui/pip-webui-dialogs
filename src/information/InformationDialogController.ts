@@ -1,13 +1,5 @@
 import { InformationDialogParams } from './InformationDialogParams';
 
-export class InformationDialogStrings {
-    public ok: string = 'OK';
-    public title: string; 
-    public message: string;
-    public error: string;
-    public content;
-}
-
 class InformationDialogController extends InformationDialogParams {
     private _injector: ng.auto.IInjectorService;
 
@@ -72,5 +64,8 @@ class InformationDialogController extends InformationDialogParams {
 }
 
 angular
-    .module('pipInformationDialog')
+    .module('pipInformationDialog', [
+        'ngMaterial',
+        'pipDialogs.Translate', 
+        'pipDialogs.Templates'])
     .controller('pipInformationDialogController', InformationDialogController);

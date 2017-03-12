@@ -52,5 +52,8 @@ class ConfirmationDialogController extends  ConfirmationDialogParams {
 }
 
 angular
-    .module('pipConfirmationDialog')
+    .module('pipConfirmationDialog', [
+        'ngMaterial', 
+        'pipDialogs.Translate',
+        'pipDialogs.Templates'])
     .controller('pipConfirmationDialogController', ConfirmationDialogController);

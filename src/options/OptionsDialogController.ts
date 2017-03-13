@@ -89,8 +89,5 @@ class OptionsDialogController extends OptionsDialogParams {
 }
 
 angular
-    .module('pipOptionsDialog', [
-        'ngMaterial', 
-        'pipDialogs.Translate',
-        'pipDialogs.Templates'])
+    .module('pipOptionsDialog')
     .controller('pipOptionsDialogController', OptionsDialogController);

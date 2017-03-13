@@ -1,8 +1,8 @@
-// angular
-//     .module('pipInformationDialog', [
-//         'ngMaterial',
-//         'pipDialogs.Translate', 
-//         'pipDialogs.Templates']);
+angular
+    .module('pipInformationDialog', [
+        'ngMaterial',
+        'pipDialogs.Translate', 
+        'pipDialogs.Templates']);
 
 import './InformationDialogParams';
 import './InformationDialogController';

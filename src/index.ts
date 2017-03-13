@@ -1,4 +1,5 @@
-﻿import './error_details';
+﻿import './dependencies/TranslateFilter';
+import './error_details';
 import './information';
 import './options';
 import './options_big';

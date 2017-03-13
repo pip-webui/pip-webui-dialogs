@@ -1,8 +1,8 @@
-// angular
-//     .module('pipOptionsBigDialog', [
-//         'ngMaterial', 
-//         'pipDialogs.Translate',
-//         'pipDialogs.Templates']);
+angular
+    .module('pipOptionsBigDialog', [
+        'ngMaterial', 
+        'pipDialogs.Translate',
+        'pipDialogs.Templates']);
 
 import './OptionsBigDialogParams';
 import './OptionsBigDialogData';

@@ -1,8 +1,8 @@
-// angular
-    // .module('pipErrorDetailsDialog', [
-    //     'ngMaterial', 
-    //     'pipDialogs.Translate',
-    //     'pipDialogs.Templates']);
+angular
+    .module('pipErrorDetailsDialog', [
+        'ngMaterial', 
+        'pipDialogs.Translate',
+        'pipDialogs.Templates']);
 
 import './ErrorDetailsDialogParams';
 import './ErrorDetailsDialogService';

@@ -1,8 +1,8 @@
-// angular
-    // .module('pipOptionsDialog', [
-    //     'ngMaterial', 
-    //     'pipDialogs.Translate',
-    //     'pipDialogs.Templates']);
+angular
+    .module('pipOptionsDialog', [
+        'ngMaterial', 
+        'pipDialogs.Translate',
+        'pipDialogs.Templates']);
 
 import './OptionsDialogData';
 import './OptionsDialogParams';

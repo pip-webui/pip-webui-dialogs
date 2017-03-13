@@ -64,8 +64,5 @@ class InformationDialogController extends InformationDialogParams {
 }
 
 angular
-    .module('pipInformationDialog', [
-        'ngMaterial',
-        'pipDialogs.Translate', 
-        'pipDialogs.Templates'])
+    .module('pipInformationDialog')
     .controller('pipInformationDialogController', InformationDialogController);

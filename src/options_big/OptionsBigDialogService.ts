@@ -10,7 +10,7 @@ class OptionsBigDialogService implements IOptionsBigDialogService {
     public show(params, successCallback?: (result: OptionsBigDialogResult) => void, cancelCallback?: () => void): any {
          this._mdDialog.show({
             targetEvent: params.event,
-            templateUrl: 'options/OptionsBigDialog.html',
+            templateUrl: 'options_big/OptionsBigDialog.html',
             controller: 'pipOptionsBigDialogController',
             controllerAs: '$ctrl',
             locals: params,

@@ -15,7 +15,6 @@ export interface IConfirmationDialogService {
 
 
 
-
 export class ErrorDetailsDialogParams {
     event?: MouseEvent;
     dismissButton?: string;
@@ -32,6 +31,21 @@ export interface IInformationDialogService {
     show(params: InformationDialogParams, successCallback?: () => void, cancelCallback?: () => void): any;
 }
 
+
+
+export class InformationDialogParams {
+    event?: MouseEvent;
+    ok?: string;
+    title?: string;
+    message: string;
+    item?: any;
+}
+
+
+
+export interface IInformationDialogService {
+    show(params: InformationDialogParams, successCallback?: () => void, cancelCallback?: () => void): any;
+}
 
 
 export class InformationDialogParams {
@@ -101,6 +115,7 @@ export class OptionsBigDialogResult {
     option: OptionsBigDialogData;
     isCheckboxOption: boolean;
 }
+
 
 
 }

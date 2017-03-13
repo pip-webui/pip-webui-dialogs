@@ -8,28 +8,68 @@ Pip.WebUI.Dialogs modules contains general purpose dialogs.
 - Confirmation message dialog
 - Error message dialog
 - Option selection dialog
+- Big option selection dialog with additional discription in *subtitle* filed.
 
-<a href="https://github.com/pip-webui/pip-webui-dialogs/raw/master/doc/images/img-info-dialog.png" style="border: 3px ridge #c8d2df; display: inline-block">
-    <img src="https://github.com/pip-webui/pip-webui-dialogs/raw/master/doc/images/img-info-dialog.png"/>
-</a>
+## <a name="information_dialog"></a> pipInformationDialog
 
-Standard dialogs require only few lines of code from developers:
-```javascript
- pipInformationDialog.show(
-        {
-            event: event,
-            title: 'Good!',
-            message: 'Stuff %s was really good',
-            item: 'Loooooong naaaaaaaaaaaaaame',
-            ok: 'Take It'
-        },
-        function () {
-            console.log('Taken');
-        }
-    );
-```
+**pipInformationDialog** show dialog with information message and OK button.
 
-See online samples [here...](http://webui.pipdevs.com/pip-webui-dialogs/index.html)
+<img src="doc/images/img-info-dialog.png"/>
+
+See online samples [here...](http://webui.pipdevs.com/pip-webui-dialogs/index.html#/information)
+
+## <a name="confirmation_dialog"></a> pipConfirmationDialog
+
+**pipConfirmationDialog** shows message with question and YES and NO buttons.
+
+<img src="doc/images/img-confirm-dialog.png"/>
+
+See online samples [here...](http://webui.pipdevs.com/pip-webui-dialogs/index.html#/confirmation)
+
+## <a name="error_dialog"></a> pipErrorDialog
+
+**pipErrorDialog** shows error message with collapsible details.
+
+<img src="doc/images/img-errors-dialog.png"/>
+
+See online samples [here...](http://webui.pipdevs.com/pip-webui-dialogs/index.html#/error_details)
+
+## <a name="options_dialog"></a> pipOptionsDialog
+
+**pipOptionsDialog** allows to pick one from several available options.
+
+<img src="doc/images/img-options-dialog.png"/>
+
+See online samples [here...](http://webui.pipdevs.com/pip-webui-dialogs/index.html#/options)
+
+Option dialog with additional option
+
+<img src="doc/images/img-options-dialog-with-additional-option.png"/>
+
+See online samples [here...](http://webui.pipdevs.com/pip-webui-dialogs/index.html#/options)
+
+## <a name="options_big_dialog"></a> pipOptionsBigDialog
+
+**pipOptionsBigDialog** allows to pick one from several available options. Each option can have additional discription in *subtitle* filed.
+
+Option dialog with subtitles.
+
+<img src="doc/images/img-options-big-dialog.png"/>
+
+See online samples [here...](http://webui.pipdevs.com/pip-webui-dialogs/index.html#/options)
+
+Option dialog with subtitles and without action button.
+
+<img src="doc/images/img-options-big-dialog-no-action.png"/>
+
+See online samples [here...](http://webui.pipdevs.com/pip-webui-dialogs/index.html#/options)
+
+Option dialog with subtitles, with title hint and without action button.
+
+<img src="doc/images/img-options-big-dialog-with-hint.png"/>
+
+See online samples [here...](http://webui.pipdevs.com/pip-webui-dialogs/index.html#/options)
+
 
 ## Learn more about the module
 

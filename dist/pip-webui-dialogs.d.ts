@@ -33,13 +33,42 @@ export interface IInformationDialogService {
 }
 
 
-
 export class InformationDialogParams {
     event?: MouseEvent;
     ok?: string;
     title?: string;
     message: string;
     item?: any;
+}
+
+
+
+export interface IOptionsDialogService {
+    show(params: OptionsDialogParams, successCallback?: (result: OptionsDialogResult) => void, cancelCallback?: () => void): any;
+}
+
+
+export class OptionsDialogData {
+    icon: string;
+    name: string;
+    title: string;
+    active: boolean;
+}
+
+export class OptionsDialogParams {
+    event?: MouseEvent;
+    title?: string;
+    ok?: string;
+    options?: OptionsDialogData[];
+    selectedOption?: OptionsDialogData;
+    selectedOptionName?: string;
+    isCheckboxOption?: boolean;
+    checkboxOptionCaption?: string;
+}
+
+export class OptionsDialogResult {
+    option: OptionsDialogData;
+    isCheckboxOption: boolean;
 }
 
 
@@ -72,35 +101,6 @@ export class OptionsBigDialogResult {
     isCheckboxOption: boolean;
 }
 
-
-
-export interface IOptionsDialogService {
-    show(params: OptionsDialogParams, successCallback?: (result: OptionsDialogResult) => void, cancelCallback?: () => void): any;
-}
-
-
-export class OptionsDialogData {
-    icon: string;
-    name: string;
-    title: string;
-    active: boolean;
-}
-
-export class OptionsDialogParams {
-    event?: MouseEvent;
-    title?: string;
-    ok?: string;
-    options?: OptionsDialogData[];
-    selectedOption?: OptionsDialogData;
-    selectedOptionName?: string;
-    isCheckboxOption?: boolean;
-    checkboxOptionCaption?: string;
-}
-
-export class OptionsDialogResult {
-    option: OptionsDialogData;
-    isCheckboxOption: boolean;
-}
 
 
 }

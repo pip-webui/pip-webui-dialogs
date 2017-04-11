@@ -18,7 +18,7 @@ class OptionsBigDialogController extends OptionsBigDialogParams {
         super();
         this.$mdDialog = $mdDialog;
         this._injector = $injector;
-        this.theme = $rootScope['$theme'];
+        this.theme = $rootScope[pip.themes.ThemeRootVar];
 
         this.initTranslate()
 

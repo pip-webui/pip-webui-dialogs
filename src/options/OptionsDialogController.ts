@@ -18,7 +18,7 @@ class OptionsDialogController extends OptionsDialogParams {
         super();
         this.$mdDialog = $mdDialog;
         this._injector = $injector;
-        this.theme = $rootScope['$theme'];
+        this.theme = $rootScope[pip.themes.ThemeRootVar];
         this.options = this.options || [];
 
         this.initTranslate();

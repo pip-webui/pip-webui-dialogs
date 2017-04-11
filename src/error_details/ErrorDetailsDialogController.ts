@@ -28,7 +28,7 @@ class ErrorDetailsDialogController extends ErrorDetailsDialogParams {
         this.strings = new ErrorDialogStrings();
         this._injector = $injector;
         this.$mdDialog = $mdDialog;
-        this.theme = $rootScope.$theme;
+        this.theme = $rootScope[pip.themes.ThemeRootVar];
 
         this.initTranslate();
 

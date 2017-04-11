@@ -19,7 +19,7 @@ class ConfirmationDialogController extends  ConfirmationDialogParams {
         this.initTranslate();
 
         this.$mdDialog = $mdDialog;
-        this.theme = $rootScope['$theme'];
+        this.theme = $rootScope[pip.themes.ThemeRootVar];
     }
 
     private initTranslate(): void {

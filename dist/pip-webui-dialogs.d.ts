@@ -15,7 +15,6 @@ export interface IConfirmationDialogService {
 
 
 
-
 export class ErrorDetailsDialogParams {
     event?: MouseEvent;
     dismissButton?: string;
@@ -33,7 +32,6 @@ export interface IInformationDialogService {
 }
 
 
-
 export class InformationDialogParams {
     event?: MouseEvent;
     ok?: string;
@@ -41,6 +39,7 @@ export class InformationDialogParams {
     message: string;
     item?: any;
 }
+
 
 
 
@@ -101,6 +100,7 @@ export class OptionsBigDialogResult {
     option: OptionsBigDialogData;
     isCheckboxOption: boolean;
 }
+
 
 
 }

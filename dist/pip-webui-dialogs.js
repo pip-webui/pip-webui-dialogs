@@ -29,11 +29,15 @@ var ConfirmationDialogController = (function (_super) {
         pipTranslate = this._injector.has('pipTranslate')
             ? this._injector.get('pipTranslate') : null;
         if (pipTranslate) {
-            pipTranslate.translations('en', { 'CONFIRM_TITLE': 'Confirm' });
-            pipTranslate.translations('ru', { 'CONFIRM_TITLE': 'Подтвердите' });
-            this.title = pipTranslate.translate(this.title) || pipTranslate.translate('CONFIRM_TITLE');
-            this.ok = pipTranslate.translate(this.ok) || pipTranslate.translate('OK');
-            this.cancel = pipTranslate.translate(this.cancel) || ('CANCEL');
+            pipTranslate.translations('en', { 'DIALOG_CONFIRM_TITLE': 'Confirm' });
+            pipTranslate.translations('ru', { 'DIALOG_CONFIRM_TITLE': 'Подтвердите' });
+            pipTranslate.translations('en', { 'DIALOG_CONFIRM_OK': 'Ok' });
+            pipTranslate.translations('ru', { 'DIALOG_CONFIRM_OK': 'Принять' });
+            pipTranslate.translations('en', { 'DIALOG_CONFIRM_CANCEL': 'Cancel' });
+            pipTranslate.translations('ru', { 'DIALOG_CONFIRM_CANCEL': 'Отменить' });
+            this.title = pipTranslate.translate(this.title) || pipTranslate.translate('DIALOG_CONFIRM_TITLE');
+            this.ok = pipTranslate.translate(this.ok) || pipTranslate.translate('DIALOG_CONFIRM_OK');
+            this.cancel = pipTranslate.translate(this.cancel) || ('DIALOG_CONFIRM_CANCEL');
         }
         else {
             this.title = this.title || 'Confirm';
@@ -174,30 +178,30 @@ var ErrorDetailsDialogController = (function (_super) {
                 'OK': 'Ok',
                 'CANCEL': 'Cancel',
                 'ERROR_DETAILS': 'Error details',
-                'CODE': 'Error code',
-                'PATH': 'Path',
-                'ERROR': 'Error',
-                'METHOD': 'Method',
-                'MESSAGE': 'Message',
-                'DISMISS': 'Dismiss'
+                'ERROR_CODE': 'Error code',
+                'ERROR_PATH': 'Path',
+                'ERROR_ERROR': 'Error',
+                'ERROR_METHOD': 'Method',
+                'ERROR_MESSAGE': 'Message',
+                'ERROR_DISMISS': 'Dismiss'
             });
             pipTranslate.translations('ru', {
                 'OK': 'Ок',
                 'CANCEL': 'Отмена',
                 'ERROR_DETAILS': 'Детали ошибки',
-                'CODE': 'Код ошибки',
-                'PATH': 'Путь',
-                'ERROR': 'Ошибка',
-                'METHOD': 'Метод',
-                'MESSAGE': 'Сообщение'
+                'ERROR_CODE': 'Код ошибки',
+                'ERROR_PATH': 'Путь',
+                'ERROR_ERROR': 'Ошибка',
+                'ERROR_METHOD': 'Метод',
+                'ERROR_MESSAGE': 'Сообщение'
             });
-            this.dismissButton = pipTranslate.translate(this.dismissButton) || pipTranslate.translate('DISMISS');
+            this.dismissButton = pipTranslate.translate(this.dismissButton) || pipTranslate.translate('ERROR_DISMISS');
             this.strings.errorDetails = pipTranslate.translate('ERROR_DETAILS');
-            this.strings.errorMessage = pipTranslate.translate('MESSAGE');
-            this.strings.errorCode = pipTranslate.translate('CODE');
-            this.strings.errorMethod = pipTranslate.translate('METHOD');
-            this.strings.errorPath = pipTranslate.translate('PATH');
-            this.strings.errorText = pipTranslate.translate('ERROR');
+            this.strings.errorMessage = pipTranslate.translate('ERROR_MESSAGE');
+            this.strings.errorCode = pipTranslate.translate('ERROR_CODE');
+            this.strings.errorMethod = pipTranslate.translate('ERROR_METHOD');
+            this.strings.errorPath = pipTranslate.translate('ERROR_PATH');
+            this.strings.errorText = pipTranslate.translate('ERROR_ERROR');
         }
         else {
             this.dismissButton = this.dismissButton || 'Dismiss';
@@ -344,8 +348,10 @@ var InformationDialogController = (function (_super) {
         if (pipTranslate) {
             pipTranslate.translations('en', { 'INFORMATION_TITLE': 'Information' });
             pipTranslate.translations('ru', { 'INFORMATION_TITLE': 'Информация' });
+            pipTranslate.translations('en', { 'INFORMATION_OK': 'Ok' });
+            pipTranslate.translations('ru', { 'INFORMATION_OK': 'Ок' });
             this.title = pipTranslate.translate(this.title) || pipTranslate.translate('INFORMATION_TITLE');
-            this.ok = pipTranslate.translate(this.ok) || pipTranslate.translate('OK');
+            this.ok = pipTranslate.translate(this.ok) || pipTranslate.translate('INFORMATION_OK');
             content = pipTranslate.translate(content);
         }
         else {
@@ -464,14 +470,20 @@ var OptionsDialogController = (function (_super) {
         var pipTranslate;
         pipTranslate = this._injector.has('pipTranslate') ? this._injector.get('pipTranslate') : null;
         if (pipTranslate) {
-            pipTranslate.translations('en', { 'OPTIONS_TITLE': 'Choose Option' });
-            pipTranslate.translations('ru', { 'OPTIONS_TITLE': 'Выберите опцию' });
-            this.title = pipTranslate.translate(this.title) || pipTranslate.translate('OPTIONS_TITLE');
-            this.ok = pipTranslate.translate(this.ok) || pipTranslate.translate('SELECT');
+            pipTranslate.translations('en', { 'DIALOG_OPTIONS_TITLE': 'Choose Option' });
+            pipTranslate.translations('ru', { 'DIALOG_OPTIONS_TITLE': 'Выберите опцию' });
+            pipTranslate.translations('en', { 'DIALOG_OPTIONS_SELECT': 'Select' });
+            pipTranslate.translations('ru', { 'DIALOG_OPTIONS_SELECT': 'Выбрать' });
+            pipTranslate.translations('en', { 'DIALOG_OPTIONS_CANCEL': 'Cancel' });
+            pipTranslate.translations('ru', { 'DIALOG_OPTIONS_CANCEL': 'Отменить' });
+            this.title = pipTranslate.translate(this.title) || pipTranslate.translate('DIALOG_OPTIONS_TITLE');
+            this.ok = pipTranslate.translate(this.ok) || pipTranslate.translate('DIALOG_OPTIONS_SELECT');
+            this.cancel = pipTranslate.translate(this.cancel) || ('DIALOG_OPTIONS_CANCEL');
         }
         else {
             this.title = this.title || 'Choose Option';
             this.ok = this.ok || 'Select';
+            this.cancel = this.cancel || 'Cancel';
         }
     };
     OptionsDialogController.prototype.onOk = function () {
@@ -634,14 +646,20 @@ var OptionsBigDialogController = (function (_super) {
         pipTranslate = this._injector.has('pipTranslate')
             ? this._injector.get('pipTranslate') : null;
         if (pipTranslate) {
-            pipTranslate.translations('en', { 'OPTIONS_TITLE': 'Choose Option' });
-            pipTranslate.translations('ru', { 'OPTIONS_TITLE': 'Выберите опцию' });
-            this.title = pipTranslate.translate(this.title) || pipTranslate.translate('OPTIONS_TITLE');
-            this.ok = pipTranslate.translate(this.ok) || pipTranslate.translate('SELECT');
+            pipTranslate.translations('en', { 'DIALOG_OPTIONS_TITLE': 'Choose Option' });
+            pipTranslate.translations('ru', { 'DIALOG_OPTIONS_TITLE': 'Выберите опцию' });
+            pipTranslate.translations('en', { 'DIALOG_OPTIONS_SELECT': 'Select' });
+            pipTranslate.translations('ru', { 'DIALOG_OPTIONS_SELECT': 'Выбрать' });
+            pipTranslate.translations('en', { 'DIALOG_OPTIONS_CANCEL': 'Cancel' });
+            pipTranslate.translations('ru', { 'DIALOG_OPTIONS_CANCEL': 'Отменить' });
+            this.title = pipTranslate.translate(this.title) || pipTranslate.translate('DIALOG_OPTIONS_TITLE');
+            this.ok = pipTranslate.translate(this.ok) || pipTranslate.translate('DIALOG_OPTIONS_SELECT');
+            this.cancel = pipTranslate.translate(this.cancel) || ('DIALOG_OPTIONS_CANCEL');
         }
         else {
             this.title = this.title || 'Choose Option';
             this.ok = this.ok || 'Select';
+            this.cancel = this.cancel || 'Cancel';
         }
     };
     OptionsBigDialogController.prototype.onOk = function () {
@@ -808,7 +826,7 @@ try {
 }
 module.run(['$templateCache', function($templateCache) {
   $templateCache.put('options/OptionsDialog.html',
-    '<md-dialog class="pip-dialog pip-options-dialog layout-column" min-width="400" md-theme="{{ $ctrl.theme }}"><md-dialog-content class="pip-body lp0 tp0 rp0 bp24 pip-scroll"><div class="pip-header"><h3>{{ ::$ctrl.title | translate }}</h3><div ng-show="$ctrl.checkboxOptionCaption" class="header-option text-subhead1 divider-bottom"><md-checkbox ng-model="$ctrl.isCheckboxOption" aria-label="CHECKBOX">{{ ::$ctrl.checkboxOptionCaption | translate }}</md-checkbox></div></div><div class="pip-content"><md-radio-group ng-model="$ctrl.selectedOptionName" class="pip-list md-primary" md-no-ink="true" ng-keypress="$ctrl.onKeyPress($event)" tabindex="0"><div ng-repeat="option in $ctrl.options" class="pip-list-item" md-ink-ripple="" ui-event="{ click: \'$ctrl.onOptionSelect($event, option)\' }" ng-class="{ selected: option.name == $ctrl.selectedOptionName }"><div class="pip-list-item item-padding"><md-icon class="pip-option-icon" md-svg-icon="icons:{{ option.icon }}" ng-if="option.icon"></md-icon><div class="pip-option-title">{{ ::option.title | translate }}</div><md-radio-button ng-value="option.name" tabindex="-1" aria-label="{{ ::option.title | translate }}"></md-radio-button></div></div></md-radio-group></div></md-dialog-content><div class="pip-footer"><div><md-button class="pip-cancel" ng-click="$ctrl.onCancel()">{{ ::\'CANCEL\' | translate }}</md-button><md-button class="pip-submit md-accent" ng-click="$ctrl.onSelect()">{{ ::$ctrl.ok | translate }}</md-button></div></div></md-dialog>');
+    '<md-dialog class="pip-dialog pip-options-dialog layout-column" min-width="400" md-theme="{{ $ctrl.theme }}"><md-dialog-content class="pip-body lp0 tp0 rp0 bp24 pip-scroll"><div class="pip-header"><h3>{{ ::$ctrl.title | translate }}</h3><div ng-show="$ctrl.checkboxOptionCaption" class="header-option text-subhead1 divider-bottom"><md-checkbox ng-model="$ctrl.isCheckboxOption" aria-label="CHECKBOX">{{ ::$ctrl.checkboxOptionCaption | translate }}</md-checkbox></div></div><div class="pip-content"><md-radio-group ng-model="$ctrl.selectedOptionName" class="pip-list md-primary" md-no-ink="true" ng-keypress="$ctrl.onKeyPress($event)" tabindex="0"><div ng-repeat="option in $ctrl.options" class="pip-list-item" md-ink-ripple="" ui-event="{ click: \'$ctrl.onOptionSelect($event, option)\' }" ng-class="{ selected: option.name == $ctrl.selectedOptionName }"><div class="pip-list-item item-padding"><md-icon class="pip-option-icon" md-svg-icon="icons:{{ option.icon }}" ng-if="option.icon"></md-icon><div class="pip-option-title">{{ ::option.title | translate }}</div><md-radio-button ng-value="option.name" tabindex="-1" aria-label="{{ ::option.title | translate }}"></md-radio-button></div></div></md-radio-group></div></md-dialog-content><div class="pip-footer"><div><md-button class="pip-cancel" ng-click="$ctrl.onCancel()">{{ ::$ctrl.cancel | translate }}</md-button><md-button class="pip-submit md-accent" ng-click="$ctrl.onSelect()">{{ ::$ctrl.ok | translate }}</md-button></div></div></md-dialog>');
 }]);
 })();
 
@@ -820,7 +838,7 @@ try {
 }
 module.run(['$templateCache', function($templateCache) {
   $templateCache.put('options_big/OptionsBigDialog.html',
-    '<md-dialog class="pip-dialog pip-options-dialog-big layout-column" min-width="400" md-theme="{{ $ctrl.theme }}"><md-dialog-content class="pip-body pip-scroll" ng-class="{\'bp24\': !$ctrl.noActions}"><div class="pip-header" ng-class="{\'header-hint\': $ctrl.noTitle && $ctrl.hint}"><h3 class="m0" ng-if="!$ctrl.noTitle">{{ ::$ctrl.title | translate }}</h3><div ng-show="$ctrl.noTitle && $ctrl.hint" class="dialog-hint layout-row layout-align-start-center"><div class="hint-icon-container flex-fixed"><md-icon md-svg-icon="icons:info-circle-outline"></md-icon></div><div>{{ ::$ctrl.hint | translate }}</div></div></div><div class="content-divider" ng-if="!noTitle"></div><div class="pip-content"><div class="spacer8" ng-if="noTitle && hint"></div><md-list class="pip-menu pip-ref-list" pip-selected="$ctrl.optionIndex" index="{{ $ctrl.optionIndex }}" pip-select="$ctrl.onSelected($event)"><md-list-item class="pip-ref-list-item pip-selectable layout-row layout-align-start-center" ng-class="{\'selected md-focused\' : option.name == $ctrl.selectedOptionName, \'divider-bottom\': $index != options.length - 1}" md-ink-ripple="" ng-keyup="$ctrl.onKeyUp($event, $index)" ng-repeat="option in $ctrl.options"><div class="pip-content content-stretch" ng-click="$ctrl.onOptionSelect($event, option)"><p class="pip-title spacer-right" ng-if="option.title" style="margin-bottom: 4px !important;">{{ ::option.title | translate }}</p><div class="pip-subtitle spacer-right" style="height: inherit" ng-if="option.subtitle">{{ ::option.subtitle | translate }}</div><div class="pip-subtitle spacer-right" style="height: inherit" ng-if="option.text" ng-bind-html="option.text | translate"></div></div></md-list-item></md-list></div><div class="spacer8" ng-if="$ctrl.noActions"></div></md-dialog-content><div class="pip-footer" ng-if="!$ctrl.noActions"><div><md-button class="pip-cancel" ng-click="$ctrl.onCancel()">{{ ::\'CANCEL\' | translate }}</md-button><md-button class="pip-submit md-accent" ng-click="$ctrl.onSelect()" style="margin-right: -6px">{{ ::$ctrl.ok | translate }}</md-button></div></div></md-dialog>');
+    '<md-dialog class="pip-dialog pip-options-dialog-big layout-column" min-width="400" md-theme="{{ $ctrl.theme }}"><md-dialog-content class="pip-body pip-scroll" ng-class="{\'bp24\': !$ctrl.noActions}"><div class="pip-header" ng-class="{\'header-hint\': $ctrl.noTitle && $ctrl.hint}"><h3 class="m0" ng-if="!$ctrl.noTitle">{{ ::$ctrl.title | translate }}</h3><div ng-show="$ctrl.noTitle && $ctrl.hint" class="dialog-hint layout-row layout-align-start-center"><div class="hint-icon-container flex-fixed"><md-icon md-svg-icon="icons:info-circle-outline"></md-icon></div><div>{{ ::$ctrl.hint | translate }}</div></div></div><div class="content-divider" ng-if="!noTitle"></div><div class="pip-content"><div class="spacer8" ng-if="noTitle && hint"></div><md-list class="pip-menu pip-ref-list" pip-selected="$ctrl.optionIndex" index="{{ $ctrl.optionIndex }}" pip-select="$ctrl.onSelected($event)"><md-list-item class="pip-ref-list-item pip-selectable layout-row layout-align-start-center" ng-class="{\'selected md-focused\' : option.name == $ctrl.selectedOptionName, \'divider-bottom\': $index != options.length - 1}" md-ink-ripple="" ng-keyup="$ctrl.onKeyUp($event, $index)" ng-repeat="option in $ctrl.options"><div class="pip-content content-stretch" ng-click="$ctrl.onOptionSelect($event, option)"><p class="pip-title spacer-right" ng-if="option.title" style="margin-bottom: 4px !important;">{{ ::option.title | translate }}</p><div class="pip-subtitle spacer-right" style="height: inherit" ng-if="option.subtitle">{{ ::option.subtitle | translate }}</div><div class="pip-subtitle spacer-right" style="height: inherit" ng-if="option.text" ng-bind-html="option.text | translate"></div></div></md-list-item></md-list></div><div class="spacer8" ng-if="$ctrl.noActions"></div></md-dialog-content><div class="pip-footer" ng-if="!$ctrl.noActions"><div><md-button class="pip-cancel" ng-click="$ctrl.onCancel()">{{ ::$ctrl.cancel | translate }}</md-button><md-button class="pip-submit md-accent" ng-click="$ctrl.onSelect()" style="margin-right: -6px">{{ ::$ctrl.ok | translate }}</md-button></div></div></md-dialog>');
 }]);
 })();
 

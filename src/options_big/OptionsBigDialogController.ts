@@ -40,15 +40,21 @@ class OptionsBigDialogController extends OptionsBigDialogParams {
             ? <pip.services.ITranslateService>this._injector.get('pipTranslate') : null;
 
         if (pipTranslate) {
-            pipTranslate.translations('en', { 'OPTIONS_TITLE': 'Choose Option' });
-            pipTranslate.translations('ru', { 'OPTIONS_TITLE': 'Выберите опцию' });
+            pipTranslate.translations('en', { 'DIALOG_OPTIONS_TITLE': 'Choose Option' });
+            pipTranslate.translations('ru', { 'DIALOG_OPTIONS_TITLE': 'Выберите опцию' });
+            pipTranslate.translations('en', { 'DIALOG_OPTIONS_SELECT': 'Select' });
+            pipTranslate.translations('ru', { 'DIALOG_OPTIONS_SELECT': 'Выбрать' });
+            pipTranslate.translations('en', { 'DIALOG_OPTIONS_CANCEL': 'Cancel' });
+            pipTranslate.translations('ru', { 'DIALOG_OPTIONS_CANCEL': 'Отменить' });
 
-            this.title =  pipTranslate.translate(this.title) || pipTranslate.translate('OPTIONS_TITLE');
-            this.ok = pipTranslate.translate(this.ok) || pipTranslate.translate('SELECT');
+            this.title = pipTranslate.translate(this.title) || pipTranslate.translate('DIALOG_OPTIONS_TITLE');
+            this.ok = pipTranslate.translate(this.ok) || pipTranslate.translate('DIALOG_OPTIONS_SELECT');
+            this.cancel = pipTranslate.translate(this.cancel) || ('DIALOG_OPTIONS_CANCEL');
         } else {
             this.title = this.title || 'Choose Option';
             this.ok = this.ok || 'Select';
-        }        
+            this.cancel = this.cancel || 'Cancel';
+        }      
     }
 
     public onOk(): void {

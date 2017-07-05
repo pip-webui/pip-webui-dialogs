@@ -60,6 +60,7 @@ export class OptionsDialogParams {
     event?: MouseEvent;
     title?: string;
     ok?: string;
+    cancel?: string;
     options?: OptionsDialogData[];
     selectedOption?: OptionsDialogData;
     selectedOptionName?: string;
@@ -89,6 +90,7 @@ export class OptionsBigDialogParams {
     event?: MouseEvent;
     title?: string;
     ok?: string;
+    cancel?: string;
     options?: OptionsBigDialogData[];
     selectedOption?: OptionsBigDialogData;
     selectedOptionName?: string;

@@ -7,6 +7,8 @@ export class OptionsDialogParams {
     public title?: string;
     // confirm button title
     public ok?: string;
+    // cancel button title
+    public cancel?: string;
     // Dialog options array
     public options?: OptionsDialogData[];
     // Selected option by default

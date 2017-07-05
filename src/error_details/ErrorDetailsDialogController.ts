@@ -47,31 +47,31 @@ class ErrorDetailsDialogController extends ErrorDetailsDialogParams {
                 'OK': 'Ok',
                 'CANCEL': 'Cancel',
                 'ERROR_DETAILS': 'Error details',
-                'CODE': 'Error code',
-                'PATH': 'Path',
-                'ERROR': 'Error',
-                'METHOD': 'Method',
-                'MESSAGE': 'Message',
-                'DISMISS': 'Dismiss'
+                'ERROR_CODE': 'Error code',
+                'ERROR_PATH': 'Path',
+                'ERROR_ERROR': 'Error',
+                'ERROR_METHOD': 'Method',
+                'ERROR_MESSAGE': 'Message',
+                'ERROR_DISMISS': 'Dismiss'
             });
             pipTranslate.translations('ru', {
                 'OK': 'Ок',
                 'CANCEL': 'Отмена',
                 'ERROR_DETAILS': 'Детали ошибки',
-                'CODE': 'Код ошибки',
-                'PATH': 'Путь',
-                'ERROR': 'Ошибка',
-                'METHOD': 'Метод',
-                'MESSAGE': 'Сообщение'
+                'ERROR_CODE': 'Код ошибки',
+                'ERROR_PATH': 'Путь',
+                'ERROR_ERROR': 'Ошибка',
+                'ERROR_METHOD': 'Метод',
+                'ERROR_MESSAGE': 'Сообщение'
             });
-            this.dismissButton = pipTranslate.translate(this.dismissButton) || pipTranslate.translate('DISMISS');
+            this.dismissButton = pipTranslate.translate(this.dismissButton) || pipTranslate.translate('ERROR_DISMISS');
 
             this.strings.errorDetails = pipTranslate.translate('ERROR_DETAILS');
-            this.strings.errorMessage = pipTranslate.translate('MESSAGE');
-            this.strings.errorCode = pipTranslate.translate('CODE');
-            this.strings.errorMethod = pipTranslate.translate('METHOD');
-            this.strings.errorPath = pipTranslate.translate('PATH');
-            this.strings.errorText = pipTranslate.translate('ERROR');
+            this.strings.errorMessage = pipTranslate.translate('ERROR_MESSAGE');
+            this.strings.errorCode = pipTranslate.translate('ERROR_CODE');
+            this.strings.errorMethod = pipTranslate.translate('ERROR_METHOD');
+            this.strings.errorPath = pipTranslate.translate('ERROR_PATH');
+            this.strings.errorText = pipTranslate.translate('ERROR_ERROR');
         } else {
             this.dismissButton = this.dismissButton || 'Dismiss';
         }

@@ -28,12 +28,16 @@ class ConfirmationDialogController extends  ConfirmationDialogParams {
             ? <pip.services.ITranslateService>this._injector.get('pipTranslate') : null;
 
         if (pipTranslate) {
-            pipTranslate.translations('en', { 'CONFIRM_TITLE': 'Confirm' });
-            pipTranslate.translations('ru', { 'CONFIRM_TITLE': 'Подтвердите'});
+            pipTranslate.translations('en', { 'DIALOG_CONFIRM_TITLE': 'Confirm' });
+            pipTranslate.translations('ru', { 'DIALOG_CONFIRM_TITLE': 'Подтвердите'});
+            pipTranslate.translations('en', { 'DIALOG_CONFIRM_OK': 'Ok' });
+            pipTranslate.translations('ru', { 'DIALOG_CONFIRM_OK': 'Принять'});
+            pipTranslate.translations('en', { 'DIALOG_CONFIRM_CANCEL': 'Cancel' });
+            pipTranslate.translations('ru', { 'DIALOG_CONFIRM_CANCEL': 'Отменить'});
 
-            this.title = pipTranslate.translate(this.title) || pipTranslate.translate('CONFIRM_TITLE');
-            this.ok = pipTranslate.translate(this.ok) || pipTranslate.translate('OK');
-            this.cancel = pipTranslate.translate(this.cancel) || ('CANCEL');
+            this.title = pipTranslate.translate(this.title) || pipTranslate.translate('DIALOG_CONFIRM_TITLE');
+            this.ok = pipTranslate.translate(this.ok) || pipTranslate.translate('DIALOG_CONFIRM_OK');
+            this.cancel = pipTranslate.translate(this.cancel) || ('DIALOG_CONFIRM_CANCEL');
         } else {
             this.title = this.title || 'Confirm';
             this.ok = this.ok || 'OK';

@@ -33,9 +33,11 @@ class InformationDialogController extends InformationDialogParams {
         if (pipTranslate) {
             pipTranslate.translations('en', { 'INFORMATION_TITLE': 'Information'});
             pipTranslate.translations('ru', { 'INFORMATION_TITLE': 'Информация' });
+            pipTranslate.translations('en', { 'INFORMATION_OK': 'Ok'});
+            pipTranslate.translations('ru', { 'INFORMATION_OK': 'Ок' });
 
             this.title = pipTranslate.translate(this.title) || pipTranslate.translate('INFORMATION_TITLE');
-            this.ok = pipTranslate.translate(this.ok) || pipTranslate.translate('OK');
+            this.ok = pipTranslate.translate(this.ok) || pipTranslate.translate('INFORMATION_OK');
             content = pipTranslate.translate(content);
         } else {
             this.title = this.title || 'Information';

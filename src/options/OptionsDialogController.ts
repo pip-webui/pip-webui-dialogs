@@ -7,12 +7,11 @@ class OptionsDialogController extends OptionsDialogParams {
     public $mdDialog: angular.material.IDialogService;
     public theme: string;
     public optionIndex: number;
-
+    
     constructor(
         $mdDialog: angular.material.IDialogService,
-        $injector: ng.auto.IInjectorService, 
-        $rootScope: ng.IRootScopeService) 
-    {
+        $injector: ng.auto.IInjectorService,
+        $rootScope: ng.IRootScopeService) {
         "ngInject";
 
         super();
@@ -22,8 +21,8 @@ class OptionsDialogController extends OptionsDialogParams {
         this.options = this.options || [];
 
         this.initTranslate();
-        
-        this.selectedOption = _.find(this.options, {active: true}) || null;
+
+        this.selectedOption = _.find(this.options, { active: true }) || null;
         let name: string = this.selectedOption ? this.selectedOption.name : this.selectedOptionName;
         let index: number = _.findIndex(this.options, (opt: OptionsDialogData) => {
             return opt.name == name;
@@ -40,16 +39,22 @@ class OptionsDialogController extends OptionsDialogParams {
         pipTranslate = this._injector.has('pipTranslate') ? <pip.services.ITranslateService>this._injector.get('pipTranslate') : null;
 
         if (pipTranslate) {
-            pipTranslate.translations('en', { 'OPTIONS_TITLE': 'Choose Option' });
-            pipTranslate.translations('ru', { 'OPTIONS_TITLE': 'Выберите опцию' });
+            pipTranslate.translations('en', { 'DIALOG_OPTIONS_TITLE': 'Choose Option' });
+            pipTranslate.translations('ru', { 'DIALOG_OPTIONS_TITLE': 'Выберите опцию' });
+            pipTranslate.translations('en', { 'DIALOG_OPTIONS_SELECT': 'Select' });
+            pipTranslate.translations('ru', { 'DIALOG_OPTIONS_SELECT': 'Выбрать' });
+            pipTranslate.translations('en', { 'DIALOG_OPTIONS_CANCEL': 'Cancel' });
+            pipTranslate.translations('ru', { 'DIALOG_OPTIONS_CANCEL': 'Отменить' });
 
-            this.title = pipTranslate.translate(this.title) || pipTranslate.translate('OPTIONS_TITLE');
-            this.ok = pipTranslate.translate(this.ok) || pipTranslate.translate('SELECT');
+            this.title = pipTranslate.translate(this.title) || pipTranslate.translate('DIALOG_OPTIONS_TITLE');
+            this.ok = pipTranslate.translate(this.ok) || pipTranslate.translate('DIALOG_OPTIONS_SELECT');
+            this.cancel = pipTranslate.translate(this.cancel) || ('DIALOG_OPTIONS_CANCEL');
         } else {
             this.title = this.title || 'Choose Option';
             this.ok = this.ok || 'Select';
+            this.cancel = this.cancel || 'Cancel';
         }
-              
+
     }
 
     public onOk(): void {
@@ -64,8 +69,8 @@ class OptionsDialogController extends OptionsDialogParams {
         event.stopPropagation();
         this.selectedOptionName = option.name;
     }
-            
-    public onKeyPress (event: JQueryKeyEventObject) {
+
+    public onKeyPress(event: JQueryKeyEventObject) {
         if (event.keyCode === 32 || event.keyCode === 13) {
             event.stopPropagation();
             event.preventDefault();

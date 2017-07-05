@@ -52,7 +52,7 @@
     <div class="pip-footer" ng-if="!$ctrl.noActions">
         <div>
             <md-button class="pip-cancel" ng-click="$ctrl.onCancel()">
-                {{ ::'CANCEL' | translate }}
+                {{ ::$ctrl.cancel | translate }}
             </md-button>
             <md-button class="pip-submit md-accent" ng-click="$ctrl.onSelect()" style="margin-right: -6px">
                 {{ ::$ctrl.ok | translate }}

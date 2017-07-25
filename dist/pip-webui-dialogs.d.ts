@@ -1,6 +1,7 @@
 declare module pip.dialogs {
 
 
+
 export class ConfirmationDialogParams {
     event?: MouseEvent;
     ok?: string;
@@ -25,7 +26,6 @@ export class ErrorDetailsDialogParams {
 export interface IErrorDetailsDialogService {
     show(params: ErrorDetailsDialogParams, successCallback?: () => void, cancelCallback?: () => void): any;
 }
-
 
 
 export interface IInformationDialogService {

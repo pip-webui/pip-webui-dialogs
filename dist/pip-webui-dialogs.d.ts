@@ -1,7 +1,6 @@
 declare module pip.dialogs {
 
 
-
 export class ConfirmationDialogParams {
     event?: MouseEvent;
     ok?: string;
@@ -13,6 +12,7 @@ export class ConfirmationDialogParams {
 export interface IConfirmationDialogService {
     show(params: ConfirmationDialogParams, successCallback?: () => void, cancelCallback?: () => void): any;
 }
+
 
 
 

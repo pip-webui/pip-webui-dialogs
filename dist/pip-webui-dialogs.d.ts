@@ -1,6 +1,35 @@
 declare module pip.dialogs {
 
 
+export class ErrorDetailsDialogParams {
+    event?: MouseEvent;
+    dismissButton?: string;
+    error: any;
+}
+
+
+export interface IErrorDetailsDialogService {
+    show(params: ErrorDetailsDialogParams, successCallback?: () => void, cancelCallback?: () => void): any;
+}
+
+
+
+export interface IInformationDialogService {
+    show(params: InformationDialogParams, successCallback?: () => void, cancelCallback?: () => void): any;
+}
+
+
+
+export class InformationDialogParams {
+    event?: MouseEvent;
+    ok?: string;
+    title?: string;
+    message: string;
+    item?: any;
+}
+
+
+
 export class ConfirmationDialogParams {
     event?: MouseEvent;
     ok?: string;
@@ -11,20 +40,6 @@ export class ConfirmationDialogParams {
 
 export interface IConfirmationDialogService {
     show(params: ConfirmationDialogParams, successCallback?: () => void, cancelCallback?: () => void): any;
-}
-
-
-
-
-export class ErrorDetailsDialogParams {
-    event?: MouseEvent;
-    dismissButton?: string;
-    error: any;
-}
-
-
-export interface IErrorDetailsDialogService {
-    show(params: ErrorDetailsDialogParams, successCallback?: () => void, cancelCallback?: () => void): any;
 }
 
 
@@ -56,21 +71,6 @@ export class OptionsDialogParams {
 export class OptionsDialogResult {
     option: OptionsDialogData;
     isCheckboxOption: boolean;
-}
-
-
-export interface IInformationDialogService {
-    show(params: InformationDialogParams, successCallback?: () => void, cancelCallback?: () => void): any;
-}
-
-
-
-export class InformationDialogParams {
-    event?: MouseEvent;
-    ok?: string;
-    title?: string;
-    message: string;
-    item?: any;
 }
 
 

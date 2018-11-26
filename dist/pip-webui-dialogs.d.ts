@@ -28,18 +28,34 @@ export interface IErrorDetailsDialogService {
 }
 
 
-export interface IInformationDialogService {
-    show(params: InformationDialogParams, successCallback?: () => void, cancelCallback?: () => void): any;
+
+export interface IOptionsBigDialogService {
+    show(params: OptionsBigDialogParams, successCallback?: (result: OptionsBigDialogResult) => void, cancelCallback?: () => void): any;
 }
 
 
+export class OptionsBigDialogData {
+    name: string;
+    title: string;
+    subtitle: string;
+}
 
-export class InformationDialogParams {
+export class OptionsBigDialogParams {
     event?: MouseEvent;
-    ok?: string;
     title?: string;
-    message: string;
-    item?: any;
+    ok?: string;
+    cancel?: string;
+    options?: OptionsBigDialogData[];
+    selectedOption?: OptionsBigDialogData;
+    selectedOptionName?: string;
+    hint?: string;
+    noTitle: any;
+    noActions: any;
+}
+
+export class OptionsBigDialogResult {
+    option: OptionsBigDialogData;
+    isCheckboxOption: boolean;
 }
 
 
@@ -74,34 +90,18 @@ export class OptionsDialogResult {
 }
 
 
-
-export interface IOptionsBigDialogService {
-    show(params: OptionsBigDialogParams, successCallback?: (result: OptionsBigDialogResult) => void, cancelCallback?: () => void): any;
+export interface IInformationDialogService {
+    show(params: InformationDialogParams, successCallback?: () => void, cancelCallback?: () => void): any;
 }
 
 
-export class OptionsBigDialogData {
-    name: string;
-    title: string;
-    subtitle: string;
-}
 
-export class OptionsBigDialogParams {
+export class InformationDialogParams {
     event?: MouseEvent;
-    title?: string;
     ok?: string;
-    cancel?: string;
-    options?: OptionsBigDialogData[];
-    selectedOption?: OptionsBigDialogData;
-    selectedOptionName?: string;
-    hint?: string;
-    noTitle: any;
-    noActions: any;
-}
-
-export class OptionsBigDialogResult {
-    option: OptionsBigDialogData;
-    isCheckboxOption: boolean;
+    title?: string;
+    message: string;
+    item?: any;
 }
 
 
